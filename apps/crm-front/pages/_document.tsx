@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import Script from 'next/script';
+import { Container } from 'react-bootstrap';
 
 export default class CustomDocument extends Document {
   render(): JSX.Element {
@@ -37,9 +38,9 @@ export default class CustomDocument extends Document {
           />
         </Head>
         <body className=''>
-          <div className="container fluid m-0 p-0">
+          <Container fluid={true} className="w-100 m-0 p-0">
             <Main />
-          </div>
+          </Container>
           <NextScript />
         </body>
       </Html>

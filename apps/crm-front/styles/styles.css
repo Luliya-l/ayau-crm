@@ -37,6 +37,8 @@
   --gosu-m-icon-drinks: url(/img/drinks.png);
   --bs-font-sans-serif: Comfortaa;
   --bs-light-rgb: 255,255,255;
+  --bs-body-font-size: 0.75rem;
+  --bs-body-color-rgba: rgb(33,37,41,1);
 }
 
 *{
@@ -45,6 +47,12 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+body {
+  background-color: var(--gosu-darck-blue-100);
+  color: var(--gosu-blue-space-100);
+}
+
 .modal-content{
   color: black!important;
 }
@@ -64,9 +72,10 @@ h2 {
 }
 
 .bg-light {
-  background-color: var(--gosu-light-50)!important;
+  background-color: var(--gosu-light-100)!important;
 }
 
+/* SIDE MENU */
 .sidenav---navtext---1AE_f {
   color: #fff!important;
 }
@@ -81,6 +90,42 @@ h2 {
   background: #171d2b!important;
   transition: min-width 0.2s;
 }
+
+/* END SIDE-MENU */
+
+/* TOP-BAR */
+.top-bar .form-control {
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 0px solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.375rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.top-bar .input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #e9ecef;
+  border: 0px solid #ced4da;
+  border-radius: 0.375rem;
+}
+
+/* END TOP-BAR */
 
 .react-datepicker {
   font-family: var(--bs-font-sans-serif)!important;
@@ -191,10 +236,7 @@ option:checked:after {
   background-color: transparent !important;
 }
 
-body {
-  background-color: var(--gosu-darck-blue-100);
-  color: var(--gosu-light-100);
-}
+
 
 .bg-darck-blue {
   background-color: var(--gosu-darck-blue-100)!important;
@@ -405,10 +447,9 @@ body {
   --bs-btn-disabled-bg: var(--gosu-orange-100);
   --bs-btn-disabled-border-color: var(--gosu-orange-100);
 
-  --bs-btn-padding-y: 1.2rem;
-  --bs-btn-padding-x: 1rem;
+
   --bs-btn-font-size: 0.875rem;
-  --bs-btn-border-radius: 1rem;
+  --bs-btn-border-radius: 0.2rem;
   line-height: 1rem;
 }
 

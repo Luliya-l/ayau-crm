@@ -3,8 +3,9 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 
 import { useSelector } from "react-redux";
+import TopBar from './top-bar';
 
-const SideMenu = ({lang = 'ru'}) => {
+const SideMenu = ({setExpanded, lang = 'ru'}) => {
     const langs = useSelector(selectLangState);
 
     return (
@@ -12,6 +13,9 @@ const SideMenu = ({lang = 'ru'}) => {
             <SideNav
                 onSelect={(selected) => {
                     // Add your code here
+                }}
+                onToggle={(expanded) => {
+                    setExpanded({ expanded });
                 }}
                 className="bg-dark-blue"
             >
