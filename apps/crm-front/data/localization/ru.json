@@ -1,0 +1,15 @@
+{
+    "icon": "ru.svg",
+    "params":
+        {
+            "dashboard": "Рабочий стол",
+            "contracts": "Сделки",
+            "customers": "Покупатели",
+            "tasks": "Задачи",
+            "lists": "Списки",
+            "mail": "Почта",
+            "bi": "Аналитика",
+            "settings": "Настройки",
+            "contacts": "Контакты"
+        }
+}

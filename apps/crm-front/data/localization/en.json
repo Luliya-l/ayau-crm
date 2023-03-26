@@ -1,0 +1,15 @@
+{
+    "icon": "en.svg",
+    "params":
+        {
+            "dashboard": "Dashboard",
+            "contracts": "Contracts",
+            "customers": "Customers",
+            "tasks": "Tasks",
+            "lists": "Lists",
+            "mail": "Mail",
+            "bi": "BI",
+            "settings": "Settings",
+            "contacts": "Контакты"
+        }
+}

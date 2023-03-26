@@ -1,14 +1,21 @@
 {
   "name": "ayau-crm",
-  "version": "0.0.0",
+  "version": "0.20.0",
   "license": "MIT",
   "scripts": {},
   "private": true,
   "dependencies": {
     "@nrwl/next": "15.8.9",
+    "@nrwl/nx-cloud": "^15.3.2",
+    "@reduxjs/toolkit": "^1.9.3",
+    "@trendmicro/react-sidenav": "^0.5.0",
     "next": "13.1.1",
-    "react": "18.2.0",
+    "next-redux-cookie-wrapper": "^2.2.1",
+    "next-redux-wrapper": "^8.1.0",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -18,7 +25,6 @@
     "@nrwl/jest": "15.8.9",
     "@nrwl/js": "15.8.9",
     "@nrwl/linter": "15.8.9",
-    "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "15.8.9",
     "@nrwl/workspace": "15.8.9",
     "@testing-library/react": "14.0.0",
