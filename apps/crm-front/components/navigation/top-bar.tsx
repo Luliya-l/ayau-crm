@@ -12,7 +12,7 @@ const TopBar = ({msg = '65 компаний', addCommand='add-company', lang = '
       <Container fluid className='top-bar position-absolute top-0 w-100 m-0 p-0'>
         <Row className='d-flex align-items-center w-100 top-menu bg-light'>
           <Col lg={2} xs={2}  role='button' className='py-2'>
-            <span className='text-uppercase'>{langs[lang].params.contacts}</span>
+            <span className='text-uppercase' style={{color:'var(--gosu-blue-space-100)'}}>{langs[lang].params.contacts}</span>
           </Col>
           <Col lg={4} xs={4} className=''>
             <InputGroup className="my-2">

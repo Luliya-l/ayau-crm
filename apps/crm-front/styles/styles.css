@@ -49,8 +49,12 @@
 }
 
 body {
-  background-color: var(--gosu-darck-blue-100);
-  color: var(--gosu-blue-space-100);
+  background: rgb(75,88,119);
+  background: linear-gradient(0deg, rgba(75,88,119,0.8604691876750701) 19%, rgba(0,212,255,1) 100%);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--gosu-light-100);
 }
 
 .modal-content{
@@ -58,10 +62,17 @@ body {
 }
 
 h1 {
-  font-weight:700;
-  font-size:34px;
-  line-height:38px;
-  /* color: rgba(24, 45, 77, 1); */
+  align-items: flex-end;
+  z-index: 2;
+  height: 100px;
+  margin-bottom: 29px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--gosu-light-100);
+  text-shadow: 0 2px 3px rgba(0,0,0,.25);
 }
 
 h2 {
@@ -69,6 +80,17 @@ h2 {
   font-size:22px;
   line-height:24.53px;
   /* color: rgba(24, 45, 77, 1); */
+}
+
+.e-control {
+  color: var(--gosu-light-100);
+}
+
+.chart {
+  background: rgba(255,255,255,.95);
+  border-radius: 1.5rem;
+  padding: 0.5rem;
+  color: var(--gosu-light-100);
 }
 
 .bg-light {

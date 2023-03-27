@@ -4,49 +4,44 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from 'react';
 import { Fade } from 'react-bootstrap';
+import TopBar from '../components/navigation/top-bar';
+import SideMenu from '../components/navigation/side-menu';
+import DashBoardMain from '../components/dashboard/dashboardMain';
 
 const Index: NextPage = () =>  {
-  const [isLoading, setLoading] = useState([false,false]);
-  const setIsLoading = (state, index) => {
-    const s = [...isLoading];
-    s[index] = state;
-    setLoading([...s]);
-  }
+  const [expanded, setExpanded] = useState({expanded: false});
+  const [left, setLeft] = useState(64);
 
   useEffect(() => {
-    if (isLoading.includes(false)){
-      document.body.style.overflow = 'hidden';
+    if (expanded['expanded']) {
+      setLeft(240);
     } else {
-      document.body.style.overflow = '';
+      setLeft(64);
     }
-    console.log(isLoading);
-  }, [isLoading]);
+    console.log('expanded', expanded['expanded']);
+  }, [expanded]);
 
   return (
     <>
-      <Fade in={!isLoading.includes(false)}>
-        <Container>
-
-          {/* content */}
-          <Row id='comp-content' className='mx-0'>
-            <Col className='px-0'>
-              <Container fluid 
-                className='bg-light rounded-ys my-1 main-container position-relative'
-              >
-
-              </Container>
-            </Col>
-          </Row>
-          {/* footer */}
-          <Row id='comp-footer' className='footer text-blue-gray m-0 m-sm-auto'>
-            <Col className='mb-4 px-0'>
-              <Container fluid className='footer-body'>
-
-              </Container>
-            </Col>
-          </Row>
-        </Container>
-      </Fade>
+      <Row>
+        <Col lg={expanded ? 2 : 1} xs={expanded ? 2 : 1} style={{width:`${left}px`}}>
+          <SideMenu setExpanded={setExpanded} />
+        </Col>
+        <Col>
+          <Container fluid className='w-100'>
+            <Row style={{minHeight:'67px'}}>
+              <Col className='position-relative'>
+                <TopBar />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <DashBoardMain />
+              </Col>
+            </Row>
+          </Container>
+        </Col>
+      </Row>
       {/* <Splash show={isLoading.includes(false)} /> */}
     </>
   );
