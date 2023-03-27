@@ -1,0 +1,36 @@
+{
+    "tasks": [
+        {
+            "dateComplete": null,
+            "responsible": "Намазова Лязат",
+            "object": "",
+            "type": "встреча",
+            "task": "Встреча с новым клиентом",
+            "result": ""
+        },
+        {
+            "dateComplete": null,
+            "responsible": "Намазова Лязат",
+            "object": "",
+            "type": "связаться",
+            "task": "Связаться с новым клиентом",
+            "result": ""
+        },
+        {
+            "dateComplete": null,
+            "responsible": "Намазова Лязат",
+            "object": "",
+            "type": "встреча",
+            "task": "Встреча с новым клиентом",
+            "result": ""
+        },
+        {
+            "dateComplete": null,
+            "responsible": "Намазова Лязат",
+            "object": "",
+            "type": "связаться",
+            "task": "Связаться с новым клиентом",
+            "result": ""
+        }
+    ]
+}

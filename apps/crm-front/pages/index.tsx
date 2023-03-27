@@ -8,6 +8,7 @@ import TopBar from '../components/navigation/top-bar';
 import SideMenu from '../components/navigation/side-menu';
 import DashBoardMain from '../components/dashboard/dashboardMain';
 import Contracts from '../components/contracts/contracts';
+import Tasks from '../components/tasks/tasks';
 
 const Index: NextPage = () =>  {
   const [expanded, setExpanded] = useState({expanded: false});
@@ -20,6 +21,8 @@ const Index: NextPage = () =>  {
         return <DashBoardMain />;
       case 'contracts':
           return <Contracts />;
+      case 'tasks':
+            return <Tasks />;
       default:
         return <DashBoardMain />;
     }

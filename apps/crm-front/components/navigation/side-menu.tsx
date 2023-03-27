@@ -37,20 +37,20 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             {langs[lang].params.contracts}
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="customers">
-                        <NavIcon>
-                            <i className="bi bi-people" style={{ fontSize: '1.75em' }} />
-                        </NavIcon>
-                        <NavText>
-                            {langs[lang].params.customers}
-                        </NavText>
-                    </NavItem>
                     <NavItem eventKey="tasks">
                         <NavIcon>
                             <i className="bi bi-list-task" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
                             {langs[lang].params.tasks}
+                        </NavText>
+                    </NavItem>
+                    <NavItem eventKey="customers">
+                        <NavIcon>
+                            <i className="bi bi-people" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            {langs[lang].params.customers}
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="list">
