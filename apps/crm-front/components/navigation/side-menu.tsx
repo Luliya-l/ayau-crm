@@ -77,7 +77,7 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             {langs[lang].params.bi}
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="sliders">
+                    <NavItem eventKey="settings">
                         <NavIcon>
                             <i className="bi bi-sliders2-vertical" style={{ fontSize: '1.75em' }} />
                         </NavIcon>

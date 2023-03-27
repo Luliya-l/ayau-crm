@@ -12,6 +12,8 @@ import Tasks from '../components/tasks/tasks';
 import Contacts from '../components/contacts/contacts';
 import Customers from '../components/customers/customers';
 import MailBox from '../components/mails/mails';
+import BI from '../components/bi/buisines-inteligence';
+import Settings from '../components/settings/settings';
 
 const Index: NextPage = () =>  {
   const [expanded, setExpanded] = useState({expanded: false});
@@ -32,6 +34,10 @@ const Index: NextPage = () =>  {
         return <Customers />;
       case 'email':
         return <MailBox />;
+      case 'bi':
+        return <BI />;
+      case 'settings':
+        return <Settings />;
       default:
         return <DashBoardMain />;
     }
@@ -54,7 +60,7 @@ const Index: NextPage = () =>  {
         </Col>
         <Col>
           <Container fluid className='w-100'>
-            <Row style={{minHeight:'67px'}}>
+            <Row style={{minHeight:'65px'}}>
               <Col className='position-relative'>
                 <TopBar />
               </Col>

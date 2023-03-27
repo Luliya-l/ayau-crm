@@ -133,6 +133,32 @@ h5 {
   border-radius: 1.5rem!important;
 }
 
+/* BI */
+.nav-link {
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font: inherit;
+  vertical-align: baseline;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 700;
+  color: var(--bs-nav-link-color);
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+
+.nav-pills {
+  --bs-nav-pills-border-radius: var(--gosu-border-radius-ys);
+  --bs-nav-pills-link-active-color: var(--gosu-light-100);
+  --bs-nav-pills-link-active-bg: var(--gosu-blue-space-100);
+  border-right: 1px solid #e8eaeb;
+  line-height: 3rem;
+}
+
+.tab-content {
+  --bs-body-color-rgba: rgb(33,37,41,1);
+}
+
 /* SIDE MENU */
 .sidenav---navtext---1AE_f {
   color: #fff!important;
