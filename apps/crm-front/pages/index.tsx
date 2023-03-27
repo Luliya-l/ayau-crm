@@ -62,7 +62,7 @@ const Index: NextPage = () =>  {
           <Container fluid className='w-100'>
             <Row style={{minHeight:'65px'}}>
               <Col className='position-relative'>
-                <TopBar />
+                <TopBar addCommand={content} />
               </Col>
             </Row>
             <Row>

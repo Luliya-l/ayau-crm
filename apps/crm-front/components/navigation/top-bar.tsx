@@ -1,15 +1,44 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Button, Container, Form, InputGroup } from 'react-bootstrap';
+import { Container, Form, InputGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
+import AddContact from '../contacts/add-contact';
+import EventsPopup from '../bi/events-popup';
+import AddTask from '../tasks/add-tasks';
+import AddContract from '../contracts/add-contract';
+import AddCustomer from '../customers/add-customer';
+import SendMail from '../mails/send-mail';
+import SaveSettings from '../settings/save';
+import AddFile from '../files/add-file';
 
 const TopBar = ({msg = '65 компаний', addCommand='add-company', lang = 'ru'}): JSX.Element => {
   const langs = useSelector(selectLangState);
-
+  const getCommand = () => {
+    switch (addCommand) {
+      case 'dashboard':
+        return <EventsPopup />
+      case 'contracts':
+        return <AddContract />
+      case 'tasks':
+        return <AddTask />
+      case 'contacts':
+        return <AddContact />
+      case 'list':
+        return <AddCustomer />
+      case 'file':
+        return <AddFile />
+      case 'email':
+        return <SendMail />
+      case 'bi':
+        return (<></>)
+      case 'settings':
+        return <SaveSettings />
+    }
+  }
   return (
     <>
-      <Container fluid className='top-bar position-fixed top-0 w-100 m-0 p-0' style={{zIndex:'1080'}}>
+      <Container fluid className='top-bar position-fixed top-0 w-100 m-0 p-0' style={{zIndex:'899'}}>
         <Row className='d-flex align-items-center w-100 top-menu bg-light shadow-lg'>
           <Col lg={2} xs={2}  role='button' className='py-2'>
             <span className='text-uppercase' style={{color:'var(--gosu-blue-space-100)'}}>{langs[lang].params.contacts}</span>
@@ -29,10 +58,7 @@ const TopBar = ({msg = '65 компаний', addCommand='add-company', lang = '
             <i className="bi bi-three-dots"></i>
           </Col>
           <Col lg={3} xs={3}>
-            <Button variant='all-orange' className='my-2 py-3 text-uppercase'>
-              <i className="bi bi-plus-lg me-1"></i>
-              {langs[lang].params[addCommand]}
-            </Button>
+            {getCommand()}
           </Col>
         </Row>
       </Container>
