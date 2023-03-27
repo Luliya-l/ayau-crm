@@ -61,7 +61,7 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             {langs[lang].params.lists}
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="posts">
+                    <NavItem eventKey="email">
                         <NavIcon>
                             <i className="bi bi-postcard" style={{ fontSize: '1.75em' }} />
                         </NavIcon>

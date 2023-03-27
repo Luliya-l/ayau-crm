@@ -9,6 +9,9 @@ import SideMenu from '../components/navigation/side-menu';
 import DashBoardMain from '../components/dashboard/dashboardMain';
 import Contracts from '../components/contracts/contracts';
 import Tasks from '../components/tasks/tasks';
+import Contacts from '../components/contacts/contacts';
+import Customers from '../components/customers/customers';
+import MailBox from '../components/mails/mails';
 
 const Index: NextPage = () =>  {
   const [expanded, setExpanded] = useState({expanded: false});
@@ -20,9 +23,15 @@ const Index: NextPage = () =>  {
       case 'dashboard':
         return <DashBoardMain />;
       case 'contracts':
-          return <Contracts />;
+        return <Contracts />;
       case 'tasks':
-            return <Tasks />;
+        return <Tasks />;
+      case 'contacts':
+        return <Contacts />;
+      case 'list':
+        return <Customers />;
+      case 'email':
+        return <MailBox />;
       default:
         return <DashBoardMain />;
     }
