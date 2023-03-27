@@ -39,6 +39,7 @@
   --bs-light-rgb: 255,255,255;
   --bs-body-font-size: 0.75rem;
   --bs-body-color-rgba: rgb(33,37,41,1);
+  --bs-card-color: var(--gosu-light-100);
 }
 
 *{
@@ -91,15 +92,40 @@ h2 {
   border-radius: 1.5rem;
   padding: 0.5rem;
   color: var(--gosu-light-100);
+  text-shadow: 0 2px 3px rgba(0,0,0,.25);
 }
 
 .bg-light {
   background-color: var(--gosu-light-100)!important;
 }
 
+.bg-darck-blue {
+  background-color: #1b3446!important;
+}
+
+.bg-warning {
+  --bs-bg-opacity: 0;
+  background-color: var(--gosu-orange-100)!important;
+}
+
+.bg-blue-space {
+  background-color: var(--gosu-blue-space-100)!important;
+}
+
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
+  color: #fff !important;;
+  border-radius: 1.5rem!important;
+}
+
 /* SIDE MENU */
 .sidenav---navtext---1AE_f {
   color: #fff!important;
+}
+
+.card-header {
+  font-size: 0.55rem;
 }
 
 .sidenav---sidenav---_2tBP {
@@ -256,21 +282,6 @@ option:checked:after {
   text-decoration: none;
   opacity: .75;
   background-color: transparent !important;
-}
-
-
-
-.bg-darck-blue {
-  background-color: var(--gosu-darck-blue-100)!important;
-}
-
-.bg-warning {
-  --bs-bg-opacity: 0;
-  background-color: var(--gosu-orange-100)!important;
-}
-
-.bg-blue-space {
-  background-color: var(--gosu-blue-space-100)!important;
 }
 
 .rounded-top {
