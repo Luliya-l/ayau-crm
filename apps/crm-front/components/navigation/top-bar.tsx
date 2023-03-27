@@ -59,7 +59,7 @@ const TopBar = ({msg = '65 компаний', addCommand='add-company', lang = '
           <Col lg={1} xs={1} className='d-flex justify-content-center'>
             <i className="bi bi-three-dots"></i>
           </Col>
-          <Col lg={3} xs={3}>
+          <Col lg={3} xs={3} className='text-end'>
             {getCommand()}
           </Col>
         </Row>
