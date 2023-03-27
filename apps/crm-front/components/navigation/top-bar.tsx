@@ -9,7 +9,7 @@ const TopBar = ({msg = '65 компаний', addCommand='add-company', lang = '
 
   return (
     <>
-      <Container fluid className='top-bar position-absolute top-0 w-100 m-0 p-0'>
+      <Container fluid className='top-bar position-fixed top-0 w-100 m-0 p-0' style={{zIndex:'1080'}}>
         <Row className='d-flex align-items-center w-100 top-menu bg-light'>
           <Col lg={2} xs={2}  role='button' className='py-2'>
             <span className='text-uppercase' style={{color:'var(--gosu-blue-space-100)'}}>{langs[lang].params.contacts}</span>
