@@ -45,12 +45,12 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             {langs[lang].params.tasks}
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="customers">
+                    <NavItem eventKey="contacts">
                         <NavIcon>
                             <i className="bi bi-people" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {langs[lang].params.customers}
+                            {langs[lang].params.contacts}
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="list">
