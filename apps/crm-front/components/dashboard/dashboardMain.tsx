@@ -44,7 +44,7 @@ const DashBoardMain = ({lang = 'ru'}) => {
         <>
             {/* in={!isLoading.includes(false)} */}
             <Fade in={true}>
-                <Container>
+                <Container fluid className="mb-4">
                     <Row>
                         <Col className="text-center my-2">
                             <h1>{'Рабочий стол'}</h1>
@@ -64,7 +64,7 @@ const DashBoardMain = ({lang = 'ru'}) => {
                                             <Card.Header className="text-uppercase">{'просроченные задачи'}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-danger">{'0'}</Card.Title>
-                                                <Card.Text className="py-4">
+                                                <Card.Text className="py-2">
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Text>
@@ -88,7 +88,7 @@ const DashBoardMain = ({lang = 'ru'}) => {
                                             <Card.Header className="text-uppercase">{'задачи к выполнению'}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-info">{'0'}</Card.Title>
-                                                <Card.Text className="py-4">
+                                                <Card.Text className="py-2">
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Text>
@@ -116,7 +116,7 @@ const DashBoardMain = ({lang = 'ru'}) => {
                                             <Card.Header className="text-uppercase">{'выполненные задачи'}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-success">{'0'}</Card.Title>
-                                                <Card.Text className="py-4">
+                                                <Card.Text className="py-2">
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Text>
@@ -140,7 +140,7 @@ const DashBoardMain = ({lang = 'ru'}) => {
                                             <Card.Header className="text-uppercase">{'сделок без задач'}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-warning">{'0'}</Card.Title>
-                                                <Card.Text className="py-4">
+                                                <Card.Text className="py-2">
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Text>
@@ -282,7 +282,7 @@ const DashBoardMain = ({lang = 'ru'}) => {
                                             <Card.Header className="text-uppercase">{'входящие звонки'}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-danger">{'0'}</Card.Title>
-                                                <Card.Text className="py-4">
+                                                <Card.Text className="py-2">
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Text>
@@ -306,7 +306,7 @@ const DashBoardMain = ({lang = 'ru'}) => {
                                             <Card.Header className="text-uppercase">{'примечаний'}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-info">{'0'}</Card.Title>
-                                                <Card.Text className="py-4">
+                                                <Card.Text className="py-2">
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Text>
@@ -334,7 +334,7 @@ const DashBoardMain = ({lang = 'ru'}) => {
                                             <Card.Header className="text-uppercase">{'исходищие звонки'}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-success">{'0'}</Card.Title>
-                                                <Card.Text className="py-4">
+                                                <Card.Text className="py-2">
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Text>
@@ -358,7 +358,7 @@ const DashBoardMain = ({lang = 'ru'}) => {
                                             <Card.Header className="text-uppercase">{'успешные сделки'}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-warning">{'0'}</Card.Title>
-                                                <Card.Text className="py-4">
+                                                <Card.Text className="py-2">
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Text>

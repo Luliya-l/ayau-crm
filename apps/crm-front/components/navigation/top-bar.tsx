@@ -38,8 +38,10 @@ const TopBar = ({msg = '65 компаний', addCommand='add-company', lang = '
   }
   return (
     <>
-      <Container fluid className='top-bar position-fixed top-0 w-100 m-0 p-0' style={{zIndex:'899'}}>
-        <Row className='d-flex align-items-center w-100 top-menu bg-light shadow-lg'>
+      <Container fluid className={`top-bar ${addCommand === 'dashboard' ? '' : 'position-fixed'} top-0 w-100 m-0 p-0`} style={{zIndex:'899', height:'65px'}}>
+        <Row className={`d-flex align-items-center w-100 top-menu ${addCommand === 'dashboard' ? '' : 'bg-light shadow-lg'}`}
+          style={{height:'65px'}}
+        >
           <Col lg={2} xs={2}  role='button' className='py-2'>
             <span className='text-uppercase' style={{color:'var(--gosu-blue-space-100)'}}>{langs[lang].params.contacts}</span>
           </Col>

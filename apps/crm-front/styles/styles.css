@@ -113,6 +113,10 @@ h5 {
   background-color: var(--gosu-light-100)!important;
 }
 
+.bg-light-blue {
+  background-color: rgba(0,212,255,1)!important;
+}
+
 .bg-darck-blue {
   background-color: #1b3446!important;
 }
