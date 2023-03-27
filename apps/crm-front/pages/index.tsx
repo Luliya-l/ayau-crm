@@ -7,10 +7,23 @@ import { Fade } from 'react-bootstrap';
 import TopBar from '../components/navigation/top-bar';
 import SideMenu from '../components/navigation/side-menu';
 import DashBoardMain from '../components/dashboard/dashboardMain';
+import Contracts from '../components/contracts/contracts';
 
 const Index: NextPage = () =>  {
   const [expanded, setExpanded] = useState({expanded: false});
   const [left, setLeft] = useState(64);
+  const [content, setContent] = useState('dashboard');
+
+  const getContent = () => {
+    switch (content) {
+      case 'dashboard':
+        return <DashBoardMain />;
+      case 'contracts':
+          return <Contracts />;
+      default:
+        return <DashBoardMain />;
+    }
+  }
 
   useEffect(() => {
     if (expanded['expanded']) {
@@ -25,7 +38,7 @@ const Index: NextPage = () =>  {
     <>
       <Row>
         <Col lg={expanded ? 2 : 1} xs={expanded ? 2 : 1} style={{width:`${left}px`}}>
-          <SideMenu setExpanded={setExpanded} />
+          <SideMenu setExpanded={setExpanded} setContent={setContent} />
         </Col>
         <Col>
           <Container fluid className='w-100'>
@@ -36,7 +49,7 @@ const Index: NextPage = () =>  {
             </Row>
             <Row>
               <Col>
-                <DashBoardMain />
+                {getContent()}
               </Col>
             </Row>
           </Container>

@@ -5,14 +5,14 @@ import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { useSelector } from "react-redux";
 import TopBar from './top-bar';
 
-const SideMenu = ({setExpanded, lang = 'ru'}) => {
+const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
     const langs = useSelector(selectLangState);
 
     return (
         <>
             <SideNav
                 onSelect={(selected) => {
-                    // Add your code here
+                    setContent(selected);
                 }}
                 onToggle={(expanded) => {
                     setExpanded({ expanded });
@@ -21,7 +21,7 @@ const SideMenu = ({setExpanded, lang = 'ru'}) => {
             >
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="chart">
-                    <NavItem eventKey="home">
+                    <NavItem eventKey="dashboard">
                         <NavIcon>
                             <i className="bi bi-speedometer" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
@@ -29,7 +29,7 @@ const SideMenu = ({setExpanded, lang = 'ru'}) => {
                             {langs[lang].params.dashboard}
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="sales">
+                    <NavItem eventKey="contracts">
                         <NavIcon>
                             <i className="bi bi-currency-dollar" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
