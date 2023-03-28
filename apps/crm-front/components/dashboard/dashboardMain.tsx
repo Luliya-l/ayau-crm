@@ -5,9 +5,13 @@ import {
     Legend, LegendSeriesModel, LineSeries, SeriesCollectionDirective, SeriesDirective, Tooltip, TooltipSettingsModel
 } from '@syncfusion/ej2-react-charts';
 import { registerLicense } from "@syncfusion/ej2-base";
+import { useSelector } from "react-redux";
+import { selectLangState } from "apps/crm-front/store/langSlice";
 
-const DashBoardMain = ({lang = 'ru'}) => {
+const DashBoardMain = () => {
     registerLicense('Mgo+DSMBaFt+QHFqVkNrXVNbdV5dVGpAd0N3RGlcdlR1fUUmHVdTRHRcQl5hTn9Tc0RnXXxeeXQ=;Mgo+DSMBPh8sVXJ1S0d+X1RPd11dXmJWd1p/THNYflR1fV9DaUwxOX1dQl9gSX1RcURjXH5adHdXQmA=;ORg4AjUWIQA/Gnt2VFhhQlJBfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5QdEJiWXpfdHBWRWhc;MTQ4NjE2MEAzMjMxMmUzMTJlMzMzNUJnSDVJbXZqODU4NVB5QWV1aXJjMFVFMENtNWhhT2NJdy9ydXMrMFlObmM9;MTQ4NjE2MUAzMjMxMmUzMTJlMzMzNW9HWW1TTkZnOG1aOVR3YndRTmJHZ2xZdVFycjYzWm1FS2pXVkVZSDlDQjg9;NRAiBiAaIQQuGjN/V0d+XU9Hc1RDX3xKf0x/TGpQb19xflBPallYVBYiSV9jS31TdUdkWH9bcXBRQmFeUQ==;MTQ4NjE2M0AzMjMxMmUzMTJlMzMzNWNHSkFzdTU5aUpIdmpsQmxFZC96Z0VKSy8rby9RZFp5elJ3MDR4T0puYzQ9;MTQ4NjE2NEAzMjMxMmUzMTJlMzMzNVZRUERQZEljR1lVKzZoUk5GL1VsUkpKNi9ZUDVFVjBLaC9oQ3kxSDdleDA9;Mgo+DSMBMAY9C3t2VFhhQlJBfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5QdEJiWXpfdHBQR2Bc;MTQ4NjE2NkAzMjMxMmUzMTJlMzMzNUJSWWIrMGhjL0lqclFGNHM5MVl6SE1OSmVwZEpjc3VoTmptU1dnSHZISFE9;MTQ4NjE2N0AzMjMxMmUzMTJlMzMzNVlvcnFjdkY1Q0VVRHF6aWJ3SkFyZlE1WmZldGJHTnNHT1ZwM2FOcmpCQTQ9;MTQ4NjE2OEAzMjMxMmUzMTJlMzMzNWNHSkFzdTU5aUpIdmpsQmxFZC96Z0VKSy8rby9RZFp5elJ3MDR4T0puYzQ9');
+
+    const localization = useSelector(selectLangState);
 
     const [isLoading, setLoading] = useState([false,false]);
     const setIsLoading = (state, index) => {
@@ -23,6 +27,10 @@ const DashBoardMain = ({lang = 'ru'}) => {
         // document.body.style.overflow = '';
         // }
     }, [isLoading]);
+
+    const getParams = (param: string) => {
+        return localization.langs[localization.currentLang]?.params[param];
+    }
 
     const data: any[] = [
         { month: 'Jan', sales: 35 }, { month: 'Feb', sales: 28 },
@@ -47,7 +55,7 @@ const DashBoardMain = ({lang = 'ru'}) => {
                 <Container fluid className="mb-4">
                     <Row>
                         <Col className="text-center mt-3">
-                            <h1>{'Рабочий стол'}</h1>
+                            <h1>{getParams('dashboard')}</h1>
                         </Col>
                     </Row>
                     <Row id='comp-content' className='mb-3'>
@@ -57,56 +65,56 @@ const DashBoardMain = ({lang = 'ru'}) => {
                                 key={'dark'}
                                 text={'dark'}
                             >
-                                <Card.Header className="text-uppercase">{'выполненные задачи'}</Card.Header>
-                                <Card.Body>
-                                    <Card.Title className="text-success">{'0'}</Card.Title>
-                                    <Card.Footer>
-                                        <small className="text-muted">{'за неделю'}</small>
-                                    </Card.Footer>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col lg={3} xs={3}>
-                            <Card
-                                bg={'dark'}
-                                key={'dark'}
-                                text={'dark'}
-                            >
-                                <Card.Header className="text-uppercase">{'выполненные задачи'}</Card.Header>
-                                <Card.Body>
-                                    <Card.Title className="text-success">{'0'}</Card.Title>
-                                    <Card.Footer>
-                                        <small className="text-muted">{'за неделю'}</small>
-                                    </Card.Footer>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col lg={3} xs={3}>
-                            <Card
-                                bg={'dark'}
-                                key={'dark'}
-                                text={'dark'}
-                            >
-                                <Card.Header className="text-uppercase">{'выполненные задачи'}</Card.Header>
-                                <Card.Body>
-                                    <Card.Title className="text-success">{'0'}</Card.Title>
-                                    <Card.Footer>
-                                        <small className="text-muted">{'за неделю'}</small>
-                                    </Card.Footer>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col lg={3} xs={3}>
-                            <Card
-                                bg={'dark'}
-                                key={'dark'}
-                                text={'dark'}
-                            >
-                                <Card.Header className="text-uppercase">{'просроченные задачи'}</Card.Header>
+                                <Card.Header className="text-uppercase">{getParams('overdueTasks')}</Card.Header>
                                 <Card.Body>
                                     <Card.Title className="text-danger">{'0'}</Card.Title>
                                     <Card.Footer>
-                                        <small className="text-muted">{'за неделю'}</small>
+                                        <small className="text-muted">{getParams('onweek')}</small>
+                                    </Card.Footer>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col lg={3} xs={3}>
+                            <Card
+                                bg={'dark'}
+                                key={'dark'}
+                                text={'dark'}
+                            >
+                                <Card.Header className="text-uppercase">{getParams('newTasks')}</Card.Header>
+                                <Card.Body>
+                                    <Card.Title className="text-info">{'0'}</Card.Title>
+                                    <Card.Footer>
+                                        <small className="text-muted">{getParams('onweek')}</small>
+                                    </Card.Footer>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col lg={3} xs={3}>
+                            <Card
+                                bg={'dark'}
+                                key={'dark'}
+                                text={'dark'}
+                            >
+                                <Card.Header className="text-uppercase">{getParams('completeTasks')}</Card.Header>
+                                <Card.Body>
+                                    <Card.Title className="text-success">{'0'}</Card.Title>
+                                    <Card.Footer>
+                                        <small className="text-muted">{getParams('onweek')}</small>
+                                    </Card.Footer>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col lg={3} xs={3}>
+                            <Card
+                                bg={'dark'}
+                                key={'dark'}
+                                text={'dark'}
+                            >
+                                <Card.Header className="text-uppercase">{getParams('withoutTask')}</Card.Header>
+                                <Card.Body>
+                                    <Card.Title className="text-warning">{'0'}</Card.Title>
+                                    <Card.Footer>
+                                        <small className="text-muted">{getParams('onweek')}</small>
                                     </Card.Footer>
                                 </Card.Body>
                             </Card>

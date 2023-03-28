@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppState } from "./store";
 import { HYDRATE } from "next-redux-wrapper";
-import { User } from "../specs/costom-types";
+import { User } from "../specs/custom-types";
 
 export interface AuthState {
   user: User;

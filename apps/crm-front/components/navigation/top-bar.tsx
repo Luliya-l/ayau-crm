@@ -2,7 +2,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Container, Form, InputGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { selectLangState } from 'apps/crm-front/store/langSlice';
 import AddContact from '../contacts/add-contact';
 import EventsPopup from '../bi/events-popup';
 import AddTask from '../tasks/add-tasks';
@@ -11,9 +10,16 @@ import AddCustomer from '../customers/add-customer';
 import SendMail from '../mails/send-mail';
 import SaveSettings from '../settings/save';
 import AddFile from '../files/add-file';
+import { Langs } from 'apps/crm-front/specs/custom-types';
+import { selectLangState } from 'apps/crm-front/store/langSlice';
 
-const TopBar = ({msg = '65 компаний', addCommand='add-company', lang = 'ru'}): JSX.Element => {
-  const langs = useSelector(selectLangState);
+const TopBar = ({msg = '65 компаний', addCommand='add-company'}): JSX.Element => {
+  const localization = useSelector(selectLangState) as Langs;
+
+  const getParams = (param: string) => {
+    return localization.langs[localization.currentLang]?.params[param];
+  }
+
   const getCommand = () => {
     switch (addCommand) {
       case 'dashboard':
@@ -43,14 +49,16 @@ const TopBar = ({msg = '65 компаний', addCommand='add-company', lang = '
           style={{height:'65px'}}
         >
           <Col lg={2} xs={2}  role='button' className='py-2'>
-            <span className='text-uppercase' style={{color:'var(--gosu-blue-space-100)'}}>{langs[lang].params.contacts}</span>
+            <span className='text-uppercase' style={{color:'var(--gosu-blue-space-100)'}}>
+              {getParams('contacts')}
+            </span>
           </Col>
           <Col lg={4} xs={4} className=''>
             <InputGroup className="my-2">
               <InputGroup.Text>
                 <i className="bi bi-search"></i>
               </InputGroup.Text>
-              <Form.Control aria-label="Search" placeholder={langs[lang].params.search} />
+              <Form.Control aria-label="Search" placeholder={getParams('search')} />
             </InputGroup>
           </Col>
           <Col lg={2} xs={2} className='d-flex justify-content-center'>

@@ -3,13 +3,17 @@ import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
-const AddFile = ({lang='ru'}) => {
-    const langs = useSelector(selectLangState);
+const AddFile = () => {
+    const localization = useSelector(selectLangState);
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const getParams = (param: string) => {
+        return localization.langs[localization.currentLang]?.params[param];
+    }
 
     return (
         <>
@@ -19,7 +23,7 @@ const AddFile = ({lang='ru'}) => {
                 onClick={handleShow}
             >
                 <i className="bi bi-cloud-arrow-up me-1"></i>
-                {langs[lang].params.addfile}
+                {getParams('addfile')}
             </Button>
             <Modal
                 show={show}
@@ -29,7 +33,7 @@ const AddFile = ({lang='ru'}) => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {langs[lang].params.addfile}
+                        {getParams('addfile')}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

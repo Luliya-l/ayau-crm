@@ -1,7 +1,7 @@
 import { useMail } from "apps/crm-front/specs/custom-hooks";
 import { Container, Table } from "react-bootstrap";
 
-const MailBox = ({inbox = true, lang='ru'}) => {
+const MailBox = ({inbox = true}) => {
     const {mails} = useMail(inbox);
 
     return (

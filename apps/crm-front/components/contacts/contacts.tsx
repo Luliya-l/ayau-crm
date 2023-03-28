@@ -1,7 +1,7 @@
 import { useContacts } from "apps/crm-front/specs/custom-hooks";
 import { Container, Table } from "react-bootstrap";
 
-const Contacts = ({lang='ru'}) => {
+const Contacts = () => {
     const {contacts} = useContacts();
 
     return (

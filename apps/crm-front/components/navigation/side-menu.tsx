@@ -1,12 +1,16 @@
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import { Langs } from 'apps/crm-front/specs/custom-types';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 
 import { useSelector } from "react-redux";
-import TopBar from './top-bar';
 
-const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
-    const langs = useSelector(selectLangState);
+const SideMenu = ({setExpanded, setContent}) => {
+    const localization = useSelector(selectLangState) as Langs;
+
+    const getParams = (param: string) => {
+        return localization.langs[localization.currentLang]?.params[param];
+    }
 
     return (
         <>
@@ -26,7 +30,7 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             <i className="bi bi-speedometer" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {langs[lang].params.dashboard}
+                            {getParams('dashboard')}
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="contracts">
@@ -34,7 +38,7 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             <i className="bi bi-currency-dollar" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {langs[lang].params.contracts}
+                            {getParams('contracts')}
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="tasks">
@@ -42,7 +46,7 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             <i className="bi bi-list-task" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {langs[lang].params.tasks}
+                            {getParams('tasks')}
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="contacts">
@@ -50,7 +54,7 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             <i className="bi bi-people" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {langs[lang].params.contacts}
+                            {getParams('contacts')}
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="list">
@@ -58,7 +62,7 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             <i className="bi bi-list-columns-reverse" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {langs[lang].params.lists}
+                            {getParams('lists')}
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="email">
@@ -66,7 +70,7 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             <i className="bi bi-postcard" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {langs[lang].params.mail}
+                            {getParams('mail')}
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="bi">
@@ -74,7 +78,7 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             <i className="bi bi-graph-down-arrow" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {langs[lang].params.bi}
+                            {getParams('bi')}
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="settings">
@@ -82,7 +86,7 @@ const SideMenu = ({setExpanded, setContent, lang = 'ru'}) => {
                             <i className="bi bi-sliders2-vertical" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {langs[lang].params.settings}
+                            {getParams('settings')}
                         </NavText>
                     </NavItem>
                 </SideNav.Nav>

@@ -1,0 +1,123 @@
+{
+    "tasks":[
+        {
+            "id":1,
+            "name":"Task 1",
+            "description":"Task 1 description",
+            "status":"open",
+            "priority":"high",
+            "due_date":"2015-01-01",
+            "created_at":"2015-01-01",
+            "updated_at":"2015-01-01",
+            "deleted_at":null,
+            "project_id":1,
+            "user_id":1,
+            "assigned_to":1,
+            "responsible":1,
+            "object_id":1
+        }
+    ],
+    "contacts":[
+        {
+            "id":1,
+            "name":"Contact 1",
+            "email":"",
+            "phone":"",
+            "mobile":"",
+            "fax":"",
+            "address":"",
+            "city":"",
+            "state":"",
+            "zip":"",
+            "country":"",
+            "notes":"",
+            "created_at":"2015-01-01",
+            "updated_at":"2015-01-01",
+            "deleted_at":null,
+            "company_id":1,
+            "user_id":1,
+            "object_id":1
+        }
+    ],
+    "contracts":[
+        {
+            "id":1,
+            "name":"Contract 1",
+            "description":"Contract 1 description",
+            "status":"open",
+            "start_date":"2015-01-01",
+            "end_date":"2015-01-01",
+            "created_at":"2015-01-01",
+            "updated_at":"2015-01-01",
+            "deleted_at":null,
+            "company_id":1,
+            "user_id":1,
+            "object_id":1
+        }
+    ],
+    "customers":[
+        {
+            "id":1,
+            "name":"Customer 1",
+            "email":"",
+            "phone":"",
+            "mobile":"",
+            "fax":"",
+            "address":"",
+            "city":"",
+            "state":"",
+            "zip":"",
+            "country":"",
+            "notes":"",
+            "created_at":"2015-01-01",
+            "updated_at":"2015-01-01",
+            "deleted_at":null,
+            "company_id":1,
+            "user_id":1,
+            "object_id":1
+        }
+    ],
+    "files":[
+        {
+            "id":1,
+            "name":"File 1",
+            "description":"File 1 description",
+            "file":"file1.jpg",
+            "created_at":"2015-01-01",
+            "updated_at":"2015-01-01",
+            "deleted_at":null,
+            "company_id":1,
+            "user_id":1,
+            "object_id":1
+        }
+    ],
+    "states":[
+        {
+            "id":1,
+            "name":"State 1",
+            "description":"State 1 description",
+            "created_at":"2015-01-01",
+            "updated_at":"2015-01-01",
+            "deleted_at":null,
+            "company_id":1,
+            "user_id":1,
+            "object_id":1
+        }
+    ],
+    "mails":[
+        {
+            "id":1,
+            "name":"Mail 1",
+            "description":"Mail 1 description",
+            "status":"open",
+            "priority":"high",
+            "due_date":"2015-01-01",
+            "created_at":"2015-01-01",
+            "updated_at":"2015-01-01",
+            "deleted_at":null,
+            "company_id":1,
+            "user_id":1,
+            "object_id":1
+        }
+    ]
+}

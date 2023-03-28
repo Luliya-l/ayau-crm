@@ -1,17 +1,22 @@
 import { useTasks } from 'apps/crm-front/specs/custom-hooks';
+import { Langs } from 'apps/crm-front/specs/custom-types';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { useState } from 'react';
 import { Button, Container, Offcanvas, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-const EventsPopup = ({lang='ru'}) => {
-    const langs = useSelector(selectLangState);
+const EventsPopup = () => {
+    const localization = useSelector(selectLangState) as Langs;
     const {tasks} = useTasks();
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const getParams = (param: string) => {
+        return localization.langs[localization.currentLang]?.params[param];
+    }
 
     return (
         <>
@@ -21,11 +26,11 @@ const EventsPopup = ({lang='ru'}) => {
                 onClick={handleShow}
             >
                 <i className="bi bi-filter-right me-1"></i>
-                {langs[lang].params.events}
+                {getParams('events')}
             </Button>
             <Offcanvas show={show} onHide={handleClose} placement={'end'}>
                 <Offcanvas.Header closeButton>
-                <Offcanvas.Title>{langs[lang].params.events}</Offcanvas.Title>
+                <Offcanvas.Title>{getParams('events')}</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Container className='text-black'>

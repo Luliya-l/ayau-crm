@@ -1,7 +1,7 @@
 import { useTasks } from "apps/crm-front/specs/custom-hooks";
 import { Container, Table } from "react-bootstrap";
 
-const Tasks = ({lang='ru'}) => {
+const Tasks = () => {
     const {tasks} = useTasks();
 
     return (

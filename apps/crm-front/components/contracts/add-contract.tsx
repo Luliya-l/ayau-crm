@@ -3,13 +3,17 @@ import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
-const AddContract = ({lang='ru'}) => {
-    const langs = useSelector(selectLangState);
+const AddContract = () => {
+    const localization = useSelector(selectLangState);
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const getParams = (param: string) => {
+        return localization.langs[localization.currentLang]?.params[param];
+    }
 
     return (
         <>
@@ -19,7 +23,7 @@ const AddContract = ({lang='ru'}) => {
                 onClick={handleShow}
             >
                 <i className="bi bi-plus-lg me-1"></i>
-                {langs[lang].params.addcontract}
+                {getParams('addcontract')}
             </Button>
             <Modal
                 show={show}
@@ -29,7 +33,7 @@ const AddContract = ({lang='ru'}) => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {langs[lang].params.addcontract}
+                        {getParams('addcontract')}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

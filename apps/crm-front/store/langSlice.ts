@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppState } from "./store";
 import { HYDRATE } from "next-redux-wrapper";
-import { Langs } from "../specs/costom-types";
+import { Langs } from "../specs/custom-types";
 import ru from "../data/localization/ru.json";
 import en from "../data/localization/en.json";
 import kz from "../data/localization/en.json";
 
 const initialState: Langs = {
   langs: {ru: ru, en: en, kz: kz},
+  currentLang: "ru"
 };
 
 export const langSlice = createSlice({
@@ -25,6 +26,6 @@ export const langSlice = createSlice({
   },
 });
 
-export const selectLangState = (state: AppState) => state.langs.langs;
+export const selectLangState = (state: AppState) => state.langs;
 
 export default langSlice.reducer;

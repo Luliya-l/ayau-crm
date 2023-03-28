@@ -1,6 +1,7 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { authSlice } from "./authSlice";
 import { langSlice } from "./langSlice";
+import { apiSlice } from "./apiSlice";
 import {nextReduxCookieMiddleware, wrapMakeStore} from "next-redux-cookie-wrapper";
 import { createWrapper } from "next-redux-wrapper";
 import { useDispatch } from "react-redux";
@@ -10,6 +11,7 @@ const makeStore = wrapMakeStore(() =>
     reducer: {
       [authSlice.name]: authSlice.reducer,
       [langSlice.name]: langSlice.reducer,
+      [apiSlice.name]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(
@@ -23,7 +25,8 @@ const makeStore = wrapMakeStore(() =>
           "auth.smsCode",
           "auth.rememberMe",
           "auth.acceptTerms",
-          "cart.cart"
+          "lang.langs",
+          "api",
         ],
       })
     ),
