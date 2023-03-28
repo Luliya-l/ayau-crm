@@ -12,9 +12,11 @@ import SaveSettings from '../settings/save';
 import AddFile from '../files/add-file';
 import { Langs } from 'apps/crm-front/specs/custom-types';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { useEffect, useState } from 'react';
 
-const TopBar = ({msg = '65 компаний', addCommand='add-company'}): JSX.Element => {
+const TopBar = ({expanded = false, msg = '65 компаний', addCommand='add-company'}): JSX.Element => {
   const localization = useSelector(selectLangState) as Langs;
+  const [fixWidth, setFixWidth] = useState('top-64');
 
   const getParams = (param: string) => {
     return localization.langs[localization.currentLang]?.params[param];
@@ -42,9 +44,22 @@ const TopBar = ({msg = '65 компаний', addCommand='add-company'}): JSX.El
         return <SaveSettings />
     }
   }
+
+  useEffect(() => {
+    if (expanded) {
+      setFixWidth('top-240');
+    } else {
+      setFixWidth('top-64');
+    }
+  }, [expanded]);
+
   return (
     <>
-      <Container fluid className={`top-bar ${addCommand === 'dashboard' ? '' : 'position-fixed'} top-0 w-100 m-0 p-0`} style={{zIndex:'899', height:'65px'}}>
+      <Container 
+        fluid 
+        className={`top-bar ${addCommand === 'dashboard' ? '' : 'position-fixed'} top-0 w-100 m-0 p-0 ${fixWidth}`} 
+        style={{zIndex:'899', height:'65px'}}
+      >
         <Row className={`d-flex align-items-center w-100 top-menu ${addCommand === 'dashboard' ? '' : 'bg-light shadow-lg'}`}
           style={{height:'65px'}}
         >

@@ -6,15 +6,17 @@
             "description":"Task 1 description",
             "status":"open",
             "priority":"high",
-            "due_date":"2015-01-01",
+            "type":"встреча",
+            "execution_date":"2015-01-01",
             "created_at":"2015-01-01",
             "updated_at":"2015-01-01",
             "deleted_at":null,
             "project_id":1,
             "user_id":1,
             "assigned_to":1,
-            "responsible":1,
-            "object_id":1
+            "responsible":" asda sda sd",
+            "object":"asdasd asd asd ",
+            "result":"asdasd asd asd "
         }
     ],
     "contacts":[

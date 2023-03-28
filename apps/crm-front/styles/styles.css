@@ -217,6 +217,14 @@ h5 {
   border-radius: 0.375rem;
 }
 
+.top-64 {
+  width: calc(100% - 64px)!important;
+}
+
+.top-240 {
+  width: calc(100% - 240px)!important;
+}
+
 /* END TOP-BAR */
 
 /* EVENTS POPUP */

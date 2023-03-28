@@ -49,7 +49,6 @@ const Index: NextPage = () =>  {
     } else {
       setLeft(64);
     }
-    console.log('expanded', expanded['expanded']);
   }, [expanded]);
 
   return (
@@ -62,7 +61,7 @@ const Index: NextPage = () =>  {
           <Container fluid className='w-100'>
             <Row style={{minHeight:'65px'}}>
               <Col className='position-relative'>
-                <TopBar addCommand={content} />
+                <TopBar expanded={expanded['expanded']} addCommand={content} />
               </Col>
             </Row>
             <Row>

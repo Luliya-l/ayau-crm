@@ -24,6 +24,12 @@
             "newTasks": "задачи к выполнению",
             "completeTasks": "выполненные задачи",
             "withoutTask": "сделок без задач",
-            "overdueTasks": "просроченные задачи"
+            "overdueTasks": "просроченные задачи",
+            "execution_date": "дата исполнения",
+            "responsible": "ответственный",
+            "object": "объект",
+            "taskType": "тип задачи",
+            "taskDescription": "текст задачи",
+            "result": "результат"
         }
 }

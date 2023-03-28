@@ -1,8 +1,15 @@
-import { useTasks } from "apps/crm-front/specs/custom-hooks";
+import { useAPI } from "apps/crm-front/store/apiSlice";
+import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Container, Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const Tasks = () => {
-    const {tasks} = useTasks();
+    const localization = useSelector(selectLangState);
+    const db = useSelector(useAPI);
+
+    const getParams = (param: string) => {
+        return localization.langs[localization.currentLang]?.params[param];
+    }
 
     return (
         <>
@@ -10,29 +17,29 @@ const Tasks = () => {
                 <Table responsive>
                     <thead>
                         <tr>
-                            <th><h5>{'дата исполнения'}</h5></th>
-                            <th><h5>{'ответственный'}</h5></th>
-                            <th><h5>{'объект'}</h5></th>
-                            <th><h5>{'тип задачи'}</h5></th>
-                            <th><h5>{'текст задачи'}</h5></th>
-                            <th><h5>{'результат'}</h5></th>
+                            <th><h5>{getParams('execution_date')}</h5></th>
+                            <th><h5>{getParams('responsible')}</h5></th>
+                            <th><h5>{getParams('object')}</h5></th>
+                            <th><h5>{getParams('taskType')}</h5></th>
+                            <th><h5>{getParams('taskDescription')}</h5></th>
+                            <th><h5>{getParams('result')}</h5></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            (tasks ?? []).map((task, index) => (
+                            (db.tasks ?? []).map((task, index) => (
                                 <tr key={index}>
-                                    <td><span className="fs-6">{task['dateComplete'] ?? ''}</span></td>
-                                    <td><span className="fs-6 text-capitalize">{task['responsible'] ?? ''}</span></td>
-                                    <td><span className="fs-6">{task['object'] ?? ''}</span></td>
+                                    <td><span className="fs-6">{task.execution_date ?? ''}</span></td>
+                                    <td><span className="fs-6 text-capitalize">{task.responsible ?? ''}</span></td>
+                                    <td><span className="fs-6">{task.object ?? ''}</span></td>
                                     <td>
-                                        {task['type'] === 'связаться' ? 
+                                        {task.type === 'связаться' ? 
                                         <i className="bi bi-telephone-fill mx-1" /> : 
                                         <i className="bi bi-briefcase-fill mx-1" />}
-                                        <span className="fs-6 text-capitalize">{task['type'] ?? ''}</span>
+                                        <span className="fs-6 text-capitalize">{task.type ?? ''}</span>
                                     </td>
-                                    <td><span className="fs-6">{task['task'] ?? ''}</span></td>
-                                    <td><span className="fs-6">{task['result'] ?? ''}</span></td>
+                                    <td><span className="fs-6">{task.name ?? ''}</span></td>
+                                    <td><span className="fs-6">{task.result ?? ''}</span></td>
                                 </tr>
                             ))
                         }

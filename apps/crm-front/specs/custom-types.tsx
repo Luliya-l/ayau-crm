@@ -39,15 +39,17 @@ export type Task = {
     description:string,
     status:string,
     priority:string,
-    due_date:string,
+    type:string,
+    execution_date:string,
     created_at:string,
     updated_at:string,
     deleted_at:string | null,
     project_id:number,
     user_id:number,
     assigned_to:number,
-    responsible:number,
-    object_id:number
+    responsible:string,
+    object:string,
+    result:string,
 }
 
 export type Contact = {
