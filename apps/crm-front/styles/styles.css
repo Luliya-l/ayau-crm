@@ -66,7 +66,6 @@ h1 {
   align-items: flex-end;
   z-index: 2;
   height: 100px;
-  margin-bottom: 29px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -202,6 +201,7 @@ h5 {
   border-radius: 0.375rem;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
 .top-bar .input-group-text {
   display: flex;
   align-items: center;
@@ -246,7 +246,14 @@ h5 {
 .offcanvas {
   width: 77% !important;
 }
+
 /* END EVENTS POPUP */
+
+/* DASHBOARD */
+
+
+
+/* END DASHBOARD */
 
 .react-datepicker {
   font-family: var(--bs-font-sans-serif)!important;

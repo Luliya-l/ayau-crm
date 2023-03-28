@@ -46,116 +46,74 @@ const DashBoardMain = ({lang = 'ru'}) => {
             <Fade in={true}>
                 <Container fluid className="mb-4">
                     <Row>
-                        <Col className="text-center my-2">
+                        <Col className="text-center mt-3">
                             <h1>{'Рабочий стол'}</h1>
                         </Col>
                     </Row>
+                    <Row id='comp-content' className='mb-3'>
+                        <Col lg={3} xs={3}>
+                            <Card
+                                bg={'dark'}
+                                key={'dark'}
+                                text={'dark'}
+                            >
+                                <Card.Header className="text-uppercase">{'выполненные задачи'}</Card.Header>
+                                <Card.Body>
+                                    <Card.Title className="text-success">{'0'}</Card.Title>
+                                    <Card.Footer>
+                                        <small className="text-muted">{'за неделю'}</small>
+                                    </Card.Footer>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col lg={3} xs={3}>
+                            <Card
+                                bg={'dark'}
+                                key={'dark'}
+                                text={'dark'}
+                            >
+                                <Card.Header className="text-uppercase">{'выполненные задачи'}</Card.Header>
+                                <Card.Body>
+                                    <Card.Title className="text-success">{'0'}</Card.Title>
+                                    <Card.Footer>
+                                        <small className="text-muted">{'за неделю'}</small>
+                                    </Card.Footer>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col lg={3} xs={3}>
+                            <Card
+                                bg={'dark'}
+                                key={'dark'}
+                                text={'dark'}
+                            >
+                                <Card.Header className="text-uppercase">{'выполненные задачи'}</Card.Header>
+                                <Card.Body>
+                                    <Card.Title className="text-success">{'0'}</Card.Title>
+                                    <Card.Footer>
+                                        <small className="text-muted">{'за неделю'}</small>
+                                    </Card.Footer>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col lg={3} xs={3}>
+                            <Card
+                                bg={'dark'}
+                                key={'dark'}
+                                text={'dark'}
+                            >
+                                <Card.Header className="text-uppercase">{'просроченные задачи'}</Card.Header>
+                                <Card.Body>
+                                    <Card.Title className="text-danger">{'0'}</Card.Title>
+                                    <Card.Footer>
+                                        <small className="text-muted">{'за неделю'}</small>
+                                    </Card.Footer>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
                     <Row id='comp-content' className='-0'>
-                        <Col lg={2} xs={2}>
-                            <Container fluid className='m-0 p-0 h-100'>
-                                <Row className="pb-4">
-                                    <Col>
-                                        <Card
-                                            bg={'dark'}
-                                            key={'dark'}
-                                            text={'dark'}
-                                            className="h-100"
-                                        >
-                                            <Card.Header className="text-uppercase">{'просроченные задачи'}</Card.Header>
-                                            <Card.Body>
-                                                <Card.Title className="text-danger">{'0'}</Card.Title>
-                                                <Card.Text className="py-2">
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Text>
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Footer>
-                                                    <small className="text-muted">{'за неделю'}</small>
-                                                </Card.Footer>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                </Row>  
-                                <Row>
-                                    <Col>
-                                        <Card
-                                            bg={'dark'}
-                                            key={'dark'}
-                                            text={'dark'}
-                                            className="h-100"
-                                        >
-                                            <Card.Header className="text-uppercase">{'задачи к выполнению'}</Card.Header>
-                                            <Card.Body>
-                                                <Card.Title className="text-info">{'0'}</Card.Title>
-                                                <Card.Text className="py-2">
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Text>
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Footer>
-                                                    <small className="text-muted">{'за неделю'}</small>
-                                                </Card.Footer>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                </Row>  
-                            </Container>
-                        </Col>
-                        <Col lg={2} xs={2}>
-                            <Container fluid className='p-0 m-0 h-100'>
-                                <Row className="pb-4">
-                                    <Col>
-                                        <Card
-                                            bg={'dark'}
-                                            key={'dark'}
-                                            text={'dark'}
-                                            className="h-100"
-                                        >
-                                            <Card.Header className="text-uppercase">{'выполненные задачи'}</Card.Header>
-                                            <Card.Body>
-                                                <Card.Title className="text-success">{'0'}</Card.Title>
-                                                <Card.Text className="py-2">
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Text>
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Footer>
-                                                    <small className="text-muted">{'за неделю'}</small>
-                                                </Card.Footer>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                </Row>  
-                                <Row>
-                                    <Col>
-                                        <Card
-                                            bg={'dark'}
-                                            key={'dark'}
-                                            text={'dark'}
-                                            className="h-100"
-                                        >
-                                            <Card.Header className="text-uppercase">{'сделок без задач'}</Card.Header>
-                                            <Card.Body>
-                                                <Card.Title className="text-warning">{'0'}</Card.Title>
-                                                <Card.Text className="py-2">
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Text>
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Footer>
-                                                    <small className="text-muted">{'за неделю'}</small>
-                                                </Card.Footer>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                </Row>  
-                            </Container>
-                        </Col>
-                        <Col lg={4} xs={4} className='text-center'>
+                        <Col lg={8} xs={8} className='text-center'>
                             <Container className='chart shadow-lg'>
                                 <ChartComponent id="charts" 
                                     primaryXAxis={primarxyAxis} 
