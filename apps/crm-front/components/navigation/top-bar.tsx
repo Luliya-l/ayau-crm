@@ -57,7 +57,7 @@ const TopBar = ({expanded = false, msg = '65 компаний', addCommand='add-
     <>
       <Container 
         fluid 
-        className={`top-bar ${addCommand === 'dashboard' ? '' : 'position-fixed'} top-0 w-100 m-0 p-0 ${fixWidth}`} 
+        className={`top-bar ${addCommand === 'dashboard' ? '' : `position-fixed ${fixWidth}`} top-0 m-0 p-0`} 
         style={{zIndex:'899', height:'65px'}}
       >
         <Row className={`d-flex align-items-center w-100 top-menu ${addCommand === 'dashboard' ? '' : 'bg-light shadow-lg'}`}
