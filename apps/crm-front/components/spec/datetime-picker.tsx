@@ -53,7 +53,7 @@ const DateTimePicker = ({ birthday, setBirthday, isYear = true, isTime = false }
       setBirthday(new Date(`${valueGroups.year}-${birthday.getMonth() + 1}-${birthday.getDate()}`));
     }
     if (isTime) {
-      const bd = new Date(`${valueGroups.year}-${birthday.getMonth() + 1}-${birthday.getDate()} ${valueGroups.hours}:${valueGroups.minutes}:00`);
+      const bd = new Date(`${valueGroups.year}-${birthday.getMonth() + 1}-${birthday.getDate()} ${valueGroups.hours.length > 1 ? valueGroups.hours : `0${valueGroups.hours}`}:${valueGroups.minutes}:00`);
       setBirthday(bd);
     }
   }, [valueGroups.year, valueGroups.hours, valueGroups.minutes]);

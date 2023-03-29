@@ -11,7 +11,7 @@ export const apiSlice = createSlice({
   initialState,
   reducers: {
     setTasks(state, action) {
-      state.tasks = {...action.payload};
+      state.tasks.push(action.payload);
     },
     setContacts(state, action) {
       state.contacts = {...action.payload};

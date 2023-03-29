@@ -29,7 +29,7 @@ const Tasks = () => {
                         {
                             (db.tasks ?? []).map((task, index) => (
                                 <tr key={index}>
-                                    <td><span className="fs-6">{task.execution_date ?? ''}</span></td>
+                                    <td><span className="fs-6">{new Date(task.execution_date ?? '').toLocaleDateString('ru-RU')}</span></td>
                                     <td><span className="fs-6 text-capitalize">{task.responsible ?? ''}</span></td>
                                     <td><span className="fs-6">{task.object ?? ''}</span></td>
                                     <td>

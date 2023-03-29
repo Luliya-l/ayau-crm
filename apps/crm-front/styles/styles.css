@@ -263,12 +263,14 @@ h5 {
 
 /* END DASHBOARD */
 
+/* DATETIME PICKER */
+
 .react-datepicker {
   font-family: var(--bs-font-sans-serif)!important;
   font-size: 0.75rem!important;
   background-color: #fff;
   color: #000;
-  border: 1px solid var(--gosu-blue-space-light-100)!important;
+  /* border: 1px solid var(--gosu-blue-space-light-100)!important; */
   border-radius: 1.5rem !important;
   display: inline-block;
   position: relative;
@@ -300,7 +302,7 @@ h5 {
 
 .react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
   align-items: center;
-  background: none;
+  background: none!important;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -394,7 +396,7 @@ option:checked:after {
 
 .year-picker option {
   font-weight: 500;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   display: block;
   line-height: 0.9rem!important;
   min-height: 1.875rem;
@@ -403,9 +405,11 @@ option:checked:after {
   padding-left: 0;
   padding-right: 0;
   gap: 0.625rem;
-  width: 4rem;
+  width: 3.7rem;
   height: 1.875rem;
 }
+
+/* END DATETIME PICKER */
 
 .logo {
   display: block;
