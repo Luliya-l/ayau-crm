@@ -19,7 +19,7 @@ const Contacts = () => {
                     <thead>
                         <tr>
                             <th><h5>{getParams('name')}</h5></th>
-                            <th><h5>{getParams('company')}</h5></th>
+                            <th><h5>{getParams('company_id')}</h5></th>
                             <th><h5>{getParams('phone')}</h5></th>
                             <th><h5>{getParams('email')}</h5></th>
                         </tr>
