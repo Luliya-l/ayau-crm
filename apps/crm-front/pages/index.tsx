@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from 'react';
-import { Fade } from 'react-bootstrap';
 import TopBar from '../components/navigation/top-bar';
 import SideMenu from '../components/navigation/side-menu';
 import DashBoardMain from '../components/dashboard/dashboardMain';
@@ -30,7 +29,7 @@ const Index: NextPage = () =>  {
       case 'tasks':
         return <Tasks setEditIndex={setEditIndex} />;
       case 'contacts':
-        return <Contacts />;
+        return <Contacts setEditIndex={setEditIndex} />;
       case 'list':
         return <Customers />;
       case 'email':
@@ -43,7 +42,7 @@ const Index: NextPage = () =>  {
         return <DashBoardMain />;
     }
   }
-
+  
   useEffect(() => {
     if (expanded['expanded']) {
       setLeft(240);

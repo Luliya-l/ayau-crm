@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Tasks = ({setEditIndex}) => {
     const localization = useSelector(selectLangState);
-    const db = useSelector(useAPI);
+    const api = useSelector(useAPI);
 
     const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ const Tasks = ({setEditIndex}) => {
                     </thead>
                     <tbody>
                         {
-                            (db.tasks ?? []).map((task, index) => (
+                            (api.tasks ?? []).map((task, index) => (
                                 <tr key={index}>
                                     <td><span className="fs-6">{new Date(task.execution_date ?? '').toLocaleDateString('ru-RU')}</span></td>
                                     <td><span className="fs-6 text-capitalize">{task.responsible ?? ''}</span></td>

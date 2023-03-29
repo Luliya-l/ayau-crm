@@ -20,7 +20,13 @@ export const apiSlice = createSlice({
       state.tasks[action.payload[1]] = action.payload[0];
     },
     setContacts(state, action) {
-      state.contacts = {...action.payload};
+      state.contacts.push(action.payload);
+    },
+    deleteContacts(state, action) {
+      state.contacts.splice(action.payload, 1);
+    },
+    updateContacts(state, action) {
+      state.contacts[action.payload[1]] = action.payload[0];
     },
     setContracts(state, action) {
       state.contracts = {...action.payload};
@@ -54,6 +60,8 @@ export const {
   deleteTasks,
   updateTasks,
   setContacts, 
+  deleteContacts,
+  updateContacts,
   setContracts, 
   setCustomers, 
   setFiles, 
