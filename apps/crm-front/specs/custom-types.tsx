@@ -69,7 +69,7 @@ export type Contact = {
     updated_at:string,
     deleted_at:string | null,
     company_id:number,
-    user_id:number,
+    user:string,
     object_id:number
 }
 
