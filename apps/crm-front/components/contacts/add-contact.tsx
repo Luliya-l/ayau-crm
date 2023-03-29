@@ -96,7 +96,7 @@ const AddContact = ({editIndex = -1, setEditIndex}) => {
                             {'Ответственный'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="name" value={responsible} placeholder="email@example.com" onChange={(e) => setResponsible(e.target.value)} />
+                        <Form.Control type="name" value={responsible} placeholder="Ф.И.О." onChange={(e) => setResponsible(e.target.value)} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="phone">
@@ -130,8 +130,8 @@ const AddContact = ({editIndex = -1, setEditIndex}) => {
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button 
-                        onClick={setContact} 
+                    <Button 
+                        onClick={() => setContact()} 
                         variant='outline-success'
                     >
                         {'Создать'}

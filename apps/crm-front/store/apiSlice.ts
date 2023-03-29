@@ -19,6 +19,7 @@ export const apiSlice = createSlice({
     updateTasks(state, action) {
       state.tasks[action.payload[1]] = action.payload[0];
     },
+
     setContacts(state, action) {
       state.contacts.push(action.payload);
     },
@@ -28,12 +29,27 @@ export const apiSlice = createSlice({
     updateContacts(state, action) {
       state.contacts[action.payload[1]] = action.payload[0];
     },
+
     setContracts(state, action) {
-      state.contracts = {...action.payload};
+      state.contracts.push(action.payload);
     },
+    deleteContracts(state, action) {
+      state.contracts.splice(action.payload, 1);
+    },
+    updateContracts(state, action) {
+      state.contracts[action.payload[1]] = action.payload[0];
+    },
+
     setCustomers(state, action) {
-      state.customers = {...action.payload};
+      state.customers.push(action.payload);
     },
+    deleteCustomers(state, action) {
+      state.customers.splice(action.payload, 1);
+    },
+    updateCustomers(state, action) {
+      state.customers[action.payload[1]] = action.payload[0];
+    },
+
     setFiles(state, action) {
       state.files = {...action.payload};
     },
@@ -59,11 +75,19 @@ export const {
   setTasks, 
   deleteTasks,
   updateTasks,
+
   setContacts, 
   deleteContacts,
   updateContacts,
+
   setContracts, 
-  setCustomers, 
+  deleteContracts,
+  updateContracts,
+
+  setCustomers,
+  deleteCustomers,
+  updateCustomers,
+
   setFiles, 
   setStates, 
   setMails 

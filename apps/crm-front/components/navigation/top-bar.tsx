@@ -33,7 +33,7 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
       case 'contacts':
         return <AddContact editIndex={editIndex} setEditIndex={setEditIndex} />
       case 'list':
-        return <AddCustomer />
+        return <AddCustomer editIndex={editIndex} setEditIndex={setEditIndex} />
       case 'file':
         return <AddFile />
       case 'email':

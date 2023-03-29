@@ -31,7 +31,7 @@ const Index: NextPage = () =>  {
       case 'contacts':
         return <Contacts setEditIndex={setEditIndex} />;
       case 'list':
-        return <Customers />;
+        return <Customers setEditIndex={setEditIndex} />;
       case 'email':
         return <MailBox />;
       case 'bi':
