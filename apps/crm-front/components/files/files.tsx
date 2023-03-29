@@ -1,8 +1,15 @@
 import { useTasks } from "apps/crm-front/specs/custom-hooks";
+import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Container, Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const Tasks = () => {
+    const localization = useSelector(selectLangState);
     const {tasks} = useTasks();
+
+    const getParams = (param: string) => {
+        return localization.langs[localization.currentLang]?.params[param];
+    }
 
     return (
         <>
@@ -10,12 +17,12 @@ const Tasks = () => {
                 <Table responsive>
                     <thead>
                         <tr>
-                            <th><h5>{'дата исполнения'}</h5></th>
-                            <th><h5>{'ответственный'}</h5></th>
-                            <th><h5>{'объект'}</h5></th>
-                            <th><h5>{'тип задачи'}</h5></th>
-                            <th><h5>{'текст задачи'}</h5></th>
-                            <th><h5>{'результат'}</h5></th>
+                            <th><h5>{getParams('name')}</h5></th>
+                            <th><h5>{getParams('user')}</h5></th>
+                            <th><h5>{getParams('object_id')}</h5></th>
+                            <th><h5>{getParams('created_at')}</h5></th>
+                            <th><h5>{getParams('updated_at')}</h5></th>
+                            <th><h5>{getParams('file')}</h5></th>
                         </tr>
                     </thead>
                     <tbody>
