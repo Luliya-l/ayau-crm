@@ -51,14 +51,34 @@ export const apiSlice = createSlice({
     },
 
     setFiles(state, action) {
-      state.files = {...action.payload};
+      state.files.push(action.payload);
     },
+    deleteFiles(state, action) {
+      state.files.splice(action.payload, 1);
+    },
+    updateFiles(state, action) {
+      state.files[action.payload[1]] = action.payload[0];
+    },
+
     setStates(state, action) {
-      state.states = {...action.payload};
+      state.states.push(action.payload);
     },
+    deleteStates(state, action) {
+      state.states.splice(action.payload, 1);
+    },
+    updateStates(state, action) {
+      state.states[action.payload[1]] = action.payload[0];
+    },
+
     setMails(state, action) {
-      state.mails = {...action.payload};
-    }
+      state.mails.push(action.payload);
+    },
+    deleteMails(state, action) {
+      state.mails.splice(action.payload, 1);
+    },
+    updateMails(state, action) {
+      state.mails[action.payload[1]] = action.payload[0];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,8 +109,16 @@ export const {
   updateCustomers,
 
   setFiles, 
+  deleteFiles,
+  updateFiles,
+
   setStates, 
-  setMails 
+  deleteStates,
+  updateStates,
+
+  setMails,
+  deleteMails,
+  updateMails, 
 } = apiSlice.actions;
 
 export const useAPI = (state: AppState) => state.api;

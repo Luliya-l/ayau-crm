@@ -15,13 +15,15 @@ export interface AuthState {
 
 const initialState: AuthState = {
   user: { 
-    id: "",
+    id: 0,
     name: "",
     phone: "",
     role: "",
     email: "",
     gender: "",
-    birthdate: "",
+    birthdate: null,
+    login: "",
+    password: "",
   },
   authState: false,
   authToken: "",
@@ -69,6 +71,6 @@ export const authSlice = createSlice({
 
 export const { setUser, setAuthState, setTokens, setSmsCode, setRememberMe, setAcceptTerms } = authSlice.actions;
 
-export const selectAuthState = (state: AppState) => state.auth;
+export const useAuth = (state: AppState) => state.auth;
 
 export default authSlice.reducer;

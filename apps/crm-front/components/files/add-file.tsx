@@ -1,5 +1,5 @@
 import { DB } from "apps/crm-front/specs/custom-types";
-import { useAPI } from "apps/crm-front/store/apiSlice";
+import { setFiles, updateFiles, useAPI } from "apps/crm-front/store/apiSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
@@ -20,23 +20,28 @@ const AddFile = ({editIndex = -1, setEditIndex}) => {
         return localization.langs[localization.currentLang]?.params[param];
     }
 
-    const [budget, setBudget] = useState(editIndex === -1 ? '' : api.contracts[editIndex].budget ?? '');
+    const [fileName, setFileName] = useState(editIndex === -1 ? '' : api.files[editIndex].name ?? '');
 
     const setFile = () => {
+        const f = fileName.split('\\');
         const c = {
-            budget: budget,
+            id:api.files.length + 1,
+            name:f[f.length - 1],
             description:'',
-            start_date:'',
-            end_date:'',
+            file:f[f.length - 1],
             created_at:(new Date()).toString(),
             updated_at:(new Date()).toString(),
             deleted_at:null,
+            company_id:0,
+            user:'Test User',
+            object_id:0
+            
         }
 
         if (editIndex === -1) {
-            // dispatch(setContracts(c));
+            dispatch(setFiles(c));
         } else {
-            // dispatch(updateContracts([c, editIndex]));
+            dispatch(updateFiles([c, editIndex]));
         }
         setEditIndex(-1);
         handleClose();
@@ -44,11 +49,7 @@ const AddFile = ({editIndex = -1, setEditIndex}) => {
 
     useEffect(() => {
         if(editIndex !== -1) {
-            // setStatus(api.contracts[editIndex].status ?? '');
-            // setResponsible(api.contracts[editIndex].name ?? '');
-            // setPhone(api.contracts[editIndex].phone ?? '');
-            // setEmail(api.contracts[editIndex].email ?? '');
-            // setPost(api.contracts[editIndex].post ?? '');
+            setFileName(api.files[editIndex].name ?? '');
             handleShow();
         }
     }, [editIndex]);
@@ -65,6 +66,7 @@ const AddFile = ({editIndex = -1, setEditIndex}) => {
             </Button>
             <Modal
                 show={show}
+                onHide={handleClose}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -76,11 +78,17 @@ const AddFile = ({editIndex = -1, setEditIndex}) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group controlId="formFileLg" className="mb-3">
-                        <Form.Label>Large file input example</Form.Label>
-                        <Form.Control type="file" size="lg" />
+                        <Form.Label>{'Выбирите файл для загрузки'}</Form.Label>
+                        <Form.Control type="file" onChange={(e) => setFileName(e.target.value)} />
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
+                    <Button 
+                        onClick={() => setFile()} 
+                        variant='outline-success'
+                    >
+                        {'Загрузить'}
+                    </Button>
                     <Button 
                         onClick={handleClose} 
                         variant='outline-warning'

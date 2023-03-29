@@ -240,12 +240,12 @@ h5 {
   --bs-btn-bg: rgba(22,43,58,.79);
   --bs-btn-border-color: rgba(22,43,58,.79);
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: linear-gradient(180deg,rgba(22,43,58,.79) 0%,#162b3a 100%);
-  --bs-btn-hover-border-color: linear-gradient(180deg,rgba(22,43,58,.79) 0%,#162b3a 100%);
+  --bs-btn-hover-bg: rgba(54, 80, 98, 0.79);
+  --bs-btn-hover-border-color: rgba(54, 80, 98, 0.79);
   --bs-btn-focus-shadow-rgb: 49,132,253;
   --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: var(--gosu-orange-100);
-  --bs-btn-active-border-color: var(--gosu-orange-100);
+  --bs-btn-active-bg: rgba(29, 54, 71, 0.79);
+  --bs-btn-active-border-color: rgba(29, 54, 71, 0.79);
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: var(--gosu-orange-100);

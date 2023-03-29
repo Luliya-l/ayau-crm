@@ -1,4 +1,17 @@
 {
+    "users":[
+        {
+            "id": 0,
+            "name": "Test User",
+            "phone": "777 777 77 77",
+            "role": "Administrator",
+            "email": "info@crm.kz",
+            "gender": "Женский",
+            "birthdate": null,
+            "login": "test",
+            "password": "123"
+        }
+    ],
     "tasks":[
         {
             "id":1,
