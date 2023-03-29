@@ -30,6 +30,19 @@
             "object": "объект",
             "taskType": "тип задачи",
             "taskDescription": "текст задачи",
-            "result": "результат"
+            "result": "результат",
+            "primaryContact": "Первичный контакт",
+            "negotiation": "Переговоры",
+            "makeDecision": "Принимают решение", 
+            "Harmonizationofcontract": "Согласование договора",
+            "name": "Наименование",
+            "company_id":"Компания",
+            "phone" : "Номер телефона", 
+            "email" : "email", 
+            "user": "Ответственный", 
+            "object_id": "объект",
+            "created_at": "Дата создания", 
+            "updated_at": "Дата обновления",
+            "file": "Файл"
         }
 }
