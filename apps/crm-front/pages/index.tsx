@@ -20,6 +20,7 @@ import { useAPI } from '../store/apiSlice';
 import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setSmsCode, setTokens, setUser, useAuth } from '../store/authSlice';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import { setCurrentLang } from '../store/langSlice';
+import Chat from '../components/utils/chat';
 
 const Index: NextPage = () =>  {
   const api = useSelector(useAPI) as DB;
@@ -154,6 +155,7 @@ const Index: NextPage = () =>  {
           </Container>
         </Col>
       </Row>
+      <Chat />
       {/* <Splash show={isLoading.includes(false)} /> */}
     </>
   );
