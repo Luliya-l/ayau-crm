@@ -97,7 +97,7 @@ const AddCustomer = ({editIndex = -1, setEditIndex}) => {
                             {'Ответственный'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="name" value={responsible} placeholder="Ф.И.О." onChange={(e) => console.log(e.target.value)} />
+                        <Form.Control type="name" value={responsible} placeholder="Ф.И.О." onChange={(e) => setResponsible(e.target.value)} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="phone">
@@ -105,7 +105,7 @@ const AddCustomer = ({editIndex = -1, setEditIndex}) => {
                             {'Раб. тел.'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="phone" value={phone} placeholder="777 777 77 77" onChange={(e) => console.log(e.target.value)} />
+                        <Form.Control type="phone" value={phone} placeholder="777 777 77 77" onChange={(e) => setPhone(e.target.value)} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="email">
@@ -113,7 +113,7 @@ const AddCustomer = ({editIndex = -1, setEditIndex}) => {
                             {'Email'}
                         </Form.Label>
                         <Col sm="10">
-                            <Form.Control type="email" value={email} placeholder="email@example.com" onChange={(e) => console.log(e.target.value)} />
+                            <Form.Control type="email" value={email} placeholder="email@example.com" onChange={(e) => setEmail(e.target.value)} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
@@ -121,7 +121,7 @@ const AddCustomer = ({editIndex = -1, setEditIndex}) => {
                             {'Website'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="email" value={website} placeholder="www.example.com" onChange={(e) => console.log(e.target.value)} />
+                        <Form.Control type="email" value={website} placeholder="www.example.com" onChange={(e) => setWebSite(e.target.value)} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
@@ -129,7 +129,7 @@ const AddCustomer = ({editIndex = -1, setEditIndex}) => {
                             {'Адрес'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="email" value={address} placeholder="г. Алматы, пр. Достык, 1" onChange={(e) => console.log(e.target.value)} />
+                        <Form.Control type="email" value={address} placeholder="г. Алматы, пр. Достык, 1" onChange={(e) => setAddress(e.target.value)} />
                         </Col>
                     </Form.Group>
                 </Modal.Body>

@@ -27,7 +27,7 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
       case 'dashboard':
         return <EventsPopup />
       case 'contracts':
-        return <AddContract />
+        return <AddContract editIndex={editIndex} setEditIndex={setEditIndex} />
       case 'tasks':
         return <AddTask editIndex={editIndex} setEditIndex={setEditIndex} />
       case 'contacts':
@@ -35,7 +35,7 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
       case 'list':
         return <AddCustomer editIndex={editIndex} setEditIndex={setEditIndex} />
       case 'file':
-        return <AddFile />
+        return <AddFile editIndex={editIndex} setEditIndex={setEditIndex} />
       case 'email':
         return <SendMail />
       case 'bi':

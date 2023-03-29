@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
-const AddFile = () => {
+const AddFile = ({editIndex = -1, setEditIndex}) => {
     const localization = useSelector(selectLangState);
 
     const [show, setShow] = useState(false);

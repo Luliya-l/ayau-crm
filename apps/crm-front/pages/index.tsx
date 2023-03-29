@@ -25,7 +25,7 @@ const Index: NextPage = () =>  {
       case 'dashboard':
         return <DashBoardMain />;
       case 'contracts':
-        return <Contracts />;
+        return <Contracts setEditIndex={setEditIndex} />;
       case 'tasks':
         return <Tasks setEditIndex={setEditIndex} />;
       case 'contacts':
