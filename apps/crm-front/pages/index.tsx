@@ -19,6 +19,7 @@ import { DB } from '../specs/custom-types';
 import { useAPI } from '../store/apiSlice';
 import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setSmsCode, setTokens, setUser, useAuth } from '../store/authSlice';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
+import { setCurrentLang } from '../store/langSlice';
 
 const Index: NextPage = () =>  {
   const api = useSelector(useAPI) as DB;
@@ -29,6 +30,7 @@ const Index: NextPage = () =>  {
   const [expanded, setExpanded] = useState({expanded: false});
   const [left, setLeft] = useState(64);
   const [content, setContent] = useState('dashboard');
+  const [lang, setLang] = useState('ru');
   const [editIndex, setEditIndex] = useState(-1);
 
   const [login, setLogin] = useState('');
@@ -70,8 +72,6 @@ const Index: NextPage = () =>  {
         return <BI />;
       case 'settings':
         return <Settings />;
-      default:
-        return <DashBoardMain />;
     }
   }
   
@@ -82,6 +82,10 @@ const Index: NextPage = () =>  {
       setLeft(64);
     }
   }, [expanded]);
+
+  useEffect(() => {
+    dispatch(setCurrentLang(lang));
+  }, [lang]);
 
   if (!auth.authState) {
     return (
@@ -133,7 +137,7 @@ const Index: NextPage = () =>  {
     <>
       <Row>
         <Col lg={expanded ? 2 : 1} xs={expanded ? 2 : 1} style={{width:`${left}px`}}>
-          <SideMenu setExpanded={setExpanded} setContent={setContent}  />
+          <SideMenu setExpanded={setExpanded} setContent={setContent} setLang={setLang} />
         </Col>
         <Col>
           <Container fluid className='w-100'>
