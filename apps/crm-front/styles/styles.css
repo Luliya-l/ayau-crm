@@ -182,6 +182,13 @@ h5 {
   transition: min-width 0.2s;
 }
 
+.sidenav---sidenav---_2tBP.sidenav---collapsed---LQDEv .sidenav---sidenav-nav---3tvij 
+.sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---sidenav-subnav---1EN61 {
+  color: var(--gosu-blue-space-100)!important;
+}
+.sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f {
+  color: var(--gosu-blue-space-100)!important;
+}
 /* END SIDE-MENU */
 
 /* TOP-BAR */

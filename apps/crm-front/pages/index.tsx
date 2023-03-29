@@ -13,6 +13,7 @@ import Customers from '../components/customers/customers';
 import MailBox from '../components/mails/mails';
 import BI from '../components/bi/buisines-inteligence';
 import Settings from '../components/settings/settings';
+import Files from '../components/files/files';
 
 const Index: NextPage = () =>  {
   const [expanded, setExpanded] = useState({expanded: false});
@@ -30,8 +31,12 @@ const Index: NextPage = () =>  {
         return <Tasks setEditIndex={setEditIndex} />;
       case 'contacts':
         return <Contacts setEditIndex={setEditIndex} />;
-      case 'list':
+      case 'list/contacts':
+        return <Contacts setEditIndex={setEditIndex} />;
+      case 'list/customers':
         return <Customers setEditIndex={setEditIndex} />;
+      case 'list/files':
+        return <Files setEditIndex={setEditIndex} />;
       case 'email':
         return <MailBox />;
       case 'bi':

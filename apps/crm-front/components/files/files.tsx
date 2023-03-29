@@ -3,7 +3,7 @@ import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Container, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
-const Tasks = () => {
+const Files = ({setEditIndex}) => {
     const localization = useSelector(selectLangState);
     const {tasks} = useTasks();
 
@@ -49,4 +49,4 @@ const Tasks = () => {
         </>
     )
 }
-export default Tasks;
+export default Files;

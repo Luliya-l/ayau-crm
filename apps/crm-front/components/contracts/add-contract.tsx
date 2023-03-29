@@ -37,7 +37,7 @@ const AddContract = ({editIndex = -1, setEditIndex}) => {
             post: post,
             budget: budget,
             description:'',
-            start_date:'',
+            start_date:(new Date()).toString(),
             end_date:'',
             created_at:(new Date()).toString(),
             updated_at:(new Date()).toString(),

@@ -28,16 +28,14 @@ const Customers = ({setEditIndex}) => {
                     </thead>
                     <tbody>
                         {
-                            (api.customers ?? []).map((task, index) => (
+                            (api.customers ?? []).map((customer, index) => (
                                 <tr key={index}>
-                                    <td><span className="fs-6">{task['dateComplete'] ?? ''}</span></td>
-                                    <td><span className="fs-6 text-capitalize">{task['responsible'] ?? ''}</span></td>
-                                    <td><span className="fs-6">{task['object'] ?? ''}</span></td>
+                                    <td><span className="fs-6">{customer.name ?? ''}</span></td>
+                                    <td><span className="fs-6 text-capitalize">{customer.notes ?? ''}</span></td>
+                                    <td><span className="fs-6">{customer.phone ?? ''}</span></td>
                                     <td>
-                                        {task['type'] === 'связаться' ? 
-                                        <i className="bi bi-telephone-fill mx-1" /> : 
-                                        <i className="bi bi-briefcase-fill mx-1" />}
-                                        <span className="fs-6 text-capitalize">{task['type'] ?? ''}</span>
+                                        <i className="bi bi-envelope-fill mx-1" />
+                                        <span className="fs-6 text-capitalize">{customer.email ?? ''}</span>
                                     </td>
                                     <td className="text-center">
                                         <i role='button' className="bi bi bi-pencil mx-4" onClick={() => setEditIndex(index)}/>

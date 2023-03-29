@@ -64,6 +64,21 @@ const SideMenu = ({setExpanded, setContent}) => {
                         <NavText>
                             {getParams('lists')}
                         </NavText>
+                        <NavItem eventKey="list/contacts">
+                            <NavText>
+                                {'Контакты'}
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="list/customers">
+                            <NavText>
+                                {'Компании'}
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="list/files">
+                            <NavText>
+                                {'Файлы'}
+                            </NavText>
+                        </NavItem>
                     </NavItem>
                     <NavItem eventKey="email">
                         <NavIcon>

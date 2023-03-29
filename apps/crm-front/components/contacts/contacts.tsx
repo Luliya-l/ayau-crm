@@ -37,7 +37,7 @@ const Contacts = ({setEditIndex}) => {
                                         <span className="fs-6">{contact.phone ?? ''}</span>
                                     </td>
                                     <td>
-                                        <i className="bi bi-briefcase-fill mx-1" />
+                                        <i className="bi bi-envelope-fill mx-1" />
                                         <span className="fs-6 text-capitalize">{contact.email ?? ''}</span>
                                     </td>
                                     <td className="text-center">
