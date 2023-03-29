@@ -72,59 +72,9 @@ const DateTimePicker = ({ birthday, setBirthday, isYear = true, isTime = false }
           <Image src='/img/icon_calendar.svg' alt='' />
         </Col>
       </Row>
-      <Row style={{height:'313.05px'}}>
-        <Col lg={4} xs={4} className={`${isTime ? '' : 'd-none'}`}></Col>
-        {/* YEAR SELECTOR */}
-        <Col lg="2" xs="2"  className={`${isYear ? '' : 'd-none'}`}>
-          <Container className="year-picker m-0 p-0">
-            <Row>
-              <Col className="text-center">
-                <span>Год</span>
-              </Col>
-            </Row>
-            <Row className="border border-2 p-1 px-3" style={{borderRadius:'1.5rem'}}>
-              <Col>
-                <Container className="m-0 p-0">
-                  <Row>
-                    <Col className="text-center p-0 m-0 my-2">
-                      <span className="date-year-select">{valueGroups.year}</span>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="position-relative text-center p-0 m-0">
-                        <select className="form-select border-0 my-4" 
-                          size={3}
-                          name="year" 
-                          value={valueGroups.year} 
-                          onChange={(e) => handleChange('year', e.target.value)}
-                        >
-                          {optionGroups.year.map((option) => (
-                            <option key={option} value={option} className='text-center'>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                        <i 
-                          role="button" 
-                          className="position-absolute bi bi-chevron-up" 
-                          style={{top: '5%',left: '43%'}}
-                          onClick={() => select('year', -1)}
-                        ></i>
-                        <i 
-                          role="button" 
-                          className="position-absolute bi bi-chevron-down" 
-                          style={{bottom: '1%',left: '43%'}}
-                          onClick={() => select('year', 1)}
-                        ></i>
-                    </Col>
-                  </Row>
-                </Container>
-              </Col>
-            </Row>
-          </Container>
-        </Col>
+      <Row style={{height:'313.05px'}}>    
         {/* DATE SELECTOR */}
-        <Col lg="5" xs="5" className="text-end">
+        <Col lg="8" xs="8" className="text-end">
           <DatePicker
             peekNextMonth
             inline
@@ -142,14 +92,14 @@ const DateTimePicker = ({ birthday, setBirthday, isYear = true, isTime = false }
           />
         </Col>
         {/* TIME SELECTOR */}
-        <Col lg="3" xs="3" className={`${isTime ? '' : 'd-none'}`}>
+        <Col lg="4" xs="4" className={`${isTime ? '' : 'd-none'}`}>
           <Container className="year-picker m-0 p-0">
             <Row>
               <Col className="text-center">
                 <span>Время</span>
               </Col>
             </Row>
-            <Row className="border border-1 p-1 px-3 my-2" style={{borderRadius:'1.5rem', borderColor:'var(--gosu-blue-space-light-100)!important'}}>
+            <Row className="border border-1 p-1 px-1 my-2" style={{borderRadius:'1.5rem', borderColor:'var(--gosu-blue-space-light-100)!important'}}>
               <Col>
                 <Container className="m-0 p-0">
                   <Row>
