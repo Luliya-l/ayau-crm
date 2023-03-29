@@ -13,6 +13,12 @@ export const apiSlice = createSlice({
     setTasks(state, action) {
       state.tasks.push(action.payload);
     },
+    deleteTasks(state, action) {
+      state.tasks.splice(action.payload, 1);
+    },
+    updateTasks(state, action) {
+      state.tasks[action.payload[1]] = action.payload[0];
+    },
     setContacts(state, action) {
       state.contacts = {...action.payload};
     },
@@ -45,6 +51,8 @@ export const apiSlice = createSlice({
 
 export const { 
   setTasks, 
+  deleteTasks,
+  updateTasks,
   setContacts, 
   setContracts, 
   setCustomers, 

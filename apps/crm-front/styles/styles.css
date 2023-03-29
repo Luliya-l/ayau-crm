@@ -282,6 +282,10 @@ h5 {
   margin: 0.5rem;
 }
 
+..react-datepicker__header {
+  background-color: transparent!important;
+}
+
 .react-datepicker__navigation {
   align-items: center;
   background: none;

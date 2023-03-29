@@ -14,7 +14,7 @@ import { Langs } from 'apps/crm-front/specs/custom-types';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { useEffect, useState } from 'react';
 
-const TopBar = ({expanded = false, msg = '65 компаний', addCommand='add-company'}): JSX.Element => {
+const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компаний', addCommand='add-company'}): JSX.Element => {
   const localization = useSelector(selectLangState) as Langs;
   const [fixWidth, setFixWidth] = useState('top-64');
 
@@ -29,7 +29,7 @@ const TopBar = ({expanded = false, msg = '65 компаний', addCommand='add-
       case 'contracts':
         return <AddContract />
       case 'tasks':
-        return <AddTask />
+        return <AddTask editIndex={editIndex} setEditIndex={setEditIndex} />
       case 'contacts':
         return <AddContact />
       case 'list':

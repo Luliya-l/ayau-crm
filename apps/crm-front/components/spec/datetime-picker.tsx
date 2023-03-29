@@ -64,7 +64,7 @@ const DateTimePicker = ({ birthday, setBirthday, isYear = true, isTime = false }
         <Col lg={6} xs={6} className={`${isTime ? '' : 'd-none'}`}></Col>
         <Col lg="4" xs="4">
           <span className="date-year-select">
-            {`${birthday.getUTCDate()}-${birthday.getMonth() + 1}-${birthday.getFullYear()}`}
+            {`${birthday.getDate()}-${birthday.getMonth() + 1}-${birthday.getFullYear()}`}
             { isTime ? ` ${birthday.getHours()}:${birthday.getMinutes()}` : '' }
           </span>
         </Col>
