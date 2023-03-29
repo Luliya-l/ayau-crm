@@ -1,8 +1,16 @@
 import { useContacts } from "apps/crm-front/specs/custom-hooks";
+import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Container, Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const Contacts = () => {
+    const localization = useSelector(selectLangState);
     const {contacts} = useContacts();
+
+
+    const getParams = (param: string) => {
+        return localization.langs[localization.currentLang]?.params[param];
+    }
 
     return (
         <>
@@ -10,10 +18,10 @@ const Contacts = () => {
                 <Table responsive>
                     <thead>
                         <tr>
-                            <th><h5>{'наименование'}</h5></th>
-                            <th><h5>{'компания'}</h5></th>
-                            <th><h5>{'телефон'}</h5></th>
-                            <th><h5>{'email'}</h5></th>
+                            <th><h5>{getParams('name')}</h5></th>
+                            <th><h5>{getParams('company')}</h5></th>
+                            <th><h5>{getParams('phone')}</h5></th>
+                            <th><h5>{getParams('email')}</h5></th>
                         </tr>
                     </thead>
                     <tbody>
