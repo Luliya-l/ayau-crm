@@ -19,6 +19,7 @@ const Index: NextPage = () =>  {
   const [expanded, setExpanded] = useState({expanded: false});
   const [left, setLeft] = useState(64);
   const [content, setContent] = useState('dashboard');
+  const [editIndex, setEditIndex] = useState(-1);
 
   const getContent = () => {
     switch (content) {
@@ -27,7 +28,7 @@ const Index: NextPage = () =>  {
       case 'contracts':
         return <Contracts />;
       case 'tasks':
-        return <Tasks />;
+        return <Tasks setEditIndex={setEditIndex} />;
       case 'contacts':
         return <Contacts />;
       case 'list':
@@ -55,13 +56,13 @@ const Index: NextPage = () =>  {
     <>
       <Row>
         <Col lg={expanded ? 2 : 1} xs={expanded ? 2 : 1} style={{width:`${left}px`}}>
-          <SideMenu setExpanded={setExpanded} setContent={setContent} />
+          <SideMenu setExpanded={setExpanded} setContent={setContent}  />
         </Col>
         <Col>
           <Container fluid className='w-100'>
             <Row style={{minHeight:'65px'}}>
               <Col className='position-relative'>
-                <TopBar expanded={expanded['expanded']} addCommand={content} />
+                <TopBar expanded={expanded['expanded']} addCommand={content} editIndex={editIndex} setEditIndex={setEditIndex} />
               </Col>
             </Row>
             <Row>

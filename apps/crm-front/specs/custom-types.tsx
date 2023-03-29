@@ -84,7 +84,7 @@ export type Contract = {
     updated_at:string,
     deleted_at:string | null,
     company_id:number,
-    user_id:number,
+    user:string,
     object_id:number
 }
 
@@ -105,7 +105,7 @@ export type Customer = {
     updated_at:string,
     deleted_at:string | null,
     company_id:number,
-    user_id:number,
+    user:string,
     object_id:number
 }
 
@@ -118,7 +118,7 @@ export type File = {
     updated_at:string,
     deleted_at:string | null,
     company_id:number,
-    user_id:number,
+    user:string,
     object_id:number
 }
 
@@ -130,7 +130,7 @@ export type State = {
     updated_at:string,
     deleted_at:string | null,
     company_id:number,
-    user_id:number,
+    user:string,
     object_id:number
 }
 
@@ -145,6 +145,6 @@ export type Mail = {
     updated_at:string,
     deleted_at:string | null,
     company_id:number,
-    user_id:number,
+    user:string,
     object_id:number
 }
