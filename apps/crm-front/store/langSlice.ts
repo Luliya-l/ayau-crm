@@ -4,7 +4,7 @@ import { HYDRATE } from "next-redux-wrapper";
 import { Langs } from "../specs/custom-types";
 import ru from "../data/localization/ru.json";
 import en from "../data/localization/en.json";
-import kz from "../data/localization/en.json";
+import kz from "../data/localization/kz.json";
 
 const initialState: Langs = {
   langs: {ru: ru, en: en, kz: kz},
@@ -14,7 +14,11 @@ const initialState: Langs = {
 export const langSlice = createSlice({
   name: "langs",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentLang(state, action) {
+      state.currentLang = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(HYDRATE, (state, action) => {
@@ -25,6 +29,8 @@ export const langSlice = createSlice({
     })
   },
 });
+
+export const { setCurrentLang } = langSlice.actions;
 
 export const selectLangState = (state: AppState) => state.langs;
 

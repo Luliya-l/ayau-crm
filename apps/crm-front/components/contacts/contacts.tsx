@@ -1,12 +1,13 @@
-import { useContacts } from "apps/crm-front/specs/custom-hooks";
+import { deleteContacts, useAPI } from "apps/crm-front/store/apiSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Container, Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const Contacts = () => {
+const Contacts = ({setEditIndex}) => {
     const localization = useSelector(selectLangState);
-    const {contacts} = useContacts();
+    const api = useSelector(useAPI);
 
+    const dispatch = useDispatch();
 
     const getParams = (param: string) => {
         return localization.langs[localization.currentLang]?.params[param];
@@ -22,20 +23,26 @@ const Contacts = () => {
                             <th><h5>{getParams('company_id')}</h5></th>
                             <th><h5>{getParams('phone')}</h5></th>
                             <th><h5>{getParams('email')}</h5></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            (contacts ?? []).map((task, index) => (
+                            (api.contacts ?? []).map((contact, index) => (
                                 <tr key={index}>
-                                    <td><span className="fs-6">{task['dateComplete'] ?? ''}</span></td>
-                                    <td><span className="fs-6 text-capitalize">{task['responsible'] ?? ''}</span></td>
-                                    <td><span className="fs-6">{task['object'] ?? ''}</span></td>
+                                    <td><span className="fs-6">{contact.name ?? ''}</span></td>
+                                    <td><span className="fs-6 text-capitalize">{contact.object_id ?? ''}</span></td>
                                     <td>
-                                        {task['type'] === 'связаться' ? 
-                                        <i className="bi bi-telephone-fill mx-1" /> : 
-                                        <i className="bi bi-briefcase-fill mx-1" />}
-                                        <span className="fs-6 text-capitalize">{task['type'] ?? ''}</span>
+                                        <i className="bi bi-telephone-fill mx-1" />
+                                        <span className="fs-6">{contact.phone ?? ''}</span>
+                                    </td>
+                                    <td>
+                                        <i className="bi bi-envelope-fill mx-1" />
+                                        <span className="fs-6 text-capitalize">{contact.email ?? ''}</span>
+                                    </td>
+                                    <td className="text-center">
+                                        <i role='button' className="bi bi bi-pencil mx-4" onClick={() => setEditIndex(index)}/>
+                                        <i role='button' className="bi bi-trash3" onClick={() => dispatch(deleteContacts(index))} />
                                     </td>
                                 </tr>
                             ))

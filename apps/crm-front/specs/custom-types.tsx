@@ -14,16 +14,19 @@ export type LangParams = {
 }
 
 export type User = {
-    id: string;
+    id: number;
     name: string;
     phone: string;
     role: string;
     email: string;
     gender: string;
-    birthdate: string;
-} | null;
+    birthdate: string | null;
+    login: string;
+    password: string;
+};
 
 export type DB = {
+    users: User[],
     tasks: Task[],
     contacts: Contact[],
     contracts: Contract[],
@@ -77,7 +80,11 @@ export type Contract = {
     id:number,
     name:string,
     description:string,
+    budget:number,
     status:string,
+    post:string,
+    email:string,
+    phone:string,
     start_date:string,
     end_date:string,
     created_at:string,

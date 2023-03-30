@@ -25,7 +25,7 @@ const makeStore = wrapMakeStore(() =>
           "auth.smsCode",
           "auth.rememberMe",
           "auth.acceptTerms",
-          "lang.langs",
+          "langs.currentLang",
           "api",
         ],
       })

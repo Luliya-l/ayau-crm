@@ -5,7 +5,7 @@ import { selectLangState } from 'apps/crm-front/store/langSlice';
 
 import { useSelector } from "react-redux";
 
-const SideMenu = ({setExpanded, setContent}) => {
+const SideMenu = ({setExpanded, setContent, setLang}) => {
     const localization = useSelector(selectLangState) as Langs;
 
     const getParams = (param: string) => {
@@ -16,7 +16,15 @@ const SideMenu = ({setExpanded, setContent}) => {
         <>
             <SideNav
                 onSelect={(selected) => {
-                    setContent(selected);
+                    if (selected === 'localize/kz') {
+                        setLang('kz');
+                    } else if (selected === 'localize/ru') {
+                        setLang('ru');
+                    } else if (selected === 'localize/en') {
+                        setLang('en');
+                    } else {
+                        setContent(selected);
+                    }
                 }}
                 onToggle={(expanded) => {
                     setExpanded({ expanded });
@@ -25,6 +33,29 @@ const SideMenu = ({setExpanded, setContent}) => {
             >
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="chart">
+                    <NavItem eventKey="localize">
+                        <NavIcon>
+                            <i className="bi bi-translate" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            {'Язык'}
+                        </NavText>
+                        <NavItem eventKey="localize/kz">
+                            <NavText>
+                                {'Казахский'}
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="localize/ru">
+                            <NavText>
+                                {'Русский'}
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="localize/en">
+                            <NavText>
+                                {'English'}
+                            </NavText>
+                        </NavItem>
+                    </NavItem>
                     <NavItem eventKey="dashboard">
                         <NavIcon>
                             <i className="bi bi-speedometer" style={{ fontSize: '1.75em' }} />
@@ -64,6 +95,21 @@ const SideMenu = ({setExpanded, setContent}) => {
                         <NavText>
                             {getParams('lists')}
                         </NavText>
+                        <NavItem eventKey="list/contacts">
+                            <NavText>
+                                {'Контакты'}
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="list/customers">
+                            <NavText>
+                                {'Компании'}
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="list/files">
+                            <NavText>
+                                {'Файлы'}
+                            </NavText>
+                        </NavItem>
                     </NavItem>
                     <NavItem eventKey="email">
                         <NavIcon>

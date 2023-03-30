@@ -1,4 +1,17 @@
 {
+    "users":[
+        {
+            "id": 0,
+            "name": "Test User",
+            "phone": "777 777 77 77",
+            "role": "Administrator",
+            "email": "info@crm.kz",
+            "gender": "Женский",
+            "birthdate": null,
+            "login": "test",
+            "password": "123"
+        }
+    ],
     "tasks":[
         {
             "id":1,
@@ -64,7 +77,11 @@
             "id":1,
             "name":"Contract 1",
             "description":"Contract 1 description",
+            "budget":1000,
             "status":"open",
+            "post":"post",
+            "email":"string",
+            "phone":"string",
             "start_date":"2015-01-01",
             "end_date":"2015-01-01",
             "created_at":"2015-01-01",

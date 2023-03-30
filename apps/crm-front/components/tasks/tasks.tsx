@@ -1,16 +1,18 @@
+import { Langs } from "apps/crm-front/specs/custom-types";
 import { deleteTasks, useAPI } from "apps/crm-front/store/apiSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const Tasks = ({setEditIndex}) => {
-    const localization = useSelector(selectLangState);
-    const db = useSelector(useAPI);
+    const localization = useSelector(selectLangState) as Langs;
+    const api = useSelector(useAPI);
 
     const dispatch = useDispatch();
 
     const getParams = (param: string) => {
-        return localization.langs[localization.currentLang]?.params[param];
+        console.log(localization.currentLang)
+        return localization.langs[localization.currentLang].params[param];
     }
 
     return (
@@ -30,7 +32,7 @@ const Tasks = ({setEditIndex}) => {
                     </thead>
                     <tbody>
                         {
-                            (db.tasks ?? []).map((task, index) => (
+                            (api.tasks ?? []).map((task, index) => (
                                 <tr key={index}>
                                     <td><span className="fs-6">{new Date(task.execution_date ?? '').toLocaleDateString('ru-RU')}</span></td>
                                     <td><span className="fs-6 text-capitalize">{task.responsible ?? ''}</span></td>

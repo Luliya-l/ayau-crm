@@ -27,7 +27,6 @@ const CustomApp: AppType = ({ Component, pageProps }: AppProps) => {
           >
             <Component {...pageProps} />
             <BackOnTop />
-            <Chat />
           </ThemeProvider>
         </Provider>
       </>

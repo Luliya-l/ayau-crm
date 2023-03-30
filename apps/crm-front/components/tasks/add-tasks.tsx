@@ -8,7 +8,7 @@ import DateTimePicker from "../spec/datetime-picker";
 
 const AddTask = ({editIndex = -1, setEditIndex,}) => {
     const localization = useSelector(selectLangState) as Langs;
-    const tasks = useSelector(useAPI) as DB;
+    const api = useSelector(useAPI) as DB;
 
     const dispatch = useDispatch();
 
@@ -21,13 +21,13 @@ const AddTask = ({editIndex = -1, setEditIndex,}) => {
         return localization.langs[localization.currentLang]?.params[param];
     }
 
-    const [taskExecutionDate, setTaskExecutionDate] = useState(editIndex === -1 ? new Date() : new Date(tasks.tasks[editIndex].execution_date));
-    const [taskType, setTaskType] = useState(editIndex === -1 ? 'Звонок' : tasks.tasks[editIndex].type);
+    const [taskExecutionDate, setTaskExecutionDate] = useState(editIndex === -1 ? new Date() : new Date(api.tasks[editIndex].execution_date));
+    const [taskType, setTaskType] = useState(editIndex === -1 ? 'Звонок' : api.tasks[editIndex].type);
 
-    const [taskName, setTaskName] = useState(editIndex === -1 ? '' : tasks.tasks[editIndex].name ?? '');
-    const [taskDescription, setTaskDescription] = useState(editIndex === -1 ? '' : tasks.tasks[editIndex].description ??'');
-    const [taskObject, setTaskObject] = useState(editIndex === -1 ? '' : tasks.tasks[editIndex].object ??'');
-    const [taskResponsible, setTaskResponsible] = useState(editIndex === -1 ? '' : tasks.tasks[editIndex].responsible ??'');
+    const [taskName, setTaskName] = useState(editIndex === -1 ? '' : api.tasks[editIndex].name ?? '');
+    const [taskDescription, setTaskDescription] = useState(editIndex === -1 ? '' : api.tasks[editIndex].description ??'');
+    const [taskObject, setTaskObject] = useState(editIndex === -1 ? '' : api.tasks[editIndex].object ??'');
+    const [taskResponsible, setTaskResponsible] = useState(editIndex === -1 ? '' : api.tasks[editIndex].responsible ??'');
 
     const acceptTask = () => {
         const t = {
@@ -60,12 +60,12 @@ const AddTask = ({editIndex = -1, setEditIndex,}) => {
 
     useEffect(() => {
         if(editIndex !== -1) {
-            setTaskExecutionDate(new Date(tasks.tasks[editIndex].execution_date));
-            setTaskType(tasks.tasks[editIndex].type);
-            setTaskName(tasks.tasks[editIndex].name ?? '');
-            setTaskDescription(tasks.tasks[editIndex].description ?? '');
-            setTaskObject(tasks.tasks[editIndex].object ?? '');
-            setTaskResponsible(tasks.tasks[editIndex].responsible ?? '');
+            setTaskExecutionDate(new Date(api.tasks[editIndex].execution_date));
+            setTaskType(api.tasks[editIndex].type);
+            setTaskName(api.tasks[editIndex].name ?? '');
+            setTaskDescription(api.tasks[editIndex].description ?? '');
+            setTaskObject(api.tasks[editIndex].object ?? '');
+            setTaskResponsible(api.tasks[editIndex].responsible ?? '');
             handleShow();
         }
     }, [editIndex]);

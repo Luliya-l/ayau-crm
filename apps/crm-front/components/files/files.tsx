@@ -1,11 +1,14 @@
-import { useTasks } from "apps/crm-front/specs/custom-hooks";
+import { DB } from "apps/crm-front/specs/custom-types";
+import { deleteFiles, useAPI } from "apps/crm-front/store/apiSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Container, Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const Tasks = () => {
+const Files = ({setEditIndex}) => {
     const localization = useSelector(selectLangState);
-    const {tasks} = useTasks();
+    const api = useSelector(useAPI) as DB;
+
+    const dispatch = useDispatch();
 
     const getParams = (param: string) => {
         return localization.langs[localization.currentLang]?.params[param];
@@ -23,23 +26,23 @@ const Tasks = () => {
                             <th><h5>{getParams('created_at')}</h5></th>
                             <th><h5>{getParams('updated_at')}</h5></th>
                             <th><h5>{getParams('file')}</h5></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            (tasks ?? []).map((task, index) => (
+                            (api.files ?? []).map((file, index) => (
                                 <tr key={index}>
-                                    <td><span className="fs-6">{task['dateComplete'] ?? ''}</span></td>
-                                    <td><span className="fs-6 text-capitalize">{task['responsible'] ?? ''}</span></td>
-                                    <td><span className="fs-6">{task['object'] ?? ''}</span></td>
-                                    <td>
-                                        {task['type'] === 'связаться' ? 
-                                        <i className="bi bi-telephone-fill mx-1" /> : 
-                                        <i className="bi bi-briefcase-fill mx-1" />}
-                                        <span className="fs-6 text-capitalize">{task['type'] ?? ''}</span>
+                                    <td><span className="fs-6">{file.name ?? ''}</span></td>
+                                    <td><span className="fs-6 text-capitalize">{file.user ?? ''}</span></td>
+                                    <td><span className="fs-6">{file.description ?? ''}</span></td>
+                                    <td><span className="fs-6 text-capitalize">{new Date(file.created_at ?? '').toLocaleDateString('ru-RU')}</span></td>
+                                    <td><span className="fs-6">{new Date(file.updated_at ?? '').toLocaleDateString('ru-RU')}</span></td>
+                                    <td><span className="fs-6">{file.file ?? ''}</span></td>
+                                    <td className="text-center">
+                                        <i role='button' className="bi bi bi-pencil mx-4" onClick={() => setEditIndex(index)}/>
+                                        <i role='button' className="bi bi-trash3" onClick={() => dispatch(deleteFiles(index))} />
                                     </td>
-                                    <td><span className="fs-6">{task['task'] ?? ''}</span></td>
-                                    <td><span className="fs-6">{task['result'] ?? ''}</span></td>
                                 </tr>
                             ))
                         }
@@ -49,4 +52,4 @@ const Tasks = () => {
         </>
     )
 }
-export default Tasks;
+export default Files;
