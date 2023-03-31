@@ -24,8 +24,8 @@
             "newTasks": "Tasks to be completed",
             "completeTasks": "Completed tasks",
             "withoutTask": "Contracts without tasks",
-            "overdueTasks": "просроченные задачи",
-            "execution_date": "дата исполнения",
+            "overdueTasks": "Overdue tasks",
+            "execution_date": "Date of execution",
             "responsible": "Responsible",
             "object": "Object",
             "taskType": "Task type",
@@ -43,6 +43,16 @@
             "object_id": "Object",
             "created_at": "Date of creation", 
             "updated_at": "Update date",
-            "file": "File"
+            "file": "File",
+            "transactionSource": "Transaction source",
+            "DealsBymanager": "Deals by manager",
+            "purpose": "Purpose",
+            "SystemUse": "System usage per week",
+            "LatestFiles": "Latest files",
+            "Salesforecast": "Sales forecast",
+            "IncomingCalls": "Incoming calls",
+            "notes": "notes",
+            "outgoingcalls": "Outgoing calls",
+            "successfuldeals": "Successful contract"
         }
 }

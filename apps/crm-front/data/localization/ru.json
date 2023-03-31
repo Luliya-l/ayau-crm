@@ -43,6 +43,21 @@
             "object_id": "объект",
             "created_at": "Дата создания", 
             "updated_at": "Дата обновления",
-            "file": "Файл"
+            "file": "Файл",
+            "transactionSource": "Источники сделок",
+            "DealsBymanager": "Сделки по менеджерам",
+            "purpose": "Цели",
+            "SystemUse": "Использование системы за неделю",
+            "LatestFiles": "Последние файлы",
+            "Salesforecast": "Прогноз продаж",
+            "IncomingCalls": "входящие звонки",
+            "notes": "примечаний",
+            "outgoingcalls": "исходищие звонки",
+            "successfuldeals": "успешные сделки"
+
+
+
+
+
         }
 }

@@ -112,7 +112,7 @@ const DashBoardMain = () => {
                                     legendSettings={legendSettings}
                                     primaryYAxis={primaryyAxis} 
                                     tooltip={tooltip}
-                                    title='Источники сделок'
+                                    title={`${getParams('transactionSource')}`}
                                     style={{color:'var(--gosu-light-100)'}}
                                 >
                                     <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
@@ -130,7 +130,7 @@ const DashBoardMain = () => {
                                     legendSettings={legendSettings}
                                     primaryYAxis={primaryyAxis} 
                                     tooltip={tooltip}
-                                    title='Сделки по менеджерам'
+                                    title={`${getParams('DealsBymanager')}`}
                                     style={{color:'var(--gosu-light-100)'}}
                                 >
                                     <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
@@ -151,7 +151,7 @@ const DashBoardMain = () => {
                                     legendSettings={legendSettings}
                                     primaryYAxis={primaryyAxis} 
                                     tooltip={tooltip}
-                                    title='Цели'
+                                    title={`${getParams('purpose')}`}
                                     style={{color:'var(--gosu-light-100)'}}
                                 >
                                     <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
@@ -169,7 +169,7 @@ const DashBoardMain = () => {
                                     legendSettings={legendSettings}
                                     primaryYAxis={primaryyAxis} 
                                     tooltip={tooltip}
-                                    title='Использование системы за неделю'
+                                    title={`${getParams('SystemUse')}`}
                                     style={{color:'var(--gosu-light-100)'}}
                                 >
                                     <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
@@ -187,7 +187,7 @@ const DashBoardMain = () => {
                                     legendSettings={legendSettings}
                                     primaryYAxis={primaryyAxis} 
                                     tooltip={tooltip}
-                                    title='Последние файлы'
+                                    title={`${getParams('LatestFiles')}`}
                                     style={{color:'var(--gosu-light-100)'}}
                                 >
                                     <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
@@ -208,7 +208,7 @@ const DashBoardMain = () => {
                                     legendSettings={legendSettings}
                                     primaryYAxis={primaryyAxis} 
                                     tooltip={tooltip}
-                                    title='Прогноз продаж'
+                                    title={`${getParams('Salesforecast')}`}
                                     style={{color:'var(--gosu-light-100)'}}
                                 >
                                     <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
@@ -228,7 +228,7 @@ const DashBoardMain = () => {
                                             text={'dark'}
                                             className="h-100"
                                         >
-                                            <Card.Header className="text-uppercase">{'входящие звонки'}</Card.Header>
+                                            <Card.Header className="text-uppercase">{getParams('IncomingCalls')}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-danger">{'0'}</Card.Title>
                                                 <Card.Text className="py-2">
@@ -238,7 +238,7 @@ const DashBoardMain = () => {
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Footer>
-                                                    <small className="text-muted">{'за неделю'}</small>
+                                                    <small className="text-muted">{getParams('onweek')}</small>
                                                 </Card.Footer>
                                             </Card.Body>
                                         </Card>
@@ -252,7 +252,7 @@ const DashBoardMain = () => {
                                             text={'dark'}
                                             className="h-100"
                                         >
-                                            <Card.Header className="text-uppercase">{'примечаний'}</Card.Header>
+                                            <Card.Header className="text-uppercase">{getParams('notes')}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-info">{'0'}</Card.Title>
                                                 <Card.Text className="py-2">
@@ -262,7 +262,7 @@ const DashBoardMain = () => {
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Footer>
-                                                    <small className="text-muted">{'за неделю'}</small>
+                                                    <small className="text-muted">{getParams('onweek')}</small>
                                                 </Card.Footer>
                                             </Card.Body>
                                         </Card>
@@ -280,7 +280,7 @@ const DashBoardMain = () => {
                                             text={'dark'}
                                             className="h-100"
                                         >
-                                            <Card.Header className="text-uppercase">{'исходищие звонки'}</Card.Header>
+                                            <Card.Header className="text-uppercase">{getParams('outgoingcalls')}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-success">{'0'}</Card.Title>
                                                 <Card.Text className="py-2">
@@ -290,7 +290,7 @@ const DashBoardMain = () => {
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Footer>
-                                                    <small className="text-muted">{'за неделю'}</small>
+                                                    <small className="text-muted">{getParams('onweek')}</small>
                                                 </Card.Footer>
                                             </Card.Body>
                                         </Card>
@@ -304,7 +304,7 @@ const DashBoardMain = () => {
                                             text={'dark'}
                                             className="h-100"
                                         >
-                                            <Card.Header className="text-uppercase">{'успешные сделки'}</Card.Header>
+                                            <Card.Header className="text-uppercase">{getParams('successfuldeals')}</Card.Header>
                                             <Card.Body>
                                                 <Card.Title className="text-warning">{'0'}</Card.Title>
                                                 <Card.Text className="py-2">
@@ -314,7 +314,7 @@ const DashBoardMain = () => {
                                                     &nbsp;
                                                 </Card.Text>
                                                 <Card.Footer>
-                                                    <small className="text-muted">{'за неделю'}</small>
+                                                    <small className="text-muted">{getParams('onweek')}</small>
                                                 </Card.Footer>
                                             </Card.Body>
                                         </Card>

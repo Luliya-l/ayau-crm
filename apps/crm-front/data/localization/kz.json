@@ -7,7 +7,7 @@
             "customers": "Сатыпалушылар",
             "tasks": "Тапсырмалар",
             "lists": "Тізімдер",
-            "mail": "Почта",
+            "mail": "Пошта",
             "bi": "Аналитика",
             "settings": "Параметрлер",
             "contacts": "Контактілер",
@@ -43,6 +43,16 @@
             "object_id": "объект",
             "created_at": "Құрылған күні", 
             "updated_at": "Жаңарту күні",
-            "file": "Файл"
+            "file": "Файл",
+            "transactionSource": "Мәміле көздері",
+            "DealsBymanager": "Менеджерлер бойынша мәмілелер",
+            "purpose": "Мақсаттар",
+            "SystemUse": "Жүйені бір апта ішінде пайдалану",
+            "LatestFiles": "Соңғы файлдар",
+            "Salesforecast": "Сатылым болжамы",
+            "IncomingCalls": "Кіріс қоңыраулар",
+            "notes": "Ескертулер",
+            "outgoingcalls": "Шығыс қоңыраулар",
+            "successfuldeals": "Сәтті мәмілелер"
         }
 }

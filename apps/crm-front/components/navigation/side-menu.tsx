@@ -42,7 +42,7 @@ const SideMenu = ({setExpanded, setContent, setLang}) => {
                         </NavText>
                         <NavItem eventKey="localize/kz">
                             <NavText>
-                                {'Казахский'}
+                                {'Қазақша'}
                             </NavText>
                         </NavItem>
                         <NavItem eventKey="localize/ru">
