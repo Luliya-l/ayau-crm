@@ -9,7 +9,6 @@ import { wrapper } from "../store/store";
 import {Provider} from 'react-redux';
 import dynamic from 'next/dynamic';
 import BackOnTop from '../components/utils/back-on-top';
-import Chat from '../components/utils/chat';
 
 const CustomApp: AppType = ({ Component, pageProps }: AppProps) => {
   const {store} = wrapper.useWrappedStore(pageProps);
