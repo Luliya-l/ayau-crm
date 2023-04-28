@@ -21,6 +21,7 @@ import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setSmsCode, set
 import { setCurrentLang } from '../store/langSlice';
 import Chat from '../components/utils/chat';
 import Authorize from '../components/authorize/authorize';
+import { postLogin } from '../data/fetch/integration';
 
 const Index: NextPage = () =>  {
   const api = useSelector(useAPI) as DB;
@@ -37,15 +38,21 @@ const Index: NextPage = () =>  {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const checkAuth = () => {
+  const checkAuth = async () => {
     if (login !== '' && password !== '') {
-      const idx = api.users.findIndex((user) => user.login === login && user.password === password);
-      if (idx !== -1) {
-        dispatch(setUser(api.users[idx]));
+      const user = await postLogin(
+        login, 
+        password
+      );
+      if (user) {
+        // dispatch(setUser(user);
         dispatch(setAuthState(true));
         dispatch(setRememberMe(true));
-        dispatch(setTokens({authToken:'', refreshToken:''}));
-        dispatch(setSmsCode('123'));
+        dispatch(setTokens({
+          authToken:user.authToken, 
+          refreshToken:user.refreshToken
+        }));
+        // dispatch(setSmsCode('123'));
         dispatch(setAcceptTerms(true));
       }
     }

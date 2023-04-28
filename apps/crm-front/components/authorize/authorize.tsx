@@ -49,7 +49,11 @@ const Authorize = ({setLogin, setPassword, checkAuth}) => {
           </Row>
           <Row>
             <Col className='text-center'>
-              <Button variant="events" size='lg' className='px-5' onClick={() => checkAuth()}>{'Войти'}</Button>
+              <Button 
+                variant="events" 
+                size='lg' 
+                className='px-5' 
+                onClick={() => checkAuth()}>{'Войти'}</Button>
             </Col>
           </Row>
           <Row>
