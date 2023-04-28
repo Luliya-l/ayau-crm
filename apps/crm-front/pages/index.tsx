@@ -18,9 +18,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DB } from '../specs/custom-types';
 import { useAPI } from '../store/apiSlice';
 import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setSmsCode, setTokens, setUser, useAuth } from '../store/authSlice';
-import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import { setCurrentLang } from '../store/langSlice';
 import Chat from '../components/utils/chat';
+import Authorize from '../components/authorize/authorize';
 
 const Index: NextPage = () =>  {
   const api = useSelector(useAPI) as DB;
@@ -90,47 +90,7 @@ const Index: NextPage = () =>  {
 
   if (!auth.authState) {
     return (
-      <>
-        <Container 
-          className='position-absolute top-50 start-50 translate-middle'
-          style={{width:'380px', height:'380px', backgroundColor:'white', borderRadius:'10px', boxShadow:'0 0 10px 0 rgba(0,0,0,0.5)'}}
-        >
-          <Row>
-            <Col className='my-3 fs-3 text-black text-center'>
-              {'Авторизация'}
-            </Col>
-          </Row>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Телефон или Email"
-            className="text-secondary mx-3 mb-3"
-          >
-            <Form.Control type="login" placeholder="name@example.com" onChange={(e) => setLogin(e.target.value)} />
-          </FloatingLabel>
-          <FloatingLabel 
-            controlId="floatingPassword" 
-            label="Пароль"
-            className='text-secondary mx-3 mb-3'
-          >
-            <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-          </FloatingLabel>
-          <Row>
-            <Col>
-              <Form.Check 
-                type={'checkbox'}
-                id={`rememberMe`}
-                label={`Запомнить меня`}
-                className='text-secondary mx-3 mb-3'
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col className='text-center'>
-              <Button variant="events" size='lg' className='px-5' onClick={() => checkAuth()}>{'Войти'}</Button>
-            </Col>
-          </Row>
-        </Container>
-      </>
+      <Authorize setLogin={setLogin}  setPassword={setPassword} checkAuth={checkAuth} />
     );
   }
 
