@@ -1,3 +1,4 @@
+import { DateTime } from "@syncfusion/ej2-charts";
 
 export type Langs = {
     langs: {ru: Lang, en: Lang, kz: Lang},
@@ -14,15 +15,17 @@ export type LangParams = {
 }
 
 export type User = {
-    id: number;
+    id: string;
     name: string;
-    phone: string;
-    role: string;
     email: string;
+    phone: string;
+    password: string;
     gender: string;
+    role: string;
     birthdate: string | null;
     login: string;
-    password: string;
+    created_at: DateTime | null;
+    updated_at: DateTime | null;
 };
 
 export type DB = {

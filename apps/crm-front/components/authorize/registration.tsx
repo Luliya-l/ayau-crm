@@ -1,8 +1,9 @@
-import { DB } from "apps/crm-front/specs/custom-types";
+import { postRegister } from "apps/crm-front/data/fetch/integration";
+import { DB, User } from "apps/crm-front/specs/custom-types";
 import { useAPI } from "apps/crm-front/store/apiSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { useState } from "react";
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const Registration = () => {
@@ -14,19 +15,23 @@ const Registration = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {setShow(true); setIsLoading(false);};
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const getParams = (param: string) => {
         return localization.langs[localization.currentLang]?.params[param];
     }
 
-    const [responsible, setResponsible] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
-    const [post, setPost] = useState('');
+    const [user, setUser] = useState({});
 
-    const setContact = () => {
-        
+    const onChange = (e) => {
+        setUser({...user, [e.target.name]: e.target.value})
+    }
+
+    const sendRegistration = async () => {
+        setIsLoading(!isLoading);
+        await postRegister(user as User)
         handleClose();
     }
 
@@ -48,10 +53,10 @@ const Registration = () => {
                 <Modal.Body>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
-                            {'Ответственный'}
+                            {'Ф.И.О.'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="name" value={responsible} placeholder="Ф.И.О." onChange={(e) => setResponsible(e.target.value)} />
+                        <Form.Control type="name" name={'name'} placeholder="Ф.И.О." onChange={(e) => onChange(e)} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="phone">
@@ -59,7 +64,7 @@ const Registration = () => {
                             {'Рабочий телефон'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="phone" value={phone} placeholder="777 777 77 77" onChange={(e) => setPhone(e.target.value)} />
+                        <Form.Control type="phone" name={'phone'} placeholder="+7 777 777 77 77" onChange={(e) => onChange(e)} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="email">
@@ -67,36 +72,44 @@ const Registration = () => {
                             {'Email'}
                         </Form.Label>
                         <Col sm="10">
-                            <Form.Control type="email" value={email} placeholder="email@example.com" onChange={(e) => setEmail(e.target.value)} />
+                            <Form.Control type="email" name={'email'} placeholder="email@example.com" onChange={(e) => onChange(e)} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
                         <Form.Label column sm="2">
-                            {'Должность'}
+                            {'Пол'}
                         </Form.Label>
                         <Col sm="10">
-                            <Form.Select value={post} onChange={(e) => setPost(e.target.value)}>
-                                <option>Выберите должность</option>
-                                <option value="1">Директор</option>
-                                <option value="2">Менеджер</option>
-                                <option value="3">Бухгалтер</option>
+                            <Form.Select name={'gender'} onChange={(e) => onChange(e)}>
+                                <option value="мужской">Мужской</option>
+                                <option value="женский">Женский</option>
                             </Form.Select>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3" controlId="email">
+                        <Form.Label column sm="2">
+                            {'Пароль'}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="password" name={'password'} onChange={(e) => onChange(e)} />
                         </Col>
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button 
-                        onClick={() => setContact()} 
-                        variant='outline-success'
-                    >
-                        {'Зарегистрироватся'}
-                    </Button>
-                    <Button 
-                        onClick={handleClose} 
-                        variant='outline-warning'
-                    >
-                        {'Отменить'}
-                    </Button>
+                    <Container className={`${isLoading ? 'd-none' : ''}`}>
+                        <Button 
+                            onClick={() => sendRegistration()} 
+                            variant='outline-success'
+                        >
+                            {'Зарегистрироватся'}
+                        </Button>
+                        <Button 
+                            onClick={handleClose} 
+                            variant='outline-warning'
+                        >
+                            {'Отменить'}
+                        </Button>
+                    </Container>
                 </Modal.Footer>
             </Modal>
         </>
