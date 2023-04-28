@@ -28,6 +28,11 @@ export type User = {
     updated_at: DateTime | null;
 };
 
+export type Msg = {
+    role: string;
+    content: string;
+};
+
 export type DB = {
     users: User[],
     tasks: Task[],

@@ -1,4 +1,4 @@
-import { User } from 'apps/crm-front/specs/custom-types';
+import { Msg, User } from 'apps/crm-front/specs/custom-types';
 import api from './axios'
 
 export async function postRegister(user: User) {
@@ -25,6 +25,21 @@ export async function postLogin(
             "email":login,
             "password":password
         }
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
+export async function postGPT(
+    msgs:Msg[]
+) {
+    return api.post(
+        "gpt/question", 
+        JSON.stringify(msgs)
     )
     .then((res) => {
         return res;
