@@ -50,8 +50,8 @@
 }
 
 body {
-  background: rgb(75,88,119);
-  background: linear-gradient(0deg, rgba(75,88,119,0.8604691876750701) 19%, rgba(0,212,255,1) 100%);
+  background: rgb(1,56,120);
+  background: linear-gradient(0deg, rgba(1,56,120,0.8604691876750701) 19%, rgba(187,180,232,1) 100%);
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-attachment: fixed;
