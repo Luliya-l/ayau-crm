@@ -49,6 +49,10 @@ const Steps = () => {
         }
     }
     
+    const nextStep = () => {
+        setStep((step > 2 ? 0 : step) + 1);
+    }
+
     return (
         <>
             <Container fluid className="text-black m-2 p-2 bg-light rounded">
@@ -64,9 +68,9 @@ const Steps = () => {
                             type="submit" 
                             className="my-2" 
                             disabled={!checkFrm()}
-                            onClick={() => setStep(step + 1)}
+                            onClick={() => nextStep()}
                         >
-                            {'ДАЛЕЕ'}
+                            {step > 2 ? 'СОХРАНИТЬ' : 'ДАЛЕЕ'}
                         </Button>
                     </Col>
                 </Row>
