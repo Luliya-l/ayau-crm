@@ -124,6 +124,19 @@ export type Customer = {
     object_id:number
 }
 
+export type Organization = {
+    id:string,
+    title:string,
+    description:string,
+    activity:string,
+    filials:string[],
+    users:string[],
+    companies:string[],
+    contacts:string[],
+    products:string[],
+    tasks:string[]
+}
+
 export type File = {
     id:number,
     name:string,

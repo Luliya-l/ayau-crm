@@ -15,13 +15,14 @@ import BI from '../components/bi/buisines-inteligence';
 import Settings from '../components/settings/settings';
 import Files from '../components/files/files';
 import { useDispatch, useSelector } from 'react-redux';
-import { DB } from '../specs/custom-types';
+import { DB, Organization } from '../specs/custom-types';
 import { useAPI } from '../store/apiSlice';
 import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setSmsCode, setTokens, setUser, useAuth } from '../store/authSlice';
 import { setCurrentLang } from '../store/langSlice';
 import Chat from '../components/utils/chat';
 import Authorize from '../components/authorize/authorize';
-import { postLogin } from '../data/fetch/integration';
+import { postLogin, postOrganization } from '../data/fetch/integration';
+import Finish from '../components/authorize/finish_registration/finish';
 
 const Index: NextPage = () =>  {
   const api = useSelector(useAPI) as DB;
@@ -37,6 +38,8 @@ const Index: NextPage = () =>  {
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+
+  const [org, setOrg] = useState(null);
 
   const checkAuth = async () => {
     if (login !== '' && password !== '') {
@@ -59,27 +62,31 @@ const Index: NextPage = () =>  {
   }
 
   const getContent = () => {
-    switch (content) {
-      case 'dashboard':
-        return <DashBoardMain />;
-      case 'contracts':
-        return <Contracts setEditIndex={setEditIndex} />;
-      case 'tasks':
-        return <Tasks setEditIndex={setEditIndex} />;
-      case 'contacts':
-        return <Contacts setEditIndex={setEditIndex} />;
-      case 'list/contacts':
-        return <Contacts setEditIndex={setEditIndex} />;
-      case 'list/customers':
-        return <Customers setEditIndex={setEditIndex} />;
-      case 'list/files':
-        return <Files setEditIndex={setEditIndex} />;
-      case 'email':
-        return <MailBox />;
-      case 'bi':
-        return <BI />;
-      case 'settings':
-        return <Settings />;
+    if (org) {
+      switch (content) {
+        case 'dashboard':
+          return <DashBoardMain />;
+        case 'contracts':
+          return <Contracts setEditIndex={setEditIndex} />;
+        case 'tasks':
+          return <Tasks setEditIndex={setEditIndex} />;
+        case 'contacts':
+          return <Contacts setEditIndex={setEditIndex} />;
+        case 'list/contacts':
+          return <Contacts setEditIndex={setEditIndex} />;
+        case 'list/customers':
+          return <Customers setEditIndex={setEditIndex} />;
+        case 'list/files':
+          return <Files setEditIndex={setEditIndex} />;
+        case 'email':
+          return <MailBox />;
+        case 'bi':
+          return <BI />;
+        case 'settings':
+          return <Settings />;
+      }
+    } else {
+      return <Finish />;
     }
   }
   
@@ -94,6 +101,20 @@ const Index: NextPage = () =>  {
   useEffect(() => {
     dispatch(setCurrentLang(lang));
   }, [lang]);
+
+  useEffect(() => {
+    if (auth.authState) {
+      if (!org){
+        postOrganization().then((res) => {
+          if (res) {
+            if (res.ok) {
+              setOrg(res);
+            }
+          }
+        });
+      }
+    }
+  }, [auth.authState, org])
 
   if (!auth.authState) {
     return (

@@ -1,4 +1,4 @@
-import { Msg, User } from 'apps/crm-front/specs/custom-types';
+import { Msg, Organization, User } from 'apps/crm-front/specs/custom-types';
 import api from './axios'
 
 export async function postRegister(user: User) {
@@ -10,7 +10,7 @@ export async function postRegister(user: User) {
         return res
     })
     .catch((e) => {
-        console.log(e)
+        return null;
     });
 }
 
@@ -40,6 +40,33 @@ export async function postGPT(
     return api.post(
         "gpt/question", 
         JSON.stringify(msgs)
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
+export async function postOrganization() {
+    return api.post(
+        "crm/get_organization_info"
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
+export async function postSetOrganization(
+    org:Organization
+) {
+    return api.post(
+        "crm/set_organization_info", 
+        JSON.stringify(org)
     )
     .then((res) => {
         return res;

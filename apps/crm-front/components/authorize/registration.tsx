@@ -46,12 +46,13 @@ const Registration = () => {
             return false;
         return true;
     }
+
     const onChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value})
         if (e.target.name !== 'password_check') {
-            setReq({...req, [e.target.name]: String(e.target.value).length > 3 ? true : false})
+            setReq({...req, [e.target.name]: String(e.target.value).length > 3 ? true : false});
         } else {
-            setReq({...req, [e.target.name]: String(e.target.value) === String(user['password']) ? true : false})
+            setReq({...req, [e.target.name]: String(e.target.value) === String(user['password']) ? true : false});
         }
     }
 
@@ -60,23 +61,29 @@ const Registration = () => {
             setIsLoading(!isLoading);
             const result = await postRegister(user as User)
             if (result) {
-                const login = await postLogin(
-                    user['email'], 
-                    user['password']
-                  );
-                  if (login) {
-                    // dispatch(setUser(user);
-                    dispatch(setAuthState(true));
-                    dispatch(setRememberMe(true));
-                    dispatch(setTokens({
-                      authToken:login.authToken, 
-                      refreshToken:login.refreshToken
-                    }));
-                    // dispatch(setSmsCode('123'));
-                    dispatch(setAcceptTerms(true));
+                if (!result.detail) {
+                    const login = await postLogin(
+                        user['email'], 
+                        user['password']
+                    );
+                    if (login) {
+                        // dispatch(setUser(user);
+                        dispatch(setAuthState(true));
+                        dispatch(setRememberMe(true));
+                        dispatch(setTokens({
+                        authToken:login.authToken, 
+                        refreshToken:login.refreshToken
+                        }));
+                        // dispatch(setSmsCode('123'));
+                        dispatch(setAcceptTerms(true));
 
-                    handleClose();
-                  }
+                        handleClose();
+                    }
+                } else {
+                    if (result.detail === "Account already exist") {
+                        console.log("")
+                    }
+                }
             }
         }
     }

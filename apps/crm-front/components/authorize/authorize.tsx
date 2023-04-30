@@ -62,7 +62,6 @@ const Authorize = ({setLogin, setPassword, checkAuth}) => {
             </Col>
           </Row>
         </Container>
-        
       </>
     )
 }
