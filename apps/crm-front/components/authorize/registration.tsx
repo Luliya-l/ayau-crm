@@ -57,14 +57,18 @@ const Registration = () => {
     const sendRegistration = async () => {
         if (checkFrm()) {
             setIsLoading(!isLoading);
-            await postRegister(user as User)
-            handleClose();
+            const result = await postRegister(user as User)
+            
         }
     }
 
     return (
         <>
-            <Button variant="link" size='lg' className='fs-6 px-5' onClick={() => handleShow()}>{'Регистрация'}</Button>
+            <Button 
+                variant="link" 
+                size='lg' 
+                className='fs-6 px-5 text-decoration-none' 
+                onClick={() => handleShow()}>{'Регистрация'}</Button>
             <Modal
                 show={show}
                 onHide={handleClose}
@@ -173,6 +177,9 @@ const Registration = () => {
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Row>
+                </Modal.Body>
+                <Modal.Body  className={`${isLoading ? '' : 'd-none'}`}>
+                    lkjfkajsdlaksjdlk
                 </Modal.Body>
                 <Modal.Footer className={`${isLoading ? 'd-none' : ''}`}>
                     <Button 
