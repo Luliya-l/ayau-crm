@@ -1,9 +1,10 @@
-import { postRegister } from "apps/crm-front/data/fetch/integration";
+import { postLogin, postRegister } from "apps/crm-front/data/fetch/integration";
 import { DB, User } from "apps/crm-front/specs/custom-types";
 import { useAPI } from "apps/crm-front/store/apiSlice";
+import { setAcceptTerms, setAuthState, setRememberMe, setTokens } from "apps/crm-front/store/authSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { useState } from "react";
-import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Modal, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const Registration = () => {
@@ -58,7 +59,25 @@ const Registration = () => {
         if (checkFrm()) {
             setIsLoading(!isLoading);
             const result = await postRegister(user as User)
-            
+            if (result) {
+                const login = await postLogin(
+                    user['email'], 
+                    user['password']
+                  );
+                  if (login) {
+                    // dispatch(setUser(user);
+                    dispatch(setAuthState(true));
+                    dispatch(setRememberMe(true));
+                    dispatch(setTokens({
+                      authToken:login.authToken, 
+                      refreshToken:login.refreshToken
+                    }));
+                    // dispatch(setSmsCode('123'));
+                    dispatch(setAcceptTerms(true));
+
+                    handleClose();
+                  }
+            }
         }
     }
 
@@ -178,8 +197,12 @@ const Registration = () => {
                         </Form.Group>
                     </Row>
                 </Modal.Body>
-                <Modal.Body  className={`${isLoading ? '' : 'd-none'}`}>
-                    lkjfkajsdlaksjdlk
+                <Modal.Body  
+                    className={`${isLoading ? '' : 'd-none'}
+                    d-flex justify-content-center
+                    align-items-center`}
+                >
+                    <Spinner animation="grow" />
                 </Modal.Body>
                 <Modal.Footer className={`${isLoading ? 'd-none' : ''}`}>
                     <Button 
