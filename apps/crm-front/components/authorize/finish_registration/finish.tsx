@@ -4,7 +4,7 @@ import { Alert, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Steps from "./steps";
 
-const Finish = () => {
+const Finish = ({setIsLoading, getOrg}) => {
     const localization = useSelector(selectLangState);
     const api = useSelector(useAPI);
 
@@ -22,7 +22,7 @@ const Finish = () => {
                     {'Вы успешно зарегистрировались в системе.'}<br />
                     {'Для продолжения работы необходимо заполнить данные о компании.'}
                 </Alert>
-                <Steps />
+                <Steps setIsLoading={setIsLoading} getOrg={getOrg} />
             </Container>
         </>
     )

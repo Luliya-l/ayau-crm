@@ -23,6 +23,7 @@ import Chat from '../components/utils/chat';
 import Authorize from '../components/authorize/authorize';
 import { postLogin, postOrganization } from '../data/fetch/integration';
 import Finish from '../components/authorize/finish_registration/finish';
+import { Spinner } from 'react-bootstrap';
 
 const Index: NextPage = () =>  {
   const auth = useSelector(useAuth) as AuthState;
@@ -39,6 +40,7 @@ const Index: NextPage = () =>  {
   const [password, setPassword] = useState('');
 
   const [org, setOrg] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getOrg = async () => {
     postOrganization(auth.authToken).then((res) => {
@@ -47,6 +49,7 @@ const Index: NextPage = () =>  {
           setOrg(res.data.org);
         }
       }
+      setIsLoading(true);
     });
   }
 
@@ -71,32 +74,47 @@ const Index: NextPage = () =>  {
   }
 
   const getContent = () => {
-    if (org) {
-      switch (content) {
-        case 'dashboard':
-          return <DashBoardMain />;
-        case 'contracts':
-          return <Contracts setEditIndex={setEditIndex} />;
-        case 'tasks':
-          return <Tasks setEditIndex={setEditIndex} />;
-        case 'contacts':
-          return <Contacts setEditIndex={setEditIndex} />;
-        case 'list/contacts':
-          return <Contacts setEditIndex={setEditIndex} />;
-        case 'list/customers':
-          return <Customers setEditIndex={setEditIndex} />;
-        case 'list/files':
-          return <Files setEditIndex={setEditIndex} />;
-        case 'email':
-          return <MailBox />;
-        case 'bi':
-          return <BI />;
-        case 'settings':
-          return <Settings />;
+    if (isLoading){
+      if (org) {
+        switch (content) {
+          case 'dashboard':
+            return <DashBoardMain />;
+          case 'contracts':
+            return <Contracts setEditIndex={setEditIndex} />;
+          case 'tasks':
+            return <Tasks setEditIndex={setEditIndex} />;
+          case 'contacts':
+            return <Contacts setEditIndex={setEditIndex} />;
+          case 'list/contacts':
+            return <Contacts setEditIndex={setEditIndex} />;
+          case 'list/customers':
+            return <Customers setEditIndex={setEditIndex} />;
+          case 'list/files':
+            return <Files setEditIndex={setEditIndex} />;
+          case 'email':
+            return <MailBox />;
+          case 'bi':
+            return <BI />;
+          case 'settings':
+            return <Settings />;
+        } 
+      } else {
+        return <Finish setIsLoading={setIsLoading} getOrg={getOrg} />;
       }
     } else {
-      return <Finish />;
-    }
+      return (
+        <>
+          <Container 
+            className='w-100 h-100 d-flex justify-content-center align-items-center'
+            style={{minHeight:'100vh'}}
+          >
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </Container>
+        </>
+      );
+    }  
   }
   
   useEffect(() => {

@@ -10,7 +10,7 @@ import { postSetOrganization } from "apps/crm-front/data/fetch/integration";
 import { Organization } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 
-const Steps = () => {
+const Steps = ({setIsLoading, getOrg}) => {
     const localization = useSelector(selectLangState);
     const auth = useSelector(useAuth) as AuthState;
 
@@ -54,7 +54,10 @@ const Steps = () => {
     
     const nextStep = () => {
         if (step === 1) {
-            postSetOrganization(org as Organization, auth.authToken);
+            setIsLoading(false);
+            postSetOrganization(org as Organization, auth.authToken).then((res) => {
+                getOrg();
+            });
         } else {
             setStep((step > 2 ? 0 : step) + 1);
         }
