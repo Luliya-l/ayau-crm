@@ -40,6 +40,16 @@ const Index: NextPage = () =>  {
 
   const [org, setOrg] = useState(null);
 
+  const getOrg = async () => {
+    postOrganization(auth.authToken).then((res) => {
+      if (res) {
+        if (res.data.ok) {
+          setOrg(res.data.org);
+        }
+      }
+    });
+  }
+
   const checkAuth = async () => {
     if (login !== '' && password !== '') {
       const user = await postLogin(
@@ -104,13 +114,7 @@ const Index: NextPage = () =>  {
   useEffect(() => {
     if (auth.authState) {
       if (!org){
-        postOrganization(auth.authToken).then((res) => {
-          if (res) {
-            if (res.data.ok) {
-              setOrg(res.data.org);
-            }
-          }
-        });
+        getOrg();
       }
     }
   }, [])
