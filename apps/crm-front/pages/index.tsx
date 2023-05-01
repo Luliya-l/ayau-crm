@@ -17,7 +17,7 @@ import Files from '../components/files/files';
 import { useDispatch, useSelector } from 'react-redux';
 import { DB, Organization } from '../specs/custom-types';
 import { useAPI } from '../store/apiSlice';
-import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setSmsCode, setTokens, setUser, useAuth } from '../store/authSlice';
+import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setTokens, useAuth } from '../store/authSlice';
 import { setCurrentLang } from '../store/langSlice';
 import Chat from '../components/utils/chat';
 import Authorize from '../components/authorize/authorize';
@@ -25,7 +25,6 @@ import { postLogin, postOrganization } from '../data/fetch/integration';
 import Finish from '../components/authorize/finish_registration/finish';
 
 const Index: NextPage = () =>  {
-  const api = useSelector(useAPI) as DB;
   const auth = useSelector(useAuth) as AuthState;
 
   const dispatch = useDispatch();
@@ -52,8 +51,8 @@ const Index: NextPage = () =>  {
         dispatch(setAuthState(true));
         dispatch(setRememberMe(true));
         dispatch(setTokens({
-          authToken:user.authToken, 
-          refreshToken:user.refreshToken
+          authToken:user.data.authToken, 
+          refreshToken:user.data.refreshToken
         }));
         // dispatch(setSmsCode('123'));
         dispatch(setAcceptTerms(true));
@@ -105,16 +104,16 @@ const Index: NextPage = () =>  {
   useEffect(() => {
     if (auth.authState) {
       if (!org){
-        postOrganization().then((res) => {
+        postOrganization(auth.authToken).then((res) => {
           if (res) {
-            if (res.ok) {
-              setOrg(res);
+            if (res.data.ok) {
+              setOrg(res.data.org);
             }
           }
         });
       }
     }
-  }, [auth.authState, org])
+  }, [])
 
   if (!auth.authState) {
     return (

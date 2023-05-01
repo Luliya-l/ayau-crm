@@ -49,9 +49,11 @@ export async function postGPT(
     });
 }
 
-export async function postOrganization() {
+export async function postOrganization(token:string) {
     return api.post(
-        "crm/get_organization_info"
+        "crm/get_organization_info",
+        '',
+        {headers: {"Authorization": `Bearer ${token}`}}
     )
     .then((res) => {
         return res;
@@ -62,11 +64,13 @@ export async function postOrganization() {
 }
 
 export async function postSetOrganization(
-    org:Organization
+    org:Organization,
+    token:string
 ) {
     return api.post(
         "crm/set_organization_info", 
-        JSON.stringify(org)
+        JSON.stringify(org),
+        {headers: {"Authorization": `Bearer ${token}`}}
     )
     .then((res) => {
         return res;

@@ -6,10 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Step1 from "./step_1";
 import Step2 from "./step_2";
 import Step3 from "./step_3";
+import { postSetOrganization } from "apps/crm-front/data/fetch/integration";
+import { Organization } from "apps/crm-front/specs/custom-types";
+import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 
 const Steps = () => {
     const localization = useSelector(selectLangState);
-    const api = useSelector(useAPI);
+    const auth = useSelector(useAuth) as AuthState;
 
     const dispatch = useDispatch();
 
@@ -50,7 +53,11 @@ const Steps = () => {
     }
     
     const nextStep = () => {
-        setStep((step > 2 ? 0 : step) + 1);
+        if (step === 1) {
+            postSetOrganization(org as Organization, auth.authToken);
+        } else {
+            setStep((step > 2 ? 0 : step) + 1);
+        }
     }
 
     return (
@@ -70,7 +77,7 @@ const Steps = () => {
                             disabled={!checkFrm()}
                             onClick={() => nextStep()}
                         >
-                            {step > 2 ? 'СОХРАНИТЬ' : 'ДАЛЕЕ'}
+                            {step > 0 ? 'СОХРАНИТЬ' : 'ДАЛЕЕ'}
                         </Button>
                     </Col>
                 </Row>

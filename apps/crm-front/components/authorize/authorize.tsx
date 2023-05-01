@@ -6,8 +6,6 @@ import Registration from "./registration";
 const Authorize = ({setLogin, setPassword, checkAuth}) => {
     const localization = useSelector(selectLangState);
 
-    const dispatch = useDispatch();
-
     const getParams = (param: string) => {
         return localization.langs[localization.currentLang]?.params[param];
     }

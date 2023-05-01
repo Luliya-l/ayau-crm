@@ -8,14 +8,13 @@ export interface AuthState {
   authState: boolean;
   authToken: string;
   refreshToken: string;
-  smsCode: "";
   rememberMe: boolean;
   acceptTerms: boolean;
 }
 
 const initialState: AuthState = {
   user: { 
-    id: 0,
+    id: "0",
     name: "",
     phone: "",
     role: "",
@@ -24,11 +23,12 @@ const initialState: AuthState = {
     birthdate: null,
     login: "",
     password: "",
+    created_at: null,
+    updated_at: null,
   },
   authState: false,
   authToken: "",
   refreshToken: "",
-  smsCode: "",
   rememberMe: false,
   acceptTerms: false,
 };
@@ -46,9 +46,6 @@ export const authSlice = createSlice({
     setTokens(state, action) {
       state.authToken = action.payload.authToken;
       state.refreshToken = action.payload.refreshToken;
-    },
-    setSmsCode(state, action) {
-      state.smsCode = action.payload;
     },
     setRememberMe(state, action) {
       state.rememberMe = action.payload;
@@ -69,7 +66,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setUser, setAuthState, setTokens, setSmsCode, setRememberMe, setAcceptTerms } = authSlice.actions;
+export const { setUser, setAuthState, setTokens, setRememberMe, setAcceptTerms } = authSlice.actions;
 
 export const useAuth = (state: AppState) => state.auth;
 
