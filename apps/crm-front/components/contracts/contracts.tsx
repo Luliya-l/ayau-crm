@@ -37,20 +37,22 @@ const Contracts = ({setEditIndex}) => {
 
     return (
         <>
-            <KanbanComponent 
-                id="kanban" 
-                keyField="Status" 
-                dataSource={data} 
-                cardSettings={{ contentField: "Summary", headerField: "Id" }} 
-                dialogSettings={{ fields: fields }}
-            >
-                <ColumnsDirective>
-                  <ColumnDirective headerText = {`${getParams('primaryContact')}`} keyField="new" />
-                  <ColumnDirective headerText={`${getParams('negotiation')}`} keyField="InProgress" />
-                  <ColumnDirective headerText={`${getParams('makeDecision')}`} keyField="Testing" />
-                  <ColumnDirective headerText={`${getParams('Harmonizationofcontract')}`} keyField="Close" />
-                </ColumnsDirective>
-            </KanbanComponent>
+            <div className="App">
+                <KanbanComponent 
+                    id="kanban" 
+                    keyField="Status" 
+                    dataSource={data} 
+                    cardSettings={{ contentField: "Summary", headerField: "Id" }} 
+                    dialogSettings={{ fields: fields }}
+                >
+                    <ColumnsDirective>
+                    <ColumnDirective headerText = {`${getParams('primaryContact')}`} keyField="new" />
+                    <ColumnDirective headerText={`${getParams('negotiation')}`} keyField="InProgress" />
+                    <ColumnDirective headerText={`${getParams('makeDecision')}`} keyField="Testing" />
+                    <ColumnDirective headerText={`${getParams('Harmonizationofcontract')}`} keyField="Close" />
+                    </ColumnsDirective>
+                </KanbanComponent>
+            </div>
         </>
     );
 }

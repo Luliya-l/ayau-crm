@@ -1,4 +1,14 @@
 @charset "UTF-8";
+
+@import "../../../node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
+@import '../../../node_modules/@syncfusion/ej2-buttons/styles/bootstrap5.css';
+@import "../../../node_modules/@syncfusion/ej2-layouts/styles/bootstrap5.css";
+@import '../../../node_modules/@syncfusion/ej2-dropdowns/styles/bootstrap5.css';
+@import '../../../node_modules/@syncfusion/ej2-inputs/styles/bootstrap5.css';
+@import "../../../node_modules/@syncfusion/ej2-navigations/styles/bootstrap5.css";
+@import "../../../node_modules/@syncfusion/ej2-popups/styles/bootstrap5.css";
+@import "../../../node_modules/@syncfusion/ej2-react-kanban/styles/bootstrap5.css";
+
 :root {
   --gosu-blue-space-100: rgba(75, 88, 119, 1);
   --gosu-blue-space-light-100: rgba(115, 128, 159, 1);
