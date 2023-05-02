@@ -75,6 +75,22 @@ const Index: NextPage = () =>  {
         }));
         // dispatch(setSmsCode('123'));
         dispatch(setAcceptTerms(true));
+        postOrganization(user.data.authToken).then((res) => {
+          if (res) {
+            if (res.data.ok) {
+              setOrg(res.data.org);
+            }
+          } else {
+            dispatch(setAuthState(false));
+            dispatch(setRememberMe(false));
+            dispatch(setTokens({
+              authToken:'', 
+              refreshToken:''
+            }));
+            dispatch(setAcceptTerms(false));
+          }
+          setIsLoading(true);
+        });
       }
     }
   }
