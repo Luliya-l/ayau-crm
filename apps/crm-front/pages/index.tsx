@@ -15,8 +15,6 @@ import BI from '../components/bi/buisines-inteligence';
 import Settings from '../components/settings/settings';
 import Files from '../components/files/files';
 import { useDispatch, useSelector } from 'react-redux';
-import { DB, Organization } from '../specs/custom-types';
-import { useAPI } from '../store/apiSlice';
 import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setTokens, useAuth } from '../store/authSlice';
 import { setCurrentLang } from '../store/langSlice';
 import Chat from '../components/utils/chat';
@@ -48,6 +46,14 @@ const Index: NextPage = () =>  {
         if (res.data.ok) {
           setOrg(res.data.org);
         }
+      } else {
+        dispatch(setAuthState(false));
+        dispatch(setRememberMe(false));
+        dispatch(setTokens({
+          authToken:'', 
+          refreshToken:''
+        }));
+        dispatch(setAcceptTerms(false));
       }
       setIsLoading(true);
     });
