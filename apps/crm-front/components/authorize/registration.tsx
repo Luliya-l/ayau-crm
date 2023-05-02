@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Button, Col, Container, Form, Modal, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-const Registration = () => {
+const Registration = ({checkAuth}) => {
     const localization = useSelector(selectLangState);
     const api = useSelector(useAPI) as DB;
 
@@ -62,23 +62,8 @@ const Registration = () => {
             const result = await postRegister(user as User)
             if (result) {
                 if (!result.detail) {
-                    const login = await postLogin(
-                        user['email'], 
-                        user['password']
-                    );
-                    if (login) {
-                        // dispatch(setUser(user);
-                        dispatch(setAuthState(true));
-                        dispatch(setRememberMe(true));
-                        dispatch(setTokens({
-                        authToken:login.authToken, 
-                        refreshToken:login.refreshToken
-                        }));
-                        // dispatch(setSmsCode('123'));
-                        dispatch(setAcceptTerms(true));
-
-                        handleClose();
-                    }
+                    checkAuth();
+                    handleClose();
                 } else {
                     if (result.detail === "Account already exist") {
                         console.log("")
