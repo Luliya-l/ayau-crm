@@ -34,7 +34,6 @@ export type Msg = {
 };
 
 export type DB = {
-    users: User[],
     tasks: Task[],
     contacts: Contact[],
     contracts: Contract[],
