@@ -10,15 +10,6 @@ export const apiSlice = createSlice({
   name: "api",
   initialState,
   reducers: {
-    setTasks(state, action) {
-      state.tasks.push(action.payload);
-    },
-    deleteTasks(state, action) {
-      state.tasks.splice(action.payload, 1);
-    },
-    updateTasks(state, action) {
-      state.tasks[action.payload[1]] = action.payload[0];
-    },
 
     setContacts(state, action) {
       state.contacts.push(action.payload);
@@ -30,15 +21,6 @@ export const apiSlice = createSlice({
       state.contacts[action.payload[1]] = action.payload[0];
     },
 
-    setContracts(state, action) {
-      state.contracts.push(action.payload);
-    },
-    deleteContracts(state, action) {
-      state.contracts.splice(action.payload, 1);
-    },
-    updateContracts(state, action) {
-      state.contracts[action.payload[1]] = action.payload[0];
-    },
 
     setCustomers(state, action) {
       state.customers.push(action.payload);
@@ -92,17 +74,9 @@ export const apiSlice = createSlice({
 });
 
 export const { 
-  setTasks, 
-  deleteTasks,
-  updateTasks,
-
   setContacts, 
   deleteContacts,
   updateContacts,
-
-  setContracts, 
-  deleteContracts,
-  updateContracts,
 
   setCustomers,
   deleteCustomers,

@@ -27,7 +27,7 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
       case 'dashboard':
         return <EventsPopup />
       case 'contracts':
-        return <AddContract editIndex={editIndex} setEditIndex={setEditIndex} />
+        return <AddContract />
       case 'tasks':
         return <AddTask editIndex={editIndex} setEditIndex={setEditIndex} />
       case 'contacts':

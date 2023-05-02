@@ -1,18 +1,15 @@
 import { postSetContract } from "apps/crm-front/data/fetch/integration";
-import { Contract, DB } from "apps/crm-front/specs/custom-types";
-import { setContracts, updateContracts, useAPI } from "apps/crm-front/store/apiSlice";
+import { Contract } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Col, Form, InputGroup, Modal, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const AddContract = () => {
     const auth = useSelector(useAuth) as AuthState;
 
     const localization = useSelector(selectLangState);
-
-    const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
 
@@ -25,7 +22,7 @@ const AddContract = () => {
 
     const [contract, setContract] = useState({} as Contract);
 
-    const onChange = (e: any) => {
+    const onChange = (e) => {
         setContract({
             ...contract,
             [e.target.name]: e.target.value

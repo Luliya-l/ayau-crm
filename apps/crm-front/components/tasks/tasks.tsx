@@ -1,60 +1,55 @@
+import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
+import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
+import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
+
 import { Langs } from "apps/crm-front/specs/custom-types";
-import { deleteTasks, useAPI } from "apps/crm-front/store/apiSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
-import { Container, Table } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 
-const Tasks = ({setEditIndex}) => {
+const baseURL = "https://crm-backend-two.vercel.app/";
+// const baseTaskURL = "http://localhost:8000/";
+const Tasks = () => {
+    const auth = useSelector(useAuth) as AuthState;
     const localization = useSelector(selectLangState) as Langs;
-    const api = useSelector(useAPI);
-
-    const dispatch = useDispatch();
 
     const getParams = (param: string) => {
-        console.log(localization.currentLang)
         return localization.langs[localization.currentLang].params[param];
     }
 
+    const taskDS: DataManager = new DataManager({
+        adaptor: new UrlAdaptor(),
+        updateUrl: `${baseURL}crm/tasks/update`,
+        insertUrl: `${baseURL}crm/tasks/set`,
+        removeUrl: `${baseURL}crm/tasks/delete`,
+        url: `${baseURL}crm/tasks/get`,
+        crossDomain: true,
+        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+    });
+
+    const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal' };
+    const toolbarOptions: ToolbarItems[] = ['Add', 'Edit', 'Delete', 'Cancel'];
+
     return (
         <>
-            <Container fluid className="my-2">
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th><h5>{getParams('execution_date')}</h5></th>
-                            <th><h5>{getParams('responsible')}</h5></th>
-                            <th><h5>{getParams('object')}</h5></th>
-                            <th><h5>{getParams('taskType')}</h5></th>
-                            <th><h5>{getParams('taskDescription')}</h5></th>
-                            <th><h5>{getParams('result')}</h5></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            (api.tasks ?? []).map((task, index) => (
-                                <tr key={index}>
-                                    <td><span className="fs-6">{new Date(task.execution_date ?? '').toLocaleDateString('ru-RU')}</span></td>
-                                    <td><span className="fs-6 text-capitalize">{task.responsible ?? ''}</span></td>
-                                    <td><span className="fs-6">{task.object ?? ''}</span></td>
-                                    <td>
-                                        {task.type === 'связаться' ? 
-                                        <i className="bi bi-telephone-fill mx-1" /> : 
-                                        <i className="bi bi-briefcase-fill mx-1" />}
-                                        <span className="fs-6 text-capitalize">{task.type ?? ''}</span>
-                                    </td>
-                                    <td><span className="fs-6">{task.name ?? ''}</span></td>
-                                    <td><span className="fs-6">{task.result ?? ''}</span></td>
-                                    <td className="text-center">
-                                        <i role='button' className="bi bi bi-pencil mx-4" onClick={() => setEditIndex(index)}/>
-                                        <i role='button' className="bi bi-trash3" onClick={() => dispatch(deleteTasks(index))} />
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </Table>
-            </Container>
+            <div className='App mt-4'>
+                <GridComponent 
+                    dataSource={taskDS}
+                    editSettings={editOptions}
+                    toolbar={toolbarOptions}
+                >
+                    <ColumnsDirective>
+                        <ColumnDirective field='title' width='100' textAlign="Right" isPrimaryKey={true} />
+                        <ColumnDirective field='created_at' headerText={getParams('execution_date')} width='100' textAlign="Right"/>
+                        <ColumnDirective field='responsible' headerText={getParams('responsible')} width='100'/>
+                        <ColumnDirective field='contract_id' headerText={getParams('object')} width='100' textAlign="Right"/>
+                        <ColumnDirective field='tast_type' headerText={getParams('taskType')} width='100' format="C2" textAlign="Right"/>
+                        <ColumnDirective field='text' headerText={getParams('taskDescription')} width='100'/>
+                        <ColumnDirective field='result' headerText={getParams('result')} width='100'/>
+                    </ColumnsDirective>
+                    <Inject services={[Edit, Toolbar]} />
+                </GridComponent>
+            </div>
         </>
     )
 }

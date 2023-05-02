@@ -34,9 +34,9 @@ export type Msg = {
 };
 
 export type DB = {
-    tasks: Task[],
+
     contacts: Contact[],
-    contracts: Contract[],
+
     customers: Customer[],
     files: File[],
     states: State[],
