@@ -26,10 +26,10 @@ const Contracts = ({setEditIndex}) => {
     }
 
     const data = new DataManager({
-        url: 'http://localhost:8000/crm/contracts/get',
-        updateUrl: 'http://localhost:8000/crm/contracts/update',
-        insertUrl: 'http://localhost:8000/crm/contracts/set',
-        removeUrl: 'http://localhost:8000/crm/contracts/delete',
+        url: 'https://crm-backend-two.vercel.app/crm/contracts/get',
+        updateUrl: 'https://crm-backend-two.vercel.app/crm/contracts/update',
+        insertUrl: 'https://crm-backend-two.vercel.app/crm/contracts/set',
+        removeUrl: 'https://crm-backend-two.vercel.app/crm/contracts/delete',
         adaptor: new UrlAdaptor(),
         crossDomain: true,
         headers: [{ Authorization: `Bearer ${auth.authToken}` }]
