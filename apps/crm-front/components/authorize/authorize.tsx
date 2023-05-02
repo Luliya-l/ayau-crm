@@ -56,7 +56,7 @@ const Authorize = ({setLogin, setPassword, checkAuth}) => {
           </Row>
           <Row>
             <Col className='text-center'>
-                <Registration />
+                <Registration checkAuth={checkAuth} />
             </Col>
           </Row>
         </Container>
