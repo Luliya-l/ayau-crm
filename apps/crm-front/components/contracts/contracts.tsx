@@ -26,6 +26,7 @@ const Contracts = () => {
         updateUrl: `${baseURL}crm/contracts/update`,
         insertUrl: `${baseURL}crm/contracts/set`,
         removeUrl: `${baseURL}crm/contracts/delete`,
+        dataType: 'json',
         adaptor: new UrlAdaptor(),
         crossDomain: true,
         headers: [{ Authorization: `Bearer ${auth.authToken}` }]
