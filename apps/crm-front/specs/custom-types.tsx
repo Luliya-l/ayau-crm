@@ -86,20 +86,16 @@ export type Contact = {
 export type Contract = {
     id:number,
     name:string,
-    description:string,
+    responsible:string,
     budget:number,
-    status:string,
-    post:string,
-    email:string,
-    phone:string,
-    start_date:string,
-    end_date:string,
+    step:string,
+    contact_id:string,
+    priority:string,
+    description:string,
+    tasks:string,
+    user_id:string,
     created_at:string,
     updated_at:string,
-    deleted_at:string | null,
-    company_id:number,
-    user:string,
-    object_id:number
 }
 
 export type Customer = {

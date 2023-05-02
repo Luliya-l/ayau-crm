@@ -13,6 +13,8 @@ import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 
+const baseURL = "https://crm-backend-two.vercel.app/";
+
 const Contracts = ({setEditIndex}) => {
     const auth = useSelector(useAuth) as AuthState;
 
@@ -26,10 +28,10 @@ const Contracts = ({setEditIndex}) => {
     }
 
     const data = new DataManager({
-        url: 'https://crm-backend-two.vercel.app/crm/contracts/get',
-        updateUrl: 'https://crm-backend-two.vercel.app/crm/contracts/update',
-        insertUrl: 'https://crm-backend-two.vercel.app/crm/contracts/set',
-        removeUrl: 'https://crm-backend-two.vercel.app/crm/contracts/delete',
+        url: `${baseURL}crm/contracts/get`,
+        updateUrl: `${baseURL}crm/contracts/update`,
+        insertUrl: `${baseURL}crm/contracts/set`,
+        removeUrl: `${baseURL}crm/contracts/delete`,
         adaptor: new UrlAdaptor(),
         crossDomain: true,
         headers: [{ Authorization: `Bearer ${auth.authToken}` }]

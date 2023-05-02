@@ -432,6 +432,29 @@ option:checked:after {
 
 /* END DATETIME PICKER */
 
+/* START KANBAN */
+
+#kanban_dialog_wrapper {
+  max-height: fit-content !important;
+  z-index: 100000 !important;
+  width: fit-content !important;
+  left: 0px;
+  top: 0px;
+  position: relative;
+}
+
+.e-dialog .e-footer-content {
+  box-sizing: border-box;
+  /* display: flex; */
+}
+
+.e-kanban-dialog {
+  min-width: fit-content !important;
+}
+
+
+/* END KANBAN */
+
 .logo {
   display: block;
   margin-left: auto;

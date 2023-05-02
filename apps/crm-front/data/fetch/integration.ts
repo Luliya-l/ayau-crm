@@ -1,4 +1,4 @@
-import { Msg, Organization, User } from 'apps/crm-front/specs/custom-types';
+import { Contract, Msg, Organization, User } from 'apps/crm-front/specs/custom-types';
 import api from './axios'
 
 export async function postRegister(user: User) {
@@ -70,6 +70,23 @@ export async function postSetOrganization(
     return api.post(
         "crm/set_organization_info", 
         JSON.stringify(org),
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
+export async function postSetContract(
+    contract:Contract,
+    token:string
+) {
+    return api.post(
+        "crm/contracts/set", 
+        JSON.stringify(contract),
         {headers: {"Authorization": `Bearer ${token}`}}
     )
     .then((res) => {
