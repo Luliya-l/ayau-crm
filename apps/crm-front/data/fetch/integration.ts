@@ -1,5 +1,5 @@
 import { Company, Contact, Contract, Mail, Msg, Organization, Question, Task, User } from 'apps/crm-front/specs/custom-types';
-import api, { apiGPT } from './axios'
+import api from './axios'
 
 export async function postRegister(user: User) {
     return api.post(
@@ -25,21 +25,6 @@ export async function postLogin(
             "email":login,
             "password":password
         }
-    )
-    .then((res) => {
-        return res;
-    })
-    .catch((e) => {
-        return null;
-    });
-}
-
-export async function postGPT(
-    msgs:Msg[]
-) {
-    return api.post(
-        "gpt/question", 
-        JSON.stringify(msgs)
     )
     .then((res) => {
         return res;
@@ -169,7 +154,7 @@ export async function postSetQuestions(
     question:Question,
     token:string
 ) {
-    return apiGPT.post(
+    return api.post(
         "gpt/question", 
         JSON.stringify(question),
         {headers: {"Authorization": `Bearer ${token}`}}
