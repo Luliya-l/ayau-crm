@@ -103,6 +103,7 @@ const AddContract = () => {
                             value={contract.responsible} 
                             name="responsible"
                             placeholder="Ф.И.О." 
+                            disabled={true}
                             onChange={(e) => onChange(e)} 
                         />
                         </Col>
