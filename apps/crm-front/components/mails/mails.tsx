@@ -9,8 +9,8 @@ import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// const baseURL = "https://crm-backend-two.vercel.app/";
-const baseURL = "http://localhost:8000/";
+const baseURL = "https://crm-backend-two.vercel.app/";
+// const baseURL = "http://localhost:8000/";
 
 const MailBox = ({inbox = true}) => {
     const auth = useSelector(useAuth) as AuthState;
