@@ -181,3 +181,19 @@ export async function postSetQuestions(
         return null;
     });
 }
+
+export async function postGetChatHistory(
+    token:string
+) {
+    return api.post(
+        "gpt/questions/get", 
+        '',
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}

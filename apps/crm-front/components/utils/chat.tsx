@@ -1,15 +1,10 @@
-import { ListViewComponent } from "@syncfusion/ej2-react-lists";
 import { Langs, Question } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Container, Form, InputGroup } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
-import { postSetQuestions } from "apps/crm-front/data/fetch/integration";
-
-const baseURL = "https://crm-backend-two.vercel.app/";
-// const baseURL = "http://localhost:8000/";
+import { postGetChatHistory, postSetQuestions } from "apps/crm-front/data/fetch/integration";
 
 const Chat = () => {
     const auth = useSelector(useAuth) as AuthState;
@@ -22,71 +17,79 @@ const Chat = () => {
 
     const listObj = useRef(null);
 
-    const chatContent: DataManager = new DataManager({
-        adaptor: new UrlAdaptor(),
-        url: `${baseURL}gpt/questions/get`,
-        crossDomain: true,
-        requestType: 'POST',
-        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
-    });
-
+    const [msgs, setMsgs] = useState([] as Question[]);
     const [msg, setMsg] = useState("");
 
     const listTemplate = (data) => {
         const sendertemplate = 
         (
-            <div className="settings w-100 text-end">
-                <div id="content">
-                    <div className="name w-100 text-end">
-                        {'Ваше сообщение'}
+            <li 
+                className="e-list-item e-level-1" 
+                role="listitem" 
+            >
+                <div>
+                    <div>
+                        <div className="settings w-100 text-end">
+                            <div id="content">
+                                <div className="name w-100 text-end">
+                                    {'Ваше сообщение'}
+                                </div>
+                                <br />
+                                <div id="info">{data.msg}</div>
+                            </div>
+                            {data.u_icon !== "" ? (
+                                <div id="image">
+                                    <span className="e-avatar img1 e-avatar-circle">&nbsp;</span>
+                                </div>
+                            ) : (
+                                <div id="image">
+                                    <span className={`${data.u_icon} img1 e-avatar e-avatar-circle`}/>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <br />
-                    <div id="info">{data.msg}</div>
                 </div>
-                {data.u_icon !== "" ? (
-                    <div id="image">
-                        <span className="e-avatar img1 e-avatar-circle">&nbsp;</span>
-                    </div>
-                ) : (
-                    <div id="image">
-                        <span className={`${data.u_icon} img1 e-avatar e-avatar-circle`}/>
-                    </div>
-                )}
-            </div>
+            </li>
         );
         const receivertemplate = 
         (
-            <div className="settings">
-                {
-                    data.avatar !== "" ? 
-                    (
-                        <div id="image2">
-                            <span className="e-avatar img2 e-avatar-circle">&nbsp;</span>
+            <li 
+                className="e-list-item e-level-1" 
+                role="listitem" 
+            >
+                <div>
+                    <div>
+                        <div className="settings">
+                            {
+                                data.avatar !== "" ? 
+                                (
+                                    <div id="image2">
+                                        <span className="e-avatar img2 e-avatar-circle">&nbsp;</span>
+                                    </div>
+                                ) : (
+                                    <div id="image2">
+                                        <span className={`${data.a_icon} img2 e-avatar e-avatar-circle`}/>
+                                    </div>
+                                )
+                            }
+                            <div id="content1">
+                                <div className="name1">{'Ассистент'}</div>
+                                <div id="info1">{data.msg}</div>
+                            </div>
                         </div>
-                    ) : (
-                        <div id="image2">
-                            <span className={`${data.a_icon} img2 e-avatar e-avatar-circle`}/>
-                        </div>
-                    )
-                }
-                <div id="content1">
-                    <div className="name1">{'Ассистент'}</div>
-                    <div id="info1">{data.msg}</div>
+                    </div>
                 </div>
-            </div>
+            </li>
         );
         return <div>{!data.assistant ? sendertemplate : receivertemplate}</div>;
     }
 
     const btnClick = async () => {
-        listObj.current.addItem([
-            { from_id: "Я", msg: msg, id: "2", a_icon: "a_icon", u_icon: "u_icon", assistant: false }
-        ]);
-
+        setMsg("");
         await postSetQuestions({msg:msg} as Question, auth.authToken).then((res) => {
-            listObj.current.addItem([
-                res.data as Question
-            ]);
+            setMsgs([...msgs, 
+                ...[{ from_id: "Я", msg: msg, id: "2", a_icon:"a_icon", u_icon: "u_icon", assistant: false } as Question,   
+                res.data as Question]]);
         }).catch((err) => {
             console.log(err);
         });
@@ -95,6 +98,18 @@ const Chat = () => {
     const onChange = (e) => {
         setMsg(e.target.value);
     }
+
+    useEffect(() => {
+        postGetChatHistory(auth.authToken).then((res) => {
+            setMsgs(res.data as Question[]);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }, []);
+
+    useEffect(() => {
+        listObj.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, [msgs]);
 
     return (
         <>
@@ -124,19 +139,37 @@ const Chat = () => {
                     onClick={() => handleClose()}
                 ></i>
                 <div>
-                    {/* ListView element */}
+                    {/* ListView element
                     <ListViewComponent 
                         id="List" 
                         dataSource={chatContent} 
                         template={listTemplate} 
                         ref={listObj}
                         className="List"
-                    />
+                    /> */}
+                    <Container className="p-0">
+                        <div id="List" className="List e-control e-listview e-lib e-touch">
+                            <div className="e-content" ref={listObj} style={{overflow:'visible'}}>
+                                <ul className="e-list-parent e-ul" role="group">
+                                    {
+                                        (msgs ?? []).map((msg, index) => {
+                                            return (
+                                                <div key={index}>
+                                                    {listTemplate(msg)}
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </Container>
                     <InputGroup className="mb-3">
                         <Form.Control 
                             type="text" 
                             placeholder="Type your message"
                             aria-describedby="basic-addon2"
+                            value={msg}
                             onChange={(e) => onChange(e)}
                         />
                         <Button variant="outline-secondary" id="button-addon2" onClick={btnClick.bind(this)}>

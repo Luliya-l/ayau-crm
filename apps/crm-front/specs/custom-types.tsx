@@ -176,6 +176,8 @@ export type Question = {
     msg:string,
     msg_date:string,
     assistant:boolean,
-    user_id:string
+    user_id:string,
+    a_icon:string,
+    u_icon:string,
 }
 

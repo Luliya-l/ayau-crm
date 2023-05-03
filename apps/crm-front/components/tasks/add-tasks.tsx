@@ -2,7 +2,7 @@ import { Langs, Task } from "apps/crm-front/specs/custom-types";
 
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { useState } from "react";
-import { Button, Col, Container, Form, InputGroup, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, InputGroup, Modal, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import DateTimePicker from "../spec/datetime-picker";
 import { postSetTask } from "apps/crm-front/data/fetch/integration";
@@ -16,6 +16,7 @@ const AddTask = () => {
     const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
+    const [send, setSend] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -67,7 +68,7 @@ const AddTask = () => {
                         {getParams('addtask')}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className={`${!send ? '' : 'd-none'}`}>
                     <Row>
                         <Col>
                             <DateTimePicker 
@@ -161,7 +162,11 @@ const AddTask = () => {
                         </Col>
                     </Row>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Body className={`${!send ? 'd-none' : ''} d-flex justify-content-center
+                    align-items-center`}>
+                    <Spinner animation="grow" />
+                </Modal.Body>
+                <Modal.Footer className={`${!send ? '' : 'd-none'}`}>
                     <Button 
                         onClick={acceptTask} 
                         variant='outline-success'
