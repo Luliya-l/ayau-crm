@@ -34,9 +34,9 @@ export type Msg = {
 };
 
 export type DB = {
-    tasks: Task[],
+
     contacts: Contact[],
-    contracts: Contract[],
+
     customers: Customer[],
     files: File[],
     states: State[],
@@ -44,62 +44,56 @@ export type DB = {
 }
 
 export type Task = {
-    id:number,
-    name:string,
-    description:string,
-    status:string,
-    priority:string,
-    type:string,
-    execution_date:string,
-    created_at:string,
-    updated_at:string,
-    deleted_at:string | null,
-    project_id:number,
-    user_id:number,
-    assigned_to:number,
-    responsible:string,
-    object:string,
+    id:string,
+    title:string,
+    task_type:string,
+    text:string,
     result:string,
+    responsible:string,
+    contract_id:string,
+    contact_id:string,
+    company_id:string,
+    user_id:string | null,
 }
 
-export type Contact = {
-    id:number,
+export type Company = {
+    id:string,
     name:string,
     email:string,
     phone:string,
-    mobile:string,
-    fax:string,
+    web_site:string,
+    responsible:string,
+    user_id:string,
     address:string,
-    city:string,
-    state:string,
-    zip:string,
-    country:string,
-    notes:string,
-    created_at:string,
-    updated_at:string,
-    deleted_at:string | null,
-    company_id:number,
-    user:string,
-    object_id:number
+    description:string,
+}
+
+export type Contact = {
+    id:string,
+    fio:string,
+    email:string,
+    phone:string,
+    company_id:string,
+    user_id:string,
+    post:string,
+    gender:string,
+    birthdate:string,
+    description:string,
 }
 
 export type Contract = {
     id:number,
     name:string,
-    description:string,
+    responsible:string,
     budget:number,
-    status:string,
-    post:string,
-    email:string,
-    phone:string,
-    start_date:string,
-    end_date:string,
+    step:string,
+    contact_id:string,
+    priority:string,
+    description:string,
+    tasks:string,
+    user_id:string,
     created_at:string,
     updated_at:string,
-    deleted_at:string | null,
-    company_id:number,
-    user:string,
-    object_id:number
 }
 
 export type Customer = {
@@ -162,16 +156,15 @@ export type State = {
 }
 
 export type Mail = {
-    id:number,
-    name:string,
-    description:string,
-    status:string,
-    priority:string,
-    due_date:string,
-    created_at:string,
-    updated_at:string,
-    deleted_at:string | null,
-    company_id:number,
-    user:string,
-    object_id:number
+    id:string,
+    from_mail:string,
+    to_mail:string,
+    title:string,
+    text:string,
+    responsible:string,
+    contract_id:string,
+    contact_id:string,
+    company_id:string,
+    user_id:string,
+    sended:boolean
 }

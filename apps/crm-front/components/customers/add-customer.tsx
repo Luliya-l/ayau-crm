@@ -1,73 +1,38 @@
-import { DB } from "apps/crm-front/specs/custom-types";
-import { setCustomers, updateCustomers, useAPI } from "apps/crm-front/store/apiSlice";
+import { postSetCompanies } from "apps/crm-front/data/fetch/integration";
+import { Company } from "apps/crm-front/specs/custom-types";
+import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
-import { useEffect, useState } from "react";
+import { setLoading } from "apps/crm-front/store/loadingState";
+import { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-const AddCustomer = ({editIndex = -1, setEditIndex}) => {
+const AddCustomer = () => {
+    const auth = useSelector(useAuth) as AuthState;
     const localization = useSelector(selectLangState);
-    const api = useSelector(useAPI) as DB;
 
     const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => {setShow(false); setEditIndex(-1);};
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const getParams = (param: string) => {
         return localization.langs[localization.currentLang]?.params[param];
     }
 
-    const [responsible, setResponsible] = useState(editIndex === -1 ? '' : api.customers[editIndex].name ?? '');
-    const [phone, setPhone] = useState(editIndex === -1 ? '' : api.customers[editIndex].phone ?? '');
-    const [email, setEmail] = useState(editIndex === -1 ? '' : api.customers[editIndex].email ?? '');
-    const [website, setWebSite] = useState(editIndex === -1 ? '' : api.customers[editIndex].notes ?? '');
-    const [address, setAddress] = useState(editIndex === -1 ? '' : api.customers[editIndex].address ?? '');
-
-    const setCustomer = () => {
-        const c = {
-            name: responsible,
-            phone: phone,
-            email: email,
-            notes: website,
-            id:0,
-            created_at:(new Date()).toString(),
-            updated_at:(new Date()).toString(),
-            deleted_at:null,
-            project_id:0,
-            user:'',
-            assigned_to:0,
-            mobile:'',
-            fax:'',
-            address:address,
-            city:'',
-            state:'',
-            zip:'',
-            country:'',
-            object_id:0
-        }
-
-        if (editIndex === -1) {
-            dispatch(setCustomers(c));
-        } else {
-            dispatch(updateCustomers([c, editIndex]));
-        }
-        setEditIndex(-1);
-        handleClose();
+    const [company, setCompany] = useState({} as Company);
+    const onChange = (e) => {
+        setCompany({...company, [e.target.name]: e.target.value});
     }
 
-    useEffect(() => {
-        if(editIndex !== -1) {
-            setResponsible(api.customers[editIndex].name ?? '');
-            setPhone(api.customers[editIndex].phone ?? '');
-            setEmail(api.customers[editIndex].email ?? '');
-            setWebSite(api.customers[editIndex].notes ?? '');
-            setAddress(api.customers[editIndex].address ?? '');
-            handleShow();
-        }
-    }, [editIndex]);
+    const setCustomer = async () => {
+        await postSetCompanies(company, auth.authToken);
+        dispatch(setLoading(true));
+        setCompany({} as Company);
+        handleClose();
+    }
 
     return (
         <>
@@ -94,10 +59,31 @@ const AddCustomer = ({editIndex = -1, setEditIndex}) => {
                 <Modal.Body>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
+                            {'Наименование'}
+                        </Form.Label>
+                        <Col sm="10">
+                        <Form.Control 
+                            type="name" 
+                            name="name"
+                            value={company.name} 
+                            placeholder="ТОО 'АйАу'" 
+                            onChange={(e) => onChange(e)} 
+                        />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3" controlId="responsible">
+                        <Form.Label column sm="2">
                             {'Ответственный'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="name" value={responsible} placeholder="Ф.И.О." onChange={(e) => setResponsible(e.target.value)} />
+                        <Form.Control 
+                            type="name" 
+                            name="responsible"
+                            disabled={true}
+                            value={company.responsible} 
+                            placeholder="Ф.И.О." 
+                            onChange={(e) => onChange(e)} 
+                        />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="phone">
@@ -105,7 +91,13 @@ const AddCustomer = ({editIndex = -1, setEditIndex}) => {
                             {'Раб. тел.'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="phone" value={phone} placeholder="777 777 77 77" onChange={(e) => setPhone(e.target.value)} />
+                        <Form.Control 
+                            type="phone" 
+                            name="phone"
+                            value={company.phone} 
+                            placeholder="777 777 77 77" 
+                            onChange={(e) => onChange(e)} 
+                        />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="email">
@@ -113,7 +105,13 @@ const AddCustomer = ({editIndex = -1, setEditIndex}) => {
                             {'Email'}
                         </Form.Label>
                         <Col sm="10">
-                            <Form.Control type="email" value={email} placeholder="email@example.com" onChange={(e) => setEmail(e.target.value)} />
+                            <Form.Control 
+                                type="email" 
+                                name="email"
+                                value={company.email} 
+                                placeholder="email@example.com" 
+                                onChange={(e) => onChange(e)}
+                            />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
@@ -121,7 +119,13 @@ const AddCustomer = ({editIndex = -1, setEditIndex}) => {
                             {'Website'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="email" value={website} placeholder="www.example.com" onChange={(e) => setWebSite(e.target.value)} />
+                        <Form.Control 
+                            type="email" 
+                            name="web_site"
+                            value={company.web_site} 
+                            placeholder="www.example.com" 
+                            onChange={(e) => onChange(e)} 
+                        />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
@@ -129,7 +133,27 @@ const AddCustomer = ({editIndex = -1, setEditIndex}) => {
                             {'Адрес'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="email" value={address} placeholder="г. Алматы, пр. Достык, 1" onChange={(e) => setAddress(e.target.value)} />
+                        <Form.Control 
+                            type="text" 
+                            name="address"
+                            value={company.address} 
+                            placeholder="г. Алматы, пр. Достык, 1" 
+                            onChange={(e) => onChange(e)} 
+                        />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+                        <Form.Label column sm="2">
+                            {'Примечание'}
+                        </Form.Label>
+                        <Col sm="10">
+                        <Form.Control 
+                            as={'textarea'}
+                            rows={5} 
+                            name="description"
+                            value={company.description} 
+                            onChange={(e) => onChange(e)} 
+                        />
                         </Col>
                     </Form.Group>
                 </Modal.Body>

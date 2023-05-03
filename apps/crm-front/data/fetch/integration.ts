@@ -1,4 +1,4 @@
-import { Msg, Organization, User } from 'apps/crm-front/specs/custom-types';
+import { Company, Contact, Contract, Mail, Msg, Organization, Task, User } from 'apps/crm-front/specs/custom-types';
 import api from './axios'
 
 export async function postRegister(user: User) {
@@ -70,6 +70,91 @@ export async function postSetOrganization(
     return api.post(
         "crm/set_organization_info", 
         JSON.stringify(org),
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
+export async function postSetContract(
+    contract:Contract,
+    token:string
+) {
+    return api.post(
+        "crm/contracts/set", 
+        JSON.stringify(contract),
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
+export async function postSetTask(
+    task:Task,
+    token:string
+) {
+    return api.post(
+        "crm/tasks/set", 
+        JSON.stringify(task),
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
+export async function postSetContacts(
+    contact:Contact,
+    token:string
+) {
+    return api.post(
+        "crm/contacts/set", 
+        JSON.stringify(contact),
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
+export async function postSetCompanies(
+    company:Company,
+    token:string
+) {
+    return api.post(
+        "crm/companies/set", 
+        JSON.stringify(company),
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
+export async function postSetMail(
+    mail:Mail,
+    token:string
+) {
+    return api.post(
+        "crm/mails/set", 
+        JSON.stringify(mail),
         {headers: {"Authorization": `Bearer ${token}`}}
     )
     .then((res) => {

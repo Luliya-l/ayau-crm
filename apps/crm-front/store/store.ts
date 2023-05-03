@@ -5,12 +5,14 @@ import { apiSlice } from "./apiSlice";
 import {nextReduxCookieMiddleware, wrapMakeStore} from "next-redux-cookie-wrapper";
 import { createWrapper } from "next-redux-wrapper";
 import { useDispatch } from "react-redux";
+import { loadingStateSlice } from "./loadingState";
 
 const makeStore = wrapMakeStore(() =>
   configureStore({
     reducer: {
       [authSlice.name]: authSlice.reducer,
       [langSlice.name]: langSlice.reducer,
+      [loadingStateSlice.name]: loadingStateSlice.reducer,
       [apiSlice.name]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

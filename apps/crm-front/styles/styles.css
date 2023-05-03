@@ -8,6 +8,7 @@
 @import "../../../node_modules/@syncfusion/ej2-navigations/styles/bootstrap5.css";
 @import "../../../node_modules/@syncfusion/ej2-popups/styles/bootstrap5.css";
 @import "../../../node_modules/@syncfusion/ej2-react-kanban/styles/bootstrap5.css";
+@import "../../../node_modules/@syncfusion/ej2-react-grids/styles/bootstrap5.css";
 
 :root {
   --gosu-blue-space-100: rgba(75, 88, 119, 1);
@@ -107,7 +108,7 @@ h5 {
 }
 
 .e-control {
-  color: var(--gosu-light-100);
+  color: var(--gosu-blue-space-light-100);
 }
 
 .chart {
@@ -431,6 +432,42 @@ option:checked:after {
 }
 
 /* END DATETIME PICKER */
+
+/* START KANBAN */
+
+#kanban_dialog_wrapper {
+  max-height: fit-content !important;
+  z-index: 100000 !important;
+  width: fit-content !important;
+  left: 0px;
+  top: 0px;
+  position: relative;
+}
+
+.e-dialog .e-footer-content {
+  box-sizing: border-box;
+  /* display: flex; */
+}
+
+.e-kanban-dialog {
+  min-width: fit-content !important;
+}
+
+
+/* END KANBAN */
+
+/* START GRID */
+
+#grid_1822616568_1_dialogEdit_wrapper, #grid_1822616568_3_dialogEdit_wrapper {
+  width: 330px;
+  max-height: fit-content !important;
+  z-index: 100002;
+  left: 0px;
+  top: 0px;
+  position: relative;
+}
+
+/* END GRID */
 
 .logo {
   display: block;

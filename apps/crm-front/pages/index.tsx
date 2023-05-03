@@ -102,15 +102,15 @@ const Index: NextPage = () =>  {
           case 'dashboard':
             return <DashBoardMain />;
           case 'contracts':
-            return <Contracts setEditIndex={setEditIndex} />;
+            return <Contracts />;
           case 'tasks':
-            return <Tasks setEditIndex={setEditIndex} />;
+            return <Tasks />;
           case 'contacts':
-            return <Contacts setEditIndex={setEditIndex} />;
+            return <Contacts />;
           case 'list/contacts':
-            return <Contacts setEditIndex={setEditIndex} />;
+            return <Contacts />;
           case 'list/customers':
-            return <Customers setEditIndex={setEditIndex} />;
+            return <Customers />;
           case 'list/files':
             return <Files setEditIndex={setEditIndex} />;
           case 'email':
@@ -149,7 +149,7 @@ const Index: NextPage = () =>  {
 
   useEffect(() => {
     dispatch(setCurrentLang(lang));
-  }, [lang]);
+  }, [lang, dispatch]);
 
   useEffect(() => {
     if (auth.authState) {

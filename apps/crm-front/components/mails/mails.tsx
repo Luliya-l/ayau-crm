@@ -1,33 +1,88 @@
-import { useMail } from "apps/crm-front/specs/custom-hooks";
-import { Container, Table } from "react-bootstrap";
+import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
+import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
+import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
+
+import { Langs } from "apps/crm-front/specs/custom-types";
+import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
+import { selectLangState } from "apps/crm-front/store/langSlice";
+import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+const baseURL = "https://crm-backend-two.vercel.app/";
+// const baseURL = "http://localhost:8000/";
 
 const MailBox = ({inbox = true}) => {
-    const {mails} = useMail(inbox);
+    const auth = useSelector(useAuth) as AuthState;
+    const loadingState = useSelector(useLoadingState);
+    const localization = useSelector(selectLangState) as Langs;
+
+    const dispatch = useDispatch();
+
+    const getParams = (param: string) => {
+        return localization.langs[localization.currentLang].params[param];
+    }
+
+    const grid = useRef(null);
+
+    const dateFormat = { type: 'dateTime', format: 'yyyy-MM-dd HH:mm' };
+
+    const taskDS: DataManager = new DataManager({
+        adaptor: new UrlAdaptor(),
+        updateUrl: `${baseURL}crm/mails/update`,
+        insertUrl: `${baseURL}crm/mails/set`,
+        removeUrl: `${baseURL}crm/mails/delete`,
+        url: `${baseURL}crm/mails/get`,
+        crossDomain: true,
+        requestType: 'POST',
+        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+    });
+
+    const editOptions: EditSettingsModel = { allowAdding: true, allowDeleting: true, mode: 'Dialog' };
+    const toolbarOptions: ToolbarItems[] = ['Search', 'Delete'];
+    
+    useEffect(() => {
+        grid.current.refresh();
+        dispatch(setLoading(false));
+    }, [loadingState.loading, dispatch]);
 
     return (
         <>
-            <Container fluid className="my-2">
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th><h5>{`${inbox ? 'от кого' : 'кому'}`}</h5></th>
-                            <th><h5>{'сделка, тема и сообщение'}</h5></th>
-                            <th><h5>{'дата'}</h5></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            (mails ?? []).map((task, index) => (
-                                <tr key={index}>
-                                    <td><span className="fs-6">{task['dateComplete'] ?? ''}</span></td>
-                                    <td><span className="fs-6 text-capitalize">{task['responsible'] ?? ''}</span></td>
-                                    <td><span className="fs-6">{task['object'] ?? ''}</span></td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </Table>
-            </Container>
+            <div className='App mt-4'>
+                <GridComponent 
+                    ref={grid}
+                    dataSource={taskDS}
+                    allowPaging={false}
+                    pageSettings={{ pageSize: 5 }}
+                    editSettings={editOptions}
+                    toolbar={toolbarOptions}
+                >
+                    <ColumnsDirective>
+                        <ColumnDirective 
+                            field='id' width='100' 
+                            textAlign="Right" isPrimaryKey={true} 
+                            visible={false}
+                        />
+                        <ColumnDirective 
+                            field='from_mail' 
+                            headerText={`${inbox ? 'от кого' : 'кому'}`.toUpperCase()} 
+                            width='100' 
+                        />
+                        <ColumnDirective 
+                            field='title' 
+                            headerText={'сделка, тема и сообщение'.toUpperCase()} 
+                            width='100'
+                        />
+                        <ColumnDirective 
+                            field='created_at' 
+                            headerText={'дата'.toUpperCase()} 
+                            width='100' 
+                            format={dateFormat}
+                        />
+                    </ColumnsDirective>
+                    <Inject services={[Edit, Toolbar]} />
+                </GridComponent>
+            </div>
         </>
     )
 }

@@ -1,42 +1,5 @@
 {
-    "tasks":[
-        {
-            "id":1,
-            "name":"Task 1",
-            "description":"Task 1 description",
-            "status":"open",
-            "priority":"high",
-            "type":"встреча",
-            "execution_date":"2015-01-01",
-            "created_at":"2015-01-01",
-            "updated_at":"2015-01-01",
-            "deleted_at":null,
-            "project_id":1,
-            "user_id":1,
-            "assigned_to":1,
-            "responsible":" Namazova",
-            "object":"asdasd asd asd ",
-            "result":"asdasd asd asd "
-        },
-        {
-            "id":1,
-            "name":"Task 1",
-            "description":"Task 1 description",
-            "status":"open",
-            "priority":"high",
-            "type":"встреча",
-            "execution_date":"2015-01-01",
-            "created_at":"2015-01-01",
-            "updated_at":"2015-01-01",
-            "deleted_at":null,
-            "project_id":1,
-            "user_id":1,
-            "assigned_to":1,
-            "responsible":" Namazova",
-            "object":"asdasd asd asd ",
-            "result":"asdasd asd asd "
-        }
-    ],
+    
     "contacts":[
         {
             "id":1,
@@ -59,26 +22,7 @@
             "object_id":1
         }
     ],
-    "contracts":[
-        {
-            "id":1,
-            "name":"Contract 1",
-            "description":"Contract 1 description",
-            "budget":1000,
-            "status":"open",
-            "post":"post",
-            "email":"string",
-            "phone":"string",
-            "start_date":"2015-01-01",
-            "end_date":"2015-01-01",
-            "created_at":"2015-01-01",
-            "updated_at":"2015-01-01",
-            "deleted_at":null,
-            "company_id":1,
-            "user": "Namazova",
-            "object_id":1
-        }
-    ],
+    
     "customers":[
         {
             "id":1,

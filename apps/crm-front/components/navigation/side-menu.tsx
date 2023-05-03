@@ -105,11 +105,11 @@ const SideMenu = ({setExpanded, setContent, setLang}) => {
                                 {'Компании'}
                             </NavText>
                         </NavItem>
-                        <NavItem eventKey="list/files">
+                        {/* <NavItem eventKey="list/files">
                             <NavText>
                                 {'Файлы'}
                             </NavText>
-                        </NavItem>
+                        </NavItem> */}
                     </NavItem>
                     <NavItem eventKey="email">
                         <NavIcon>
