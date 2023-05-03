@@ -38,6 +38,7 @@ const Contracts = () => {
         crossDomain: true,
         headers: [{ Authorization: `Bearer ${auth.authToken}` }]
     });
+    
     const fields: DialogFieldsModel[] = [
         { text:'Задача', key: 'name', type: 'TextBox' },
         { text:'Шаг', key: 'step', type: 'DropDown' },
@@ -45,19 +46,19 @@ const Contracts = () => {
         { text:'Задача', key: 'description', type: 'TextArea' }
     ];
 
-    function cardRendered(args) {
+    const cardRendered = (args) => {
         const val = args.data.priority;
         addClass([args.element], val);
     }
 
-    function columnTemplate(props) {
+    const columnTemplate = (props) => {
         return (<div className="header-template-wrap">
             <div className={"header-icon e-icons " + props.keyField}></div>
             <div className="header-text">{props.headerText}</div>
         </div>);
     }
 
-    function cardTemplate(props) {
+    const cardTemplate = (props) => {
         return (<div className={"card-template"}>
             <div className="e-card-header">
                 <div className="e-card-header-caption">
@@ -69,12 +70,12 @@ const Contracts = () => {
             </div>
             <div className="e-card-custom-footer">
                 {props.step.split(",").map((tag) => <div key={tag} className="e-card-tag-field e-tooltip-text">{tag}</div>)}
-                <div className="e-card-avatar">{getString(props.budget)}</div>
+                <div className="e-card-avatar">{getString(props.step)}</div>
             </div>
         </div>);
     }
 
-    function getString(assignee) {
+    const getString = (assignee) => {
         return assignee.match(/\b(\w)/g).join("").toUpperCase();
     }
 
