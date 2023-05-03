@@ -41,6 +41,7 @@ const AddTask = () => {
     const acceptTask = async () => {
         await postSetTask(task, auth.authToken);
         dispatch(setLoading(true));
+        setTask({} as Task);
         handleClose();
     }
 
@@ -101,6 +102,7 @@ const AddTask = () => {
                                             <Form.Control 
                                                 aria-label="object" 
                                                 name="contract_id"
+                                                disabled={true}
                                                 value={task.contract_id} 
                                                 placeholder={'Объект'} 
                                                 onChange={(e) => onChange(e)} />
@@ -116,6 +118,7 @@ const AddTask = () => {
                                             <Form.Control 
                                                 aria-label="responsible" 
                                                 name="responsible"
+                                                disabled={true}
                                                 value={task.responsible} 
                                                 placeholder={'Исполнитель'} 
                                                 onChange={(e) => onChange(e)} />

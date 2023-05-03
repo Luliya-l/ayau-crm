@@ -156,16 +156,15 @@ export type State = {
 }
 
 export type Mail = {
-    id:number,
-    name:string,
-    description:string,
-    status:string,
-    priority:string,
-    due_date:string,
-    created_at:string,
-    updated_at:string,
-    deleted_at:string | null,
-    company_id:number,
-    user:string,
-    object_id:number
+    id:string,
+    from_mail:string,
+    to_mail:string,
+    title:string,
+    text:string,
+    responsible:string,
+    contract_id:string,
+    contact_id:string,
+    company_id:string,
+    user_id:string,
+    sended:boolean
 }

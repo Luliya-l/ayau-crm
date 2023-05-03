@@ -2,14 +2,16 @@ import { postSetContract } from "apps/crm-front/data/fetch/integration";
 import { Contract } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
+import { setLoading } from "apps/crm-front/store/loadingState";
 import { useState } from "react";
 import { Button, Col, Form, InputGroup, Modal, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddContract = () => {
     const auth = useSelector(useAuth) as AuthState;
-
     const localization = useSelector(selectLangState);
+
+    const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
 
@@ -31,6 +33,8 @@ const AddContract = () => {
 
     const setCustomer = async () => {
         await postSetContract(contract, auth.authToken);
+        dispatch(setLoading(true));
+        setContract({} as Contract);
         handleClose();
     }
 

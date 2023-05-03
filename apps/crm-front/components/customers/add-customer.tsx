@@ -30,6 +30,7 @@ const AddCustomer = () => {
     const setCustomer = async () => {
         await postSetCompanies(company, auth.authToken);
         dispatch(setLoading(true));
+        setCompany({} as Company);
         handleClose();
     }
 
@@ -78,6 +79,7 @@ const AddCustomer = () => {
                         <Form.Control 
                             type="name" 
                             name="responsible"
+                            disabled={true}
                             value={company.responsible} 
                             placeholder="Ф.И.О." 
                             onChange={(e) => onChange(e)} 
