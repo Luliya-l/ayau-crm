@@ -1,4 +1,3 @@
-import { useAPI } from "apps/crm-front/store/apiSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Alert, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +5,6 @@ import Steps from "./steps";
 
 const Finish = ({setIsLoading, getOrg}) => {
     const localization = useSelector(selectLangState);
-    const api = useSelector(useAPI);
 
     const dispatch = useDispatch();
 

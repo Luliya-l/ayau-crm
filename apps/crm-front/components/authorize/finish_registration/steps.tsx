@@ -1,7 +1,6 @@
-import { useAPI } from "apps/crm-front/store/apiSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Step1 from "./step_1";
 import Step2 from "./step_2";

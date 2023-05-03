@@ -1,12 +1,9 @@
-import { DB } from "apps/crm-front/specs/custom-types";
-import { deleteFiles, useAPI } from "apps/crm-front/store/apiSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const Files = ({setEditIndex}) => {
     const localization = useSelector(selectLangState);
-    const api = useSelector(useAPI) as DB;
 
     const dispatch = useDispatch();
 
@@ -30,7 +27,7 @@ const Files = ({setEditIndex}) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
+                        {/* {
                             (api.files ?? []).map((file, index) => (
                                 <tr key={index}>
                                     <td><span className="fs-6">{file.name ?? ''}</span></td>
@@ -45,7 +42,7 @@ const Files = ({setEditIndex}) => {
                                     </td>
                                 </tr>
                             ))
-                        }
+                        } */}
                     </tbody>
                 </Table>
             </Container>

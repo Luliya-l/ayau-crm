@@ -1,13 +1,10 @@
-import { DB } from "apps/crm-front/specs/custom-types";
-import { setFiles, updateFiles, useAPI } from "apps/crm-front/store/apiSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const AddFile = ({editIndex = -1, setEditIndex}) => {
     const localization = useSelector(selectLangState);
-    const api = useSelector(useAPI) as DB;
 
     const dispatch = useDispatch();
 
@@ -20,39 +17,11 @@ const AddFile = ({editIndex = -1, setEditIndex}) => {
         return localization.langs[localization.currentLang]?.params[param];
     }
 
-    const [fileName, setFileName] = useState(editIndex === -1 ? '' : api.files[editIndex].name ?? '');
+    const [fileName, setFileName] = useState('');
 
     const setFile = () => {
-        const f = fileName.split('\\');
-        const c = {
-            id:api.files.length + 1,
-            name:f[f.length - 1],
-            description:'',
-            file:f[f.length - 1],
-            created_at:(new Date()).toString(),
-            updated_at:(new Date()).toString(),
-            deleted_at:null,
-            company_id:0,
-            user:'Test User',
-            object_id:0
-            
-        }
-
-        if (editIndex === -1) {
-            dispatch(setFiles(c));
-        } else {
-            dispatch(updateFiles([c, editIndex]));
-        }
-        setEditIndex(-1);
         handleClose();
     }
-
-    useEffect(() => {
-        if(editIndex !== -1) {
-            setFileName(api.files[editIndex].name ?? '');
-            handleShow();
-        }
-    }, [editIndex]);
 
     return (
         <>

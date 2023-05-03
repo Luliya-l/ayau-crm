@@ -1,7 +1,6 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { authSlice } from "./authSlice";
 import { langSlice } from "./langSlice";
-import { apiSlice } from "./apiSlice";
 import {nextReduxCookieMiddleware, wrapMakeStore} from "next-redux-cookie-wrapper";
 import { createWrapper } from "next-redux-wrapper";
 import { useDispatch } from "react-redux";
@@ -13,7 +12,6 @@ const makeStore = wrapMakeStore(() =>
       [authSlice.name]: authSlice.reducer,
       [langSlice.name]: langSlice.reducer,
       [loadingStateSlice.name]: loadingStateSlice.reducer,
-      [apiSlice.name]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(

@@ -1,15 +1,12 @@
-import { postLogin, postRegister } from "apps/crm-front/data/fetch/integration";
-import { DB, User } from "apps/crm-front/specs/custom-types";
-import { useAPI } from "apps/crm-front/store/apiSlice";
-import { setAcceptTerms, setAuthState, setRememberMe, setTokens } from "apps/crm-front/store/authSlice";
+import { postRegister } from "apps/crm-front/data/fetch/integration";
+import { User } from "apps/crm-front/specs/custom-types";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { useState } from "react";
-import { Button, Col, Container, Form, Modal, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const Registration = ({checkAuth}) => {
     const localization = useSelector(selectLangState);
-    const api = useSelector(useAPI) as DB;
 
     const dispatch = useDispatch();
 
