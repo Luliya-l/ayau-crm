@@ -1,21 +1,33 @@
+import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
+import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
+import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
+
 import { Container, Form, Tabs } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
-import { registerLicense } from "@syncfusion/ej2-base";
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setTokens, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef, useState } from "react";
-import { Organization, User } from 'apps/crm-front/specs/custom-types';
+import { Langs, Organization, User } from 'apps/crm-front/specs/custom-types';
 import { postGetProfile, postOrganization } from 'apps/crm-front/data/fetch/integration';
+import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
+import { selectLangState } from 'apps/crm-front/store/langSlice';
+
+const baseURL = "https://crm-backend-two.vercel.app/";
+// const baseURL = "http://localhost:8000/";
 
 const Settings = ({lang='ru'}) => {
-  registerLicense('Mgo+DSMBaFt+QHFqVkNrXVNbdV5dVGpAd0N3RGlcdlR1fUUmHVdTRHRcQl5hTn9Tc0RnXXxeeXQ=;Mgo+DSMBPh8sVXJ1S0d+X1RPd11dXmJWd1p/THNYflR1fV9DaUwxOX1dQl9gSX1RcURjXH5adHdXQmA=;ORg4AjUWIQA/Gnt2VFhhQlJBfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5QdEJiWXpfdHBWRWhc;MTQ4NjE2MEAzMjMxMmUzMTJlMzMzNUJnSDVJbXZqODU4NVB5QWV1aXJjMFVFMENtNWhhT2NJdy9ydXMrMFlObmM9;MTQ4NjE2MUAzMjMxMmUzMTJlMzMzNW9HWW1TTkZnOG1aOVR3YndRTmJHZ2xZdVFycjYzWm1FS2pXVkVZSDlDQjg9;NRAiBiAaIQQuGjN/V0d+XU9Hc1RDX3xKf0x/TGpQb19xflBPallYVBYiSV9jS31TdUdkWH9bcXBRQmFeUQ==;MTQ4NjE2M0AzMjMxMmUzMTJlMzMzNWNHSkFzdTU5aUpIdmpsQmxFZC96Z0VKSy8rby9RZFp5elJ3MDR4T0puYzQ9;MTQ4NjE2NEAzMjMxMmUzMTJlMzMzNVZRUERQZEljR1lVKzZoUk5GL1VsUkpKNi9ZUDVFVjBLaC9oQ3kxSDdleDA9;Mgo+DSMBMAY9C3t2VFhhQlJBfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5QdEJiWXpfdHBQR2Bc;MTQ4NjE2NkAzMjMxMmUzMTJlMzMzNUJSWWIrMGhjL0lqclFGNHM5MVl6SE1OSmVwZEpjc3VoTmptU1dnSHZISFE9;MTQ4NjE2N0AzMjMxMmUzMTJlMzMzNVlvcnFjdkY1Q0VVRHF6aWJ3SkFyZlE1WmZldGJHTnNHT1ZwM2FOcmpCQTQ9;MTQ4NjE2OEAzMjMxMmUzMTJlMzMzNWNHSkFzdTU5aUpIdmpsQmxFZC96Z0VKSy8rby9RZFp5elJ3MDR4T0puYzQ9');
-
   const auth = useSelector(useAuth) as AuthState;
+  const loadingState = useSelector(useLoadingState);
+  const localization = useSelector(selectLangState) as Langs;
 
   const dispatch = useDispatch();
+
+  const getParams = (param: string) => {
+    return localization.langs[localization.currentLang].params[param];
+  }
 
   const [profile, setProfile] = useState({} as User);
   const [org, setOrg] = useState({} as Organization);
@@ -39,6 +51,29 @@ const Settings = ({lang='ru'}) => {
       console.log(err);
     });
   }, []);
+
+  const grid = useRef(null);
+
+    const dateFormat = { type: 'dateTime', format: 'yyyy-MM-dd' };
+
+    const taskDS: DataManager = new DataManager({
+        adaptor: new UrlAdaptor(),
+        updateUrl: `${baseURL}crm/tasks/update`,
+        insertUrl: `${baseURL}crm/tasks/set`,
+        removeUrl: `${baseURL}crm/tasks/delete`,
+        url: `${baseURL}crm/tasks/get`,
+        crossDomain: true,
+        requestType: 'POST',
+        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+    });
+
+    const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
+    const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
+    
+    useEffect(() => {
+        grid.current.refresh();
+        dispatch(setLoading(false));
+    }, [loadingState.loading, dispatch]);
 
   return (
     <Container fluid className='mt-4'>
@@ -187,7 +222,7 @@ const Settings = ({lang='ru'}) => {
                           </Col>
                       </Form.Group>
                   </Container>
-                  <Container fluid className='text-black'>
+                  <Container fluid className='text-black d-none'>
                     <Tabs
                       defaultActiveKey="filials"
                       id="fill-tab-example"
@@ -196,11 +231,61 @@ const Settings = ({lang='ru'}) => {
                     >
                       <Tab eventKey="filials" title={'Филиалы'}>
                         <Container fluid className='text-black'>
-                          
+                        <GridComponent 
+                            ref={grid}
+                            dataSource={taskDS}
+                            allowPaging={false}
+                            pageSettings={{ pageSize: 5 }}
+                            editSettings={editOptions}
+                            toolbar={toolbarOptions}
+                        >
+                            <ColumnsDirective>
+                              <ColumnDirective 
+                                  field='id' width='100' 
+                                  textAlign="Right" isPrimaryKey={true} 
+                                  visible={false}
+                              />
+                              <ColumnDirective 
+                                  field='created_at' 
+                                  headerText={getParams('execution_date').toUpperCase()} 
+                                  width='100' 
+                                  format={dateFormat}
+                              />
+                              <ColumnDirective 
+                                  field='responsible' 
+                                  headerText={getParams('responsible').toUpperCase()} 
+                                  width='100'
+                              />
+                              <ColumnDirective 
+                                  field='contract_id' 
+                                  headerText={getParams('object').toUpperCase()} 
+                                  width='100' 
+                              />
+                              <ColumnDirective 
+                                  field='task_type' 
+                                  headerText={getParams('taskType').toUpperCase()} 
+                                  width='100' 
+                                  format="C2" 
+                              />
+                              <ColumnDirective 
+                                  field='text' 
+                                  headerText={getParams('taskDescription').toUpperCase()} 
+                                  width='100'
+                              />
+                              <ColumnDirective 
+                                  field='result' 
+                                  headerText={getParams('result').toUpperCase()} 
+                                  width='100'
+                              />
+                            </ColumnsDirective>
+                            <Inject services={[Edit, Toolbar]} />
+                          </GridComponent>
                         </Container>
                       </Tab>
                       <Tab eventKey="users" title={'Пользователи'}>
-                        Tab content for Profile
+                        <Container fluid className='text-black'>
+                          
+                        </Container>
                       </Tab>
                     </Tabs>
                   </Container>
@@ -226,6 +311,9 @@ const Settings = ({lang='ru'}) => {
                   </Container>
               </Tab.Pane>
             </Tab.Content>
+            <Row style={{minHeight:'30vh'}}>
+              <Col>&nbsp;</Col>
+            </Row>
           </Col>
         </Row>
       </Tab.Container>
