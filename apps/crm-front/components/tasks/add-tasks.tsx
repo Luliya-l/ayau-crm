@@ -1,13 +1,19 @@
-import { Langs } from "apps/crm-front/specs/custom-types";
+import { Langs, Task } from "apps/crm-front/specs/custom-types";
 
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { useState } from "react";
 import { Button, Col, Container, Form, InputGroup, Modal, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DateTimePicker from "../spec/datetime-picker";
+import { postSetTask } from "apps/crm-front/data/fetch/integration";
+import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
+import { setLoading } from "apps/crm-front/store/loadingState";
 
 const AddTask = ({editIndex = -1, setEditIndex,}) => {
+    const auth = useSelector(useAuth) as AuthState;
     const localization = useSelector(selectLangState) as Langs;
+    
+    const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
 
@@ -19,15 +25,22 @@ const AddTask = ({editIndex = -1, setEditIndex,}) => {
     }
 
     const [taskExecutionDate, setTaskExecutionDate] = useState(new Date());
-    const [taskType, setTaskType] = useState('Звонок');
 
-    const [taskName, setTaskName] = useState('');
-    const [taskDescription, setTaskDescription] = useState('');
-    const [taskObject, setTaskObject] = useState('');
-    const [taskResponsible, setTaskResponsible] = useState('');
+    const [task, setTask] = useState({
+        title: "",
+        task_type:"Звонок",
+        text: "",
+        contract_id: "",
+        responsible: "",
+    } as Task);
 
-    const acceptTask = () => {
-       
+    const onChange = (e) => {
+        setTask({...task, [e.target.name]: e.target.value});
+    }
+
+    const acceptTask = async () => {
+        await postSetTask(task, auth.authToken);
+        dispatch(setLoading(true));
         handleClose();
     }
 
@@ -71,7 +84,11 @@ const AddTask = ({editIndex = -1, setEditIndex,}) => {
                                             <InputGroup.Text>
                                                 <i className="bi bi-input-cursor"></i>
                                             </InputGroup.Text>
-                                            <Form.Control aria-label="name" value={taskName} placeholder={'Тема'} onChange={(e) => setTaskName(e.target.value)} />
+                                            <Form.Control 
+                                                aria-label="name" 
+                                                name="title"
+                                                value={task.title} 
+                                                placeholder={'Тема'} onChange={(e) => onChange(e)} />
                                         </InputGroup>
                                     </Col>
                                 </Row>
@@ -81,7 +98,12 @@ const AddTask = ({editIndex = -1, setEditIndex,}) => {
                                             <InputGroup.Text>
                                                 <i className="bi bi-people"></i>
                                             </InputGroup.Text>
-                                            <Form.Control aria-label="object" value={taskObject} placeholder={'Объект'} onChange={(e) => setTaskObject(e.target.value)} />
+                                            <Form.Control 
+                                                aria-label="object" 
+                                                name="contract_id"
+                                                value={task.contract_id} 
+                                                placeholder={'Объект'} 
+                                                onChange={(e) => onChange(e)} />
                                         </InputGroup>
                                     </Col>
                                 </Row>
@@ -91,7 +113,12 @@ const AddTask = ({editIndex = -1, setEditIndex,}) => {
                                             <InputGroup.Text>
                                                 <i className="bi bi-person-lines-fill"></i>
                                             </InputGroup.Text>
-                                            <Form.Control aria-label="responsible" value={taskResponsible} placeholder={'Исполнитель'} onChange={(e) => setTaskResponsible(e.target.value)} />
+                                            <Form.Control 
+                                                aria-label="responsible" 
+                                                name="responsible"
+                                                value={task.responsible} 
+                                                placeholder={'Исполнитель'} 
+                                                onChange={(e) => onChange(e)} />
                                         </InputGroup>
                                     </Col>
                                 </Row>
@@ -99,9 +126,13 @@ const AddTask = ({editIndex = -1, setEditIndex,}) => {
                                     <Col>
                                         <InputGroup className="my-2">
                                             <InputGroup.Text>
-                                                <i className={`bi ${taskType === 'Звонок' ? 'bi-telephone-fill' : 'bi-briefcase-fill'}`}></i>
+                                                <i className={`bi ${task.task_type === 'Звонок' ? 'bi-telephone-fill' : 'bi-briefcase-fill'}`}></i>
                                             </InputGroup.Text>
-                                            <Form.Select aria-label="type" value={taskType} onChange={(e) => setTaskType(e.target.value)}>
+                                            <Form.Select 
+                                                aria-label="type" 
+                                                name="task_type"
+                                                value={task.task_type} 
+                                                onChange={(e) => onChange(e)}>
                                                 <option>{'Звонок'}</option>
                                                 <option>{'Встреча'}</option>
                                             </Form.Select>
@@ -114,7 +145,12 @@ const AddTask = ({editIndex = -1, setEditIndex,}) => {
                                             <InputGroup.Text>
                                                 <i className="bi bi-list-task"></i>
                                             </InputGroup.Text>
-                                            <Form.Control aria-label="description" value={taskDescription} placeholder={'Задача'} onChange={(e) => setTaskDescription(e.target.value)} />
+                                            <Form.Control 
+                                                aria-label="description" 
+                                                name="text"
+                                                value={task.text} 
+                                                placeholder={'Задача'} 
+                                                onChange={(e) => onChange(e)} />
                                         </InputGroup>
                                     </Col>
                                 </Row>

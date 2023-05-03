@@ -456,6 +456,19 @@ option:checked:after {
 
 /* END KANBAN */
 
+/* START GRID */
+
+#grid_1822616568_1_dialogEdit_wrapper {
+  width: 330px;
+  max-height: fit-content !important;
+  z-index: 100002;
+  left: 0px;
+  top: 0px;
+  position: relative;
+}
+
+/* END GRID */
+
 .logo {
   display: block;
   margin-left: auto;

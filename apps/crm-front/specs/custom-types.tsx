@@ -45,21 +45,15 @@ export type DB = {
 
 export type Task = {
     id:number,
-    name:string,
-    description:string,
-    status:string,
-    priority:string,
-    type:string,
-    execution_date:string,
-    created_at:string,
-    updated_at:string,
-    deleted_at:string | null,
-    project_id:number,
-    user_id:number,
-    assigned_to:number,
-    responsible:string,
-    object:string,
+    title:string,
+    task_type:string,
+    text:string,
     result:string,
+    responsible:string,
+    contract_id:string,
+    contact_id:string,
+    company_id:string,
+    user_id:string | null,
 }
 
 export type Contact = {
