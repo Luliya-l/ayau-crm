@@ -58,17 +58,17 @@ const Settings = ({lang='ru'}) => {
 
     const taskDS: DataManager = new DataManager({
         adaptor: new UrlAdaptor(),
-        updateUrl: `${baseURL}crm/tasks/update`,
-        insertUrl: `${baseURL}crm/tasks/set`,
-        removeUrl: `${baseURL}crm/tasks/delete`,
-        url: `${baseURL}crm/tasks/get`,
+        updateUrl: `${baseURL}crm/filials/update`,
+        insertUrl: `${baseURL}crm/filials/set`,
+        removeUrl: `${baseURL}crm/filials/delete`,
+        url: `${baseURL}crm/filials/get`,
         crossDomain: true,
         requestType: 'POST',
         headers: [{ Authorization: `Bearer ${auth.authToken}` }]
     });
 
     const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
-    const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
+    const toolbarOptions: ToolbarItems[] = ['Search', 'Add', 'Edit', 'Delete', 'Update', 'Cancel'];
     
     useEffect(() => {
         grid.current.refresh();
@@ -222,7 +222,7 @@ const Settings = ({lang='ru'}) => {
                           </Col>
                       </Form.Group>
                   </Container>
-                  <Container fluid className='text-black d-none'>
+                  <Container fluid className='text-black'>
                     <Tabs
                       defaultActiveKey="filials"
                       id="fill-tab-example"
@@ -246,35 +246,35 @@ const Settings = ({lang='ru'}) => {
                                   visible={false}
                               />
                               <ColumnDirective 
-                                  field='created_at' 
-                                  headerText={getParams('execution_date').toUpperCase()} 
+                                  field='name' 
+                                  headerText={'Наименование'.toUpperCase()} 
                                   width='100' 
-                                  format={dateFormat}
+                              />
+                              <ColumnDirective 
+                                  field='phone' 
+                                  headerText={getParams('phone').toUpperCase()} 
+                                  width='100'
+                              />
+                              <ColumnDirective 
+                                  field='email' 
+                                  headerText={getParams('email').toUpperCase()} 
+                                  width='100' 
                               />
                               <ColumnDirective 
                                   field='responsible' 
                                   headerText={getParams('responsible').toUpperCase()} 
-                                  width='100'
-                              />
-                              <ColumnDirective 
-                                  field='contract_id' 
-                                  headerText={getParams('object').toUpperCase()} 
-                                  width='100' 
-                              />
-                              <ColumnDirective 
-                                  field='task_type' 
-                                  headerText={getParams('taskType').toUpperCase()} 
                                   width='100' 
                                   format="C2" 
+                                  visible={false}
                               />
                               <ColumnDirective 
-                                  field='text' 
-                                  headerText={getParams('taskDescription').toUpperCase()} 
+                                  field='address' 
+                                  headerText={'Адрес'.toUpperCase()} 
                                   width='100'
                               />
                               <ColumnDirective 
-                                  field='result' 
-                                  headerText={getParams('result').toUpperCase()} 
+                                  field='description' 
+                                  headerText={'Примечание'.toUpperCase()} 
                                   width='100'
                               />
                             </ColumnsDirective>
@@ -284,7 +284,7 @@ const Settings = ({lang='ru'}) => {
                       </Tab>
                       <Tab eventKey="users" title={'Пользователи'}>
                         <Container fluid className='text-black'>
-                          
+
                         </Container>
                       </Tab>
                     </Tabs>
