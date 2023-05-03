@@ -106,11 +106,11 @@ const Index: NextPage = () =>  {
           case 'tasks':
             return <Tasks />;
           case 'contacts':
-            return <Contacts setEditIndex={setEditIndex} />;
+            return <Contacts />;
           case 'list/contacts':
-            return <Contacts setEditIndex={setEditIndex} />;
+            return <Contacts />;
           case 'list/customers':
-            return <Customers setEditIndex={setEditIndex} />;
+            return <Customers />;
           case 'list/files':
             return <Files setEditIndex={setEditIndex} />;
           case 'email':

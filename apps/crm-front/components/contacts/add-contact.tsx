@@ -1,72 +1,37 @@
-import { DB } from "apps/crm-front/specs/custom-types";
-import { setContacts, updateContacts, useAPI } from "apps/crm-front/store/apiSlice";
+import { postSetContacts } from "apps/crm-front/data/fetch/integration";
+import { Contact } from "apps/crm-front/specs/custom-types";
+import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
-import { useEffect, useState } from "react";
+import { setLoading } from "apps/crm-front/store/loadingState";
+import { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-const AddContact = ({editIndex = -1, setEditIndex}) => {
+const AddContact = () => {
+    const auth = useSelector(useAuth) as AuthState;
     const localization = useSelector(selectLangState);
-    const api = useSelector(useAPI) as DB;
 
     const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => {setShow(false); setEditIndex(-1);};
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const getParams = (param: string) => {
         return localization.langs[localization.currentLang]?.params[param];
     }
 
-    const [responsible, setResponsible] = useState(editIndex === -1 ? '' : api.contacts[editIndex].name ?? '');
-    const [phone, setPhone] = useState(editIndex === -1 ? '' : api.contacts[editIndex].phone ?? '');
-    const [email, setEmail] = useState(editIndex === -1 ? '' : api.contacts[editIndex].email ?? '');
-    const [post, setPost] = useState(editIndex === -1 ? '' : api.contacts[editIndex].notes ?? '');
-
-    const setContact = () => {
-        const c = {
-            name: responsible,
-            phone: phone,
-            email: email,
-            notes: post,
-            id:0,
-            created_at:(new Date()).toString(),
-            updated_at:(new Date()).toString(),
-            deleted_at:null,
-            project_id:0,
-            user:'',
-            assigned_to:0,
-            mobile:'',
-            fax:'',
-            address:'',
-            city:'',
-            state:'',
-            zip:'',
-            country:'',
-            company_id:0,
-            object_id:0
-        }
-
-        if (editIndex === -1) {
-            dispatch(setContacts(c));
-        } else {
-            dispatch(updateContacts([c, editIndex]));
-        }
-        setEditIndex(-1);
-        handleClose();
+    const [contact, setContacts] = useState({} as Contact);
+    const onChange = (e) => {
+        setContacts({...contact, [e.target.name]: e.target.value});
     }
 
-    useEffect(() => {
-        if(editIndex !== -1) {
-            setResponsible(api.contacts[editIndex].name ?? '');
-            setPhone(api.contacts[editIndex].phone ?? '');
-            setEmail(api.contacts[editIndex].email ?? '');
-            setPost(api.contacts[editIndex].notes ?? '');
-            handleShow();
-        }
-    }, [editIndex]);
+    const setContact = async () => {
+        await postSetContacts(contact, auth.authToken);
+        dispatch(setLoading(true));
+        handleClose();
+    }
 
     return (
         <>
@@ -93,10 +58,16 @@ const AddContact = ({editIndex = -1, setEditIndex}) => {
                 <Modal.Body>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
-                            {'Ответственный'}
+                            {'Ф.И.О.'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="name" value={responsible} placeholder="Ф.И.О." onChange={(e) => setResponsible(e.target.value)} />
+                        <Form.Control 
+                            type="name" 
+                            name="fio"
+                            value={contact.fio} 
+                            placeholder="Ф.И.О." 
+                            onChange={(e) => onChange(e)} 
+                        />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="phone">
@@ -104,7 +75,12 @@ const AddContact = ({editIndex = -1, setEditIndex}) => {
                             {'Рабочий телефон'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control type="phone" value={phone} placeholder="777 777 77 77" onChange={(e) => setPhone(e.target.value)} />
+                        <Form.Control 
+                            type="phone" 
+                            name="phone"
+                            value={contact.phone} 
+                            placeholder="777 777 77 77" 
+                            onChange={(e) => onChange(e)} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="email">
@@ -112,7 +88,13 @@ const AddContact = ({editIndex = -1, setEditIndex}) => {
                             {'Email'}
                         </Form.Label>
                         <Col sm="10">
-                            <Form.Control type="email" value={email} placeholder="email@example.com" onChange={(e) => setEmail(e.target.value)} />
+                            <Form.Control 
+                                type="email" 
+                                name="email"
+                                value={contact.email} 
+                                placeholder="email@example.com" 
+                                onChange={(e) => onChange(e)} 
+                            />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
@@ -120,12 +102,30 @@ const AddContact = ({editIndex = -1, setEditIndex}) => {
                             {'Должность'}
                         </Form.Label>
                         <Col sm="10">
-                            <Form.Select value={post} onChange={(e) => setPost(e.target.value)}>
+                            <Form.Select 
+                                name="post"
+                                value={contact.post} 
+                                onChange={(e) => onChange(e)}
+                            >
                                 <option>Выберите должность</option>
                                 <option value="1">Директор</option>
                                 <option value="2">Менеджер</option>
                                 <option value="3">Бухгалтер</option>
                             </Form.Select>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3" controlId="email">
+                        <Form.Label column sm="2">
+                            {'Примечание'}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control 
+                                as={'textarea'} 
+                                rows={5}
+                                name="description"
+                                value={contact.description} 
+                                onChange={(e) => onChange(e)} 
+                            />
                         </Col>
                     </Form.Group>
                 </Modal.Body>

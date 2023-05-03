@@ -9,7 +9,7 @@ import { postSetTask } from "apps/crm-front/data/fetch/integration";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { setLoading } from "apps/crm-front/store/loadingState";
 
-const AddTask = ({editIndex = -1, setEditIndex,}) => {
+const AddTask = () => {
     const auth = useSelector(useAuth) as AuthState;
     const localization = useSelector(selectLangState) as Langs;
     
@@ -17,7 +17,7 @@ const AddTask = ({editIndex = -1, setEditIndex,}) => {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => {setShow(false); setEditIndex(-1);}
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const getParams = (param: string) => {

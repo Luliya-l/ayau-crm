@@ -44,7 +44,7 @@ export type DB = {
 }
 
 export type Task = {
-    id:number,
+    id:string,
     title:string,
     task_type:string,
     text:string,
@@ -56,25 +56,29 @@ export type Task = {
     user_id:string | null,
 }
 
-export type Contact = {
-    id:number,
+export type Company = {
+    id:string,
     name:string,
     email:string,
     phone:string,
-    mobile:string,
-    fax:string,
+    web_site:string,
+    responsible:string,
+    user_id:string,
     address:string,
-    city:string,
-    state:string,
-    zip:string,
-    country:string,
-    notes:string,
-    created_at:string,
-    updated_at:string,
-    deleted_at:string | null,
-    company_id:number,
-    user:string,
-    object_id:number
+    description:string,
+}
+
+export type Contact = {
+    id:string,
+    fio:string,
+    email:string,
+    phone:string,
+    company_id:string,
+    user_id:string,
+    post:string,
+    gender:string,
+    birthdate:string,
+    description:string,
 }
 
 export type Contract = {

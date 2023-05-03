@@ -1,11 +1,21 @@
-import { deleteContacts, useAPI } from "apps/crm-front/store/apiSlice";
-import { selectLangState } from "apps/crm-front/store/langSlice";
-import { Container, Table } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
+import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
+import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
 
-const Contacts = ({setEditIndex}) => {
-    const localization = useSelector(selectLangState);
-    const api = useSelector(useAPI);
+import { Langs } from "apps/crm-front/specs/custom-types";
+import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
+import { selectLangState } from "apps/crm-front/store/langSlice";
+import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef } from 'react';
+
+const baseURL = "https://crm-backend-two.vercel.app/";
+// const baseURL = "http://localhost:8000/";
+
+const Contacts = () => {
+    const auth = useSelector(useAuth) as AuthState;
+    const loadingState = useSelector(useLoadingState);
+    const localization = useSelector(selectLangState) as Langs;
 
     const dispatch = useDispatch();
 
@@ -13,43 +23,69 @@ const Contacts = ({setEditIndex}) => {
         return localization.langs[localization.currentLang]?.params[param];
     }
 
+    const grid = useRef(null);
+
+    const taskDS: DataManager = new DataManager({
+        adaptor: new UrlAdaptor(),
+        updateUrl: `${baseURL}crm/contacts/update`,
+        insertUrl: `${baseURL}crm/contacts/set`,
+        removeUrl: `${baseURL}crm/contacts/delete`,
+        url: `${baseURL}crm/contacts/get`,
+        crossDomain: true,
+        requestType: 'POST',
+        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+    });
+
+    const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
+    const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
+    
+    useEffect(() => {
+        grid.current.refresh();
+        dispatch(setLoading(false));
+    }, [loadingState.loading, dispatch]);
+
     return (
         <>
-            <Container fluid className="my-2">
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th><h5>{getParams('name')}</h5></th>
-                            <th><h5>{getParams('company_id')}</h5></th>
-                            <th><h5>{getParams('phone')}</h5></th>
-                            <th><h5>{getParams('email')}</h5></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            (api.contacts ?? []).map((contact, index) => (
-                                <tr key={index}>
-                                    <td><span className="fs-6">{contact.name ?? ''}</span></td>
-                                    <td><span className="fs-6 text-capitalize">{contact.object_id ?? ''}</span></td>
-                                    <td>
-                                        <i className="bi bi-telephone-fill mx-1" />
-                                        <span className="fs-6">{contact.phone ?? ''}</span>
-                                    </td>
-                                    <td>
-                                        <i className="bi bi-envelope-fill mx-1" />
-                                        <span className="fs-6 text-capitalize">{contact.email ?? ''}</span>
-                                    </td>
-                                    <td className="text-center">
-                                        <i role='button' className="bi bi bi-pencil mx-4" onClick={() => setEditIndex(index)}/>
-                                        <i role='button' className="bi bi-trash3" onClick={() => dispatch(deleteContacts(index))} />
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </Table>
-            </Container>
+            <div className='App mt-4'>
+                <GridComponent 
+                    ref={grid}
+                    dataSource={taskDS}
+                    allowPaging={false}
+                    pageSettings={{ pageSize: 5 }}
+                    editSettings={editOptions}
+                    toolbar={toolbarOptions}
+                >
+                    <ColumnsDirective>
+                        <ColumnDirective 
+                            field='id' width='100' 
+                            textAlign="Right" isPrimaryKey={true} 
+                            visible={false}
+                        />
+                        <ColumnDirective 
+                            field='fio' 
+                            headerText={getParams('name').toUpperCase()} 
+                            width='100' 
+                        />
+                        <ColumnDirective 
+                            field='company_id' 
+                            headerText={getParams('company_id').toUpperCase()} 
+                            width='100'
+                        />
+                        <ColumnDirective 
+                            field='phone' 
+                            headerText={getParams('phone').toUpperCase()} 
+                            width='100' 
+                        />
+                        <ColumnDirective 
+                            field='email' 
+                            headerText={getParams('email').toUpperCase()} 
+                            width='100' 
+                            format="C2" 
+                        />
+                    </ColumnsDirective>
+                    <Inject services={[Edit, Toolbar]} />
+                </GridComponent>
+            </div>
         </>
     )
 }

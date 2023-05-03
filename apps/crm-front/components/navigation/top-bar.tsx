@@ -29,15 +29,15 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
       case 'contracts':
         return <AddContract />
       case 'tasks':
-        return <AddTask editIndex={editIndex} setEditIndex={setEditIndex} />
+        return <AddTask />
       case 'contacts':
-        return <AddContact editIndex={editIndex} setEditIndex={setEditIndex} />
+        return <AddContact />
       case 'list':
-        return <AddCustomer editIndex={editIndex} setEditIndex={setEditIndex} />
+        return <AddCustomer />
       case 'list/contacts':
-        return <AddContact editIndex={editIndex} setEditIndex={setEditIndex} />
+        return <AddContact />
       case 'list/customers':
-        return <AddCustomer editIndex={editIndex} setEditIndex={setEditIndex} />
+        return <AddCustomer />
       case 'list/files':
         return <AddFile editIndex={editIndex} setEditIndex={setEditIndex} />
       case 'email':

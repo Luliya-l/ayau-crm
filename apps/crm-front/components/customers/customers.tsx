@@ -1,11 +1,20 @@
-import { deleteCustomers, useAPI } from "apps/crm-front/store/apiSlice";
+import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
+import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
+import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
+
+import { Langs } from "apps/crm-front/specs/custom-types";
+import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
-import { Container, Table } from "react-bootstrap";
+import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const Customers = ({setEditIndex}) => {
-    const localization = useSelector(selectLangState);
-    const api = useSelector(useAPI);
+// const baseURL = "https://crm-backend-two.vercel.app/";
+const baseURL = "http://localhost:8000/";
+const Customers = () => {
+    const auth = useSelector(useAuth) as AuthState;
+    const loadingState = useSelector(useLoadingState);
+    const localization = useSelector(selectLangState) as Langs;
 
     const dispatch = useDispatch();
 
@@ -13,40 +22,81 @@ const Customers = ({setEditIndex}) => {
         return localization.langs[localization.currentLang]?.params[param];
     }
 
+    const grid = useRef(null);
+
+    const dateFormat = { type: 'dateTime', format: 'yyyy-MM-dd' };
+
+    const taskDS: DataManager = new DataManager({
+        adaptor: new UrlAdaptor(),
+        updateUrl: `${baseURL}crm/companies/update`,
+        insertUrl: `${baseURL}crm/companies/set`,
+        removeUrl: `${baseURL}crm/companies/delete`,
+        url: `${baseURL}crm/companies/get`,
+        crossDomain: true,
+        requestType: 'POST',
+        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+    });
+
+    const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
+    const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
+    
+    useEffect(() => {
+        grid.current.refresh();
+        dispatch(setLoading(false));
+    }, [loadingState.loading, dispatch]);
+
     return (
         <>
-            <Container fluid className="my-2">
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th><h5>{getParams('name')}</h5></th>
-                            <th><h5>{getParams('company_id')}</h5></th>
-                            <th><h5>{getParams('phone')}</h5></th>
-                            <th><h5>{getParams('email')}</h5></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            (api.customers ?? []).map((customer, index) => (
-                                <tr key={index}>
-                                    <td><span className="fs-6">{customer.name ?? ''}</span></td>
-                                    <td><span className="fs-6 text-capitalize">{customer.notes ?? ''}</span></td>
-                                    <td><span className="fs-6">{customer.phone ?? ''}</span></td>
-                                    <td>
-                                        <i className="bi bi-envelope-fill mx-1" />
-                                        <span className="fs-6 text-capitalize">{customer.email ?? ''}</span>
-                                    </td>
-                                    <td className="text-center">
-                                        <i role='button' className="bi bi bi-pencil mx-4" onClick={() => setEditIndex(index)}/>
-                                        <i role='button' className="bi bi-trash3" onClick={() => dispatch(deleteCustomers(index))} />
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </Table>
-            </Container>
+            <div className='App mt-4'>
+                <GridComponent 
+                    ref={grid}
+                    dataSource={taskDS}
+                    allowPaging={false}
+                    pageSettings={{ pageSize: 5 }}
+                    editSettings={editOptions}
+                    toolbar={toolbarOptions}
+                >
+                    <ColumnsDirective>
+                        <ColumnDirective 
+                            field='id' width='100' 
+                            textAlign="Right" isPrimaryKey={true} 
+                            visible={false}
+                        />
+                        <ColumnDirective 
+                            field='name' 
+                            headerText={getParams('name').toUpperCase()} 
+                            width='100' 
+                        />
+                        <ColumnDirective 
+                            field='responsible' 
+                            headerText={getParams('responsible').toUpperCase()} 
+                            width='100'
+                        />
+                        <ColumnDirective 
+                            field='phone' 
+                            headerText={getParams('phone').toUpperCase()} 
+                            width='100' 
+                        />
+                        <ColumnDirective 
+                            field='email' 
+                            headerText={getParams('email').toUpperCase()} 
+                            width='100' 
+                            format="C2" 
+                        />
+                        <ColumnDirective 
+                            field='description' 
+                            headerText={'Примечание'.toUpperCase()} 
+                            width='100'
+                        />
+                        <ColumnDirective 
+                            field='address' 
+                            headerText={'Адрес'.toUpperCase()} 
+                            width='100'
+                        />
+                    </ColumnsDirective>
+                    <Inject services={[Edit, Toolbar]} />
+                </GridComponent>
+            </div>
         </>
     )
 }

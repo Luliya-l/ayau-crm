@@ -1,6 +1,6 @@
 import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
 import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
-import { DataManager, UrlAdaptor, WebApiAdaptor  } from '@syncfusion/ej2-data';
+import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
 
 import { Langs } from "apps/crm-front/specs/custom-types";
 import { selectLangState } from "apps/crm-front/store/langSlice";
@@ -9,8 +9,8 @@ import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from 'react';
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
 
-// const baseURL = "https://crm-backend-two.vercel.app/";
-const baseURL = "http://localhost:8000/";
+const baseURL = "https://crm-backend-two.vercel.app/";
+// const baseURL = "http://localhost:8000/";
 const Tasks = () => {
     const auth = useSelector(useAuth) as AuthState;
     const loadingState = useSelector(useLoadingState);
@@ -27,7 +27,6 @@ const Tasks = () => {
     const dateFormat = { type: 'dateTime', format: 'yyyy-MM-dd' };
 
     const taskDS: DataManager = new DataManager({
-        
         adaptor: new UrlAdaptor(),
         updateUrl: `${baseURL}crm/tasks/update`,
         insertUrl: `${baseURL}crm/tasks/set`,

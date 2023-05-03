@@ -458,7 +458,7 @@ option:checked:after {
 
 /* START GRID */
 
-#grid_1822616568_1_dialogEdit_wrapper {
+#grid_1822616568_1_dialogEdit_wrapper, #grid_1822616568_3_dialogEdit_wrapper {
   width: 330px;
   max-height: fit-content !important;
   z-index: 100002;
