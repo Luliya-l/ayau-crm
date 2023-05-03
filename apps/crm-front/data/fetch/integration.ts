@@ -34,6 +34,22 @@ export async function postLogin(
     });
 }
 
+export async function postGetProfile(
+    token:string
+) {
+    return api.post(
+        "auth/getme", 
+        '',
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
 export async function postOrganization(token:string) {
     return api.post(
         "crm/get_organization_info",
