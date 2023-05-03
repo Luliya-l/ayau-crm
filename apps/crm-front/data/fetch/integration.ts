@@ -1,5 +1,5 @@
 import { Company, Contact, Contract, Mail, Msg, Organization, Question, Task, User } from 'apps/crm-front/specs/custom-types';
-import api from './axios'
+import api, { apiGPT } from './axios'
 
 export async function postRegister(user: User) {
     return api.post(
@@ -169,7 +169,7 @@ export async function postSetQuestions(
     question:Question,
     token:string
 ) {
-    return api.post(
+    return apiGPT.post(
         "gpt/question", 
         JSON.stringify(question),
         {headers: {"Authorization": `Bearer ${token}`}}

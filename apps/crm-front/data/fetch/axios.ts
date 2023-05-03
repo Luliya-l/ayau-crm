@@ -8,5 +8,11 @@ const api = axios.create({
     }
 })
 
+export const apiGPT = axios.create({
+    baseURL: "http://185.125.88.88:9040/",
+    headers: {
+        "content-type":"application/json",
+    }
+})
 
 export default api
