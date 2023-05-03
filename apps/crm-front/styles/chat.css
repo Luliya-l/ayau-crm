@@ -1,0 +1,112 @@
+#List {
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    height: 55vh;
+  }
+  
+  #List .e-list-item {
+    height: auto;
+    cursor: pointer;
+  }
+  
+  #List .e-list-header .e-text {
+    font-family: sans-serif;
+    font-size: 18px;
+    line-height: 26px;
+  }
+  
+  #List #info,
+  #List .name {
+    font-size: 11px;
+    line-height: 20px;
+  }
+  
+  #List .name {
+    padding-top: 3px;
+    font-weight: 500;
+    /* padding-left:150px;
+    margin-left: 55px; */
+    float: right;
+  }
+  #List #info {
+    float: right;
+    margin-right:10px;
+  }
+  #List .settings {
+    display: flex;
+  }
+
+  .img1 {
+    background-image: url("/img/u-icon.png");
+  }
+  
+  .img2 {
+    background-image: url("/img/a-icon.png");
+  }
+  
+  .img2 {
+    margin-left: 10px;
+    margin-top: 7px;
+    font-size: 13px;
+  }
+  
+  #List #content1 {
+    width: 200px;
+    background-color: aliceblue;
+    display: inline-block;
+    margin: 5px;
+    
+  }
+  
+  #List #info1,
+  #List .name1 {
+    font-size: 11px;
+    line-height: 20px;
+    margin-left: 10px;
+  }
+  
+  #List .name1 {
+    padding-top: 3px;
+    font-weight: 500;
+  }
+  #List #content {
+      margin: 5px;
+      width: 240px;
+      margin-left: 62px;
+      background-color: aliceblue;
+      display:inline-block
+  }
+  #image {
+      float: right;
+      /* display: inline-block; */
+  
+  }
+  #image2 {
+      float: left;
+      /* display: inline-block; */
+  
+  }
+  .img1 {
+      margin-right: 10px;
+      margin: 5px;
+      font-size: 13px;
+  }
+  .e-listview .e-list-header{
+    color: white;
+  }
+  .e-listview .e-list-header{
+    background: rgb(2, 120, 215);
+  }
+  #List.e-listview .e-hover {
+    background-color: transparent;
+  }
+  #inputname {
+    width: 275px
+  }
+  .message {
+    width: 350px;
+    margin: 0 auto;
+  }
+  #btn {
+    float:right
+  }

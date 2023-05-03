@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { ThemeProvider } from 'react-bootstrap';
 import '../styles/styles.css';
 import '../styles/kanban.css';
+import '../styles/chat.css';
 import '../styles/fonts.css';
 import { wrapper } from "../store/store";
 import {Provider} from 'react-redux';

@@ -1,4 +1,4 @@
-import { Company, Contact, Contract, Mail, Msg, Organization, Task, User } from 'apps/crm-front/specs/custom-types';
+import { Company, Contact, Contract, Mail, Msg, Organization, Question, Task, User } from 'apps/crm-front/specs/custom-types';
 import api from './axios'
 
 export async function postRegister(user: User) {
@@ -155,6 +155,23 @@ export async function postSetMail(
     return api.post(
         "crm/mails/set", 
         JSON.stringify(mail),
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
+
+export async function postSetQuestions(
+    question:Question,
+    token:string
+) {
+    return api.post(
+        "gpt/question", 
+        JSON.stringify(question),
         {headers: {"Authorization": `Bearer ${token}`}}
     )
     .then((res) => {

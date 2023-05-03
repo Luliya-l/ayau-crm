@@ -168,3 +168,14 @@ export type Mail = {
     user_id:string,
     sended:boolean
 }
+
+export type Question = {
+    id:string,
+    from_id:string,
+    to_id:string,
+    msg:string,
+    msg_date:string,
+    assistant:boolean,
+    user_id:string
+}
+
