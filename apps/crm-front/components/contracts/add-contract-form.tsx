@@ -5,8 +5,9 @@ import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { useEffect, useState } from "react";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Contract, User } from "apps/crm-front/specs/custom-types";
-import { postGetResponsible } from 'apps/crm-front/data/fetch/integration';
+import { Company, Contract, User } from "apps/crm-front/specs/custom-types";
+import { postGetCompaniesList, postGetResponsible } from 'apps/crm-front/data/fetch/integration';
+import { GetParams } from 'apps/crm-front/specs/custom-service';
 
 const AddContractForm = (props = null) => {
     const auth = useSelector(useAuth) as AuthState;
@@ -15,7 +16,8 @@ const AddContractForm = (props = null) => {
 
     const fields = { text: 'name', value: 'id' };
 
-    const [responsible, setResponsible] = useState([] as User[]);
+    const [responsibles, setResponsibles] = useState([] as User[]);
+    const [companies, setComapnies] = useState([] as Company[]);
 
     const [state, setState] = useState(extend({}, {}, props, true));
     const data = state as Contract;
@@ -28,7 +30,10 @@ const AddContractForm = (props = null) => {
 
     useEffect(() => {
         postGetResponsible(auth.authToken).then((data) => {
-            setResponsible(data.data);
+            setResponsibles(data.data);
+        })
+        postGetCompaniesList(auth.authToken).then((data) => {
+            setComapnies(data.data);
         })
     }, []);
 
@@ -71,16 +76,33 @@ const AddContractForm = (props = null) => {
                     {'Ответственный'}
                 </Form.Label>
                 <Col sm="10">
-                <DropDownListComponent 
-                    id='responsible' 
-                    name="responsible" 
-                    fields={fields}
-                    dataSource={responsible} 
-                    className="e-field" 
-                    placeholder='Ответственный' 
-                    value={data.responsible}>
+                    <DropDownListComponent 
+                        id='responsible' 
+                        name="responsible" 
+                        fields={fields}
+                        dataSource={responsibles} 
+                        className="e-field" 
+                        placeholder='Ответственный' 
+                        value={data.responsible}>
 
-                </DropDownListComponent>
+                    </DropDownListComponent>
+                </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="responsible">
+                <Form.Label column sm="2">
+                    {GetParams('company_id')}
+                </Form.Label>
+                <Col sm="10">
+                    <DropDownListComponent 
+                        id='company_id' 
+                        name="company_id" 
+                        fields={fields}
+                        dataSource={companies} 
+                        className="e-field" 
+                        placeholder={GetParams('company_id')} 
+                        value={data.company_id}>
+
+                    </DropDownListComponent>
                 </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="phone">

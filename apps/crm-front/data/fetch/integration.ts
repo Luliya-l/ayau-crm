@@ -214,3 +214,19 @@ export async function postGetResponsible(
         return null;
     });
 }
+
+export async function postGetCompaniesList(
+    token:string
+) {
+    return api.post(
+        "crm/companies_list/get", 
+        '',
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}

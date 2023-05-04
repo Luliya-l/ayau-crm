@@ -1,15 +1,16 @@
-import { postSetContract } from "apps/crm-front/data/fetch/integration";
-import { Contract } from "apps/crm-front/specs/custom-types";
+import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
+import { postGetCompaniesList, postGetResponsible, postSetContract } from "apps/crm-front/data/fetch/integration";
+import { GetParams } from "apps/crm-front/specs/custom-service";
+import { Company, Contract, User } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { setLoading } from "apps/crm-front/store/loadingState";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const AddContract = () => {
     const auth = useSelector(useAuth) as AuthState;
-    const localization = useSelector(selectLangState);
 
     const dispatch = useDispatch();
 
@@ -18,9 +19,10 @@ const AddContract = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const getParams = (param: string) => {
-        return localization.langs[localization.currentLang]?.params[param];
-    }
+    const fields = { text: 'name', value: 'id' };
+
+    const [responsible, setResponsible] = useState([] as User[]);
+    const [companies, setComapnies] = useState([] as Company[]);
 
     const [contract, setContract] = useState({} as Contract);
 
@@ -38,6 +40,15 @@ const AddContract = () => {
         handleClose();
     }
 
+    useEffect(() => {
+        postGetResponsible(auth.authToken).then((data) => {
+            setResponsible(data.data);
+        })
+        postGetCompaniesList(auth.authToken).then((data) => {
+            setComapnies(data.data);
+        })
+    }, []);
+
     return (
         <>
             <Button 
@@ -46,7 +57,7 @@ const AddContract = () => {
                 onClick={handleShow}
             >
                 <i className="bi bi-plus-lg me-1"></i>
-                {getParams('addcontract')}
+                {GetParams('addcontract')}
             </Button>
             <Modal
                 show={show}
@@ -57,7 +68,7 @@ const AddContract = () => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {getParams('addcontract')}
+                        {GetParams('addcontract')}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -98,14 +109,35 @@ const AddContract = () => {
                             {'Ответственный'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control 
-                            type="name" 
-                            value={contract.responsible} 
-                            name="responsible"
-                            placeholder="Ф.И.О." 
-                            disabled={true}
-                            onChange={(e) => onChange(e)} 
-                        />
+                        <DropDownListComponent 
+                            id='responsible' 
+                            name="responsible" 
+                            fields={fields}
+                            dataSource={responsible} 
+                            className="e-field" 
+                            placeholder='Ответственный' 
+                            value={contract.responsible}
+                            onChange={(e) => onChange(e)}
+                        >
+
+                        </DropDownListComponent>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3" controlId="responsible">
+                        <Form.Label column sm="2">
+                            {GetParams('company_id')}
+                        </Form.Label>
+                        <Col sm="10">
+                            <DropDownListComponent 
+                                id='company_id' 
+                                name="company_id" 
+                                fields={fields}
+                                dataSource={companies} 
+                                className="e-field" 
+                                placeholder={GetParams('company_id')} 
+                                value={contract.company_id}>
+
+                            </DropDownListComponent>
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="phone">
