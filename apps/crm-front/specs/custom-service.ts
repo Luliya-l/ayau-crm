@@ -4,7 +4,7 @@ import { selectLangState } from "../store/langSlice";
 import { Langs } from "./custom-types";
 
 
-const baseURL = "https://crm-backend-two.vercel.app/";
+export const baseURL = "https://crm-backend-two.vercel.app/";
 // const baseURL = "http://localhost:8000/";
 
 
@@ -33,6 +33,39 @@ export const taskDS = (auth): DataManager => new DataManager({
     insertUrl: `${baseURL}crm/tasks/set`,
     removeUrl: `${baseURL}crm/tasks/delete`,
     url: `${baseURL}crm/tasks/get`,
+    crossDomain: true,
+    requestType: 'POST',
+    headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+});
+
+export const companiesDS = (auth): DataManager => new DataManager({
+    adaptor: new UrlAdaptor(),
+    updateUrl: `${baseURL}crm/companies/update`,
+    insertUrl: `${baseURL}crm/companies/set`,
+    removeUrl: `${baseURL}crm/companies/delete`,
+    url: `${baseURL}crm/companies/get`,
+    crossDomain: true,
+    requestType: 'POST',
+    headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+});
+
+export const contactsDS = (auth): DataManager => new DataManager({
+    adaptor: new UrlAdaptor(),
+    updateUrl: `${baseURL}crm/contacts/update`,
+    insertUrl: `${baseURL}crm/contacts/set`,
+    removeUrl: `${baseURL}crm/contacts/delete`,
+    url: `${baseURL}crm/contacts/get`,
+    crossDomain: true,
+    requestType: 'POST',
+    headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+});
+
+export const companiesListDS = (auth): DataManager => new DataManager({
+    adaptor: new UrlAdaptor(),
+    updateUrl: `${baseURL}crm/companies/update`,
+    insertUrl: `${baseURL}crm/companies/set`,
+    removeUrl: `${baseURL}crm/companies/delete`,
+    url: `${baseURL}crm/companies_list/get`,
     crossDomain: true,
     requestType: 'POST',
     headers: [{ Authorization: `Bearer ${auth.authToken}` }]

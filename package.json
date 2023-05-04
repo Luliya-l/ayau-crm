@@ -23,6 +23,7 @@
     "@syncfusion/ej2-popups": "^21.1.35",
     "@syncfusion/ej2-react-base": "^21.1.35",
     "@syncfusion/ej2-react-charts": "^21.1.35",
+    "@syncfusion/ej2-react-dropdowns": "^21.2.3",
     "@syncfusion/ej2-react-grids": "^21.1.35",
     "@syncfusion/ej2-react-kanban": "^21.1.35",
     "@syncfusion/ej2-react-lists": "^21.1.41",
@@ -38,6 +39,7 @@
     "react-datepicker": "^4.10.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
+    "save": "^2.9.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {

@@ -2,16 +2,10 @@ import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej
 import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
 import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
 
-import { Container, Form, Tabs } from 'react-bootstrap';
-import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
-import Row from 'react-bootstrap/Row';
-import Tab from 'react-bootstrap/Tab';
 import { useDispatch, useSelector } from 'react-redux';
-import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setTokens, useAuth } from 'apps/crm-front/store/authSlice';
-import { useEffect, useRef, useState } from "react";
-import { Langs, Organization, User } from 'apps/crm-front/specs/custom-types';
-import { postGetProfile, postOrganization } from 'apps/crm-front/data/fetch/integration';
+import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
+import { useEffect, useRef } from "react";
+import { Langs } from 'apps/crm-front/specs/custom-types';
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 

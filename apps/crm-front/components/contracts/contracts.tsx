@@ -12,6 +12,8 @@ import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
+import AddContract from "./add-contract";
+import AddContractForm from "./add-contract-form";
 
 const baseURL = "https://crm-backend-two.vercel.app/";
 
@@ -38,23 +40,12 @@ const Contracts = () => {
         crossDomain: true,
         headers: [{ Authorization: `Bearer ${auth.authToken}` }]
     });
-
-    const dataResposibles = new DataManager({
-        url: `${baseURL}crm/users/get`,
-        updateUrl: `${baseURL}crm/users/update`,
-        insertUrl: `${baseURL}crm/users/set`,
-        removeUrl: `${baseURL}crm/users/delete`,
-        dataType: 'json',
-        adaptor: new UrlAdaptor(),
-        crossDomain: true,
-        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
-    });
     
     const fields: DialogFieldsModel[] = [
         { text:'Задача', key: 'name', type: 'TextBox' },
         { text:'Шаг', key: 'step', type: 'DropDown' },
         { text:'Бюджет', key: 'budget', type: 'Numeric' },
-        { text:'Задача', key: 'description', type: 'TextArea' }
+        { text:'Задача', key: 'description', type: 'TextArea'},
     ];
 
     const cardRendered = (args) => {
@@ -90,6 +81,10 @@ const Contracts = () => {
         return assignee.match(/\b(\w)/g).join("").toUpperCase();
     }
 
+    const dialogTemplate = (props) => {
+        return (<AddContractForm {...props}/>);
+    }
+
     useEffect(() => {
         kanban.current.refresh();
         dispatch(setLoading(false));
@@ -109,15 +104,10 @@ const Contracts = () => {
                         showHeader: false,
                         template: cardTemplate.bind(this)
                     }} 
-                    dialogSettings={{ fields: fields }}
+                    dialogSettings={{ template: dialogTemplate.bind(this) }}
                     cardRendered={cardRendered.bind(this)}
                 >
                     <ColumnsDirective>
-                        <ColumnDirective 
-                            headerText={`Ответственный`} 
-                            keyField="responsible" 
-                            template={columnTemplate.bind(this)}
-                        />
                         <ColumnDirective 
                             headerText={`${getParams('primaryContact')}`} 
                             keyField="new" 

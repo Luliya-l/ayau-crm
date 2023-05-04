@@ -198,3 +198,19 @@ export async function postGetChatHistory(
         return null;
     });
 }
+
+export async function postGetResponsible(
+    token:string
+) {
+    return api.post(
+        "crm/responsibles/get", 
+        '',
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}
