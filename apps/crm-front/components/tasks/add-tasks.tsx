@@ -1,17 +1,18 @@
-import { Langs, Task } from "apps/crm-front/specs/custom-types";
+import { Contract, Task, User } from "apps/crm-front/specs/custom-types";
 
-import { selectLangState } from "apps/crm-front/store/langSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, InputGroup, Modal, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import DateTimePicker from "../spec/datetime-picker";
-import { postSetTask } from "apps/crm-front/data/fetch/integration";
+import { postGetContracts, postGetResponsible, postSetTask } from "apps/crm-front/data/fetch/integration";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { setLoading } from "apps/crm-front/store/loadingState";
+import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
+import { GetParams } from "apps/crm-front/specs/custom-service";
+import { DateTime } from "@syncfusion/ej2-charts";
 
 const AddTask = () => {
     const auth = useSelector(useAuth) as AuthState;
-    const localization = useSelector(selectLangState) as Langs;
     
     const dispatch = useDispatch();
 
@@ -21,11 +22,10 @@ const AddTask = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const getParams = (param: string) => {
-        return localization.langs[localization.currentLang]?.params[param];
-    }
+    const fields = { text: 'name', value: 'id' };
 
-    const [taskExecutionDate, setTaskExecutionDate] = useState(new Date());
+    const [responsible, setResponsible] = useState([] as User[]);
+    const [contracts, setContracts] = useState([] as Contract[]);
 
     const [task, setTask] = useState({
         title: "",
@@ -33,10 +33,15 @@ const AddTask = () => {
         text: "",
         contract_id: "",
         responsible: "",
+        finish_at: new Date(),
     } as Task);
 
     const onChange = (e) => {
         setTask({...task, [e.target.name]: e.target.value});
+    }
+
+    const setTaskExecutionDate = (date: Date) => {
+        setTask({...task, ['finish_at']: date});
     }
 
     const acceptTask = async () => {
@@ -46,6 +51,17 @@ const AddTask = () => {
         handleClose();
     }
 
+    useEffect(() => {
+        postGetResponsible(auth.authToken).then((data) => {
+            if (data)
+                setResponsible(data.data);
+        })
+        postGetContracts(auth.authToken).then((data) => {
+            if (data)
+                setContracts(data.data);
+        })
+    }, []);
+
     return (
         <>
             <Button 
@@ -54,7 +70,7 @@ const AddTask = () => {
                 onClick={handleShow}
             >
                 <i className="bi bi-plus-lg me-1"></i>
-                {getParams('addtask')}
+                {GetParams('addtask')}
             </Button>
             <Modal
                 show={show}
@@ -65,14 +81,14 @@ const AddTask = () => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {getParams('addtask')}
+                        {GetParams('addtask')}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={`${!send ? '' : 'd-none'}`}>
+                <Modal.Body className={`${!send ? '' : 'd-none'} grid-editor`}>
                     <Row>
                         <Col>
                             <DateTimePicker 
-                                birthday={taskExecutionDate} 
+                                birthday={task.finish_at ?? new Date()} 
                                 setBirthday={setTaskExecutionDate} 
                                 isYear={false}
                                 isTime={true} 
@@ -100,13 +116,18 @@ const AddTask = () => {
                                             <InputGroup.Text>
                                                 <i className="bi bi-people"></i>
                                             </InputGroup.Text>
-                                            <Form.Control 
-                                                aria-label="object" 
-                                                name="contract_id"
-                                                disabled={true}
-                                                value={task.contract_id} 
-                                                placeholder={'Объект'} 
-                                                onChange={(e) => onChange(e)} />
+                                            <DropDownListComponent 
+                                                id='contract_id' 
+                                                name="contract_id" 
+                                                fields={fields}
+                                                dataSource={contracts} 
+                                                className="e-field" 
+                                                placeholder='Сделка' 
+                                                value={task.contract_id}
+                                                onChange={(e) => onChange(e)}
+                                            >
+
+                                            </DropDownListComponent>
                                         </InputGroup>
                                     </Col>
                                 </Row>
@@ -116,13 +137,18 @@ const AddTask = () => {
                                             <InputGroup.Text>
                                                 <i className="bi bi-person-lines-fill"></i>
                                             </InputGroup.Text>
-                                            <Form.Control 
-                                                aria-label="responsible" 
-                                                name="responsible"
-                                                disabled={true}
-                                                value={task.responsible} 
-                                                placeholder={'Исполнитель'} 
-                                                onChange={(e) => onChange(e)} />
+                                            <DropDownListComponent 
+                                                id='responsible' 
+                                                name="responsible" 
+                                                fields={fields}
+                                                dataSource={responsible} 
+                                                className="e-field" 
+                                                placeholder='Ответственный' 
+                                                value={task.responsible}
+                                                onChange={(e) => onChange(e)}
+                                            >
+
+                                            </DropDownListComponent>
                                         </InputGroup>
                                     </Col>
                                 </Row>

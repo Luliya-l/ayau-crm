@@ -1,21 +1,17 @@
 import { 
     KanbanComponent, 
     ColumnsDirective, 
-    ColumnDirective, 
-    DialogFieldsModel 
+    ColumnDirective
 } from "@syncfusion/ej2-react-kanban";
-import { extend, addClass } from '@syncfusion/ej2-base';
+import { addClass } from '@syncfusion/ej2-base';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
-import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
-import AddContract from "./add-contract";
 import AddContractForm from "./add-contract-form";
-
-const baseURL = "https://crm-backend-two.vercel.app/";
+import { contractsDS } from "apps/crm-front/specs/custom-service";
 
 const Contracts = () => {
     const auth = useSelector(useAuth) as AuthState;
@@ -29,24 +25,6 @@ const Contracts = () => {
     }
 
     const kanban = useRef(null);
-
-    const data = new DataManager({
-        url: `${baseURL}crm/contracts/get`,
-        updateUrl: `${baseURL}crm/contracts/update`,
-        insertUrl: `${baseURL}crm/contracts/set`,
-        removeUrl: `${baseURL}crm/contracts/delete`,
-        dataType: 'json',
-        adaptor: new UrlAdaptor(),
-        crossDomain: true,
-        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
-    });
-    
-    const fields: DialogFieldsModel[] = [
-        { text:'Задача', key: 'name', type: 'TextBox' },
-        { text:'Шаг', key: 'step', type: 'DropDown' },
-        { text:'Бюджет', key: 'budget', type: 'Numeric' },
-        { text:'Задача', key: 'description', type: 'TextArea'},
-    ];
 
     const cardRendered = (args) => {
         const val = args.data.priority;
@@ -97,7 +75,7 @@ const Contracts = () => {
                     ref={kanban}
                     id="kanban" 
                     keyField="step" 
-                    dataSource={data} 
+                    dataSource={contractsDS(auth)} 
                     cardSettings={{ 
                         contentField: "description", 
                         headerField: "id", 

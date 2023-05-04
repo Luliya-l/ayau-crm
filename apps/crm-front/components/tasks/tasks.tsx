@@ -14,6 +14,8 @@ import { useEffect, useRef } from 'react';
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
 import { GetParams, dateFormat, taskDS } from 'apps/crm-front/specs/custom-service';
 import { ResponsibleColumn } from '../utils/grid-responsible';
+import { ContractColumn } from '../utils/grid-contract';
+import AddTaskForm from './add-tasks-form';
 
 const Tasks = () => {
     const auth = useSelector(useAuth) as AuthState;
@@ -23,7 +25,17 @@ const Tasks = () => {
 
     const grid = useRef(null);
 
-    const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
+    const dialogTemplate = (props): any => {
+        return (<AddTaskForm {...props} />);
+    }
+
+    const editOptions: EditSettingsModel = { 
+        allowEditing: true, 
+        allowAdding: true, 
+        allowDeleting: true, 
+        mode: 'Dialog', 
+        template:(props) => dialogTemplate(props), 
+    };
     const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
     
     useEffect(() => {
@@ -51,17 +63,13 @@ const Tasks = () => {
                             visible={false}
                         />
                         <ColumnDirective 
-                            field='created_at' 
+                            field='finish_at' 
                             headerText={GetParams('execution_date').toUpperCase()} 
                             width='100' 
                             format={dateFormat}
                         />
                         {ResponsibleColumn('responsible', auth)}
-                        <ColumnDirective 
-                            field='contract_id' 
-                            headerText={GetParams('object').toUpperCase()} 
-                            width='100' 
-                        />
+                        {ContractColumn('contract_id', auth)}
                         <ColumnDirective 
                             field='task_type' 
                             headerText={GetParams('taskType').toUpperCase()} 

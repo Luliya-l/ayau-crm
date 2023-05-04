@@ -230,3 +230,19 @@ export async function postGetCompaniesList(
         return null;
     });
 }
+
+export async function postGetContracts(
+    token:string
+) {
+    return api.post(
+        "crm/contracts/get", 
+        '',
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}

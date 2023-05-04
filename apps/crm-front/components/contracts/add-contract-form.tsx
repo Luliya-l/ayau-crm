@@ -4,15 +4,13 @@ import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { useEffect, useState } from "react";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Company, Contract, User } from "apps/crm-front/specs/custom-types";
 import { postGetCompaniesList, postGetResponsible } from 'apps/crm-front/data/fetch/integration';
 import { GetParams } from 'apps/crm-front/specs/custom-service';
 
 const AddContractForm = (props = null) => {
     const auth = useSelector(useAuth) as AuthState;
-
-    const dispatch = useDispatch();
 
     const fields = { text: 'name', value: 'id' };
 

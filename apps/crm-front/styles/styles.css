@@ -458,6 +458,9 @@ option:checked:after {
 /* END KANBAN */
 
 /* START GRID */
+.e-dlg-container div {
+  max-height: fit-content !important;
+}
 
 #grid_1822616568_1_dialogEdit_wrapper, #grid_1822616568_3_dialogEdit_wrapper {
   width: 330px;
@@ -469,6 +472,16 @@ option:checked:after {
 }
 
 /* END GRID */
+
+/* DROP DOWN LIST */
+
+.grid-editor .e-input-group {
+  position: relative !important;
+  flex: 1 1 auto !important;
+  width: 1% !important;
+  min-width: 0 !important;
+}
+/* END DROP DOWN LIST */
 
 .logo {
   display: block;

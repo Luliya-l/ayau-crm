@@ -109,18 +109,18 @@ const AddContract = () => {
                             {'Ответственный'}
                         </Form.Label>
                         <Col sm="10">
-                        <DropDownListComponent 
-                            id='responsible' 
-                            name="responsible" 
-                            fields={fields}
-                            dataSource={responsible} 
-                            className="e-field" 
-                            placeholder='Ответственный' 
-                            value={contract.responsible}
-                            onChange={(e) => onChange(e)}
-                        >
+                            <DropDownListComponent 
+                                id='responsible' 
+                                name="responsible" 
+                                fields={fields}
+                                dataSource={responsible} 
+                                className="e-field" 
+                                placeholder='Ответственный' 
+                                value={contract.responsible}
+                                onChange={(e) => onChange(e)}
+                            >
 
-                        </DropDownListComponent>
+                            </DropDownListComponent>
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">

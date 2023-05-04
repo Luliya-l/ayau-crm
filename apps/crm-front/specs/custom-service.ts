@@ -27,6 +27,17 @@ export const responsiblesDS = (auth): DataManager => new DataManager({
     headers: [{ Authorization: `Bearer ${auth.authToken}` }]
 });
 
+export const contractsDS = (auth):DataManager => new DataManager({
+    url: `${baseURL}crm/contracts/get`,
+    updateUrl: `${baseURL}crm/contracts/update`,
+    insertUrl: `${baseURL}crm/contracts/set`,
+    removeUrl: `${baseURL}crm/contracts/delete`,
+    dataType: 'json',
+    adaptor: new UrlAdaptor(),
+    crossDomain: true,
+    headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+});
+
 export const taskDS = (auth): DataManager => new DataManager({
     adaptor: new UrlAdaptor(),
     updateUrl: `${baseURL}crm/tasks/update`,

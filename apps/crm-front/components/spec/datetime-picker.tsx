@@ -48,6 +48,10 @@ const DateTimePicker = ({ birthday, setBirthday, isYear = true, isTime = false }
     }
   }
 
+  const DoubleValue = (value: string): string => {
+    return value.toString().length > 1 ? value : `0${value}`;
+  }
+
   useEffect(() => {
     if (isYear) {
       setBirthday(new Date(`${valueGroups.year}-${birthday.getMonth() + 1}-${birthday.getDate()}`));
@@ -58,19 +62,24 @@ const DateTimePicker = ({ birthday, setBirthday, isYear = true, isTime = false }
     }
   }, [valueGroups.year, valueGroups.hours, valueGroups.minutes]);
 
+  if (!birthday) {
+    return <></>;
+  }
+
   return (
     <>
       <Row className="py-2">
-        <Col lg={6} xs={6} className={`${isTime ? '' : 'd-none'}`}></Col>
-        <Col lg="4" xs="4">
+        <Col lg={2} xs={2} className={`${isTime ? '' : 'd-none'}`}></Col>
+        <Col lg="5" xs="5">
           <span className="date-year-select">
-            {`${birthday.getDate()}-${birthday.getMonth() + 1}-${birthday.getFullYear()}`}
-            { isTime ? ` ${birthday.getHours()}:${birthday.getMinutes()}` : '' }
+            {`${DoubleValue(birthday.getDate())}-${DoubleValue(birthday.getMonth() + 1)}-${birthday.getFullYear()}`}
+            { isTime ? ` ${DoubleValue(birthday.getHours())}:${DoubleValue(birthday.getMinutes())}` : '' }
           </span>
         </Col>
         <Col lg="2" xs="2" className="text-end">
           <Image src='/img/icon_calendar.svg' alt='' />
         </Col>
+        <Col lg={3} xs={3} className={`${isTime ? '' : 'd-none'}`}></Col>
       </Row>
       <Row style={{height:'313.05px'}}>    
         {/* DATE SELECTOR */}
