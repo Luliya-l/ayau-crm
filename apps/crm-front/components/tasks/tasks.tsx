@@ -1,4 +1,11 @@
-import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
+import { GridComponent,
+    ColumnsDirective,
+    ColumnDirective,
+    Page,
+    Filter,
+    Sort,
+    ForeignKey,
+} from '@syncfusion/ej2-react-grids';
 import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
 import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
 
@@ -37,6 +44,17 @@ const Tasks = () => {
         headers: [{ Authorization: `Bearer ${auth.authToken}` }]
     });
 
+    const responsiblesDS = new DataManager({
+        url: `${baseURL}crm/responsibles/get`,
+        updateUrl: `${baseURL}crm/users/update`,
+        insertUrl: `${baseURL}crm/users/set`,
+        removeUrl: `${baseURL}crm/users/delete`,
+        dataType: 'json',
+        adaptor: new UrlAdaptor(),
+        crossDomain: true,
+        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+    });
+
     const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
     const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
     
@@ -51,15 +69,17 @@ const Tasks = () => {
                 <GridComponent 
                     ref={grid}
                     dataSource={taskDS}
-                    allowPaging={false}
-                    pageSettings={{ pageSize: 5 }}
+                    allowPaging={true}
+                    pageSettings={{ pageSize: 50 }}
+                    allowSorting={true}
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
                 >
                     <ColumnsDirective>
                         <ColumnDirective 
                             field='id' width='100' 
-                            textAlign="Right" isPrimaryKey={true} 
+                            textAlign="Right" 
+                            isPrimaryKey={true} 
                             visible={false}
                         />
                         <ColumnDirective 
@@ -70,8 +90,12 @@ const Tasks = () => {
                         />
                         <ColumnDirective 
                             field='responsible' 
+                            dataSource={responsiblesDS}
                             headerText={getParams('responsible').toUpperCase()} 
                             width='100'
+                            // validationRules={{required: false}}
+                            foreignKeyValue="name"
+                            foreignKeyField="id" 
                         />
                         <ColumnDirective 
                             field='contract_id' 
@@ -95,7 +119,7 @@ const Tasks = () => {
                             width='100'
                         />
                     </ColumnsDirective>
-                    <Inject services={[Edit, Toolbar]} />
+                    <Inject services={[Filter, Page, Edit, Sort, ForeignKey, Toolbar]} />
                 </GridComponent>
             </div>
         </>

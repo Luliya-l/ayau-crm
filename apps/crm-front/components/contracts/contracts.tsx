@@ -38,6 +38,17 @@ const Contracts = () => {
         crossDomain: true,
         headers: [{ Authorization: `Bearer ${auth.authToken}` }]
     });
+
+    const dataResposibles = new DataManager({
+        url: `${baseURL}crm/users/get`,
+        updateUrl: `${baseURL}crm/users/update`,
+        insertUrl: `${baseURL}crm/users/set`,
+        removeUrl: `${baseURL}crm/users/delete`,
+        dataType: 'json',
+        adaptor: new UrlAdaptor(),
+        crossDomain: true,
+        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+    });
     
     const fields: DialogFieldsModel[] = [
         { text:'Задача', key: 'name', type: 'TextBox' },
@@ -102,26 +113,31 @@ const Contracts = () => {
                     cardRendered={cardRendered.bind(this)}
                 >
                     <ColumnsDirective>
-                    <ColumnDirective 
-                        headerText={`${getParams('primaryContact')}`} 
-                        keyField="new" 
-                        template={columnTemplate.bind(this)}
-                    />
-                    <ColumnDirective 
-                        headerText={`${getParams('negotiation')}`} 
-                        keyField="InProgress" 
-                        template={columnTemplate.bind(this)}
-                    />
-                    <ColumnDirective 
-                        headerText={`${getParams('makeDecision')}`} 
-                        keyField="Testing" 
-                        template={columnTemplate.bind(this)}
-                    />
-                    <ColumnDirective 
-                        headerText={`${getParams('Harmonizationofcontract')}`} 
-                        keyField="Close" 
-                        template={columnTemplate.bind(this)}
-                    />
+                        <ColumnDirective 
+                            headerText={`Ответственный`} 
+                            keyField="responsible" 
+                            template={columnTemplate.bind(this)}
+                        />
+                        <ColumnDirective 
+                            headerText={`${getParams('primaryContact')}`} 
+                            keyField="new" 
+                            template={columnTemplate.bind(this)}
+                        />
+                        <ColumnDirective 
+                            headerText={`${getParams('negotiation')}`} 
+                            keyField="InProgress" 
+                            template={columnTemplate.bind(this)}
+                        />
+                        <ColumnDirective 
+                            headerText={`${getParams('makeDecision')}`} 
+                            keyField="Testing" 
+                            template={columnTemplate.bind(this)}
+                        />
+                        <ColumnDirective 
+                            headerText={`${getParams('Harmonizationofcontract')}`} 
+                            keyField="Close" 
+                            template={columnTemplate.bind(this)}
+                        />
                     </ColumnsDirective>
                 </KanbanComponent>
             </div>
