@@ -7,53 +7,21 @@ import { GridComponent,
     ForeignKey,
 } from '@syncfusion/ej2-react-grids';
 import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
-import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
 
-import { Langs } from "apps/crm-front/specs/custom-types";
-import { selectLangState } from "apps/crm-front/store/langSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from 'react';
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
+import { GetParams, dateFormat, taskDS } from 'apps/crm-front/specs/custom-service';
+import { ResponsibleColumn } from '../utils/grid-responsible';
 
-const baseURL = "https://crm-backend-two.vercel.app/";
-// const baseURL = "http://localhost:8000/";
 const Tasks = () => {
     const auth = useSelector(useAuth) as AuthState;
     const loadingState = useSelector(useLoadingState);
-    const localization = useSelector(selectLangState) as Langs;
-
+    
     const dispatch = useDispatch();
 
-    const getParams = (param: string) => {
-        return localization.langs[localization.currentLang].params[param];
-    }
-
     const grid = useRef(null);
-
-    const dateFormat = { type: 'dateTime', format: 'yyyy-MM-dd' };
-
-    const taskDS: DataManager = new DataManager({
-        adaptor: new UrlAdaptor(),
-        updateUrl: `${baseURL}crm/tasks/update`,
-        insertUrl: `${baseURL}crm/tasks/set`,
-        removeUrl: `${baseURL}crm/tasks/delete`,
-        url: `${baseURL}crm/tasks/get`,
-        crossDomain: true,
-        requestType: 'POST',
-        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
-    });
-
-    const responsiblesDS = new DataManager({
-        url: `${baseURL}crm/responsibles/get`,
-        updateUrl: `${baseURL}crm/users/update`,
-        insertUrl: `${baseURL}crm/users/set`,
-        removeUrl: `${baseURL}crm/users/delete`,
-        dataType: 'json',
-        adaptor: new UrlAdaptor(),
-        crossDomain: true,
-        headers: [{ Authorization: `Bearer ${auth.authToken}` }]
-    });
 
     const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
     const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
@@ -68,7 +36,7 @@ const Tasks = () => {
             <div className='App mt-4'>
                 <GridComponent 
                     ref={grid}
-                    dataSource={taskDS}
+                    dataSource={taskDS(auth)}
                     allowPaging={true}
                     pageSettings={{ pageSize: 50 }}
                     allowSorting={true}
@@ -84,38 +52,30 @@ const Tasks = () => {
                         />
                         <ColumnDirective 
                             field='created_at' 
-                            headerText={getParams('execution_date').toUpperCase()} 
+                            headerText={GetParams('execution_date').toUpperCase()} 
                             width='100' 
                             format={dateFormat}
                         />
-                        <ColumnDirective 
-                            field='responsible' 
-                            dataSource={responsiblesDS}
-                            headerText={getParams('responsible').toUpperCase()} 
-                            width='100'
-                            // validationRules={{required: false}}
-                            foreignKeyValue="name"
-                            foreignKeyField="id" 
-                        />
+                        {ResponsibleColumn('responsible', auth)}
                         <ColumnDirective 
                             field='contract_id' 
-                            headerText={getParams('object').toUpperCase()} 
+                            headerText={GetParams('object').toUpperCase()} 
                             width='100' 
                         />
                         <ColumnDirective 
                             field='task_type' 
-                            headerText={getParams('taskType').toUpperCase()} 
+                            headerText={GetParams('taskType').toUpperCase()} 
                             width='100' 
                             format="C2" 
                         />
                         <ColumnDirective 
                             field='text' 
-                            headerText={getParams('taskDescription').toUpperCase()} 
+                            headerText={GetParams('taskDescription').toUpperCase()} 
                             width='100'
                         />
                         <ColumnDirective 
                             field='result' 
-                            headerText={getParams('result').toUpperCase()} 
+                            headerText={GetParams('result').toUpperCase()} 
                             width='100'
                         />
                     </ColumnsDirective>
