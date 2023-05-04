@@ -135,7 +135,9 @@ const AddContract = () => {
                                 dataSource={companies} 
                                 className="e-field" 
                                 placeholder={GetParams('company_id')} 
-                                value={contract.company_id}>
+                                value={contract.company_id}
+                                onChange={(e) => onChange(e)}
+                            >
 
                             </DropDownListComponent>
                         </Col>
