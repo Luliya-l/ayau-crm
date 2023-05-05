@@ -21,7 +21,16 @@ const AddCustomer = () => {
     const fields = { text: 'name', value: 'id' };
 
     const [responsible, setResponsible] = useState([] as User[]);
-    const [company, setCompany] = useState({} as Company);
+    const [company, setCompany] = useState({
+        name: "",
+        responsible: "",
+        address: "",
+        phone: "",
+        email: "",
+        web_site: "",
+        description: "",
+        user_id: "",
+    } as Company);
     const onChange = (e) => {
         setCompany({...company, [e.target.name]: e.target.value});
     }

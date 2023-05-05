@@ -33,7 +33,7 @@ const Customers = () => {
         allowAdding: true, 
         allowDeleting: true, 
         mode: 'Dialog',
-        template:(props) => dialogTemplate(props), 
+        template:dialogTemplate, 
     };
     const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
     
