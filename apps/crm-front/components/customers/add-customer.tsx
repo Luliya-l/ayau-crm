@@ -1,15 +1,15 @@
-import { postSetCompanies } from "apps/crm-front/data/fetch/integration";
-import { Company } from "apps/crm-front/specs/custom-types";
+import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
+import { postGetResponsible, postSetCompanies } from "apps/crm-front/data/fetch/integration";
+import { GetParams } from "apps/crm-front/specs/custom-service";
+import { Company, User } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
-import { selectLangState } from "apps/crm-front/store/langSlice";
 import { setLoading } from "apps/crm-front/store/loadingState";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const AddCustomer = () => {
     const auth = useSelector(useAuth) as AuthState;
-    const localization = useSelector(selectLangState);
 
     const dispatch = useDispatch();
 
@@ -18,10 +18,9 @@ const AddCustomer = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const getParams = (param: string) => {
-        return localization.langs[localization.currentLang]?.params[param];
-    }
+    const fields = { text: 'name', value: 'id' };
 
+    const [responsible, setResponsible] = useState([] as User[]);
     const [company, setCompany] = useState({} as Company);
     const onChange = (e) => {
         setCompany({...company, [e.target.name]: e.target.value});
@@ -34,6 +33,13 @@ const AddCustomer = () => {
         handleClose();
     }
 
+    useEffect(() => {
+        postGetResponsible(auth.authToken).then((data) => {
+            if (data)
+                setResponsible(data.data);
+        })
+    }, []);
+
     return (
         <>
             <Button 
@@ -42,7 +48,7 @@ const AddCustomer = () => {
                 onClick={handleShow}
             >
                 <i className="bi bi-plus-lg me-1"></i>
-                {getParams('addcompany')}
+                {GetParams('addcompany')}
             </Button>
             <Modal
                 show={show}
@@ -53,10 +59,10 @@ const AddCustomer = () => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {getParams('addcompany')}
+                        {GetParams('addcompany')}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="grid-group-editor">
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
                             {'Наименование'}
@@ -76,14 +82,18 @@ const AddCustomer = () => {
                             {'Ответственный'}
                         </Form.Label>
                         <Col sm="10">
-                        <Form.Control 
-                            type="name" 
-                            name="responsible"
-                            disabled={true}
-                            value={company.responsible} 
-                            placeholder="Ф.И.О." 
-                            onChange={(e) => onChange(e)} 
-                        />
+                            <DropDownListComponent 
+                                id='responsible' 
+                                name="responsible" 
+                                fields={fields}
+                                dataSource={responsible} 
+                                className="e-field" 
+                                placeholder='Ответственный' 
+                                value={company.responsible}
+                                onChange={(e) => onChange(e)}
+                            >
+
+                            </DropDownListComponent>
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="phone">

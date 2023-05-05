@@ -15,6 +15,7 @@ import { useEffect, useRef } from 'react';
 import { GetParams, contactsDS } from 'apps/crm-front/specs/custom-service';
 import { CompanyColumn } from '../utils/grid-company';
 import { ResponsibleColumn } from '../utils/grid-responsible';
+import AddContactForm from './add-contact-form';
 
 const Contacts = () => {
     const auth = useSelector(useAuth) as AuthState;
@@ -24,7 +25,17 @@ const Contacts = () => {
 
     const grid = useRef(null);
 
-    const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
+    const dialogTemplate = (props): any => {
+        return (<AddContactForm {...props} />);
+    }
+
+    const editOptions: EditSettingsModel = { 
+        allowEditing: true, 
+        allowAdding: true, 
+        allowDeleting: true, 
+        mode: 'Dialog',
+        template:(props) => dialogTemplate(props), 
+    };
     const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
     
     useEffect(() => {

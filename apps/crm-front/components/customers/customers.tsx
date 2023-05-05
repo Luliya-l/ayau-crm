@@ -8,29 +8,33 @@ import { GridComponent,
 } from '@syncfusion/ej2-react-grids';
 import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
 
-import { Langs } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
-import { selectLangState } from "apps/crm-front/store/langSlice";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ResponsibleColumn } from '../utils/grid-responsible';
-import { companiesDS } from 'apps/crm-front/specs/custom-service';
+import { GetParams, companiesDS } from 'apps/crm-front/specs/custom-service';
+import AddCustomerForm from './add-customer-form';
 
 const Customers = () => {
     const auth = useSelector(useAuth) as AuthState;
     const loadingState = useSelector(useLoadingState);
-    const localization = useSelector(selectLangState) as Langs;
 
     const dispatch = useDispatch();
 
-    const getParams = (param: string) => {
-        return localization.langs[localization.currentLang]?.params[param];
-    }
-
     const grid = useRef(null);
 
-    const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
+    const dialogTemplate = (props): any => {
+        return (<AddCustomerForm {...props} />);
+    }
+
+    const editOptions: EditSettingsModel = { 
+        allowEditing: true, 
+        allowAdding: true, 
+        allowDeleting: true, 
+        mode: 'Dialog',
+        template:(props) => dialogTemplate(props), 
+    };
     const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
     
     useEffect(() => {
@@ -58,18 +62,18 @@ const Customers = () => {
                         />
                         <ColumnDirective 
                             field='name' 
-                            headerText={getParams('name').toUpperCase()} 
+                            headerText={GetParams('name').toUpperCase()} 
                             width='100' 
                         />
                         {ResponsibleColumn('responsible', auth)}
                         <ColumnDirective 
                             field='phone' 
-                            headerText={getParams('phone').toUpperCase()} 
+                            headerText={GetParams('phone').toUpperCase()} 
                             width='100' 
                         />
                         <ColumnDirective 
                             field='email' 
-                            headerText={getParams('email').toUpperCase()} 
+                            headerText={GetParams('email').toUpperCase()} 
                             width='100' 
                             format="C2" 
                         />

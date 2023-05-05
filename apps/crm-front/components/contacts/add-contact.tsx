@@ -1,15 +1,15 @@
-import { postSetContacts } from "apps/crm-front/data/fetch/integration";
-import { Contact } from "apps/crm-front/specs/custom-types";
+import { postGetCompaniesList, postGetResponsible, postSetContacts } from "apps/crm-front/data/fetch/integration";
+import { Company, Contact, User } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
-import { selectLangState } from "apps/crm-front/store/langSlice";
 import { setLoading } from "apps/crm-front/store/loadingState";
-import { useState } from "react";
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Button, Col, Form, InputGroup, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { GetParams } from "apps/crm-front/specs/custom-service";
+import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 
 const AddContact = () => {
     const auth = useSelector(useAuth) as AuthState;
-    const localization = useSelector(selectLangState);
 
     const dispatch = useDispatch();
 
@@ -18,9 +18,10 @@ const AddContact = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const getParams = (param: string) => {
-        return localization.langs[localization.currentLang]?.params[param];
-    }
+    const fields = { text: 'name', value: 'id' };
+
+    const [responsible, setResponsible] = useState([] as User[]);
+    const [company, setCompany] = useState([] as Company[]);
 
     const [contact, setContacts] = useState({} as Contact);
     const onChange = (e) => {
@@ -33,6 +34,17 @@ const AddContact = () => {
         handleClose();
     }
 
+    useEffect(() => {
+        postGetResponsible(auth.authToken).then((data) => {
+            if (data)
+                setResponsible(data.data);
+        })
+        postGetCompaniesList(auth.authToken).then((data) => {
+            if (data)
+                setCompany(data.data);
+        })
+    }, []);
+
     return (
         <>
             <Button 
@@ -41,7 +53,7 @@ const AddContact = () => {
                 onClick={handleShow}
             >
                 <i className="bi bi-plus-lg me-1"></i>
-                {getParams('addcontact')}
+                {GetParams('addcontact')}
             </Button>
             <Modal
                 show={show}
@@ -52,10 +64,10 @@ const AddContact = () => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {getParams('addcontact')}
+                        {GetParams('addcontact')}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="grid-group-editor">
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
                             {'Ф.И.О.'}
@@ -68,6 +80,25 @@ const AddContact = () => {
                             placeholder="Ф.И.О." 
                             onChange={(e) => onChange(e)} 
                         />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3" controlId="company_id">
+                        <Form.Label column sm="2">
+                            {'Компания'}
+                        </Form.Label>
+                        <Col sm="10">
+                            <DropDownListComponent 
+                                id='company_id' 
+                                name="company_id" 
+                                fields={fields}
+                                dataSource={company} 
+                                className="e-field" 
+                                placeholder='Компания' 
+                                value={contact.company_id}
+                                onChange={(e) => onChange(e)}
+                            >
+
+                            </DropDownListComponent>
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="phone">
@@ -112,6 +143,25 @@ const AddContact = () => {
                                 <option value="2">Менеджер</option>
                                 <option value="3">Бухгалтер</option>
                             </Form.Select>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3" controlId="responsible">
+                        <Form.Label column sm="2">
+                            {'Ответственный'}
+                        </Form.Label>
+                        <Col sm="10">
+                            <DropDownListComponent 
+                                id='responsible' 
+                                name="responsible" 
+                                fields={fields}
+                                dataSource={responsible} 
+                                className="e-field" 
+                                placeholder='Ответственный' 
+                                value={contact.responsible}
+                                onChange={(e) => onChange(e)}
+                            >
+
+                            </DropDownListComponent>
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="email">

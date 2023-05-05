@@ -9,7 +9,6 @@ import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { setLoading } from "apps/crm-front/store/loadingState";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import { GetParams } from "apps/crm-front/specs/custom-service";
-import { DateTime } from "@syncfusion/ej2-charts";
 
 const AddTask = () => {
     const auth = useSelector(useAuth) as AuthState;

@@ -37,7 +37,7 @@ const AddContractForm = (props = null) => {
 
     return (
         <>
-            <Form.Group as={Row} className="bg-info bg-gradient py-2 mb-3" controlId="formPlaintextEmail">
+            <Form.Group as={Row} className="bg-info bg-gradient py-2 mb-3 grid-group-editor" controlId="formPlaintextEmail">
                 <Form.Label column sm="2">
                     <i className="bi bi-question-octagon fs-5"></i>
                 </Form.Label>

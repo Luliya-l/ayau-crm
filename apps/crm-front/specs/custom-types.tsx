@@ -75,6 +75,7 @@ export type Contact = {
     email:string,
     phone:string,
     company_id:string,
+    responsible:string,
     user_id:string,
     post:string,
     gender:string,
