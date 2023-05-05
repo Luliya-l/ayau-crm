@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from 'react';
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
-import { GetParams, dateFormat, taskDS } from 'apps/crm-front/specs/custom-service';
+import { CurrentLang, GetParams, dateFormat, taskDS } from 'apps/crm-front/specs/custom-service';
 import { ResponsibleColumn } from '../utils/grid-responsible';
 import { ContractColumn } from '../utils/grid-contract';
 import AddTaskForm from './add-tasks-form';
@@ -54,6 +54,7 @@ const Tasks = () => {
                     allowSorting={true}
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
+                    locale={CurrentLang()}
                 >
                     <ColumnsDirective>
                         <ColumnDirective 

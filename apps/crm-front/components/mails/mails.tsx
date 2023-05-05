@@ -5,7 +5,7 @@ import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { mailsDS } from 'apps/crm-front/specs/custom-service';
+import { CurrentLang, mailsDS } from 'apps/crm-front/specs/custom-service';
 
 
 const MailBox = ({inbox = true}) => {
@@ -36,6 +36,7 @@ const MailBox = ({inbox = true}) => {
                     pageSettings={{ pageSize: 5 }}
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
+                    locale={CurrentLang()}
                 >
                     <ColumnsDirective>
                         <ColumnDirective 

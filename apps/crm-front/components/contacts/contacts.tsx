@@ -12,7 +12,7 @@ import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from 'react';
-import { GetParams, contactsDS } from 'apps/crm-front/specs/custom-service';
+import { CurrentLang, GetParams, contactsDS } from 'apps/crm-front/specs/custom-service';
 import { CompanyColumn } from '../utils/grid-company';
 import { ResponsibleColumn } from '../utils/grid-responsible';
 import AddContactForm from './add-contact-form';
@@ -54,6 +54,7 @@ const Contacts = () => {
                     allowSorting={true}
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
+                    locale={CurrentLang()}
                 >
                     <ColumnsDirective>
                         <ColumnDirective 

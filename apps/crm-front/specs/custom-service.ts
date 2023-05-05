@@ -16,6 +16,11 @@ export const GetParams = (param: string): string => {
     return localization.langs[localization.currentLang].params[param];
 }
 
+export const CurrentLang =():string => {
+    const localization = useSelector(selectLangState) as Langs;
+    return localization.currentLang;
+}
+
 export const responsiblesDS = (auth): DataManager => new DataManager({
     url: `${baseURL}crm/responsibles/get`,
     updateUrl: `${baseURL}crm/users/update`,

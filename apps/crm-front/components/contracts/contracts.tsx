@@ -6,23 +6,17 @@ import {
 import { addClass } from '@syncfusion/ej2-base';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import AddContractForm from "./add-contract-form";
-import { contractsDS } from "apps/crm-front/specs/custom-service";
+import { CurrentLang, GetParams, contractsDS } from "apps/crm-front/specs/custom-service";
 
 const Contracts = () => {
     const auth = useSelector(useAuth) as AuthState;
     const loadingState = useSelector(useLoadingState);
-    const localization = useSelector(selectLangState);
 
     const dispatch = useDispatch();
-
-    const getParams = (param: string) => {
-        return localization.langs[localization.currentLang]?.params[param];
-    }
 
     const kanban = useRef(null);
 
@@ -84,25 +78,26 @@ const Contracts = () => {
                     }} 
                     dialogSettings={{ template: dialogTemplate.bind(this) }}
                     cardRendered={cardRendered.bind(this)}
+                    locale={CurrentLang()}
                 >
                     <ColumnsDirective>
                         <ColumnDirective 
-                            headerText={`${getParams('primaryContact')}`} 
+                            headerText={`${GetParams('primaryContact')}`} 
                             keyField="new" 
                             template={columnTemplate.bind(this)}
                         />
                         <ColumnDirective 
-                            headerText={`${getParams('negotiation')}`} 
+                            headerText={`${GetParams('negotiation')}`} 
                             keyField="InProgress" 
                             template={columnTemplate.bind(this)}
                         />
                         <ColumnDirective 
-                            headerText={`${getParams('makeDecision')}`} 
+                            headerText={`${GetParams('makeDecision')}`} 
                             keyField="Testing" 
                             template={columnTemplate.bind(this)}
                         />
                         <ColumnDirective 
-                            headerText={`${getParams('Harmonizationofcontract')}`} 
+                            headerText={`${GetParams('Harmonizationofcontract')}`} 
                             keyField="Close" 
                             template={columnTemplate.bind(this)}
                         />

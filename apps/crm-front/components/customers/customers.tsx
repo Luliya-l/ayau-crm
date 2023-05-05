@@ -13,7 +13,7 @@ import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ResponsibleColumn } from '../utils/grid-responsible';
-import { GetParams, companiesDS } from 'apps/crm-front/specs/custom-service';
+import { CurrentLang, GetParams, companiesDS } from 'apps/crm-front/specs/custom-service';
 import AddCustomerForm from './add-customer-form';
 
 const Customers = () => {
@@ -53,6 +53,7 @@ const Customers = () => {
                     allowSorting={true}
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
+                    locale={CurrentLang()}
                 >
                     <ColumnsDirective>
                         <ColumnDirective 

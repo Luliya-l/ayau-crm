@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { L10n } from '@syncfusion/ej2-base';
 import { useEffect, useState } from 'react';
 import TopBar from '../components/navigation/top-bar';
 import SideMenu from '../components/navigation/side-menu';
@@ -21,7 +20,10 @@ import Chat from '../components/utils/chat';
 import Authorize from '../components/authorize/authorize';
 import { postLogin, postOrganization } from '../data/fetch/integration';
 import Finish from '../components/authorize/finish_registration/finish';
-import { Spinner } from 'react-bootstrap';
+import { Col, Row, Spinner } from 'react-bootstrap';
+import { sf } from '../data/localization/sf';
+
+L10n.load(sf);
 
 const Index: NextPage = () =>  {
   const auth = useSelector(useAuth) as AuthState;
