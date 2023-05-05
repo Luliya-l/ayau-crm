@@ -81,3 +81,14 @@ export const companiesListDS = (auth): DataManager => new DataManager({
     requestType: 'POST',
     headers: [{ Authorization: `Bearer ${auth.authToken}` }]
 });
+
+export const mailsDS = (auth): DataManager => new DataManager({
+    adaptor: new UrlAdaptor(),
+    updateUrl: `${baseURL}crm/mails/update`,
+    insertUrl: `${baseURL}crm/mails/set`,
+    removeUrl: `${baseURL}crm/mails/delete`,
+    url: `${baseURL}crm/mails/get`,
+    crossDomain: true,
+    requestType: 'POST',
+    headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+});
