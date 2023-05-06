@@ -87,19 +87,19 @@ const DashBoardMain = () => {
                     <div id="notes" className="e-panel" data-row="5" data-col="4" data-sizex="1" data-sizey="1">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
-                            <Calls title={GetParams('notes')} value={'0'} period={GetParams('onweek')} />
+                            <Calls title={GetParams('notes')} value={'0'} period={GetParams('onweek')} className='text-info' />
                         </div>
                     </div>
                     <div id="outgoingcalls" className="e-panel" data-row="6" data-col="5" data-sizex="1" data-sizey="1">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
-                            <Calls title={GetParams('outgoingcalls')} value={'0'} period={GetParams('onweek')} />
+                            <Calls title={GetParams('outgoingcalls')} value={'0'} period={GetParams('onweek')} className='text-success' />
                         </div>
                     </div>
                     <div id="successfuldeals" className="e-panel" data-row="6" data-col="5" data-sizex="1" data-sizey="1">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
-                            <Calls title={GetParams('successfuldeals')} value={'0'} period={GetParams('onweek')} />
+                            <Calls title={GetParams('successfuldeals')} value={'0'} period={GetParams('onweek')} className='text-warning' />
                         </div>
                     </div>
                 </DashboardLayoutComponent>

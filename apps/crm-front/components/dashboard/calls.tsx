@@ -1,7 +1,7 @@
 import { GetParams } from "apps/crm-front/specs/custom-service"
 import { Card, Col, Container, Row } from "react-bootstrap"
 
-const Calls = ({title, value, period}): JSX.Element => {
+const Calls = ({title, value, period, className = 'text-danger'}): JSX.Element => {
     return (
         <Card
             bg={'dark'}
@@ -11,7 +11,7 @@ const Calls = ({title, value, period}): JSX.Element => {
         >
             <Card.Header className="text-uppercase">{title}</Card.Header>
             <Card.Body>
-                <Card.Title className="text-danger">{value}</Card.Title>
+                <Card.Title className={className}>{value}</Card.Title>
                 <Card.Text className="py-2">
                     &nbsp;
                 </Card.Text>
