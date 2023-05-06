@@ -1,330 +1,85 @@
-import { Card, Col, Container, Fade, Row } from "react-bootstrap";
-import {
-    AxisModel, Category, ChartComponent, ColumnSeries, DataLabel, Inject,
-    Legend, LegendSeriesModel, LineSeries, SeriesCollectionDirective, SeriesDirective, Tooltip, TooltipSettingsModel
-} from '@syncfusion/ej2-react-charts';
-import { registerLicense } from "@syncfusion/ej2-base";
-import { useSelector } from "react-redux";
-import { selectLangState } from "apps/crm-front/store/langSlice";
+import { DashboardLayoutComponent } from '@syncfusion/ej2-react-layouts';
+import { Col, Container, Row } from "react-bootstrap";
+
+import Kpi from "./kpi";
+import TransactionsSource from "./transaction-source";
+import DealsBymanager from "./deals-by-managers";
+import Purpose from "./purpose";
+import SystemUse from "./system-use";
+import LatestFiles from "./latest-files";
+import Salesforecast from "./sales-forecast";
+import Calls from "./calls";
+import { GetParams } from "apps/crm-front/specs/custom-service";
 
 const DashBoardMain = () => {
-    registerLicense('Mgo+DSMBaFt+QHFqVkNrXVNbdV5dVGpAd0N3RGlcdlR1fUUmHVdTRHRcQl5hTn9Tc0RnXXxeeXQ=;Mgo+DSMBPh8sVXJ1S0d+X1RPd11dXmJWd1p/THNYflR1fV9DaUwxOX1dQl9gSX1RcURjXH5adHdXQmA=;ORg4AjUWIQA/Gnt2VFhhQlJBfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5QdEJiWXpfdHBWRWhc;MTQ4NjE2MEAzMjMxMmUzMTJlMzMzNUJnSDVJbXZqODU4NVB5QWV1aXJjMFVFMENtNWhhT2NJdy9ydXMrMFlObmM9;MTQ4NjE2MUAzMjMxMmUzMTJlMzMzNW9HWW1TTkZnOG1aOVR3YndRTmJHZ2xZdVFycjYzWm1FS2pXVkVZSDlDQjg9;NRAiBiAaIQQuGjN/V0d+XU9Hc1RDX3xKf0x/TGpQb19xflBPallYVBYiSV9jS31TdUdkWH9bcXBRQmFeUQ==;MTQ4NjE2M0AzMjMxMmUzMTJlMzMzNWNHSkFzdTU5aUpIdmpsQmxFZC96Z0VKSy8rby9RZFp5elJ3MDR4T0puYzQ9;MTQ4NjE2NEAzMjMxMmUzMTJlMzMzNVZRUERQZEljR1lVKzZoUk5GL1VsUkpKNi9ZUDVFVjBLaC9oQ3kxSDdleDA9;Mgo+DSMBMAY9C3t2VFhhQlJBfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5QdEJiWXpfdHBQR2Bc;MTQ4NjE2NkAzMjMxMmUzMTJlMzMzNUJSWWIrMGhjL0lqclFGNHM5MVl6SE1OSmVwZEpjc3VoTmptU1dnSHZISFE9;MTQ4NjE2N0AzMjMxMmUzMTJlMzMzNVlvcnFjdkY1Q0VVRHF6aWJ3SkFyZlE1WmZldGJHTnNHT1ZwM2FOcmpCQTQ9;MTQ4NjE2OEAzMjMxMmUzMTJlMzMzNWNHSkFzdTU5aUpIdmpsQmxFZC96Z0VKSy8rby9RZFp5elJ3MDR4T0puYzQ9');
-
-    const localization = useSelector(selectLangState);
-
-    const getParams = (param: string) => {
-        return localization.langs[localization.currentLang]?.params[param];
-    }
-
-    const data: any[] = [
-        { month: 'Jan', sales: 35 }, { month: 'Feb', sales: 28 },
-        { month: 'Mar', sales: 34 }, { month: 'Apr', sales: 32 },
-        { month: 'May', sales: 40 }, { month: 'Jun', sales: 32 },
-        { month: 'Jul', sales: 35 }, { month: 'Aug', sales: 55 },
-        { month: 'Sep', sales: 38 }, { month: 'Oct', sales: 30 },
-        { month: 'Nov', sales: 25 }, { month: 'Dec', sales: 32 }
-      ];
-    const tooltip: TooltipSettingsModel = { enable: true, shared: false }
-    const primaryyAxis: AxisModel = { labelFormat: '${value}K' }
-    const primarxyAxis: AxisModel = { valueType: 'Category' }
-    const legendSettings: LegendSeriesModel = { visible: true }
-    const marker = { 
-        dataLabel: { visible: true}
-    };
+    const cellSpacing = [6, 6];
 
     return (
         <>
-            <Fade in={true}>
-                <Container fluid className="mb-4">
-                    <Row>
-                        <Col className="text-center mt-3">
-                            <h1>{getParams('dashboard')}</h1>
-                        </Col>
-                    </Row>
-                    <Row id='comp-content' className='mb-3'>
-                        <Col lg={3} xs={3}>
-                            <Card
-                                bg={'dark'}
-                                key={'dark'}
-                                text={'dark'}
-                            >
-                                <Card.Header className="text-uppercase">{getParams('overdueTasks')}</Card.Header>
-                                <Card.Body>
-                                    <Card.Title className="text-danger">{'0'}</Card.Title>
-                                    <Card.Footer>
-                                        <small className="text-muted">{getParams('onweek')}</small>
-                                    </Card.Footer>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col lg={3} xs={3}>
-                            <Card
-                                bg={'dark'}
-                                key={'dark'}
-                                text={'dark'}
-                            >
-                                <Card.Header className="text-uppercase">{getParams('newTasks')}</Card.Header>
-                                <Card.Body>
-                                    <Card.Title className="text-info">{'0'}</Card.Title>
-                                    <Card.Footer>
-                                        <small className="text-muted">{getParams('onweek')}</small>
-                                    </Card.Footer>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col lg={3} xs={3}>
-                            <Card
-                                bg={'dark'}
-                                key={'dark'}
-                                text={'dark'}
-                            >
-                                <Card.Header className="text-uppercase">{getParams('completeTasks')}</Card.Header>
-                                <Card.Body>
-                                    <Card.Title className="text-success">{'0'}</Card.Title>
-                                    <Card.Footer>
-                                        <small className="text-muted">{getParams('onweek')}</small>
-                                    </Card.Footer>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col lg={3} xs={3}>
-                            <Card
-                                bg={'dark'}
-                                key={'dark'}
-                                text={'dark'}
-                            >
-                                <Card.Header className="text-uppercase">{getParams('withoutTask')}</Card.Header>
-                                <Card.Body>
-                                    <Card.Title className="text-warning">{'0'}</Card.Title>
-                                    <Card.Footer>
-                                        <small className="text-muted">{getParams('onweek')}</small>
-                                    </Card.Footer>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                    <Row id='comp-content' className='-0'>
-                        <Col lg={8} xs={8} className='text-center'>
-                            <Container className='chart shadow-lg'>
-                                <ChartComponent id="charts" 
-                                    primaryXAxis={primarxyAxis} 
-                                    theme='Material'
-                                    legendSettings={legendSettings}
-                                    primaryYAxis={primaryyAxis} 
-                                    tooltip={tooltip}
-                                    title={`${getParams('transactionSource')}`}
-                                    style={{color:'var(--gosu-light-100)'}}
-                                >
-                                    <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
-                                    <SeriesCollectionDirective>
-                                        <SeriesDirective dataSource={data} xName='month' yName='sales' name='Sales' marker={marker} />
-                                    </SeriesCollectionDirective>
-                                </ChartComponent>
-                            </Container>
-                        </Col>
-                        <Col lg={4} xs={4} className='text-center'>
-                            <Container className='chart shadow-lg'>
-                                <ChartComponent id="charts2" 
-                                    primaryXAxis={primarxyAxis} 
-                                    theme='Material'
-                                    legendSettings={legendSettings}
-                                    primaryYAxis={primaryyAxis} 
-                                    tooltip={tooltip}
-                                    title={`${getParams('DealsBymanager')}`}
-                                    style={{color:'var(--gosu-light-100)'}}
-                                >
-                                    <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
-                                    <SeriesCollectionDirective>
-                                        <SeriesDirective dataSource={data} xName='month' yName='sales' name='Sales' marker={marker} />
-                                    </SeriesCollectionDirective>
-                                </ChartComponent>
-                            </Container>
-                        </Col>
-                    </Row>
-                    {/*  */}
-                    <Row className="my-3">
-                        <Col lg={4} xs={4} className='text-center'>
-                            <Container className='chart shadow-lg'>
-                                <ChartComponent id="charts3" 
-                                    primaryXAxis={primarxyAxis} 
-                                    theme='Material'
-                                    legendSettings={legendSettings}
-                                    primaryYAxis={primaryyAxis} 
-                                    tooltip={tooltip}
-                                    title={`${getParams('purpose')}`}
-                                    style={{color:'var(--gosu-light-100)'}}
-                                >
-                                    <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
-                                    <SeriesCollectionDirective>
-                                        <SeriesDirective dataSource={data} xName='month' yName='sales' name='Sales' marker={marker} />
-                                    </SeriesCollectionDirective>
-                                </ChartComponent>
-                            </Container>
-                        </Col>
-                        <Col lg={4} xs={4} className='text-center'>
-                            <Container className='chart shadow-lg'>
-                                <ChartComponent id="charts4" 
-                                    primaryXAxis={primarxyAxis} 
-                                    theme='Material'
-                                    legendSettings={legendSettings}
-                                    primaryYAxis={primaryyAxis} 
-                                    tooltip={tooltip}
-                                    title={`${getParams('SystemUse')}`}
-                                    style={{color:'var(--gosu-light-100)'}}
-                                >
-                                    <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
-                                    <SeriesCollectionDirective>
-                                        <SeriesDirective dataSource={data} xName='month' yName='sales' name='Sales' marker={marker} />
-                                    </SeriesCollectionDirective>
-                                </ChartComponent>
-                            </Container>
-                        </Col>
-                        <Col lg={4} xs={4} className='text-center'>
-                            <Container className='chart shadow-lg'>
-                                <ChartComponent id="charts5" 
-                                    primaryXAxis={primarxyAxis} 
-                                    theme='Material'
-                                    legendSettings={legendSettings}
-                                    primaryYAxis={primaryyAxis} 
-                                    tooltip={tooltip}
-                                    title={`${getParams('LatestFiles')}`}
-                                    style={{color:'var(--gosu-light-100)'}}
-                                >
-                                    <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
-                                    <SeriesCollectionDirective>
-                                        <SeriesDirective dataSource={data} xName='month' yName='sales' name='Sales' marker={marker} />
-                                    </SeriesCollectionDirective>
-                                </ChartComponent>
-                            </Container>
-                        </Col>
-                    </Row>
-                    {/*  */}
-                    <Row id='comp-content' className='-0'>
-                        <Col lg={8} xs={8}>
-                            <Container className='chart shadow-lg'>
-                                <ChartComponent id="charts6" 
-                                    primaryXAxis={primarxyAxis} 
-                                    theme='Material'
-                                    legendSettings={legendSettings}
-                                    primaryYAxis={primaryyAxis} 
-                                    tooltip={tooltip}
-                                    title={`${getParams('Salesforecast')}`}
-                                    style={{color:'var(--gosu-light-100)'}}
-                                >
-                                    <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
-                                    <SeriesCollectionDirective>
-                                        <SeriesDirective dataSource={data} xName='month' yName='sales' name='Sales' marker={marker} />
-                                    </SeriesCollectionDirective>
-                                </ChartComponent>
-                            </Container>
-                        </Col>
-                        <Col lg={2} xs={2}>
-                            <Container fluid className='m-0 p-0 h-100'>
-                                <Row className="pb-4">
-                                    <Col>
-                                        <Card
-                                            bg={'dark'}
-                                            key={'dark'}
-                                            text={'dark'}
-                                            className="h-100"
-                                        >
-                                            <Card.Header className="text-uppercase">{getParams('IncomingCalls')}</Card.Header>
-                                            <Card.Body>
-                                                <Card.Title className="text-danger">{'0'}</Card.Title>
-                                                <Card.Text className="py-2">
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Text>
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Footer>
-                                                    <small className="text-muted">{getParams('onweek')}</small>
-                                                </Card.Footer>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                </Row>  
-                                <Row>
-                                    <Col>
-                                        <Card
-                                            bg={'dark'}
-                                            key={'dark'}
-                                            text={'dark'}
-                                            className="h-100"
-                                        >
-                                            <Card.Header className="text-uppercase">{getParams('notes')}</Card.Header>
-                                            <Card.Body>
-                                                <Card.Title className="text-info">{'0'}</Card.Title>
-                                                <Card.Text className="py-2">
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Text>
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Footer>
-                                                    <small className="text-muted">{getParams('onweek')}</small>
-                                                </Card.Footer>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                </Row>  
-                            </Container>
-                        </Col>
-                        <Col lg={2} xs={2}>
-                            <Container fluid className='p-0 m-0 h-100'>
-                                <Row className="pb-4">
-                                    <Col>
-                                        <Card
-                                            bg={'dark'}
-                                            key={'dark'}
-                                            text={'dark'}
-                                            className="h-100"
-                                        >
-                                            <Card.Header className="text-uppercase">{getParams('outgoingcalls')}</Card.Header>
-                                            <Card.Body>
-                                                <Card.Title className="text-success">{'0'}</Card.Title>
-                                                <Card.Text className="py-2">
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Text>
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Footer>
-                                                    <small className="text-muted">{getParams('onweek')}</small>
-                                                </Card.Footer>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                </Row>  
-                                <Row>
-                                    <Col>
-                                        <Card
-                                            bg={'dark'}
-                                            key={'dark'}
-                                            text={'dark'}
-                                            className="h-100"
-                                        >
-                                            <Card.Header className="text-uppercase">{getParams('successfuldeals')}</Card.Header>
-                                            <Card.Body>
-                                                <Card.Title className="text-warning">{'0'}</Card.Title>
-                                                <Card.Text className="py-2">
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Text>
-                                                    &nbsp;
-                                                </Card.Text>
-                                                <Card.Footer>
-                                                    <small className="text-muted">{getParams('onweek')}</small>
-                                                </Card.Footer>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                </Row>  
-                            </Container>
-                        </Col>
-                    </Row>
-                </Container>
-            </Fade>
+            <Container fluid className="mb-4">
+                <Row>
+                    <Col className="text-center mt-3">
+                        <h1>{GetParams('dashboard')}</h1>
+                    </Col>
+                </Row>
+            </Container>
+            <div className="control-section">
+                <DashboardLayoutComponent 
+                    id='defaultLayout' 
+                    cellSpacing={cellSpacing} 
+                    allowResizing={true} 
+                    columns={6}
+                >
+                    <div id="one" className="e-panel" data-row="0" data-col="0" data-sizex="6" data-sizey="1">
+                        <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <Kpi />
+                        </div>
+                    </div>
+                    <div id="two" className="e-panel" data-row="1" data-col="0" data-sizex="4" data-sizey="2">
+                        <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <TransactionsSource />
+                        </div>
+                    </div>
+                    <div id="three" className="e-panel" data-row="1" data-col="5" data-sizex="2" data-sizey="2">
+                    <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <DealsBymanager />
+                        </div>
+                    </div>    
+                    <div id="four" className="e-panel" data-row="3" data-col="0" data-sizex="2" data-sizey="2">
+                        <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <Purpose />
+                        </div>
+                    </div>
+                    <div id="five" className="e-panel" data-row="3" data-col="2" data-sizex="2" data-sizey="2">
+                        <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <SystemUse />
+                        </div>
+                    </div>
+                    <div id="six" className="e-panel" data-row="3" data-col="4" data-sizex="2" data-sizey="2">
+                        <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <LatestFiles />
+                        </div>
+                    </div>
+                    <div id="seven" className="e-panel" data-row="5" data-col="0" data-sizex="4" data-sizey="2">
+                        <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <Salesforecast />
+                        </div>
+                    </div>
+                    <div id="eight" className="e-panel" data-row="5" data-col="4" data-sizex="2" data-sizey="2">
+                        <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <Calls />
+                        </div>
+                    </div>
+                </DashboardLayoutComponent>
+            </div>
         </>
     )
 }
