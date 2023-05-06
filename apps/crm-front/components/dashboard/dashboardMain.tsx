@@ -30,7 +30,13 @@ const DashBoardMain = () => {
                     allowResizing={true} 
                     columns={6}
                 >
-                    <div id="one" className="e-panel" data-row="0" data-col="0" data-sizex="6" data-sizey="1">
+                    <div id="one" 
+                        className="e-panel kpi" 
+                        data-row="0" 
+                        data-col="0" 
+                        data-sizex="6" 
+                        data-sizey="1"
+                    >
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
                             <Kpi />
@@ -38,7 +44,7 @@ const DashBoardMain = () => {
                     </div>
                     <div id="two" className="e-panel" data-row="1" data-col="0" data-sizex="4" data-sizey="2">
                         <span id="close" className="e-template-icon e-clear-icon"/>
-                        <div className="e-panel-container">
+                        <div className="e-panel-container chart">
                             <TransactionsSource />
                         </div>
                     </div>
