@@ -78,10 +78,28 @@ const DashBoardMain = () => {
                             <Salesforecast />
                         </div>
                     </div>
-                    <div id="eight" className="e-panel" data-row="5" data-col="4" data-sizex="2" data-sizey="2">
+                    <div id="IncomingCalls" className="e-panel" data-row="5" data-col="4" data-sizex="1" data-sizey="1">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
-                            <Calls />
+                            <Calls title={GetParams('IncomingCalls')} value={'0'} period={GetParams('onweek')} />
+                        </div>
+                    </div>
+                    <div id="notes" className="e-panel" data-row="5" data-col="4" data-sizex="1" data-sizey="1">
+                        <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <Calls title={GetParams('notes')} value={'0'} period={GetParams('onweek')} />
+                        </div>
+                    </div>
+                    <div id="outgoingcalls" className="e-panel" data-row="6" data-col="5" data-sizex="1" data-sizey="1">
+                        <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <Calls title={GetParams('outgoingcalls')} value={'0'} period={GetParams('onweek')} />
+                        </div>
+                    </div>
+                    <div id="successfuldeals" className="e-panel" data-row="6" data-col="5" data-sizex="1" data-sizey="1">
+                        <span id="close" className="e-template-icon e-clear-icon"/>
+                        <div className="e-panel-container">
+                            <Calls title={GetParams('successfuldeals')} value={'0'} period={GetParams('onweek')} />
                         </div>
                     </div>
                 </DashboardLayoutComponent>
