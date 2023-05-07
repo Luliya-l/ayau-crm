@@ -58,6 +58,17 @@ const AddTaskForm = (props) => {
                         <Row>
                             <Col>
                                 <InputGroup className="my-2">
+                                    <Form.Check 
+                                        aria-label="name" 
+                                        name="completed"
+                                        checked={task.completed}
+                                        onChange={(e) => onChange(e)} />
+                                </InputGroup>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <InputGroup className="my-2">
                                     <InputGroup.Text>
                                         <i className="bi bi-input-cursor"></i>
                                     </InputGroup.Text>
