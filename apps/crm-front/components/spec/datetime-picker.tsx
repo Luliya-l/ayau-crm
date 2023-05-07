@@ -81,9 +81,9 @@ const DateTimePicker = ({ birthday, setBirthday, isYear = true, isTime = false }
         </Col>
         <Col lg={3} xs={3} className={`${isTime ? '' : 'd-none'}`}></Col>
       </Row>
-      <Row style={{height:'313.05px'}}>    
+      <Row style={{height:'313.05px', width:'fit-content'}}>    
         {/* DATE SELECTOR */}
-        <Col lg="8" xs="8" className="text-end">
+        <Col lg="8" xs="8" className="text-end" style={{width:'fit-content'}}>
           <DatePicker
             peekNextMonth
             inline

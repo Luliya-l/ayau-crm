@@ -22,6 +22,7 @@
     "@syncfusion/ej2-pdf-export": "^21.2.3",
     "@syncfusion/ej2-popups": "^21.2.3",
     "@syncfusion/ej2-react-base": "^21.2.3",
+    "@syncfusion/ej2-react-calendars": "^21.2.3",
     "@syncfusion/ej2-react-charts": "^21.2.3",
     "@syncfusion/ej2-react-dropdowns": "^21.2.3",
     "@syncfusion/ej2-react-grids": "^21.2.3",

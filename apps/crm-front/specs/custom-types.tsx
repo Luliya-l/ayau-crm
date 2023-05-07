@@ -54,6 +54,8 @@ export type Task = {
     contact_id:string,
     company_id:string,
     finish_at:Date,
+    completed_at:Date,
+    completed:boolean,
     user_id:string | null,
 }
 

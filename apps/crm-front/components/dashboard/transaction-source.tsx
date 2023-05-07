@@ -25,7 +25,7 @@ const TransactionsSource = (): JSX.Element => {
             primaryYAxis={primaryyAxis} 
             tooltip={tooltip}
             title={`${GetParams('transactionSource')}`}
-            style={{color:'var(--gosu-light-100)'}}
+            style={{width:'100%', height:'100%', color:'var(--gosu-light-100)'}}
         >
             <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
             <SeriesCollectionDirective>

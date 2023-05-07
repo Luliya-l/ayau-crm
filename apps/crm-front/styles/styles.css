@@ -11,6 +11,7 @@
 @import "../../../node_modules/@syncfusion/ej2-react-lists/styles/bootstrap5.css";
 @import "../../../node_modules/@syncfusion/ej2-react-kanban/styles/bootstrap5.css";
 @import "../../../node_modules/@syncfusion/ej2-react-grids/styles/bootstrap5.css";
+@import "../../../node_modules/@syncfusion/ej2-react-calendars/styles/bootstrap5.css";
 
 :root {
   --gosu-blue-space-100: rgba(75, 88, 119, 1);

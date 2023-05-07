@@ -64,7 +64,7 @@ const Tasks = () => {
                             visible={false}
                         />
                         <ColumnDirective 
-                            field='finish_at' 
+                            field='completed_at' 
                             headerText={GetParams('execution_date').toUpperCase()} 
                             width='100' 
                             format={dateFormat}

@@ -85,7 +85,7 @@ const AddTask = () => {
                 </Modal.Header>
                 <Modal.Body className={`${!send ? '' : 'd-none'} grid-editor`}>
                     <Row>
-                        <Col>
+                        <Col lg="7" xs="7">
                             <DateTimePicker 
                                 birthday={task.finish_at ?? new Date()} 
                                 setBirthday={setTaskExecutionDate} 

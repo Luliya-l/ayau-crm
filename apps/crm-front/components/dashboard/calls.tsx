@@ -1,5 +1,4 @@
-import { GetParams } from "apps/crm-front/specs/custom-service"
-import { Card, Col, Container, Row } from "react-bootstrap"
+import { Card } from "react-bootstrap"
 
 const Calls = ({title, value, period, className = 'text-danger'}): JSX.Element => {
     return (

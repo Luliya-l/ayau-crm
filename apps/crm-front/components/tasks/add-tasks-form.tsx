@@ -28,7 +28,7 @@ const AddTaskForm = (props) => {
     }
 
     const setTaskExecutionDate = (date: Date) => {
-        setState({['finish_at']: date});
+        setState({['completed_at']: date});
     }
 
     useEffect(() => {
@@ -45,9 +45,9 @@ const AddTaskForm = (props) => {
     return (
         <>
             <Row className='grid-editor'>
-                <Col>
+                <Col lg="7" xs="7" >
                     <DateTimePicker 
-                        birthday={task.finish_at ?? new Date()} 
+                        birthday={task.completed_at ?? new Date()} 
                         setBirthday={setTaskExecutionDate} 
                         isYear={false}
                         isTime={true} 

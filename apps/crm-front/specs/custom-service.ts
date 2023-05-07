@@ -1,13 +1,11 @@
-import { DataManager, UrlAdaptor } from "@syncfusion/ej2-data";
+import { DataManager, UrlAdaptor, Query, Predicate } from "@syncfusion/ej2-data";
 import { useSelector } from "react-redux";
 import { selectLangState } from "../store/langSlice";
-import { Langs } from "./custom-types";
+import { Contract, Langs, Task } from "./custom-types";
 
 
 export const baseURL = "https://crm-backend-two.vercel.app/";
 // const baseURL = "http://localhost:8000/";
-
-
 
 export const dateFormat = { type: 'dateTime', format: 'yyyy-MM-dd' };
 
@@ -97,3 +95,45 @@ export const mailsDS = (auth): DataManager => new DataManager({
     requestType: 'POST',
     headers: [{ Authorization: `Bearer ${auth.authToken}` }]
 });
+
+// DASHBOARD
+
+export const TasksData = async(auth) => {
+    return taskDS(auth).executeQuery(
+        new Query().where(new Predicate('completed', 'equal', true)))
+        .then((e) => {
+            if (e) {
+                const c = {overdueTasks:0, newTasks:0, completedTasks:0};
+                e['result']['result'].forEach((el:Task) => {
+                    if (!el.completed) {
+                        c.newTasks++;
+                    } else {
+                        c.completedTasks++;
+                    }
+                    if (el.finish_at && new Date(el.finish_at) < new Date()) {
+                        c.overdueTasks++;
+                    }
+                })
+                return c;
+            }
+        })
+}
+
+export const ContractsData = async(auth) => {
+    return contractsDS(auth).executeQuery(
+        new Query().where(new Predicate('step', 'equal', 'new')))
+        .then((e) => {
+            if (e) {
+                const c = {withoutTask:0};
+                if (!e['result']['result']) {
+                    return c;
+                }
+                e['result']['result'].forEach((el:Contract) => {
+                    if (!el.tasks) {
+                        c.withoutTask++;
+                    } 
+                })
+                return c;
+            }
+        })
+}
