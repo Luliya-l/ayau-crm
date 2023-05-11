@@ -53,6 +53,7 @@
             "IncomingCalls": "Кіріс қоңыраулар",
             "notes": "Ескертулер",
             "outgoingcalls": "Шығыс қоңыраулар",
-            "successfuldeals": "Сәтті мәмілелер"
+            "successfuldeals": "Сәтті мәмілелер",
+            "language": "Тіл"
         }
 }

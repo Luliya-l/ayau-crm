@@ -38,7 +38,7 @@ const SideMenu = ({setExpanded, setContent, setLang}) => {
                             <i className="bi bi-translate" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {'Язык'}
+                            {getParams('language')}
                         </NavText>
                         <NavItem eventKey="localize/kz">
                             <NavText>

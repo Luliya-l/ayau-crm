@@ -53,7 +53,8 @@
             "IncomingCalls": "входящие звонки",
             "notes": "примечаний",
             "outgoingcalls": "исходищие звонки",
-            "successfuldeals": "успешные сделки"
+            "successfuldeals": "успешные сделки",
+            "language": "Язык"
 
 
 

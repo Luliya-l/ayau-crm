@@ -53,6 +53,7 @@
             "IncomingCalls": "Incoming calls",
             "notes": "notes",
             "outgoingcalls": "Outgoing calls",
-            "successfuldeals": "Successful contract"
+            "successfuldeals": "Successful contract",
+            "language": "language"
         }
 }
