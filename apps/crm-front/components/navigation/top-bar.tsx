@@ -13,6 +13,7 @@ import AddFile from '../files/add-file';
 import { Langs } from 'apps/crm-front/specs/custom-types';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { useEffect, useState } from 'react';
+import { GetParams } from 'apps/crm-front/specs/custom-service';
 
 const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компаний', addCommand='add-company'}): JSX.Element => {
   const localization = useSelector(selectLangState) as Langs;
@@ -49,6 +50,33 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
     }
   }
 
+  const getBreadcrumb = () => {
+    switch (addCommand) {
+      case 'dashboard':
+        return 'Рабочий стол'
+      case 'contracts':
+        return 'Сделки'
+      case 'tasks':
+        return "Задачи"
+      case 'contacts':
+        return GetParams('contacts')
+      case 'list':
+        return "Клиенты"
+      case 'list/contacts':
+        return "Контакты"
+      case 'list/customers':
+        return "Клиенты"
+      case 'list/files':
+        return "Файлы"
+      case 'email':
+        return "Почта"
+      case 'bi':
+        return "Бизнес-аналитика"
+      case 'settings':
+        return "Настройки"
+    }
+  }
+
   useEffect(() => {
     if (expanded) {
       setFixWidth('top-240');
@@ -69,7 +97,7 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
         >
           <Col lg={2} xs={2}  role='button' className='py-2'>
             <span className='text-uppercase' style={{color:'var(--gosu-blue-space-100)'}}>
-              {getParams('contacts')}
+              {getBreadcrumb()}
             </span>
           </Col>
           <Col lg={4} xs={4} className=''>
