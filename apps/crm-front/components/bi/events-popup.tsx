@@ -1,22 +1,36 @@
-import { useTasks } from 'apps/crm-front/specs/custom-hooks';
-import { Langs } from 'apps/crm-front/specs/custom-types';
-import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { GridComponent,
+    ColumnsDirective,
+    ColumnDirective,
+    Page,
+    Filter,
+    Sort,
+    ForeignKey,
+    PdfExport,
+    ExcelExport,
+} from '@syncfusion/ej2-react-grids';
+import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
+import { CurrentLang, GetParams, dateFormat, eventsDS } from 'apps/crm-front/specs/custom-service';
+import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
+
 import { useState } from 'react';
-import { Button, Container, Offcanvas, Table } from 'react-bootstrap';
+import { Button, Offcanvas } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { ResponsibleColumn } from '../utils/grid-responsible';
 
 const EventsPopup = () => {
-    const localization = useSelector(selectLangState) as Langs;
-    const {tasks} = useTasks();
-
+    const auth = useSelector(useAuth) as AuthState;
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const getParams = (param: string) => {
-        return localization.langs[localization.currentLang]?.params[param];
-    }
+    const editOptions: EditSettingsModel = { 
+        allowEditing: false, 
+        allowAdding: false, 
+        allowDeleting: false, 
+        mode: 'Dialog', 
+    };
+    const toolbarOptions: ToolbarItems[] = ['Search', 'Cancel', 'PdfExport', 'ExcelExport'];
 
     return (
         <>
@@ -26,48 +40,57 @@ const EventsPopup = () => {
                 onClick={handleShow}
             >
                 <i className="bi bi-filter-right me-1"></i>
-                {getParams('events')}
+                {GetParams('events')}
             </Button>
             <Offcanvas show={show} onHide={handleClose} placement={'end'}>
                 <Offcanvas.Header closeButton>
-                <Offcanvas.Title>{getParams('events')}</Offcanvas.Title>
+                <Offcanvas.Title>{GetParams('events')}</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <Container className='text-black'>
-                        <Table responsive>
-                            <thead>
-                                <tr>
-                                    <th><h5>{'дата'}</h5></th>
-                                    <th><h5>{'автор'}</h5></th>
-                                    <th><h5>{'объект'}</h5></th>
-                                    <th><h5>{'название'}</h5></th>
-                                    <th><h5>{'событие'}</h5></th>
-                                    <th><h5>{'значение до'}</h5></th>
-                                    <th><h5>{'значение после'}</h5></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    (tasks ?? []).map((task, index) => (
-                                        <tr key={index}>
-                                            <td><span className="fs-6">{task['dateComplete'] ?? ''}</span></td>
-                                            <td><span className="fs-6 text-capitalize">{task['responsible'] ?? ''}</span></td>
-                                            <td><span className="fs-6">{task['object'] ?? ''}</span></td>
-                                            <td>
-                                                {task['type'] === 'связаться' ? 
-                                                <i className="bi bi-telephone-fill mx-1" /> : 
-                                                <i className="bi bi-briefcase-fill mx-1" />}
-                                                <span className="fs-6 text-capitalize">{task['type'] ?? ''}</span>
-                                            </td>
-                                            <td><span className="fs-6">{task['task'] ?? ''}</span></td>
-                                            <td><span className="fs-6">{task['result'] ?? ''}</span></td>
-                                            <td><span className="fs-6">{task['result'] ?? ''}</span></td>
-                                        </tr>
-                                    ))
-                                }
-                            </tbody>
-                        </Table>
-                    </Container>
+                    <GridComponent 
+                        dataSource={eventsDS(auth)}
+                        allowPaging={true}
+                        pageSettings={{ pageSize: 50 }}
+                        allowSorting={true}
+                        editSettings={editOptions}
+                        toolbar={toolbarOptions}
+                        locale={CurrentLang()}
+                        allowExcelExport={true}
+                        allowPdfExport={true}
+                    >
+                        <ColumnsDirective>
+                            <ColumnDirective 
+                                field='id' width='100' 
+                                textAlign="Right" 
+                                isPrimaryKey={true} 
+                                visible={false}
+                            />
+                            <ColumnDirective 
+                                field='event_date' 
+                                headerText={'Дата'.toUpperCase()} 
+                                width='100' 
+                                format={dateFormat}
+                            />
+                            {ResponsibleColumn('user_id', auth)}
+                            <ColumnDirective 
+                                field='event_type' 
+                                headerText={'Тип события'.toUpperCase()} 
+                                width='100' 
+                                format="C2" 
+                            />
+                            <ColumnDirective 
+                                field='reference' 
+                                headerText={'Объект события'.toUpperCase()} 
+                                width='100'
+                            />
+                            <ColumnDirective 
+                                field='event_object' 
+                                headerText={'Идентификатор объекта'.toUpperCase()} 
+                                width='100'
+                            />
+                        </ColumnsDirective>
+                        <Inject services={[Filter, Page, Sort, ForeignKey, Toolbar, PdfExport, ExcelExport]} />
+                    </GridComponent>
                 </Offcanvas.Body>
             </Offcanvas>
         </>

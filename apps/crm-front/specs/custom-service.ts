@@ -18,6 +18,14 @@ export const CurrentLang =():string => {
     return localization.currentLang;
 }
 
+export const eventsDS = (auth): DataManager => new DataManager({
+    url: `${baseURL}crm/events/get`,
+    dataType: 'json',
+    adaptor: new UrlAdaptor(),
+    crossDomain: true,
+    headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+});
+
 export const responsiblesDS = (auth): DataManager => new DataManager({
     url: `${baseURL}crm/responsibles/get`,
     updateUrl: `${baseURL}crm/users/update`,

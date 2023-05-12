@@ -1,7 +1,6 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Container, Form, InputGroup } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import AddContact from '../contacts/add-contact';
 import EventsPopup from '../bi/events-popup';
 import AddTask from '../tasks/add-tasks';
