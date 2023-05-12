@@ -38,7 +38,7 @@ const SideMenu = ({setExpanded, setContent, setLang}) => {
                             <i className="bi bi-translate" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            {'Язык'}
+                            {getParams('language')}
                         </NavText>
                         <NavItem eventKey="localize/kz">
                             <NavText>
@@ -97,12 +97,12 @@ const SideMenu = ({setExpanded, setContent, setLang}) => {
                         </NavText>
                         <NavItem eventKey="list/contacts">
                             <NavText>
-                                {'Контакты'}
+                                {getParams('contacts')}
                             </NavText>
                         </NavItem>
                         <NavItem eventKey="list/customers">
                             <NavText>
-                                {'Компании'}
+                                {getParams('company_id')}
                             </NavText>
                         </NavItem>
                         {/* <NavItem eventKey="list/files">
