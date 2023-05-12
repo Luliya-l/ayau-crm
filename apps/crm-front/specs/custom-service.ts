@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { selectLangState } from "../store/langSlice";
 import { Contract, Langs, Task } from "./custom-types";
 
-
 export const baseURL = "https://crm-backend-two.vercel.app/";
 // const baseURL = "http://localhost:8000/";
 
