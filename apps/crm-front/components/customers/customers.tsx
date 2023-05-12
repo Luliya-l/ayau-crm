@@ -56,6 +56,8 @@ const Customers = () => {
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
                     locale={CurrentLang()}
+                    allowExcelExport={true}
+                    allowPdfExport={true}
                 >
                     <ColumnsDirective>
                         <ColumnDirective 
