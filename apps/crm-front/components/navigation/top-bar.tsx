@@ -10,18 +10,11 @@ import AddCustomer from '../customers/add-customer';
 import SendMail from '../mails/send-mail';
 import SaveSettings from '../settings/save';
 import AddFile from '../files/add-file';
-import { Langs } from 'apps/crm-front/specs/custom-types';
-import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { useEffect, useState } from 'react';
 import { GetParams } from 'apps/crm-front/specs/custom-service';
 
 const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компаний', addCommand='add-company'}): JSX.Element => {
-  const localization = useSelector(selectLangState) as Langs;
   const [fixWidth, setFixWidth] = useState('top-64');
-
-  const getParams = (param: string) => {
-    return localization.langs[localization.currentLang]?.params[param];
-  }
 
   const getCommand = () => {
     switch (addCommand) {
@@ -105,7 +98,7 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
               <InputGroup.Text>
                 <i className="bi bi-search"></i>
               </InputGroup.Text>
-              <Form.Control aria-label="Search" placeholder={getParams('search')} />
+              <Form.Control aria-label="Search" placeholder={GetParams('search')} />
             </InputGroup>
           </Col>
           <Col lg={2} xs={2} className='d-flex justify-content-center'>
