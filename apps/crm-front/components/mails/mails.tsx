@@ -1,4 +1,4 @@
-import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
+import { ColumnDirective, ColumnsDirective, ExcelExport, GridComponent, PdfExport } from '@syncfusion/ej2-react-grids';
 import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
 
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
@@ -19,7 +19,7 @@ const MailBox = ({inbox = true}) => {
     const dateFormat = { type: 'dateTime', format: 'yyyy-MM-dd HH:mm' };
 
     const editOptions: EditSettingsModel = { allowAdding: true, allowDeleting: true, mode: 'Dialog' };
-    const toolbarOptions: ToolbarItems[] = ['Search', 'Delete'];
+    const toolbarOptions: ToolbarItems[] = ['Search', 'Delete', 'PdfExport', 'ExcelExport'];
     
     useEffect(() => {
         grid.current.refresh();
@@ -66,7 +66,7 @@ const MailBox = ({inbox = true}) => {
                             format={dateFormat}
                         />
                     </ColumnsDirective>
-                    <Inject services={[Edit, Toolbar]} />
+                    <Inject services={[Edit, Toolbar, PdfExport, ExcelExport]} />
                 </GridComponent>
             </div>
         </>

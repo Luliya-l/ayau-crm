@@ -5,6 +5,8 @@ import { GridComponent,
     Filter,
     Sort,
     ForeignKey,
+    PdfExport,
+    ExcelExport,
 } from '@syncfusion/ej2-react-grids';
 import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
 
@@ -36,7 +38,7 @@ const Tasks = () => {
         mode: 'Dialog', 
         template:(props) => dialogTemplate(props), 
     };
-    const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel'];
+    const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel', 'PdfExport', 'ExcelExport'];
     
     useEffect(() => {
         grid.current.refresh();
@@ -88,7 +90,7 @@ const Tasks = () => {
                             width='100'
                         />
                     </ColumnsDirective>
-                    <Inject services={[Filter, Page, Edit, Sort, ForeignKey, Toolbar]} />
+                    <Inject services={[Filter, Page, Edit, Sort, ForeignKey, Toolbar, PdfExport, ExcelExport]} />
                 </GridComponent>
             </div>
         </>
