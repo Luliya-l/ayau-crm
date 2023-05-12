@@ -10,11 +10,14 @@ import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import AddContractForm from "./add-contract-form";
-import { CurrentLang, GetParams, contractsDS } from "apps/crm-front/specs/custom-service";
+import { GetParams, contractsDS } from "apps/crm-front/specs/custom-service";
+import { selectLangState } from "apps/crm-front/store/langSlice";
+import { Langs } from "apps/crm-front/specs/custom-types";
 
 const Contracts = () => {
     const auth = useSelector(useAuth) as AuthState;
     const loadingState = useSelector(useLoadingState);
+    const localization = useSelector(selectLangState) as Langs;
 
     const dispatch = useDispatch();
 
@@ -78,26 +81,26 @@ const Contracts = () => {
                     }} 
                     dialogSettings={{ template: dialogTemplate.bind(this) }}
                     cardRendered={cardRendered.bind(this)}
-                    locale={CurrentLang()}
+                    locale={localization.currentLang}
                 >
                     <ColumnsDirective>
                         <ColumnDirective 
-                            headerText={`${GetParams('primaryContact')}`} 
+                            headerText={`${GetParams('primaryContact', localization)}`} 
                             keyField="new" 
                             template={columnTemplate.bind(this)}
                         />
                         <ColumnDirective 
-                            headerText={`${GetParams('negotiation')}`} 
+                            headerText={`${GetParams('negotiation', localization)}`} 
                             keyField="InProgress" 
                             template={columnTemplate.bind(this)}
                         />
                         <ColumnDirective 
-                            headerText={`${GetParams('makeDecision')}`} 
+                            headerText={`${GetParams('makeDecision', localization)}`} 
                             keyField="Testing" 
                             template={columnTemplate.bind(this)}
                         />
                         <ColumnDirective 
-                            headerText={`${GetParams('Harmonizationofcontract')}`} 
+                            headerText={`${GetParams('Harmonizationofcontract', localization)}`} 
                             keyField="Close" 
                             template={columnTemplate.bind(this)}
                         />

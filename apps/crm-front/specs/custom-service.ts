@@ -8,9 +8,9 @@ export const baseURL = "https://crm-backend-two.vercel.app/";
 
 export const dateFormat = { type: 'dateTime', format: 'yyyy-MM-dd' };
 
-export const GetParams = (param: string): string => {
-    const localization = useSelector(selectLangState) as Langs;
-    return localization.langs[localization.currentLang].params[param];
+export const GetParams = (param: string, localization): string => {
+    // const localization = useSelector(selectLangState) as Langs;
+    return localization?.langs[localization.currentLang].params[param];
 }
 
 export const CurrentLang =():string => {

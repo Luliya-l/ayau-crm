@@ -14,14 +14,17 @@ import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from 'react';
-import { CurrentLang, GetParams, contactsDS } from 'apps/crm-front/specs/custom-service';
+import { GetParams, contactsDS } from 'apps/crm-front/specs/custom-service';
 import { CompanyColumn } from '../utils/grid-company';
 import { ResponsibleColumn } from '../utils/grid-responsible';
 import AddContactForm from './add-contact-form';
+import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { Langs } from 'apps/crm-front/specs/custom-types';
 
 const Contacts = () => {
     const auth = useSelector(useAuth) as AuthState;
     const loadingState = useSelector(useLoadingState);
+    const localization = useSelector(selectLangState) as Langs;
 
     const dispatch = useDispatch();
 
@@ -56,7 +59,7 @@ const Contacts = () => {
                     allowSorting={true}
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
-                    locale={CurrentLang()}
+                    locale={localization.currentLang}
                     allowExcelExport={true}
                     allowPdfExport={true}
                 >
@@ -74,12 +77,12 @@ const Contacts = () => {
                         {CompanyColumn('company_id', auth)}
                         <ColumnDirective 
                             field='phone' 
-                            headerText={GetParams('phone').toUpperCase()} 
+                            headerText={GetParams('phone', localization).toUpperCase()} 
                             width='100' 
                         />
                         <ColumnDirective 
                             field='email' 
-                            headerText={GetParams('email').toUpperCase()} 
+                            headerText={GetParams('email', localization).toUpperCase()} 
                             width='100' 
                             format="C2" 
                         />

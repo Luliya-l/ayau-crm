@@ -1,17 +1,19 @@
 import { extend } from '@syncfusion/ej2-base';
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 
-import { Contract, Task, User } from "apps/crm-front/specs/custom-types";
+import { Contract, Langs, Task, User } from "apps/crm-front/specs/custom-types";
 import { useEffect, useState } from "react";
 import { Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import DateTimePicker from "../spec/datetime-picker";
 import { postGetContracts, postGetResponsible } from "apps/crm-front/data/fetch/integration";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
+import { selectLangState } from 'apps/crm-front/store/langSlice';
 
 
 const AddTaskForm = (props) => {
     const auth = useSelector(useAuth) as AuthState;
+    const localization = useSelector(selectLangState) as Langs;
 
     const fields = { text: 'name', value: 'id' };
 

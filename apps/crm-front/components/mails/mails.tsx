@@ -5,12 +5,15 @@ import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CurrentLang, mailsDS } from 'apps/crm-front/specs/custom-service';
+import { mailsDS } from 'apps/crm-front/specs/custom-service';
+import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { Langs } from 'apps/crm-front/specs/custom-types';
 
 
 const MailBox = ({inbox = true}) => {
     const auth = useSelector(useAuth) as AuthState;
     const loadingState = useSelector(useLoadingState);
+    const localization = useSelector(selectLangState) as Langs;
 
     const dispatch = useDispatch();
 
@@ -36,7 +39,7 @@ const MailBox = ({inbox = true}) => {
                     pageSettings={{ pageSize: 5 }}
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
-                    locale={CurrentLang()}
+                    locale={localization.currentLang}
                     allowExcelExport={true}
                     allowPdfExport={true}
                 >

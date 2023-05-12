@@ -5,12 +5,14 @@ import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { useEffect, useState } from "react";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Company, Contract, User } from "apps/crm-front/specs/custom-types";
+import { Company, Contract, Langs, User } from "apps/crm-front/specs/custom-types";
 import { postGetCompaniesList, postGetResponsible } from 'apps/crm-front/data/fetch/integration';
 import { GetParams } from 'apps/crm-front/specs/custom-service';
+import { selectLangState } from 'apps/crm-front/store/langSlice';
 
 const AddContractForm = (props = null) => {
     const auth = useSelector(useAuth) as AuthState;
+    const localization = useSelector(selectLangState) as Langs;
 
     const fields = { text: 'name', value: 'id' };
 
@@ -88,7 +90,7 @@ const AddContractForm = (props = null) => {
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="responsible">
                 <Form.Label column sm="2">
-                    {GetParams('company_id')}
+                    {GetParams('company_id', localization)}
                 </Form.Label>
                 <Col sm="10">
                     <DropDownListComponent 
@@ -97,7 +99,7 @@ const AddContractForm = (props = null) => {
                         fields={fields}
                         dataSource={companies} 
                         className="e-field" 
-                        placeholder={GetParams('company_id')} 
+                        placeholder={GetParams('company_id', localization)} 
                         value={data.company_id}>
 
                     </DropDownListComponent>

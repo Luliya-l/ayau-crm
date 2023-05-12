@@ -1,4 +1,4 @@
-import { Contract, Task, User } from "apps/crm-front/specs/custom-types";
+import { Contract, Langs, Task, User } from "apps/crm-front/specs/custom-types";
 
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, InputGroup, Modal, Row, Spinner } from "react-bootstrap";
@@ -9,10 +9,12 @@ import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { setLoading } from "apps/crm-front/store/loadingState";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import { GetParams } from "apps/crm-front/specs/custom-service";
+import { selectLangState } from "apps/crm-front/store/langSlice";
 
 const AddTask = () => {
     const auth = useSelector(useAuth) as AuthState;
-    
+    const localization = useSelector(selectLangState) as Langs;
+
     const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
@@ -69,7 +71,7 @@ const AddTask = () => {
                 onClick={handleShow}
             >
                 <i className="bi bi-plus-lg me-1"></i>
-                {GetParams('addtask')}
+                {GetParams('addtask', localization)}
             </Button>
             <Modal
                 show={show}
@@ -80,7 +82,7 @@ const AddTask = () => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {GetParams('addtask')}
+                        {GetParams('addtask', localization)}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={`${!send ? '' : 'd-none'} grid-editor`}>

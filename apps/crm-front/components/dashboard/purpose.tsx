@@ -1,7 +1,12 @@
 import { AxisModel, Category, ChartComponent, ColumnSeries, DataLabel, Inject, Legend, LegendSeriesModel, LineSeries, SeriesCollectionDirective, SeriesDirective, Tooltip, TooltipSettingsModel } from "@syncfusion/ej2-react-charts";
 import { GetParams } from "apps/crm-front/specs/custom-service";
+import { Langs } from "apps/crm-front/specs/custom-types";
+import { selectLangState } from "apps/crm-front/store/langSlice";
+import { useSelector } from "react-redux";
 
 const Purpose = (): JSX.Element => {
+    const localization = useSelector(selectLangState) as Langs;
+
     const data: any[] = [
         { month: 'Jan', sales: 35 }, { month: 'Feb', sales: 28 },
         { month: 'Mar', sales: 34 }, { month: 'Apr', sales: 32 },
@@ -24,7 +29,7 @@ const Purpose = (): JSX.Element => {
             legendSettings={legendSettings}
             primaryYAxis={primaryyAxis} 
             tooltip={tooltip}
-            title={`${GetParams('purpose')}`}
+            title={`${GetParams('purpose', localization)}`}
             style={{color:'var(--gosu-light-100)'}}
         >
             <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />

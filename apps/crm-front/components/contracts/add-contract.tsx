@@ -1,7 +1,7 @@
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import { postGetCompaniesList, postGetResponsible, postSetContract } from "apps/crm-front/data/fetch/integration";
 import { GetParams } from "apps/crm-front/specs/custom-service";
-import { Company, Contract, User } from "apps/crm-front/specs/custom-types";
+import { Company, Contract, Langs, User } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { setLoading } from "apps/crm-front/store/loadingState";
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AddContract = () => {
     const auth = useSelector(useAuth) as AuthState;
+    const localization = useSelector(selectLangState) as Langs;
 
     const dispatch = useDispatch();
 
@@ -57,7 +58,7 @@ const AddContract = () => {
                 onClick={handleShow}
             >
                 <i className="bi bi-plus-lg me-1"></i>
-                {GetParams('addcontract')}
+                {GetParams('addcontract', localization)}
             </Button>
             <Modal
                 show={show}
@@ -68,7 +69,7 @@ const AddContract = () => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {GetParams('addcontract')}
+                        {GetParams('addcontract', localization)}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="grid-group-editor">
@@ -125,7 +126,7 @@ const AddContract = () => {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
-                            {GetParams('company_id')}
+                            {GetParams('company_id', localization)}
                         </Form.Label>
                         <Col sm="10">
                             <DropDownListComponent 
@@ -134,7 +135,7 @@ const AddContract = () => {
                                 fields={fields}
                                 dataSource={companies} 
                                 className="e-field" 
-                                placeholder={GetParams('company_id')} 
+                                placeholder={GetParams('company_id', localization)} 
                                 value={contract.company_id}
                                 onChange={(e) => onChange(e)}
                             >

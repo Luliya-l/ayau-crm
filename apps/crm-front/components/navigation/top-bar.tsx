@@ -11,8 +11,12 @@ import SaveSettings from '../settings/save';
 import AddFile from '../files/add-file';
 import { useEffect, useState } from 'react';
 import { GetParams } from 'apps/crm-front/specs/custom-service';
+import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { Langs } from 'apps/crm-front/specs/custom-types';
+import { useSelector } from 'react-redux';
 
 const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компаний', addCommand='add-company'}): JSX.Element => {
+  const localization = useSelector(selectLangState) as Langs;
   const [fixWidth, setFixWidth] = useState('top-64');
 
   const getCommand = () => {
@@ -51,7 +55,7 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
       case 'tasks':
         return "Задачи"
       case 'contacts':
-        return GetParams('contacts')
+        return GetParams('contacts', localization)
       case 'list':
         return "Клиенты"
       case 'list/contacts':
@@ -94,14 +98,14 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
           </Col>
           <Col lg={4} xs={4} className=''>
             <InputGroup className="my-2">
-              <InputGroup.Text>
+              {/* <InputGroup.Text>
                 <i className="bi bi-search"></i>
-              </InputGroup.Text>
-              <Form.Control aria-label="Search" placeholder={GetParams('search')} />
+              </InputGroup.Text> */}
+              {/* <Form.Control aria-label="Search" placeholder={GetParams('search')} /> */}
             </InputGroup>
           </Col>
           <Col lg={2} xs={2} className='d-flex justify-content-center'>
-            <span className='fs-6'>{msg}</span>
+            {/* <span className='fs-6'>{msg}</span> */}
           </Col>
           <Col lg={1} xs={1} className='d-flex justify-content-center'>
             <i className="bi bi-three-dots"></i>

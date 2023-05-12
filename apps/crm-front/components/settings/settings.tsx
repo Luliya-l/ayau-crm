@@ -12,7 +12,6 @@ import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setTokens, useA
 import { useEffect, useState } from "react";
 import { Langs, Organization, User } from 'apps/crm-front/specs/custom-types';
 import { postGetProfile, postOrganization } from 'apps/crm-front/data/fetch/integration';
-import { useLoadingState } from 'apps/crm-front/store/loadingState';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import Filials from './filials';
 import Users from './users';
@@ -22,10 +21,6 @@ const Settings = ({lang='ru'}) => {
   const localization = useSelector(selectLangState) as Langs;
 
   const dispatch = useDispatch();
-
-  const getParams = (param: string) => {
-    return localization.langs[localization.currentLang].params[param];
-  }
 
   const [profile, setProfile] = useState({} as User);
   const [org, setOrg] = useState({} as Organization);
@@ -66,7 +61,7 @@ const Settings = ({lang='ru'}) => {
                 {/* <Nav.Link eventKey="general">{'Общие настройки'}</Nav.Link> */}
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="payment">{'Счет и оплата'}</Nav.Link>
+                {/* <Nav.Link eventKey="payment">{'Счет и оплата'}</Nav.Link> */}
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="users">{'Пользователи'}</Nav.Link>

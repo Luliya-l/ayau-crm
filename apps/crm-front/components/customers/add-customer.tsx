@@ -1,8 +1,9 @@
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import { postGetResponsible, postSetCompanies } from "apps/crm-front/data/fetch/integration";
 import { GetParams } from "apps/crm-front/specs/custom-service";
-import { Company, User } from "apps/crm-front/specs/custom-types";
+import { Company, Langs, User } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
+import { selectLangState } from "apps/crm-front/store/langSlice";
 import { setLoading } from "apps/crm-front/store/loadingState";
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
@@ -10,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AddCustomer = () => {
     const auth = useSelector(useAuth) as AuthState;
+    const localization = useSelector(selectLangState) as Langs;
 
     const dispatch = useDispatch();
 
@@ -57,7 +59,7 @@ const AddCustomer = () => {
                 onClick={handleShow}
             >
                 <i className="bi bi-plus-lg me-1"></i>
-                {GetParams('addcompany')}
+                {GetParams('addcompany', localization)}
             </Button>
             <Modal
                 show={show}
@@ -68,7 +70,7 @@ const AddCustomer = () => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {GetParams('addcompany')}
+                        {GetParams('addcompany', localization)}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="grid-group-editor">

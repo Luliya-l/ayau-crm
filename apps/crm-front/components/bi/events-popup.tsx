@@ -16,9 +16,13 @@ import { useState } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { ResponsibleColumn } from '../utils/grid-responsible';
+import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { Langs } from 'apps/crm-front/specs/custom-types';
 
 const EventsPopup = () => {
     const auth = useSelector(useAuth) as AuthState;
+    const localization = useSelector(selectLangState) as Langs;
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -40,11 +44,11 @@ const EventsPopup = () => {
                 onClick={handleShow}
             >
                 <i className="bi bi-filter-right me-1"></i>
-                {GetParams('events')}
+                {GetParams('events', localization)}
             </Button>
             <Offcanvas show={show} onHide={handleClose} placement={'end'}>
                 <Offcanvas.Header closeButton>
-                <Offcanvas.Title>{GetParams('events')}</Offcanvas.Title>
+                <Offcanvas.Title>{GetParams('events', localization)}</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <GridComponent 
@@ -54,7 +58,7 @@ const EventsPopup = () => {
                         allowSorting={true}
                         editSettings={editOptions}
                         toolbar={toolbarOptions}
-                        locale={CurrentLang()}
+                        locale={localization.currentLang}
                         allowExcelExport={true}
                         allowPdfExport={true}
                     >

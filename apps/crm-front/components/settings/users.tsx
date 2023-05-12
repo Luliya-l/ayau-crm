@@ -1,13 +1,14 @@
-import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
+import { ColumnDirective, ColumnsDirective, ExcelExport, GridComponent, PdfExport } from '@syncfusion/ej2-react-grids';
 import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
 import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
-import { Langs } from 'apps/crm-front/specs/custom-types';
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
+import { GetParams } from 'apps/crm-front/specs/custom-service';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { Langs } from 'apps/crm-front/specs/custom-types';
 
 const baseURL = "https://crm-backend-two.vercel.app/";
 // const baseURL = "http://localhost:8000/";
@@ -18,10 +19,6 @@ const Users = ({lang='ru'}) => {
   const localization = useSelector(selectLangState) as Langs;
 
   const dispatch = useDispatch();
-
-  const getParams = (param: string) => {
-    return localization.langs[localization.currentLang].params[param];
-  }
 
   const grid = useRef(null);
 
@@ -52,6 +49,9 @@ const Users = ({lang='ru'}) => {
         pageSettings={{ pageSize: 5 }}
         editSettings={editOptions}
         toolbar={toolbarOptions}
+        locale={localization.currentLang}
+        allowExcelExport={true}
+        allowPdfExport={true}
     >
         <ColumnsDirective>
           <ColumnDirective 
@@ -66,12 +66,12 @@ const Users = ({lang='ru'}) => {
           />
           <ColumnDirective 
               field='phone' 
-              headerText={getParams('phone').toUpperCase()} 
+              headerText={GetParams('phone', localization).toUpperCase()} 
               width='100'
           />
           <ColumnDirective 
               field='email' 
-              headerText={getParams('email').toUpperCase()} 
+              headerText={GetParams('email', localization).toUpperCase()} 
               width='100' 
           />
           <ColumnDirective 
@@ -86,7 +86,7 @@ const Users = ({lang='ru'}) => {
               width='100'
           />
         </ColumnsDirective>
-        <Inject services={[Edit, Toolbar]} />
+        <Inject services={[Edit, Toolbar, PdfExport, ExcelExport]} />
       </GridComponent>
   );
 }

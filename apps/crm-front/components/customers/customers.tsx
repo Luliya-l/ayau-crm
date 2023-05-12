@@ -17,10 +17,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { ResponsibleColumn } from '../utils/grid-responsible';
 import { CurrentLang, GetParams, companiesDS } from 'apps/crm-front/specs/custom-service';
 import AddCustomerForm from './add-customer-form';
+import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { Langs } from 'apps/crm-front/specs/custom-types';
 
 const Customers = () => {
     const auth = useSelector(useAuth) as AuthState;
     const loadingState = useSelector(useLoadingState);
+    const localization = useSelector(selectLangState) as Langs;
 
     const dispatch = useDispatch();
 
@@ -55,7 +58,7 @@ const Customers = () => {
                     allowSorting={true}
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
-                    locale={CurrentLang()}
+                    locale={localization.currentLang}
                     allowExcelExport={true}
                     allowPdfExport={true}
                 >
@@ -67,18 +70,18 @@ const Customers = () => {
                         />
                         <ColumnDirective 
                             field='name' 
-                            headerText={GetParams('name').toUpperCase()} 
+                            headerText={GetParams('name', localization).toUpperCase()} 
                             width='100' 
                         />
                         {ResponsibleColumn('responsible', auth)}
                         <ColumnDirective 
                             field='phone' 
-                            headerText={GetParams('phone').toUpperCase()} 
+                            headerText={GetParams('phone', localization).toUpperCase()} 
                             width='100' 
                         />
                         <ColumnDirective 
                             field='email' 
-                            headerText={GetParams('email').toUpperCase()} 
+                            headerText={GetParams('email', localization).toUpperCase()} 
                             width='100' 
                             format="C2" 
                         />

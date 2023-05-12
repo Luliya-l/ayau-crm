@@ -18,11 +18,14 @@ import { CurrentLang, GetParams, dateFormat, taskDS } from 'apps/crm-front/specs
 import { ResponsibleColumn } from '../utils/grid-responsible';
 import { ContractColumn } from '../utils/grid-contract';
 import AddTaskForm from './add-tasks-form';
+import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { Langs } from 'apps/crm-front/specs/custom-types';
 
 const Tasks = () => {
     const auth = useSelector(useAuth) as AuthState;
     const loadingState = useSelector(useLoadingState);
-    
+    const localization = useSelector(selectLangState) as Langs;
+
     const dispatch = useDispatch();
 
     const grid = useRef(null);
@@ -56,7 +59,7 @@ const Tasks = () => {
                     allowSorting={true}
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
-                    locale={CurrentLang()}
+                    locale={localization.currentLang}
                     allowExcelExport={true}
                     allowPdfExport={true}
                 >
@@ -69,7 +72,7 @@ const Tasks = () => {
                         />
                         <ColumnDirective 
                             field='completed_at' 
-                            headerText={GetParams('execution_date').toUpperCase()} 
+                            headerText={GetParams('execution_date', localization).toUpperCase()} 
                             width='100' 
                             format={dateFormat}
                         />
@@ -77,18 +80,18 @@ const Tasks = () => {
                         {ContractColumn('contract_id', auth)}
                         <ColumnDirective 
                             field='task_type' 
-                            headerText={GetParams('taskType').toUpperCase()} 
+                            headerText={GetParams('taskType', localization).toUpperCase()} 
                             width='100' 
                             format="C2" 
                         />
                         <ColumnDirective 
                             field='text' 
-                            headerText={GetParams('taskDescription').toUpperCase()} 
+                            headerText={GetParams('taskDescription', localization).toUpperCase()} 
                             width='100'
                         />
                         <ColumnDirective 
                             field='result' 
-                            headerText={GetParams('result').toUpperCase()} 
+                            headerText={GetParams('result', localization).toUpperCase()} 
                             width='100'
                         />
                     </ColumnsDirective>

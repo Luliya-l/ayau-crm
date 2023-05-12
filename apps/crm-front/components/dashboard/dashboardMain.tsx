@@ -13,9 +13,13 @@ import { ContractsData, GetParams, TasksData } from "apps/crm-front/specs/custom
 import { useSelector } from 'react-redux';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useState } from 'react';
+import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { Langs } from 'apps/crm-front/specs/custom-types';
 
 const DashBoardMain = () => {
     const auth = useSelector(useAuth) as AuthState;
+    const localization = useSelector(selectLangState) as Langs;
+
     const [tasks, setTasks] = useState({overdueTasks:0, newTasks:0, completedTasks:0});
     const [contracts, setContracts] = useState({withoutTask:0});
 
@@ -36,7 +40,7 @@ const DashBoardMain = () => {
             <Container fluid className="mb-4">
                 <Row>
                     <Col className="text-center mt-3">
-                        <h1>{GetParams('dashboard')}</h1>
+                        <h1>{GetParams('dashboard', localization)}</h1>
                     </Col>
                 </Row>
             </Container>
@@ -57,9 +61,9 @@ const DashBoardMain = () => {
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
                             <Kpi 
-                                title={GetParams('overdueTasks')} 
+                                title={GetParams('overdueTasks', localization)} 
                                 value={tasks.overdueTasks} 
-                                period={GetParams('onweek')} 
+                                period={GetParams('onweek', localization)} 
                             />
                         </div>
                     </div>
@@ -73,9 +77,9 @@ const DashBoardMain = () => {
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
                             <Kpi 
-                                title={GetParams('newTasks')} 
+                                title={GetParams('newTasks', localization)} 
                                 value={tasks.newTasks} 
-                                period={GetParams('onweek')} 
+                                period={GetParams('onweek', localization)} 
                                 className='text-info'
                             />
                         </div>
@@ -90,9 +94,9 @@ const DashBoardMain = () => {
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
                             <Kpi 
-                                title={GetParams('completeTasks')} 
+                                title={GetParams('completeTasks', localization)} 
                                 value={tasks.completedTasks} 
-                                period={GetParams('onweek')} 
+                                period={GetParams('onweek', localization)} 
                                 className='text-success'
                             />
                         </div>
@@ -107,9 +111,9 @@ const DashBoardMain = () => {
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
                             <Kpi 
-                                title={GetParams('withoutTask')} 
+                                title={GetParams('withoutTask', localization)} 
                                 value={contracts.withoutTask} 
-                                period={GetParams('onweek')} 
+                                period={GetParams('onweek', localization)} 
                                 className='text-warning'
                             />
                         </div>
@@ -153,25 +157,25 @@ const DashBoardMain = () => {
                     <div id="IncomingCalls" className="e-panel" data-row="14" data-col="8" data-sizex="2" data-sizey="2">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
-                            <Calls title={GetParams('IncomingCalls')} value={'0'} period={GetParams('onweek')} />
+                            <Calls title={GetParams('IncomingCalls', localization)} value={'0'} period={GetParams('onweek', localization)} />
                         </div>
                     </div>
                     <div id="notes" className="e-panel" data-row="14" data-col="10" data-sizex="2" data-sizey="2">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
-                            <Calls title={GetParams('notes')} value={'0'} period={GetParams('onweek')} className='text-info' />
+                            <Calls title={GetParams('notes', localization)} value={'0'} period={GetParams('onweek', localization)} className='text-info' />
                         </div>
                     </div>
                     <div id="outgoingcalls" className="e-panel" data-row="16" data-col="8" data-sizex="2" data-sizey="2">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
-                            <Calls title={GetParams('outgoingcalls')} value={'0'} period={GetParams('onweek')} className='text-success' />
+                            <Calls title={GetParams('outgoingcalls', localization)} value={'0'} period={GetParams('onweek', localization)} className='text-success' />
                         </div>
                     </div>
                     <div id="successfuldeals" className="e-panel" data-row="16" data-col="10" data-sizex="2" data-sizey="2">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
-                            <Calls title={GetParams('successfuldeals')} value={'0'} period={GetParams('onweek')} className='text-warning' />
+                            <Calls title={GetParams('successfuldeals', localization)} value={'0'} period={GetParams('onweek', localization)} className='text-warning' />
                         </div>
                     </div>
                 </DashboardLayoutComponent>

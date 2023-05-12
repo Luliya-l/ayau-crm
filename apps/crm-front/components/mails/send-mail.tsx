@@ -1,8 +1,9 @@
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import { postGetCompaniesList, postGetContracts, postGetResponsible, postSetMail } from "apps/crm-front/data/fetch/integration";
 import { GetParams } from "apps/crm-front/specs/custom-service";
-import { Company, Contract, Mail, User } from "apps/crm-front/specs/custom-types";
+import { Company, Contract, Langs, Mail, User } from "apps/crm-front/specs/custom-types";
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
+import { selectLangState } from "apps/crm-front/store/langSlice";
 import { setLoading } from "apps/crm-front/store/loadingState";
 import { useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Modal, Row } from "react-bootstrap";
@@ -10,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const SendMail = () => {
     const auth = useSelector(useAuth) as AuthState;
+    const localization = useSelector(selectLangState) as Langs;
 
     const dispatch = useDispatch();
 
@@ -69,7 +71,7 @@ const SendMail = () => {
                 onClick={handleShow}
             >
                 <i className="bi bi-plus-lg me-1"></i>
-                {GetParams('write')}
+                {GetParams('write', localization)}
             </Button>
             <Modal
                 show={show}
@@ -80,7 +82,7 @@ const SendMail = () => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {GetParams('write')}
+                        {GetParams('write', localization)}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="grid-editor">

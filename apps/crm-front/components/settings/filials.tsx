@@ -1,16 +1,16 @@
-import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
+import { ColumnDirective, ColumnsDirective, ExcelExport, GridComponent, PdfExport } from '@syncfusion/ej2-react-grids';
 import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
 import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
-import { Langs } from 'apps/crm-front/specs/custom-types';
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
+import { CurrentLang, GetParams } from 'apps/crm-front/specs/custom-service';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { Langs } from 'apps/crm-front/specs/custom-types';
 
 const baseURL = "https://crm-backend-two.vercel.app/";
-// const baseURL = "http://localhost:8000/";
 
 const Filials = ({lang='ru'}) => {
   const auth = useSelector(useAuth) as AuthState;
@@ -19,13 +19,9 @@ const Filials = ({lang='ru'}) => {
 
   const dispatch = useDispatch();
 
-  const getParams = (param: string) => {
-    return localization.langs[localization.currentLang].params[param];
-  }
-
   const grid = useRef(null);
 
-  const taskDS: DataManager = new DataManager({
+  const filialsDS: DataManager = new DataManager({
       adaptor: new UrlAdaptor(),
       updateUrl: `${baseURL}crm/filials/update`,
       insertUrl: `${baseURL}crm/filials/set`,
@@ -47,11 +43,14 @@ const Filials = ({lang='ru'}) => {
   return (
     <GridComponent 
         ref={grid}
-        dataSource={taskDS}
+        dataSource={filialsDS}
         allowPaging={false}
         pageSettings={{ pageSize: 5 }}
         editSettings={editOptions}
         toolbar={toolbarOptions}
+        locale={localization.currentLang}
+        allowExcelExport={true}
+        allowPdfExport={true}
     >
         <ColumnsDirective>
           <ColumnDirective 
@@ -66,17 +65,17 @@ const Filials = ({lang='ru'}) => {
           />
           <ColumnDirective 
               field='phone' 
-              headerText={getParams('phone').toUpperCase()} 
+              headerText={GetParams('phone', localization).toUpperCase()} 
               width='100'
           />
           <ColumnDirective 
               field='email' 
-              headerText={getParams('email').toUpperCase()} 
+              headerText={GetParams('email', localization).toUpperCase()} 
               width='100' 
           />
           <ColumnDirective 
               field='responsible' 
-              headerText={getParams('responsible').toUpperCase()} 
+              headerText={GetParams('responsible', localization).toUpperCase()} 
               width='100' 
               format="C2" 
               visible={false}
@@ -92,7 +91,7 @@ const Filials = ({lang='ru'}) => {
               width='100'
           />
         </ColumnsDirective>
-        <Inject services={[Edit, Toolbar]} />
+        <Inject services={[Edit, Toolbar, PdfExport, ExcelExport]} />
       </GridComponent>
   );
 }
