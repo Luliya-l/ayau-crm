@@ -20,16 +20,20 @@ const AddTaskForm = (props) => {
     const [responsible, setResponsible] = useState([] as User[]);
     const [contracts, setContracts] = useState([] as Contract[]);
 
+    
     const [state, setState] = useState(extend({}, {}, props, true));
     const task = state as Task;
+    const [check, setCheck] = useState(task.completed);
 
     const onChange = (args) => {
         const key = args.target.name;
         const value = args.target.value;
-        setState({ [key]: value });
         if (key === 'completed') {
+            setCheck(!check);
+            setState({ [key]: check });
             setState({ ['completed_at']: value ? new Date() : null });
-        }
+        } else
+            setState({ [key]: value });
     }
 
     const setTaskExecutionDate = (date: Date) => {
@@ -66,7 +70,8 @@ const AddTaskForm = (props) => {
                                     <Form.Check 
                                         aria-label="name" 
                                         name="completed"
-                                        checked={task.completed}
+                                        label={'Выполнено'}
+                                        checked={check}
                                         onChange={(e) => onChange(e)} />
                                 </InputGroup>
                             </Col>

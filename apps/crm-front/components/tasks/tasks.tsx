@@ -43,6 +43,12 @@ const Tasks = () => {
     };
     const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel', 'PdfExport', 'ExcelExport'];
     
+    const actionComplete = (args) => {
+        if (args.requestType === 'save') {
+            dispatch(setLoading(true));
+        }
+    }
+
     useEffect(() => {
         grid.current.refresh();
         dispatch(setLoading(false));
@@ -62,6 +68,7 @@ const Tasks = () => {
                     locale={localization.currentLang}
                     allowExcelExport={true}
                     allowPdfExport={true}
+                    actionComplete={actionComplete}
                     toolbarClick={(e) => ToolbarExport(grid, e)}
                 >
                     <ColumnsDirective>
