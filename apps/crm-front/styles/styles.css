@@ -305,7 +305,10 @@ h5 {
 
 /* DASHBOARD */
 
-
+#charts_svg {
+  width: 100%!important;
+  height: 100%!important;
+}
 
 /* END DASHBOARD */
 

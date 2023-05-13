@@ -19,6 +19,14 @@ export const sf = {
             'noCard': 'Көрсетілетін карталар жоқ',
             'unassigned': 'тағайындалмаған'
         },
+        'chart': {
+            ZoomIn: 'ZoomIn',
+            ZoomOut: 'ZoomOut',
+            Zoom: 'Zoom',
+            Pan: 'Pan',
+            Reset: 'Reset',
+            ResetZoom: 'ResetZoom',
+        },
         'grid': {
             'EmptyRecord': 'No records to display',
             'True':'true',
@@ -135,6 +143,14 @@ export const sf = {
             'close': 'Закрыть',
             'noCard': 'Нет карт для отображения',
             'unassigned': 'не назначен'
+        },
+        'chart': {
+            ZoomIn: 'ZoomIn',
+            ZoomOut: 'ZoomOut',
+            Zoom: 'Zoom',
+            Pan: 'Pan',
+            Reset: 'Reset',
+            ResetZoom: 'ResetZoom',
         },
         'grid': {
             'EmptyRecord': 'Нет записей для отображения',
