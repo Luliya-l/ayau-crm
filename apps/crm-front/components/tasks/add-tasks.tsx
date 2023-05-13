@@ -34,6 +34,7 @@ const AddTask = () => {
         text: "",
         contract_id: "",
         responsible: "",
+        completed_at: null,
         finish_at: new Date(),
     } as Task);
 
