@@ -27,10 +27,13 @@ const AddTaskForm = (props) => {
         const key = args.target.name;
         const value = args.target.value;
         setState({ [key]: value });
+        if (key === 'completed') {
+            setState({ ['completed_at']: value ? new Date() : null });
+        }
     }
 
     const setTaskExecutionDate = (date: Date) => {
-        setState({['completed_at']: date});
+        setState({['finish_at']: date});
     }
 
     useEffect(() => {
