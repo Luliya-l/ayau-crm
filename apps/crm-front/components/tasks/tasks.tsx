@@ -76,6 +76,12 @@ const Tasks = () => {
                             width='100' 
                             format={dateFormat}
                         />
+                        <ColumnDirective 
+                            field='finish_at' 
+                            headerText={GetParams('execution_date', localization).toUpperCase()} 
+                            width='100' 
+                            format={dateFormat}
+                        />
                         {ResponsibleColumn('responsible', auth)}
                         {ContractColumn('contract_id', auth)}
                         <ColumnDirective 
