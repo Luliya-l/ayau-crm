@@ -9,9 +9,9 @@ import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
 import { GetParams } from 'apps/crm-front/specs/custom-service';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { Langs } from 'apps/crm-front/specs/custom-types';
+import AddUserForm from './add-users-form';
 
 const baseURL = "https://crm-backend-two.vercel.app/";
-// const baseURL = "http://localhost:8000/";
 
 const Users = ({lang='ru'}) => {
   const auth = useSelector(useAuth) as AuthState;
@@ -33,7 +33,11 @@ const Users = ({lang='ru'}) => {
       headers: [{ Authorization: `Bearer ${auth.authToken}` }]
   });
 
-  const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
+  const dialogTemplate = (props) => {
+    return (<AddUserForm {...props}/>);
+}
+
+  const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog', template: dialogTemplate };
   const toolbarOptions: ToolbarItems[] = ['Search', 'Add', 'Edit', 'Delete', 'Update', 'Cancel'];
   
   useEffect(() => {
