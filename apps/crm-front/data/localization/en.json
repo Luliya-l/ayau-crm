@@ -54,6 +54,7 @@
             "notes": "notes",
             "outgoingcalls": "Outgoing calls",
             "successfuldeals": "Successful contract",
-            "language": "language"
+            "language": "language",
+            "lastName": "Full name"
         }
 }
