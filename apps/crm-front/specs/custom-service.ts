@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { selectLangState } from "../store/langSlice";
 import { Contract, Langs, Task } from "./custom-types";
 
-export const baseURL = "https://crm-backend-two.vercel.app/";
-// const baseURL = "http://localhost:8000/";
+// export const baseURL = "https://crm-backend-two.vercel.app/";
+const baseURL = "http://localhost:8000/";
 
 export const dateFormat = { type: 'dateTime', format: 'yyyy-MM-dd' };
 
@@ -28,6 +28,17 @@ export const eventsDS = (auth): DataManager => new DataManager({
 
 export const responsiblesDS = (auth): DataManager => new DataManager({
     url: `${baseURL}crm/responsibles/get`,
+    updateUrl: `${baseURL}crm/users/update`,
+    insertUrl: `${baseURL}crm/users/set`,
+    removeUrl: `${baseURL}crm/users/delete`,
+    dataType: 'json',
+    adaptor: new UrlAdaptor(),
+    crossDomain: true,
+    headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+});
+
+export const usersDS = (auth): DataManager => new DataManager({
+    url: `${baseURL}crm/users/get`,
     updateUrl: `${baseURL}crm/users/update`,
     insertUrl: `${baseURL}crm/users/set`,
     removeUrl: `${baseURL}crm/users/delete`,

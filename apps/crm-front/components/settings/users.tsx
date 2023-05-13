@@ -1,17 +1,14 @@
 import { ColumnDirective, ColumnsDirective, ExcelExport, GridComponent, PdfExport } from '@syncfusion/ej2-react-grids';
 import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
-import { DataManager, UrlAdaptor  } from '@syncfusion/ej2-data';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
-import { GetParams } from 'apps/crm-front/specs/custom-service';
+import { GetParams, responsiblesDS, usersDS } from 'apps/crm-front/specs/custom-service';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { Langs } from 'apps/crm-front/specs/custom-types';
 import AddUserForm from './add-users-form';
-
-const baseURL = "https://crm-backend-two.vercel.app/";
 
 const Users = ({lang='ru'}) => {
   const auth = useSelector(useAuth) as AuthState;
@@ -22,22 +19,33 @@ const Users = ({lang='ru'}) => {
 
   const grid = useRef(null);
 
-  const taskDS: DataManager = new DataManager({
-      adaptor: new UrlAdaptor(),
-      updateUrl: `${baseURL}crm/users/update`,
-      insertUrl: `${baseURL}crm/users/set`,
-      removeUrl: `${baseURL}crm/users/delete`,
-      url: `${baseURL}crm/users/get`,
-      crossDomain: true,
-      requestType: 'POST',
-      headers: [{ Authorization: `Bearer ${auth.authToken}` }]
-  });
+  const userRoles = [
+    {
+        id:'head',
+        name:'Руководитель'
+    },
+    {
+        id:'manager',
+        name:'Менеджер'
+    },
+    {
+        id:'user',
+        name:'Администратор'
+    }
+  ]
 
   const dialogTemplate = (props) => {
     return (<AddUserForm {...props}/>);
-}
+  }
 
-  const editOptions: EditSettingsModel = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog', template: dialogTemplate };
+  const editOptions: EditSettingsModel = { 
+    allowEditing: true, 
+    allowAdding: true, 
+    allowDeleting: true, 
+    mode: 'Dialog', 
+    template: (props) => dialogTemplate(props) 
+  };
+
   const toolbarOptions: ToolbarItems[] = ['Search', 'Add', 'Edit', 'Delete', 'Update', 'Cancel'];
   
   useEffect(() => {
@@ -48,9 +56,9 @@ const Users = ({lang='ru'}) => {
   return (
     <GridComponent 
         ref={grid}
-        dataSource={taskDS}
-        allowPaging={false}
-        pageSettings={{ pageSize: 5 }}
+        dataSource={usersDS(auth)}
+        allowPaging={true}
+        pageSettings={{ pageSize: 50 }}
         editSettings={editOptions}
         toolbar={toolbarOptions}
         locale={localization.currentLang}
@@ -60,7 +68,8 @@ const Users = ({lang='ru'}) => {
         <ColumnsDirective>
           <ColumnDirective 
               field='id' width='100' 
-              textAlign="Right" isPrimaryKey={true} 
+              textAlign="Right" 
+              isPrimaryKey={true} 
               visible={false}
           />
           <ColumnDirective 
@@ -82,12 +91,13 @@ const Users = ({lang='ru'}) => {
               field='gender' 
               headerText={'Пол'.toUpperCase()} 
               width='100' 
-              format="C2" 
           />
           <ColumnDirective 
               field='role' 
               headerText={'Роль'.toUpperCase()} 
-              width='100'
+              dataSource={userRoles}
+              foreignKeyValue="name"
+              foreignKeyField="id"
           />
         </ColumnsDirective>
         <Inject services={[Edit, Toolbar, PdfExport, ExcelExport]} />

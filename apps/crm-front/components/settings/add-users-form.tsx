@@ -1,8 +1,7 @@
 import { extend } from '@syncfusion/ej2-base';
 
-import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { useState } from "react";
-import { Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Col, Form,  Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Langs, User } from "apps/crm-front/specs/custom-types";
 import { selectLangState } from 'apps/crm-front/store/langSlice';

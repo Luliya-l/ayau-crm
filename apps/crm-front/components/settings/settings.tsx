@@ -98,7 +98,7 @@ const Settings = ({lang='ru'}) => {
                           <Form.Control 
                               type="name" 
                               name="name"
-                              value={profile?.name} 
+                              value={profile?.name ?? ''} 
                               placeholder="Ф.И.О." 
                               onChange={(e) => onChange(e)} 
                           />
@@ -112,7 +112,7 @@ const Settings = ({lang='ru'}) => {
                           <Form.Control 
                               type="phone" 
                               name="phone"
-                              value={profile?.phone} 
+                              value={profile?.phone ?? ''} 
                               placeholder="777 777 77 77" 
                               onChange={(e) => onChange(e)} />
                           </Col>
@@ -125,7 +125,7 @@ const Settings = ({lang='ru'}) => {
                               <Form.Control 
                                   type="email" 
                                   name="email"
-                                  value={profile?.email} 
+                                  value={profile?.email ?? ''} 
                                   placeholder="email@example.com" 
                                   onChange={(e) => onChange(e)} 
                               />
@@ -138,7 +138,7 @@ const Settings = ({lang='ru'}) => {
                           <Col sm="10">
                               <Form.Select 
                                   name="gender"
-                                  value={profile?.gender} 
+                                  value={profile?.gender ?? '1'} 
                                   onChange={(e) => onChange(e)}
                               >
                                   <option value="1">Мужской</option>
@@ -155,9 +155,9 @@ const Settings = ({lang='ru'}) => {
                           </Form.Label>
                           <Col sm="10">
                               <Form.Control 
-                                  type="title" 
+                                  type="text" 
                                   name="title"
-                                  value={org?.title} 
+                                  value={org?.title ?? ''} 
                                   placeholder="ТОО Ладья" 
                                   onChange={(e) => onChange(e)} 
                               />
@@ -172,7 +172,7 @@ const Settings = ({lang='ru'}) => {
                                   as={'textarea'}
                                   rows={5} 
                                   name="activity"
-                                  value={org?.activity} 
+                                  value={org?.activity ?? ''} 
                                   onChange={(e) => onChange(e)} 
                               />
                           </Col>
@@ -186,7 +186,7 @@ const Settings = ({lang='ru'}) => {
                                   as={'textarea'} 
                                   rows={5}
                                   name="description"
-                                  value={org?.description} 
+                                  value={org?.description ?? ''} 
                                   onChange={(e) => onChange(e)} 
                               />
                           </Col>
