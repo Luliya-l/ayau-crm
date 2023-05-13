@@ -15,7 +15,7 @@ import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ResponsibleColumn } from '../utils/grid-responsible';
-import { CurrentLang, GetParams, companiesDS } from 'apps/crm-front/specs/custom-service';
+import { CurrentLang, GetParams, ToolbarExport, companiesDS } from 'apps/crm-front/specs/custom-service';
 import AddCustomerForm from './add-customer-form';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { Langs } from 'apps/crm-front/specs/custom-types';
@@ -61,6 +61,7 @@ const Customers = () => {
                     locale={localization.currentLang}
                     allowExcelExport={true}
                     allowPdfExport={true}
+                    toolbarClick={(e) => ToolbarExport(grid, e)}
                 >
                     <ColumnsDirective>
                         <ColumnDirective 

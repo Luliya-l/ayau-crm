@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
-import { GetParams, responsiblesDS, usersDS } from 'apps/crm-front/specs/custom-service';
+import { GetParams, ToolbarExport, responsiblesDS, usersDS } from 'apps/crm-front/specs/custom-service';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { Langs } from 'apps/crm-front/specs/custom-types';
 import AddUserForm from './add-users-form';
@@ -64,6 +64,7 @@ const Users = ({lang='ru'}) => {
         locale={localization.currentLang}
         allowExcelExport={true}
         allowPdfExport={true}
+        toolbarClick={(e) => ToolbarExport(grid, e)}
     >
         <ColumnsDirective>
           <ColumnDirective 

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
-import { CurrentLang, GetParams } from 'apps/crm-front/specs/custom-service';
+import { CurrentLang, GetParams, ToolbarExport } from 'apps/crm-front/specs/custom-service';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { Langs } from 'apps/crm-front/specs/custom-types';
 
@@ -51,6 +51,7 @@ const Filials = ({lang='ru'}) => {
         locale={localization.currentLang}
         allowExcelExport={true}
         allowPdfExport={true}
+        toolbarClick={(e) => ToolbarExport(grid, e)}
     >
         <ColumnsDirective>
           <ColumnDirective 

@@ -5,16 +5,17 @@ import { GridComponent,
     Filter,
     Sort,
     ForeignKey,
-    ExcelExport,
-    PdfExport,
+    toolbarClick,
 } from '@syncfusion/ej2-react-grids';
-import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems } from '@syncfusion/ej2-react-grids';
+import { Edit, EditSettingsModel, Inject, Toolbar, ToolbarItems,
+    ExcelExport,
+    PdfExport, } from '@syncfusion/ej2-react-grids';
 
 import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from 'react';
-import { GetParams, contactsDS } from 'apps/crm-front/specs/custom-service';
+import { GetParams, ToolbarExport, contactsDS } from 'apps/crm-front/specs/custom-service';
 import { CompanyColumn } from '../utils/grid-company';
 import { ResponsibleColumn } from '../utils/grid-responsible';
 import AddContactForm from './add-contact-form';
@@ -62,6 +63,7 @@ const Contacts = () => {
                     locale={localization.currentLang}
                     allowExcelExport={true}
                     allowPdfExport={true}
+                    toolbarClick={(e) => ToolbarExport(grid, e)}
                 >
                     <ColumnsDirective>
                         <ColumnDirective 
@@ -75,6 +77,7 @@ const Contacts = () => {
                             width='100' 
                         />
                         {CompanyColumn('company_id', auth)}
+                        {ResponsibleColumn('responsible', auth)}
                         <ColumnDirective 
                             field='phone' 
                             headerText={GetParams('phone', localization).toUpperCase()} 

@@ -18,6 +18,15 @@ export const CurrentLang =():string => {
     return localization.currentLang;
 }
 
+export const ToolbarExport = (grid, args) => {
+    if (grid && args.item.id.indexOf('excelexport') > -1) {
+        grid.current.excelExport();
+    }
+    if (grid && args.item.id.indexOf('pdfexport') > -1) {
+        grid.current.pdfExport();
+    }
+};
+
 export const eventsDS = (auth): DataManager => new DataManager({
     url: `${baseURL}crm/events/get`,
     dataType: 'json',
