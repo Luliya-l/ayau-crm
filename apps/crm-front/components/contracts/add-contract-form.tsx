@@ -76,13 +76,15 @@ const AddContractForm = (props = null) => {
                     {'Источник'}
                 </Form.Label>
                 <Col sm="10">
-                    <Form.Control 
-                        type="source" 
+                    <Form.Select 
+                        value={data.source ?? 'instagram'} 
                         name="source"
-                        value={data.source ?? ''} 
-                        placeholder="Instagram"
-                        onChange={(e) => onChange(e)} 
-                    />
+                        onChange={(e) => onChange(e)}
+                    >
+                        <option value="instagram" className="bg-gradient fs-4">{'Instagram'}</option>
+                        <option value="google" className="bg-gradient fs-4">{'Google'}</option>
+                        <option value="facebook" className="bg-gradient fs-4">{'Facebook'}</option>
+                    </Form.Select>
                 </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="responsible">
