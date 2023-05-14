@@ -24,7 +24,7 @@ const TransactionsSource = (): JSX.Element => {
     const localization = useSelector(selectLangState) as Langs;
 
     const tooltip: TooltipSettingsModel = { enable: true, shared: false }
-    const primaryyAxis: AxisModel = { labelFormat: '₸{value}K' }
+    const primaryyAxis: AxisModel = { labelFormat: '₸{value}' }
     const primarxyAxis: AxisModel = { valueType: 'Category' }
     const legendSettings: LegendSeriesModel = { visible: true }
     const marker = { 
@@ -54,7 +54,7 @@ const TransactionsSource = (): JSX.Element => {
         <div id="element" style={{width:`${size.width}px`, height: `${size.height}px`}}>
             <ChartComponent id="charts" 
                 primaryXAxis={primarxyAxis} 
-                theme='Material'
+                theme='Bootstrap5'
                 legendSettings={legendSettings}
                 primaryYAxis={primaryyAxis} 
                 tooltip={tooltip}
