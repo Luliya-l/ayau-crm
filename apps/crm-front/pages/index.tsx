@@ -14,7 +14,7 @@ import BI from '../components/bi/buisines-inteligence';
 import Settings from '../components/settings/settings';
 import Files from '../components/files/files';
 import { useDispatch, useSelector } from 'react-redux';
-import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setTokens, useAuth } from '../store/authSlice';
+import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setTokens, setUser, useAuth } from '../store/authSlice';
 import { setCurrentLang } from '../store/langSlice';
 import Chat from '../components/utils/chat';
 import Authorize from '../components/authorize/authorize';
@@ -68,7 +68,7 @@ const Index: NextPage = () =>  {
         password
       );
       if (user) {
-        // dispatch(setUser(user);
+        dispatch(setUser(user.data.user));
         dispatch(setAuthState(true));
         dispatch(setRememberMe(true));
         dispatch(setTokens({

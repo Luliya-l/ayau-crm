@@ -64,7 +64,11 @@ const Settings = ({lang='ru'}) => {
                 {/* <Nav.Link eventKey="payment">{'Счет и оплата'}</Nav.Link> */}
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="users">{'Пользователи'}</Nav.Link>
+                {
+                  auth.user?.role === 'admin' ?
+                  <Nav.Link eventKey="users">{'Пользователи'}</Nav.Link>
+                  : null
+                }
               </Nav.Item>
               <Nav.Item>
                 {/* <Nav.Link eventKey="chats">{'Чаты и мессенджеры'}</Nav.Link> */}
@@ -147,70 +151,76 @@ const Settings = ({lang='ru'}) => {
                           </Col>
                       </Form.Group>
                   </Container>
-                  <Container fluid className='text-black'>
-                    <h2>{'Организация'}</h2>
-                    <Form.Group as={Row} className="mb-3" controlId="title">
-                          <Form.Label column sm="2">
-                              {'Наименование'}
-                          </Form.Label>
-                          <Col sm="10">
-                              <Form.Control 
-                                  type="text" 
-                                  name="title"
-                                  value={org?.title ?? ''} 
-                                  placeholder="ТОО Ладья" 
-                                  onChange={(e) => onChange(e)} 
-                              />
-                          </Col>
-                      </Form.Group>
-                      <Form.Group as={Row} className="mb-3" controlId="activity">
-                          <Form.Label column sm="2">
-                              {'Род деятельности'}
-                          </Form.Label>
-                          <Col sm="10">
-                              <Form.Control 
-                                  as={'textarea'}
-                                  rows={5} 
-                                  name="activity"
-                                  value={org?.activity ?? ''} 
-                                  onChange={(e) => onChange(e)} 
-                              />
-                          </Col>
-                      </Form.Group>
-                      <Form.Group as={Row} className="mb-3" controlId="description">
-                          <Form.Label column sm="2">
-                              {'Примечание'}
-                          </Form.Label>
-                          <Col sm="10">
-                              <Form.Control 
-                                  as={'textarea'} 
-                                  rows={5}
-                                  name="description"
-                                  value={org?.description ?? ''} 
-                                  onChange={(e) => onChange(e)} 
-                              />
-                          </Col>
-                      </Form.Group>
-                  </Container>
-                  <Container fluid className='text-black'>
-                    <Tabs
-                      defaultActiveKey="filials"
-                      id="fill-tab-example"
-                      className="mb-3"
-                      fill
-                    >
-                      <Tab eventKey="filials" title={'Филиалы'}>
-                        <Container fluid className='text-black'>
-                          <Filials />
-                        </Container>
-                      </Tab>
-                      <Tab eventKey="users" title={'Пользователи'}>
-                        <Container fluid className='text-black'>
-                          <Users />
-                        </Container>
-                      </Tab>
-                    </Tabs>
-                  </Container>
+                  {
+                    auth.user?.role === 'admin' ?
+                    <>
+                      <Container fluid className='text-black'>
+                      <h2>{'Организация'}</h2>
+                      <Form.Group as={Row} className="mb-3" controlId="title">
+                            <Form.Label column sm="2">
+                                {'Наименование'}
+                            </Form.Label>
+                            <Col sm="10">
+                                <Form.Control 
+                                    type="text" 
+                                    name="title"
+                                    value={org?.title ?? ''} 
+                                    placeholder="ТОО Ладья" 
+                                    onChange={(e) => onChange(e)} 
+                                />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="activity">
+                            <Form.Label column sm="2">
+                                {'Род деятельности'}
+                            </Form.Label>
+                            <Col sm="10">
+                                <Form.Control 
+                                    as={'textarea'}
+                                    rows={5} 
+                                    name="activity"
+                                    value={org?.activity ?? ''} 
+                                    onChange={(e) => onChange(e)} 
+                                />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="description">
+                            <Form.Label column sm="2">
+                                {'Примечание'}
+                            </Form.Label>
+                            <Col sm="10">
+                                <Form.Control 
+                                    as={'textarea'} 
+                                    rows={5}
+                                    name="description"
+                                    value={org?.description ?? ''} 
+                                    onChange={(e) => onChange(e)} 
+                                />
+                            </Col>
+                        </Form.Group>
+                    </Container>
+                    <Container fluid className='text-black'>
+                      <Tabs
+                        defaultActiveKey="filials"
+                        id="fill-tab-example"
+                        className="mb-3"
+                        fill
+                      >
+                        <Tab eventKey="filials" title={'Филиалы'}>
+                          <Container fluid className='text-black'>
+                            <Filials />
+                          </Container>
+                        </Tab>
+                        <Tab eventKey="users" title={'Пользователи'}>
+                          <Container fluid className='text-black'>
+                            <Users />
+                          </Container>
+                        </Tab>
+                      </Tabs>
+                    </Container>
+                    </>
+                    : null
+                  }
               </Tab.Pane>
               <Tab.Pane eventKey="general">
                   <Container fluid className='text-black'>
