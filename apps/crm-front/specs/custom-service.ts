@@ -164,3 +164,11 @@ export const ContractsData = async(auth) => {
             }
         })
 }
+
+export const transactionsSourceDS = (auth): DataManager => new DataManager({
+    url: `${baseURL}crm/bi/transactions_source`,
+    dataType: 'json',
+    adaptor: new UrlAdaptor(),
+    crossDomain: true,
+    headers: [{ Authorization: `Bearer ${auth.authToken}` }]
+});

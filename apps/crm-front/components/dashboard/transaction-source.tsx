@@ -1,27 +1,34 @@
-import { AxisModel, Category, ChartComponent, ColumnSeries, DataLabel, Inject, Legend, LegendSeriesModel, LineSeries, SeriesCollectionDirective, SeriesDirective, Tooltip, TooltipSettingsModel } from "@syncfusion/ej2-react-charts";
-import { GetParams } from "apps/crm-front/specs/custom-service";
+import { Query } from "@syncfusion/ej2-data";
+import { AxisModel, 
+    Category, 
+    ChartComponent, 
+    ColumnSeries, 
+    DataLabel, 
+    Inject, 
+    Legend, 
+    LegendSeriesModel, 
+    LineSeries, 
+    SeriesCollectionDirective, 
+    SeriesDirective, 
+    Tooltip, 
+    TooltipSettingsModel } from "@syncfusion/ej2-react-charts";
+import { GetParams, transactionsSourceDS } from "apps/crm-front/specs/custom-service";
 import { Langs } from "apps/crm-front/specs/custom-types";
+import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const TransactionsSource = (): JSX.Element => {
+    const auth = useSelector(useAuth) as AuthState;
     const localization = useSelector(selectLangState) as Langs;
 
-    const data: any[] = [
-        { month: 'Jan', sales: 35 }, { month: 'Feb', sales: 28 },
-        { month: 'Mar', sales: 34 }, { month: 'Apr', sales: 32 },
-        { month: 'May', sales: 40 }, { month: 'Jun', sales: 32 },
-        { month: 'Jul', sales: 35 }, { month: 'Aug', sales: 55 },
-        { month: 'Sep', sales: 38 }, { month: 'Oct', sales: 30 },
-        { month: 'Nov', sales: 25 }, { month: 'Dec', sales: 32 }
-      ];
     const tooltip: TooltipSettingsModel = { enable: true, shared: false }
-    const primaryyAxis: AxisModel = { labelFormat: '${value}K' }
+    const primaryyAxis: AxisModel = { labelFormat: '₸{value}K' }
     const primarxyAxis: AxisModel = { valueType: 'Category' }
     const legendSettings: LegendSeriesModel = { visible: true }
     const marker = { 
-        dataLabel: { visible: true}
+        dataLabel: {  visible: true }
     };
 
     const [size, setSize] = useState({ width: 780, height: 379 });
@@ -52,11 +59,35 @@ const TransactionsSource = (): JSX.Element => {
                 primaryYAxis={primaryyAxis} 
                 tooltip={tooltip}
                 title={`${GetParams('transactionSource', localization)}`}
+                locale={localization.currentLang}
                 style={{width:'100%', height:'100%', color:'var(--gosu-light-100)'}}
             >
                 <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
                 <SeriesCollectionDirective>
-                    <SeriesDirective dataSource={data} xName='month' yName='sales' name='Sales' marker={marker} />
+                    <SeriesDirective 
+                        dataSource={transactionsSourceDS(auth)} 
+                        xName='created_at' 
+                        yName='budget' 
+                        name='Instagram' 
+                        query={new Query().where('source', '==', 'instagram')}
+                        marker={marker} 
+                    />
+                    <SeriesDirective 
+                        dataSource={transactionsSourceDS(auth)} 
+                        xName='created_at' 
+                        yName='budget' 
+                        name='Google' 
+                        query={new Query().where('source', '==', 'google')}
+                        marker={marker} 
+                    />
+                    <SeriesDirective 
+                        dataSource={transactionsSourceDS(auth)} 
+                        xName='created_at' 
+                        yName='budget' 
+                        name='Facebook' 
+                        query={new Query().where('source', '==', 'facebook')}
+                        marker={marker} 
+                    />
                 </SeriesCollectionDirective>
             </ChartComponent>
         </div>

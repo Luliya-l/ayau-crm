@@ -73,6 +73,20 @@ const AddContractForm = (props = null) => {
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="responsible">
                 <Form.Label column sm="2">
+                    {'Источник'}
+                </Form.Label>
+                <Col sm="10">
+                    <Form.Control 
+                        type="source" 
+                        name="source"
+                        value={data.source ?? ''} 
+                        placeholder="Instagram"
+                        onChange={(e) => onChange(e)} 
+                    />
+                </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="responsible">
+                <Form.Label column sm="2">
                     {'Ответственный'}
                 </Form.Label>
                 <Col sm="10">

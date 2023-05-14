@@ -89,6 +89,7 @@ export type Contract = {
     id:number,
     name:string,
     responsible:string,
+    source:string,
     budget:number,
     step:string,
     contact_id:string,
