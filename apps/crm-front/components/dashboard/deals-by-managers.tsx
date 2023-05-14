@@ -40,6 +40,8 @@ const DealsBymanager = (): JSX.Element => {
         setSize({ width, height });
     }
 
+    const palette = ["#E94649", "#F6B53F", "#6FAAB0", "#C4C24A"];
+
     useEffect(() => {
         const element = document.getElementById('three');
         if (element) {
@@ -56,6 +58,7 @@ const DealsBymanager = (): JSX.Element => {
             <ChartComponent id="charts2" 
                 primaryXAxis={primarxyAxis} 
                 theme='Bootstrap5'
+                palettes={palette}
                 legendSettings={legendSettings}
                 primaryYAxis={primaryyAxis} 
                 tooltip={tooltip}
@@ -68,7 +71,26 @@ const DealsBymanager = (): JSX.Element => {
                         dataSource={transactionsSourceDS(auth)} 
                         xName='responsible' 
                         yName='budget' 
-                        name='Менеджер' 
+                        name='Instagram' 
+                        query={new Query().where('source', '==', 'instagram')}
+                        marker={marker} 
+                        type='StackingColumn'
+                    />
+                    <SeriesDirective 
+                        dataSource={transactionsSourceDS(auth)} 
+                        xName='responsible' 
+                        yName='budget' 
+                        name='Google' 
+                        query={new Query().where('source', '==', 'google')}
+                        marker={marker} 
+                        type='StackingColumn'
+                    />
+                    <SeriesDirective 
+                        dataSource={transactionsSourceDS(auth)} 
+                        xName='responsible' 
+                        yName='budget' 
+                        name='Facebook' 
+                        query={new Query().where('source', '==', 'facebook')}
                         marker={marker} 
                         type='StackingColumn'
                     />
