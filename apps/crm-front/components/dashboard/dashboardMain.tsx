@@ -130,6 +130,7 @@ const DashBoardMain = () => {
                             <DealsBymanager />
                         </div>
                     </div>    
+{/*                     
                     <div id="four" className="e-panel" data-row="6" data-col="0" data-sizex="4" data-sizey="4">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">
@@ -177,7 +178,7 @@ const DashBoardMain = () => {
                         <div className="e-panel-container">
                             <Calls title={GetParams('successfuldeals', localization)} value={'0'} period={GetParams('onweek', localization)} className='text-warning' />
                         </div>
-                    </div>
+                    </div> */}
                 </DashboardLayoutComponent>
             </div>
         </>

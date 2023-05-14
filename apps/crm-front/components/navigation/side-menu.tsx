@@ -119,14 +119,14 @@ const SideMenu = ({setExpanded, setContent, setLang}) => {
                             {getParams('mail')}
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="bi">
+                    {/* <NavItem eventKey="bi">
                         <NavIcon>
                             <i className="bi bi-graph-down-arrow" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
                             {getParams('bi')}
                         </NavText>
-                    </NavItem>
+                    </NavItem> */}
                     <NavItem eventKey="settings">
                         <NavIcon>
                             <i className="bi bi-sliders2-vertical" style={{ fontSize: '1.75em' }} />
