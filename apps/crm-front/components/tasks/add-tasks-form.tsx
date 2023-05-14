@@ -164,6 +164,21 @@ const AddTaskForm = (props) => {
                                 </InputGroup>
                             </Col>
                         </Row>
+                        <Row>
+                            <Col>
+                                <InputGroup className="my-2">
+                                    <InputGroup.Text>
+                                        <i className="bi bi-list-task"></i>
+                                    </InputGroup.Text>
+                                    <Form.Control 
+                                        as="textarea"
+                                        rows={5} 
+                                        name="result"
+                                        value={task.result ?? ''} 
+                                        onChange={(e) => onChange(e)} />
+                                </InputGroup>
+                            </Col>
+                        </Row>
                     </Container>
                 </Col>
             </Row>

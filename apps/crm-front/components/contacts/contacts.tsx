@@ -73,7 +73,7 @@ const Contacts = () => {
                         />
                         <ColumnDirective 
                             field='fio' 
-                            headerText={'Ф.И.О.'.toUpperCase()} 
+                            headerText={GetParams('lastName', localization).toUpperCase()} 
                             width='100' 
                         />
                         {CompanyColumn('company_id', auth)}

@@ -1,14 +1,10 @@
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Button, Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Registration from "./registration";
 
 const Authorize = ({setLogin, setPassword, checkAuth}) => {
     const localization = useSelector(selectLangState);
-
-    const getParams = (param: string) => {
-        return localization.langs[localization.currentLang]?.params[param];
-    }
 
     return (
         <>

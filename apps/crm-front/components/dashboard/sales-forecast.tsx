@@ -2,6 +2,7 @@ import { AxisModel, Category, ChartComponent, ColumnSeries, DataLabel, Inject, L
 import { GetParams } from "apps/crm-front/specs/custom-service";
 import { Langs } from "apps/crm-front/specs/custom-types";
 import { selectLangState } from "apps/crm-front/store/langSlice";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Salesforecast = (): JSX.Element => {
@@ -22,21 +23,43 @@ const Salesforecast = (): JSX.Element => {
     const marker = { 
         dataLabel: { visible: true}
     };
+
+    const [size, setSize] = useState({ width: 780, height: 379 });
+
+    const changeSize = (element) => {
+        const width = element.offsetWidth;
+        const height = element.offsetHeight;
+        setSize({ width, height });
+    }
+
+    useEffect(() => {
+        const element = document.getElementById('seven');
+        if (element) {
+            const resizeObserver = new ResizeObserver(() => {
+                changeSize(element);
+            });
+            resizeObserver.observe(element);
+            return () => resizeObserver.disconnect();
+        }
+    }, []);
+
     return (
-        <ChartComponent id="charts6" 
-            primaryXAxis={primarxyAxis} 
-            theme='Material'
-            legendSettings={legendSettings}
-            primaryYAxis={primaryyAxis} 
-            tooltip={tooltip}
-            title={`${GetParams('Salesforecast', localization)}`}
-            style={{color:'var(--gosu-light-100)'}}
-        >
-            <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
-            <SeriesCollectionDirective>
-                <SeriesDirective dataSource={data} xName='month' yName='sales' name='Sales' marker={marker} />
-            </SeriesCollectionDirective>
-        </ChartComponent>
+        <div id="element" style={{width:`${size.width}px`, height: `${size.height}px`}}>
+            <ChartComponent id="charts6" 
+                primaryXAxis={primarxyAxis} 
+                theme='Material'
+                legendSettings={legendSettings}
+                primaryYAxis={primaryyAxis} 
+                tooltip={tooltip}
+                title={`${GetParams('Salesforecast', localization)}`}
+                style={{color:'var(--gosu-light-100)'}}
+            >
+                <Inject services={[ColumnSeries, DataLabel, Tooltip, Legend, LineSeries, Category]} />
+                <SeriesCollectionDirective>
+                    <SeriesDirective dataSource={data} xName='month' yName='sales' name='Sales' marker={marker} />
+                </SeriesCollectionDirective>
+            </ChartComponent>
+        </div>
     )
 }
 
