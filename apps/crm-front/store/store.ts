@@ -18,6 +18,7 @@ const makeStore = wrapMakeStore(() =>
       nextReduxCookieMiddleware({
         secure: true,
         subtrees: [
+          "auth.user",
           "auth.authState",
           "auth.authToken",
           "auth.refreshToken",

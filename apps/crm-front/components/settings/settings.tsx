@@ -61,7 +61,7 @@ const Settings = ({lang='ru'}) => {
               </Nav.Item>
               <Nav.Item>
                 {
-                  auth.user?.role === 'admin' ?
+                  auth.user?.role === 'user' ?
                   <Nav.Link eventKey="users">{'Пользователи'}</Nav.Link>
                   : null
                 }
@@ -148,7 +148,7 @@ const Settings = ({lang='ru'}) => {
                       </Form.Group>
                   </Container>
                   {
-                    auth.user?.role === 'admin' ?
+                    auth.user?.role === 'user' ?
                     <>
                       <Container fluid className='text-black'>
                       <h2>{'Организация'}</h2>
