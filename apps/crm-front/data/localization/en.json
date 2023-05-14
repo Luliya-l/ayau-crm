@@ -33,7 +33,7 @@
             "result": "Result",
             "primaryContact": "Primary contact",
             "negotiation": "Negotiation",
-            "makeDecision": "Ьake a decision", 
+            "makeDecision": "make a decision", 
             "Harmonizationofcontract": "Harmonization of contract",
             "name": "Name",
             "company_id":"Company",
@@ -54,6 +54,7 @@
             "notes": "notes",
             "outgoingcalls": "Outgoing calls",
             "successfuldeals": "Successful contract",
-            "language": "language"
+            "language": "language",
+            "lastName": "Full name"
         }
 }
