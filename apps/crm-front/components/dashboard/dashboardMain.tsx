@@ -44,7 +44,7 @@ const DashBoardMain = () => {
                     </Col>
                 </Row>
             </Container>
-            <div className="control-section">
+            <div className="control-section mb-4">
                 <DashboardLayoutComponent 
                     id='defaultLayout' 
                     cellSpacing={cellSpacing} 
@@ -181,6 +181,7 @@ const DashBoardMain = () => {
                     </div> */}
                 </DashboardLayoutComponent>
             </div>
+            <div className='mt-4 mb-4'>&nbsp;</div>
         </>
     )
 }
