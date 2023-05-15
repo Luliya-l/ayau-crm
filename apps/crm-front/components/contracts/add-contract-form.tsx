@@ -87,6 +87,7 @@ const AddContractForm = (props = null) => {
                     </Form.Select>
                 </Col>
             </Form.Group>
+            { auth.user.role === 'head' || auth.user.role === 'user' ?
             <Form.Group as={Row} className="mb-3" controlId="responsible">
                 <Form.Label column sm="2">
                     {'Ответственный'}
@@ -104,6 +105,8 @@ const AddContractForm = (props = null) => {
                     </DropDownListComponent>
                 </Col>
             </Form.Group>
+            : null
+            }
             <Form.Group as={Row} className="mb-3" controlId="responsible">
                 <Form.Label column sm="2">
                     {GetParams('company_id', localization)}

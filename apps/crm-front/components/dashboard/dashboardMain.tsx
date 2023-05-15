@@ -125,7 +125,7 @@ const DashBoardMain = () => {
                         </div>
                     </div>
                     {
-                        auth.user?.role === 'head' || auth.user?.role === 'admin' ? 
+                        auth.user?.role === 'head' || auth.user?.role === 'user' ? 
                         <div id="three" className="e-panel" data-row="2" data-col="8" data-sizex="4" data-sizey="4">
                             <span id="close" className="e-template-icon e-clear-icon"/>
                             <div className="e-panel-container">
@@ -133,7 +133,7 @@ const DashBoardMain = () => {
                             </div>
                         </div> : null
                     }   
-{/*                     
+                    {/*                     
                     <div id="four" className="e-panel" data-row="6" data-col="0" data-sizex="4" data-sizey="4">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container">

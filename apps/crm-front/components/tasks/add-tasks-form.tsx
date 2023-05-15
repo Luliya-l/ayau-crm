@@ -111,6 +111,7 @@ const AddTaskForm = (props) => {
                                 </InputGroup>
                             </Col>
                         </Row>
+                        { auth.user.role === 'head' || auth.user.role === 'user' ? 
                         <Row>
                             <Col>
                                 <InputGroup className="my-2">
@@ -131,7 +132,8 @@ const AddTaskForm = (props) => {
                                     </DropDownListComponent>
                                 </InputGroup>
                             </Col>
-                        </Row>
+                        </Row> : null
+                        }
                         <Row>
                             <Col>
                                 <InputGroup className="my-2">
