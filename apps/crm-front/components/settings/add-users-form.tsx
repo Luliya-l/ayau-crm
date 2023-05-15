@@ -32,6 +32,7 @@ const AddUserForm = (props = null) => {
                     >
                         <option value="head" className="bg-gradient fs-4">{'Руководитель'}</option>
                         <option value="manager" className="bg-gradient fs-4">{'Менеджер'}</option>
+                        <option value="user" className="bg-gradient fs-4">{'Администратор'}</option>
                     </Form.Select>
                 </Col>
             </Form.Group>
