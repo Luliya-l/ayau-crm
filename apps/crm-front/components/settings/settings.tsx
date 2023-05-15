@@ -133,11 +133,11 @@ const Settings = ({lang='ru'}) => {
                       </Form.Group>
                       <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
                           <Form.Label column sm="2">
-                              {'Должность'}
+                              {'Роль'}
                           </Form.Label>
                           <Col sm="10">
                               <Form.Select 
-                                  name="gender"
+                                  name="role"
                                   value={profile?.gender ?? '1'} 
                                   onChange={(e) => onChange(e)}
                               >
