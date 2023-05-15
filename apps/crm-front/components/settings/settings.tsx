@@ -131,7 +131,7 @@ const Settings = ({lang='ru'}) => {
                               />
                           </Col>
                       </Form.Group>
-                      <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+                      {/* <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
                           <Form.Label column sm="2">
                               {'Роль'}
                           </Form.Label>
@@ -145,7 +145,7 @@ const Settings = ({lang='ru'}) => {
                                   <option value="manager">Менеджер</option>
                               </Form.Select>
                           </Col>
-                      </Form.Group>
+                      </Form.Group> */}
                   </Container>
                   {
                     auth.user?.role === 'user' ?
