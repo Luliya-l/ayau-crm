@@ -90,7 +90,7 @@ const Tasks = () => {
                         />
                         <ColumnDirective 
                             field='finish_at' 
-                            headerText={'Выполнить до'.toUpperCase()} 
+                            headerText={GetParams('run_upto', localization).toUpperCase()} 
                             width='100' 
                             format={dateFormat}
                         />

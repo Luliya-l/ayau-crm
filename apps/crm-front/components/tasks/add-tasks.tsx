@@ -108,7 +108,7 @@ const AddTask = () => {
                                                 aria-label="name" 
                                                 name="title"
                                                 value={task.title} 
-                                                placeholder={'Тема'} onChange={(e) => onChange(e)} />
+                                                placeholder={GetParams('topic3', localization)} onChange={(e) => onChange(e)} />
                                         </InputGroup>
                                     </Col>
                                 </Row>
@@ -124,7 +124,7 @@ const AddTask = () => {
                                                 fields={fields}
                                                 dataSource={contracts} 
                                                 className="e-field" 
-                                                placeholder='Сделка' 
+                                                placeholder= {GetParams('contract', localization)} 
                                                 value={task.contract_id}
                                                 onChange={(e) => onChange(e)}
                                             >
@@ -146,7 +146,7 @@ const AddTask = () => {
                                                 fields={fields}
                                                 dataSource={responsible} 
                                                 className="e-field" 
-                                                placeholder='Ответственный' 
+                                                placeholder={GetParams('responsible', localization)} 
                                                 value={task.responsible}
                                                 onChange={(e) => onChange(e)}
                                             >
@@ -167,8 +167,8 @@ const AddTask = () => {
                                                 name="task_type"
                                                 value={task.task_type} 
                                                 onChange={(e) => onChange(e)}>
-                                                <option>{'Звонок'}</option>
-                                                <option>{'Встреча'}</option>
+                                                <option>{GetParams('calls', localization)}</option>
+                                                <option>{GetParams('meeting', localization)}</option>
                                             </Form.Select>
                                         </InputGroup>
                                     </Col>
@@ -183,7 +183,7 @@ const AddTask = () => {
                                                 aria-label="description" 
                                                 name="text"
                                                 value={task.text} 
-                                                placeholder={'Задача'} 
+                                                placeholder={GetParams('task', localization)} 
                                                 onChange={(e) => onChange(e)} />
                                         </InputGroup>
                                     </Col>
@@ -201,13 +201,13 @@ const AddTask = () => {
                         onClick={acceptTask} 
                         variant='outline-success'
                     >
-                        {'Поставить'}
+                        {GetParams('put', localization)}
                     </Button>
                     <Button 
                         onClick={handleClose} 
                         variant='outline-warning'
                     >
-                        {'Отменить'}
+                        {GetParams('cancel', localization)}
                     </Button>
                 </Modal.Footer>
             </Modal>
