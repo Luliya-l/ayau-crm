@@ -118,7 +118,9 @@ const DashBoardMain = () => {
                             />
                         </div>
                     </div>
-                    <div id="two" className="e-panel" data-row="2" data-col="0" data-sizex="8" data-sizey="4">
+                    <div id="two" className="e-panel" data-row="2" data-col="0" data-sizex={
+                        auth.user?.role === 'head' || auth.user?.role === 'user' ? '12' : '8'
+                    } data-sizey="4">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container chart">
                             <TransactionsSource />
