@@ -124,12 +124,15 @@ const DashBoardMain = () => {
                             <TransactionsSource />
                         </div>
                     </div>
-                    <div id="three" className="e-panel" data-row="2" data-col="8" data-sizex="4" data-sizey="4">
-                    <span id="close" className="e-template-icon e-clear-icon"/>
-                        <div className="e-panel-container">
-                            <DealsBymanager />
-                        </div>
-                    </div>    
+                    {
+                        auth.user?.role === 'head' || auth.user?.role === 'admin' ? 
+                        <div id="three" className="e-panel" data-row="2" data-col="8" data-sizex="4" data-sizey="4">
+                            <span id="close" className="e-template-icon e-clear-icon"/>
+                            <div className="e-panel-container">
+                                <DealsBymanager />
+                            </div>
+                        </div> : null
+                    }   
 {/*                     
                     <div id="four" className="e-panel" data-row="6" data-col="0" data-sizex="4" data-sizey="4">
                         <span id="close" className="e-template-icon e-clear-icon"/>
