@@ -113,7 +113,7 @@ const SendMail = () => {
                                     aria-label="object" 
                                     name="title"
                                     value={mail.title} 
-                                    placeholder={'Тема сообщения'} 
+                                    placeholder={GetParams('topic', localization)} 
                                     onChange={(e) => onChange(e)} />
                             </InputGroup>
                         </Col>
@@ -130,7 +130,7 @@ const SendMail = () => {
                                     fields={fields}
                                     dataSource={contracts} 
                                     className="e-field" 
-                                    placeholder='Сделка' 
+                                    placeholder= {GetParams('contract', localization)}
                                     value={mail.contract_id}
                                     onChange={(e) => onChange(e)}
                                 >
@@ -151,7 +151,7 @@ const SendMail = () => {
                                     fields={fields}
                                     dataSource={responsible} 
                                     className="e-field" 
-                                    placeholder='Ответственный' 
+                                    placeholder= {GetParams('responsible', localization)}
                                     value={mail.responsible}
                                     onChange={(e) => onChange(e)}
                                 >
@@ -172,7 +172,7 @@ const SendMail = () => {
                                     fields={fields}
                                     dataSource={company} 
                                     className="e-field" 
-                                    placeholder='Компания' 
+                                    placeholder={GetParams('company_id', localization)}
                                     value={mail.company_id}
                                     onChange={(e) => onChange(e)}
                                 >
@@ -203,13 +203,13 @@ const SendMail = () => {
                         onClick={acceptMail} 
                         variant='outline-success'
                     >
-                        {'Отправить'}
+                        {GetParams('send', localization)}
                     </Button>
                     <Button 
                         onClick={handleClose} 
                         variant='outline-warning'
                     >
-                        {'Отменить'}
+                        {GetParams('cancel', localization)}
                     </Button>
                 </Modal.Footer>
             </Modal>

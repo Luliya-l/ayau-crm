@@ -5,7 +5,7 @@ import { AuthState, useAuth } from "apps/crm-front/store/authSlice";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ToolbarExport, mailsDS } from 'apps/crm-front/specs/custom-service';
+import { GetParams, ToolbarExport, mailsDS } from 'apps/crm-front/specs/custom-service';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { Langs } from 'apps/crm-front/specs/custom-types';
 
@@ -52,22 +52,22 @@ const MailBox = ({inbox = true}) => {
                         />
                         <ColumnDirective 
                             field='from_mail' 
-                            headerText={'от кого'.toUpperCase()} 
+                            headerText={`${GetParams('from', localization).toUpperCase()}`} 
                             width='100' 
                         />
                         <ColumnDirective 
                             field='to_mail' 
-                            headerText={'кому'.toUpperCase()} 
+                            headerText={`${GetParams('to', localization).toUpperCase()}`} 
                             width='100' 
                         />
                         <ColumnDirective 
                             field='title' 
-                            headerText={'сделка, тема и сообщение'.toUpperCase()} 
+                            headerText={`${GetParams('topic2', localization).toUpperCase()}`} 
                             width='100'
                         />
                         <ColumnDirective 
                             field='created_at' 
-                            headerText={'дата'.toUpperCase()} 
+                            headerText={`${GetParams('date', localization).toUpperCase()}`} 
                             width='100' 
                             format={dateFormat}
                         />

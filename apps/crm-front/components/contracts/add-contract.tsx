@@ -83,17 +83,17 @@ const AddContract = () => {
                                 name="step"
                                 onChange={(e) => onChange(e)}
                             >
-                                <option value="new" className="bg-gradient fs-4">{'Первичный контакт'}</option>
-                                <option value="InProgress" className="bg-gradient fs-4">{'Переговоры'}</option>
-                                <option value="Testing" className="bg-gradient fs-4">{'Принимают решение'}</option>
-                                <option value="Close" className="bg-gradient fs-4">{'Успешно реализовано'}</option>
-                                <option value="Stop" className="bg-gradient fs-4">{'Закрыто и не реализовано'}</option>
+                                <option value="new" className="bg-gradient fs-4">{GetParams('primaryContact', localization)}</option>
+                                <option value="InProgress" className="bg-gradient fs-4">{GetParams('negotiation', localization)}</option>
+                                <option value="Testing" className="bg-gradient fs-4">{GetParams('makeDecision', localization)}</option>
+                                <option value="Close" className="bg-gradient fs-4">{GetParams('successfullyImplemented', localization)}</option>
+                                <option value="Stop" className="bg-gradient fs-4">{GetParams('closed', localization)}</option>
                             </Form.Select>
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
-                            {'Источник'}
+                            {GetParams('sources', localization)}
                         </Form.Label>
                         <Col sm="10">
                             <Form.Select 
@@ -109,7 +109,7 @@ const AddContract = () => {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
-                            {'Контракт'}
+                            {GetParams('contact', localization)}
                         </Form.Label>
                         <Col sm="10">
                         <Form.Control 
@@ -124,7 +124,7 @@ const AddContract = () => {
                     { auth.user.role === 'head' || auth.user.role === 'user' ?
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
-                            {'Ответственный'}
+                            {GetParams('responsible', localization)}
                         </Form.Label>
                         <Col sm="10">
                             <DropDownListComponent 
@@ -182,7 +182,7 @@ const AddContract = () => {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="phone">
                         <Form.Label column sm="2">
-                            {'Описание'}
+                            {GetParams('description', localization)}
                         </Form.Label>
                         <Col sm="10">
                         <Form.Control 
@@ -200,13 +200,13 @@ const AddContract = () => {
                         onClick={() => setCustomer()} 
                         variant='outline-success'
                     >
-                        {'Создать'}
+                        {GetParams('create', localization)}
                     </Button>
                     <Button 
                         onClick={handleClose} 
                         variant='outline-warning'
                     >
-                        {'Отменить'}
+                        {GetParams('cancel', localization)}
                     </Button>
                 </Modal.Footer>
             </Modal>

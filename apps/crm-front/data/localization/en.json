@@ -55,6 +55,23 @@
             "outgoingcalls": "Outgoing calls",
             "successfuldeals": "Successful contract",
             "language": "language",
-            "lastName": "Full name"
+            "lastName": "Full name",
+            "successfullyImplemented": "Successfully Implemented", 
+            "closed": "Закрыто и не реализовано",
+            "sources": "Sources", 
+            "contact": "Contact",
+            "contract": "Contract",
+            "description": "Description",
+            "create":"Create",
+            "cancel": "Cancel",
+            "worknumber": "Work telephone number",
+            "post": "Post",
+            "address":"Address", 
+            "send": "Send",
+            "topic":"Topic of the message", 
+            "from" : "From",
+            "to": "To", 
+            "date": "Date",
+            "topic2": "Contract, topic and message"
         }
 }

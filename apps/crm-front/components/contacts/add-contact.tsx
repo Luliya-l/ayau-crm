@@ -72,7 +72,7 @@ const AddContact = () => {
                 <Modal.Body className="grid-group-editor">
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
-                            {'Ф.И.О.'}
+                            {GetParams('lastName', localization)}
                         </Form.Label>
                         <Col sm="10">
                         <Form.Control 
@@ -86,7 +86,7 @@ const AddContact = () => {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="company_id">
                         <Form.Label column sm="2">
-                            {'Компания'}
+                            {GetParams('company_id', localization)}
                         </Form.Label>
                         <Col sm="10">
                             <DropDownListComponent 
@@ -105,7 +105,7 @@ const AddContact = () => {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="phone">
                         <Form.Label column sm="2">
-                            {'Рабочий телефон'}
+                            {GetParams('worknumber', localization)}
                         </Form.Label>
                         <Col sm="10">
                         <Form.Control 
@@ -118,7 +118,7 @@ const AddContact = () => {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="email">
                         <Form.Label column sm="2">
-                            {'Email'}
+                            {GetParams('email', localization)}
                         </Form.Label>
                         <Col sm="10">
                             <Form.Control 
@@ -132,7 +132,7 @@ const AddContact = () => {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
                         <Form.Label column sm="2">
-                            {'Должность'}
+                            {GetParams('post', localization)}
                         </Form.Label>
                         <Col sm="10">
                             <Form.Select 
@@ -149,7 +149,7 @@ const AddContact = () => {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
-                            {'Ответственный'}
+                            {GetParams('responsible', localization)}
                         </Form.Label>
                         <Col sm="10">
                             <DropDownListComponent 
@@ -168,7 +168,7 @@ const AddContact = () => {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="email">
                         <Form.Label column sm="2">
-                            {'Примечание'}
+                            {GetParams('notes', localization)}
                         </Form.Label>
                         <Col sm="10">
                             <Form.Control 
@@ -186,13 +186,13 @@ const AddContact = () => {
                         onClick={() => setContact()} 
                         variant='outline-success'
                     >
-                        {'Создать'}
+                        {GetParams('create', localization)}
                     </Button>
                     <Button 
                         onClick={handleClose} 
                         variant='outline-warning'
                     >
-                        {'Отменить'}
+                        {GetParams('cancel', localization)}
                     </Button>
                 </Modal.Footer>
             </Modal>
