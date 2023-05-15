@@ -48,6 +48,13 @@ const Users = ({lang='ru'}) => {
 
   const toolbarOptions: ToolbarItems[] = ['Search', 'Add', 'Edit', 'Delete', 'Update', 'Cancel'];
   
+  const actionComplete = (args) => {
+    if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
+        const dialog = args.dialog;
+        dialog.header = args.requestType === 'beginEdit' ? 'Редактирование: ' + args.rowData['name'] : 'Новая запись';
+    }
+  }
+
   useEffect(() => {
       grid.current.refresh();
       dispatch(setLoading(false));
@@ -64,6 +71,7 @@ const Users = ({lang='ru'}) => {
         locale={localization.currentLang}
         allowExcelExport={true}
         allowPdfExport={true}
+        actionComplete={actionComplete}
         toolbarClick={(e) => ToolbarExport(grid, e)}
     >
         <ColumnsDirective>

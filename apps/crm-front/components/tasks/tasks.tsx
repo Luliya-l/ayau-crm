@@ -44,6 +44,10 @@ const Tasks = () => {
     const toolbarOptions: ToolbarItems[] = ['Search', 'Edit', 'Delete', 'Update', 'Cancel', 'PdfExport', 'ExcelExport'];
     
     const actionComplete = (args) => {
+        if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
+            const dialog = args.dialog;
+            dialog.header = args.requestType === 'beginEdit' ? 'Редактирование: ' + args.rowData['title'] : 'Новая запись';
+        }
         if (args.requestType === 'save') {
             dispatch(setLoading(true));
         }

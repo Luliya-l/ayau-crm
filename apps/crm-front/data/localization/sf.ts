@@ -182,7 +182,7 @@ export const sf = {
             'SaveButton':'Сохранить',
             'OKButton':'Ок',
             'CancelButton':'Отмена',
-            'EditFormTitle':'Детали',
+            'EditFormTitle':'Детали ',
             'AddFormTitle':'Добавить новую запись',
             'BatchSaveConfirm':'Вы уверены, что хотите сохранить изменения?',
             'BatchSaveLostChanges':'Несохраненные изменения будут потеряны. Вы уверены что хотите продолжить?',

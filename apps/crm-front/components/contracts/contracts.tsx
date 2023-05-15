@@ -45,7 +45,7 @@ const Contracts = () => {
             <div className="e-card-content e-tooltip-text">
                 <div className="e-text">{props.description}</div>
             </div>
-            <div className="e-card-custom-footer">
+            <div className="e-card-custom-footer d-none">
                 {props.step.split(",").map((tag) => <div key={tag} className="e-card-tag-field e-tooltip-text">{tag}</div>)}
                 <div className="e-card-avatar">{getString(props.step)}</div>
             </div>
