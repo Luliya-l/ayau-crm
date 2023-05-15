@@ -77,9 +77,9 @@ const AddUserForm = (props = null) => {
                 />
                 </Col>
             </Form.Group>
-            <Form.Group as={Row} className="bg-info bg-gradient py-2 mb-3 grid-group-editor" controlId="formPlaintextEmail">
+            <Form.Group as={Row} className="bg-warning bg-gradient py-2 mb-3 grid-group-editor" controlId="formPlaintextEmail">
                 <Form.Label column sm="2">
-                    <i className="bi bi-question-octagon fs-5"></i>
+                    <i className="bi bi-people fs-5"></i>
                 </Form.Label>
                 <Col sm="10">
                     <Form.Select 
