@@ -192,6 +192,8 @@ const DashBoardMain = ({org=''}) => {
                 </DashboardLayoutComponent>
             </div>
             <div className='mt-4 mb-4'>&nbsp;</div>
+            <div className='mt-4 mb-4'>&nbsp;</div>
+            <div className='mt-4 mb-4'>&nbsp;</div>
         </>
     )
 }
