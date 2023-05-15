@@ -138,11 +138,11 @@ const Settings = ({lang='ru'}) => {
                           <Col sm="10">
                               <Form.Select 
                                   name="role"
-                                  value={profile?.gender ?? '1'} 
+                                  value={profile?.role ?? 'head'} 
                                   onChange={(e) => onChange(e)}
                               >
-                                  <option value="1">Мужской</option>
-                                  <option value="2">Женский</option>
+                                  <option value="head">Руководитель</option>
+                                  <option value="manager">Менеджер</option>
                               </Form.Select>
                           </Col>
                       </Form.Group>
