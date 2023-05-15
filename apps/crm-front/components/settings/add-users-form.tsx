@@ -76,6 +76,21 @@ const AddUserForm = (props = null) => {
                 />
                 </Col>
             </Form.Group>
+            <Form.Group as={Row} className="bg-info bg-gradient py-2 mb-3 grid-group-editor" controlId="formPlaintextEmail">
+                <Form.Label column sm="2">
+                    <i className="bi bi-question-octagon fs-5"></i>
+                </Form.Label>
+                <Col sm="10">
+                    <Form.Select 
+                        value={data.gender} 
+                        name="role"
+                        onChange={(e) => onChange(e)}
+                    >
+                        <option value="Мужской" className="bg-gradient fs-4">{'Мужской'}</option>
+                        <option value="Женский" className="bg-gradient fs-4">{'Женский'}</option>
+                    </Form.Select>
+                </Col>
+            </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="phone">
                 <Form.Label column sm="2">
                     {'Пароль'}
