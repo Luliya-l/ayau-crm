@@ -84,7 +84,7 @@ const AddUserForm = (props = null) => {
                 <Col sm="10">
                     <Form.Select 
                         value={data.gender} 
-                        name="role"
+                        name="gender"
                         onChange={(e) => onChange(e)}
                     >
                         <option value="Мужской" className="bg-gradient fs-4">{'Мужской'}</option>
