@@ -15,7 +15,7 @@ import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { Langs } from 'apps/crm-front/specs/custom-types';
 import { useSelector } from 'react-redux';
 
-const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компаний', addCommand='add-company'}): JSX.Element => {
+const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компаний', addCommand='add-company', org=''}): JSX.Element => {
   const localization = useSelector(selectLangState) as Langs;
   const [fixWidth, setFixWidth] = useState('top-64');
 
@@ -96,13 +96,16 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
               {getBreadcrumb()}
             </span>
           </Col>
-          <Col lg={4} xs={4} className=''>
-            <InputGroup className="my-2">
+          <Col lg={4} xs={4} role='button' className='py-2'>
+            {/* <span className='text-uppercase' style={{color:'var(--gosu-blue-space-100)'}}>
+              {org}
+            </span> */}
+            {/* <InputGroup className="my-2"> */}
               {/* <InputGroup.Text>
                 <i className="bi bi-search"></i>
               </InputGroup.Text> */}
               {/* <Form.Control aria-label="Search" placeholder={GetParams('search')} /> */}
-            </InputGroup>
+            {/* </InputGroup> */}
           </Col>
           <Col lg={2} xs={2} className='d-flex justify-content-center'>
             {/* <span className='fs-6'>{msg}</span> */}

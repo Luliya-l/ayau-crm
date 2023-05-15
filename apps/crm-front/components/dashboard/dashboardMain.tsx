@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { Langs } from 'apps/crm-front/specs/custom-types';
 
-const DashBoardMain = () => {
+const DashBoardMain = ({org=''}) => {
     const auth = useSelector(useAuth) as AuthState;
     const localization = useSelector(selectLangState) as Langs;
 
@@ -40,7 +40,10 @@ const DashBoardMain = () => {
             <Container fluid className="mb-4">
                 <Row>
                     <Col className="text-center mt-3">
-                        <h1>{GetParams('dashboard', localization)}</h1>
+                        <h1>
+                            {org}
+                            {/* {GetParams('dashboard', localization)} */}
+                        </h1>
                     </Col>
                 </Row>
             </Container>
@@ -118,9 +121,11 @@ const DashBoardMain = () => {
                             />
                         </div>
                     </div>
-                    <div id="two" className="e-panel" data-row="2" data-col="0" data-sizex={
-                        auth.user?.role === 'head' || auth.user?.role === 'user' ? '12' : '8'
-                    } data-sizey="4">
+                    <div id="two" className="e-panel" data-row="2" data-col="0" data-sizex=
+                    {
+                        auth.user?.role === 'head' || auth.user?.role === 'user' ? '8' : '12'
+                    } 
+                    data-sizey="4">
                         <span id="close" className="e-template-icon e-clear-icon"/>
                         <div className="e-panel-container chart">
                             <TransactionsSource />

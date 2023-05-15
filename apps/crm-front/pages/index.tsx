@@ -102,7 +102,7 @@ const Index: NextPage = () =>  {
       if (org) {
         switch (content) {
           case 'dashboard':
-            return <DashBoardMain />;
+            return <DashBoardMain org={org?.title} />;
           case 'contracts':
             return <Contracts />;
           case 'tasks':
@@ -177,7 +177,7 @@ const Index: NextPage = () =>  {
           <Container fluid className='w-100'>
             <Row style={{minHeight:'65px'}}>
               <Col className='position-relative'>
-                <TopBar expanded={expanded['expanded']} addCommand={content} editIndex={editIndex} setEditIndex={setEditIndex} />
+                <TopBar expanded={expanded['expanded']} addCommand={content} editIndex={editIndex} setEditIndex={setEditIndex} org={org?.title} />
               </Col>
             </Row>
             <Row>
