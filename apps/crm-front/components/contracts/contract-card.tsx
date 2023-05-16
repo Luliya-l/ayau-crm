@@ -22,8 +22,21 @@ const ContractCard = (props) => {
         return assignee.match(/\b(\w)/g).join("").toUpperCase();
     }
 
+    const getPriority = (priority) => {
+        switch (priority) {
+            case 'low':
+                return 'rgb(89 237 40)';
+            case 'medium':
+                return 'rgb(230 144 37)';
+            case 'high':
+                return 'rgb(228 43 10)';
+            default:
+                return '#f55f44';
+        }
+    }
+    
     return (
-        <div className={"card-template"}>
+        <div className={"card-template"} style={{borderLeft:`1px solid ${getPriority(props.priority)}`}}>
             <div className="e-card-header">
                 <div className="e-card-header-caption">
                     <div className="e-card-header-title e-tooltip-text">{props.name}</div>
