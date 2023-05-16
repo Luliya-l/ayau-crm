@@ -57,6 +57,22 @@ const AddContractForm = (props = null) => {
                     </Form.Select>
                 </Col>
             </Form.Group>
+            <Form.Group as={Row} className="py-2 mb-3 grid-group-editor" controlId="formPlaintextEmail">
+                <Form.Label column sm="2">
+                    <i className="bi bi-question-octagon fs-5"></i>
+                </Form.Label>
+                <Col sm="10">
+                    <Form.Select 
+                        value={data.priority} 
+                        name="priority"
+                        onChange={(e) => onChange(e)}
+                    >
+                        <option value="low" className="bg-gradient fs-4">{'Низкий'}</option>
+                        <option value="medium" className="bg-gradient fs-4">{'Средний'}</option>
+                        <option value="high" className="bg-gradient fs-4">{'Высокий'}</option>
+                    </Form.Select>
+                </Col>
+            </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="responsible">
                 <Form.Label column sm="2">
                     {'Контракт'}
