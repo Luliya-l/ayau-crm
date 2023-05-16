@@ -13,6 +13,7 @@ import AddContractForm from "./add-contract-form";
 import { GetParams, contractsDS } from "apps/crm-front/specs/custom-service";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Langs } from "apps/crm-front/specs/custom-types";
+import ContractCard from "./contract-card";
 
 const Contracts = () => {
     const auth = useSelector(useAuth) as AuthState;
@@ -36,24 +37,7 @@ const Contracts = () => {
     }
 
     const cardTemplate = (props) => {
-        return (<div className={"card-template"}>
-            <div className="e-card-header">
-                <div className="e-card-header-caption">
-                    <div className="e-card-header-title e-tooltip-text">{props.name}</div>
-                </div>
-            </div>
-            <div className="e-card-content e-tooltip-text">
-                <div className="e-text">{props.description}</div>
-            </div>
-            <div className="e-card-custom-footer d-none">
-                {props.step.split(",").map((tag) => <div key={tag} className="e-card-tag-field e-tooltip-text">{tag}</div>)}
-                <div className="e-card-avatar">{getString(props.step)}</div>
-            </div>
-        </div>);
-    }
-
-    const getString = (assignee) => {
-        return assignee.match(/\b(\w)/g).join("").toUpperCase();
+        return (<ContractCard {...props} />);
     }
 
     const dialogTemplate = (props) => {

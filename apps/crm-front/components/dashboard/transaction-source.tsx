@@ -31,7 +31,7 @@ const TransactionsSource = (): JSX.Element => {
         dataLabel: {  visible: true }
     };
 
-    const [size, setSize] = useState({ width: 780 + (auth.user.role === 'user' || auth.user.role === 'head' ? 0 : 393), height: 379 + (auth.user.role === 'user' || auth.user.role === 'head' ? 0 : 393) });
+    const [size, setSize] = useState({ width: 780 + (auth.user.role === 'user' || auth.user.role === 'head' ? 0 : 393), height: 379 });
 
     const changeSize = (element) => {
         const width = element.offsetWidth;
