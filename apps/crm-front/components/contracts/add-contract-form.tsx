@@ -59,7 +59,7 @@ const AddContractForm = (props = null) => {
             </Form.Group>
             <Form.Group as={Row} className="py-2 mb-3 grid-group-editor" controlId="formPlaintextEmail">
                 <Form.Label column sm="2">
-                    <i className="bi bi-question-octagon fs-5"></i>
+                    <i className="bi bi-exclamation-octagon fs-5"></i>
                 </Form.Label>
                 <Col sm="10">
                     <Form.Select 
