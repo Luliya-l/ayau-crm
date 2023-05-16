@@ -10,7 +10,7 @@ import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
 import { setLoading, useLoadingState } from "apps/crm-front/store/loadingState";
 import AddContractForm from "./add-contract-form";
-import { GetParams, contractsDS } from "apps/crm-front/specs/custom-service";
+import { GetParams, contractsDS, currency } from "apps/crm-front/specs/custom-service";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Langs } from "apps/crm-front/specs/custom-types";
 
@@ -30,10 +30,10 @@ const ContractCard = (props) => {
                 </div>
             </div>
             <div className="e-card-content e-tooltip-text">
-                <div className="e-text">{props.description}</div>
+                <div className="e-text text-info">{props.description}</div>
             </div>
             <div className="e-card-content e-tooltip-text">
-                <div className="e-text">{props.budget}₸</div>
+                <div className="e-text">{currency(props.budget)} ₸ *</div>
             </div>
             <div className="e-card-custom-footer d-none">
                 {props.step.split(",").map((tag) => <div key={tag} className="e-card-tag-field e-tooltip-text">{tag}</div>)}

@@ -172,3 +172,8 @@ export const transactionsSourceDS = (auth): DataManager => new DataManager({
     crossDomain: true,
     headers: [{ Authorization: `Bearer ${auth.authToken}` }]
 });
+
+// GET NUMBER AS CURRENT CURRENCY FORMAT
+export const currency = (price: number): string => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
