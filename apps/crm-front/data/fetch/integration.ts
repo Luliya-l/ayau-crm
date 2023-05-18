@@ -269,14 +269,14 @@ export async function postGetResponsibleName(
     token:string
 ) {
     return api.post(
-        "crm/responsibles/get", 
-        {'id' : id},
+        "crm/responsibles/get/name", 
+        {'value' : id},
         {headers: {"Authorization": `Bearer ${token}`}}
     )
     .then((res) => {
         return res;
     })
     .catch((e) => {
-        return null;
+        return e.response;
     });
 }

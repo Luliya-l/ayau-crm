@@ -8,7 +8,8 @@ import { useSelector } from "react-redux";
 const ColumnTemplate = (props) => {
     const auth = useSelector(useAuth) as AuthState;
     const [bs, setBs] = useState(0);
-    
+    const [count, setCount] = useState(props.count);
+
     useEffect(() => {  
         postGetBudget(props.keyField, auth.authToken).then((res) => 
             {
@@ -21,6 +22,7 @@ const ColumnTemplate = (props) => {
                 } else {
                     setBs(0);
                 }
+                setCount(props.count);
             }
         );
     },[]);
@@ -39,7 +41,7 @@ const ColumnTemplate = (props) => {
                 <Row>
                     <Col>
                         <div className="header-text" style={{fontSize:'0.7rem'}}>
-                            {`Кол.: ${props.count}`}
+                            {`Кол.: ${count}`}
                         </div>
                     </Col>
                     <Col>

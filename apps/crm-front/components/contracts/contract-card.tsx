@@ -3,10 +3,13 @@ import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { currency } from "apps/crm-front/specs/custom-service";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Langs } from "apps/crm-front/specs/custom-types";
+import { use, useEffect, useState } from 'react';
+import { postGetResponsibleName } from 'apps/crm-front/data/fetch/integration';
 
 const ContractCard = (props) => {
     const auth = useSelector(useAuth) as AuthState;
     const localization = useSelector(selectLangState) as Langs;
+    const [responsible, setResponsible] = useState('' as string);
 
     const getString = (assignee) => {
         return assignee.match(/\b(\w)/g).join("").toUpperCase();
@@ -25,6 +28,16 @@ const ContractCard = (props) => {
         }
     }
     
+    useEffect(() => {
+        postGetResponsibleName(props.responsible, auth.authToken).then((res) => {
+            if (res.status === 200) {
+                setResponsible(res.data[0]?.name ?? "");
+            } else {
+                setResponsible(props.resposible);
+            }
+        });
+    }, [auth, localization, props]);
+
     return (
         <div className={"card-template"} style={{borderLeft:`1px solid ${getPriority(props.priority)}`}}>
             <div className="e-card-header">
@@ -43,7 +56,7 @@ const ContractCard = (props) => {
                 <div className="e-card-avatar">{getString(props.step)}</div>
             </div>
             <div className="e-card-content e-tooltip-text">
-                <div className="e-text">{props.resposible}</div>
+                <div className="e-text">{responsible}</div>
             </div>
         </div>
     );
