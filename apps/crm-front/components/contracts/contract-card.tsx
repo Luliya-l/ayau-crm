@@ -3,7 +3,7 @@ import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { currency } from "apps/crm-front/specs/custom-service";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Langs } from "apps/crm-front/specs/custom-types";
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { postGetResponsibleName } from 'apps/crm-front/data/fetch/integration';
 
 const ContractCard = (props) => {
