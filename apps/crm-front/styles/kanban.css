@@ -4,6 +4,10 @@
   font-weight: 500;
 }
 
+.e-header-title > div:first-of-type {
+  width: 100%;
+}
+
 .e-kanban .header-template-wrap .header-icon {
   font-family: 'Kanban priority icons';
   margin-top: 3px;

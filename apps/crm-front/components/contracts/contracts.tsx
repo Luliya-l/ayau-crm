@@ -14,12 +14,12 @@ import { GetParams, contractsDS } from "apps/crm-front/specs/custom-service";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Langs } from "apps/crm-front/specs/custom-types";
 import ContractCard from "./contract-card";
+import ColumnTemplate from "./budget-total";
 
 const Contracts = () => {
     const auth = useSelector(useAuth) as AuthState;
     const loadingState = useSelector(useLoadingState);
     const localization = useSelector(selectLangState) as Langs;
-
     const dispatch = useDispatch();
 
     const kanban = useRef(null);
@@ -27,13 +27,6 @@ const Contracts = () => {
     const cardRendered = (args) => {
         const val = args.data.priority;
         addClass([args.element], val);
-    }
-
-    const columnTemplate = (props) => {
-        return (<div className="header-template-wrap">
-            <div className={"header-icon e-icons " + props.keyField}></div>
-            <div className="header-text">{props.headerText}</div>
-        </div>);
     }
 
     const cardTemplate = (props) => {
@@ -71,22 +64,22 @@ const Contracts = () => {
                         <ColumnDirective 
                             headerText={`${GetParams('primaryContact', localization)}`} 
                             keyField="new" 
-                            template={columnTemplate.bind(this)}
+                            template={ColumnTemplate.bind(this)}
                         />
                         <ColumnDirective 
                             headerText={`${GetParams('negotiation', localization)}`} 
                             keyField="InProgress" 
-                            template={columnTemplate.bind(this)}
+                            template={ColumnTemplate.bind(this)}
                         />
                         <ColumnDirective 
                             headerText={`${GetParams('makeDecision', localization)}`} 
                             keyField="Testing" 
-                            template={columnTemplate.bind(this)}
+                            template={ColumnTemplate.bind(this)}
                         />
                         <ColumnDirective 
                             headerText={`${GetParams('Harmonizationofcontract', localization)}`} 
                             keyField="Close" 
-                            template={columnTemplate.bind(this)}
+                            template={ColumnTemplate.bind(this)}
                         />
                     </ColumnsDirective>
                 </KanbanComponent>

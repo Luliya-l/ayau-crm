@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from 'react';
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
-import { CurrentLang, GetParams, ToolbarExport, dateFormat, taskDS } from 'apps/crm-front/specs/custom-service';
+import { GetParams, ToolbarExport, dateFormat, taskDS } from 'apps/crm-front/specs/custom-service';
 import { ResponsibleColumn } from '../utils/grid-responsible';
 import { ContractColumn } from '../utils/grid-contract';
 import AddTaskForm from './add-tasks-form';

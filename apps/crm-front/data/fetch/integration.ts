@@ -246,3 +246,37 @@ export async function postGetContracts(
         return null;
     });
 }
+
+export async function postGetBudget(
+    step:string,
+    token:string
+) {
+    return api.post(
+        "crm/contracts/get/budget", 
+        {'value':step},
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return e.response;
+    });
+}
+
+export async function postGetResponsibleName(
+    id:string,
+    token:string
+) {
+    return api.post(
+        "crm/responsibles/get", 
+        {'id' : id},
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res;
+    })
+    .catch((e) => {
+        return null;
+    });
+}

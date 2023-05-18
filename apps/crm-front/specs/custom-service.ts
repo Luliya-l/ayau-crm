@@ -175,5 +175,5 @@ export const transactionsSourceDS = (auth): DataManager => new DataManager({
 
 // GET NUMBER AS CURRENT CURRENCY FORMAT
 export const currency = (price: number): string => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return price ? price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") : '0';
 }
