@@ -244,6 +244,7 @@ const Settings = ({lang='ru'}) => {
                               name="email"
                               value={profile?.email ?? ''} 
                               placeholder="ТОО Ладья" 
+                              disabled
                               onChange={(e) => onChange(e)} 
                           />
                       </Col>
