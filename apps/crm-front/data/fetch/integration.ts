@@ -50,6 +50,23 @@ export async function postGetProfile(
     });
 }
 
+export async function postSetProfile(
+    profile:User,
+    token:string
+) {
+    return api.post(
+        "crm/users/update", 
+        {'value':profile},
+        {headers: {"Authorization": `Bearer ${token}`}}
+    )
+    .then((res) => {
+        return res
+    })
+    .catch((e) => {
+        return e.response;
+    });
+}
+
 export async function postOrganization(token:string) {
     return api.post(
         "crm/get_organization_info",

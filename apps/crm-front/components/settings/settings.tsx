@@ -1,4 +1,4 @@
-import { Container, Form, Tabs } from 'react-bootstrap';
+import { Button, Container, Form, Tabs } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
@@ -7,10 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AuthState, setAcceptTerms, setAuthState, setRememberMe, setTokens, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useState } from "react";
 import { Langs, Organization, User } from 'apps/crm-front/specs/custom-types';
-import { postGetProfile, postOrganization } from 'apps/crm-front/data/fetch/integration';
+import { postGetProfile, postOrganization, postSetProfile } from 'apps/crm-front/data/fetch/integration';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import Filials from './filials';
 import Users from './users';
+import { GetParams } from 'apps/crm-front/specs/custom-service';
 
 const Settings = ({lang='ru'}) => {
   const auth = useSelector(useAuth) as AuthState;
@@ -25,6 +26,19 @@ const Settings = ({lang='ru'}) => {
     setProfile({
       ...profile,
       [e.target.name]: e.target.value
+    });
+  }
+
+  const onChangeOrg = (e) => {
+    setOrg({
+      ...org,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const setProfileData = () => {
+    postSetProfile(profile, auth.authToken).then((res) => {
+      console.log(res);
     });
   }
 
@@ -54,7 +68,7 @@ const Settings = ({lang='ru'}) => {
                 <Nav.Link eventKey="profile">{'Профиль'}</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                {/* <Nav.Link eventKey="general">{'Общие настройки'}</Nav.Link> */}
+                <Nav.Link eventKey="general">{'Настройки почты'}</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 {/* <Nav.Link eventKey="payment">{'Счет и оплата'}</Nav.Link> */}
@@ -162,7 +176,7 @@ const Settings = ({lang='ru'}) => {
                                     name="title"
                                     value={org?.title ?? ''} 
                                     placeholder="ТОО Ладья" 
-                                    onChange={(e) => onChange(e)} 
+                                    onChange={(e) => onChangeOrg(e)} 
                                 />
                             </Col>
                         </Form.Group>
@@ -176,7 +190,7 @@ const Settings = ({lang='ru'}) => {
                                     rows={5} 
                                     name="activity"
                                     value={org?.activity ?? ''} 
-                                    onChange={(e) => onChange(e)} 
+                                    onChange={(e) => onChangeOrg(e)} 
                                 />
                             </Col>
                         </Form.Group>
@@ -190,7 +204,7 @@ const Settings = ({lang='ru'}) => {
                                     rows={5}
                                     name="description"
                                     value={org?.description ?? ''} 
-                                    onChange={(e) => onChange(e)} 
+                                    onChange={(e) => onChangeOrg(e)} 
                                 />
                             </Col>
                         </Form.Group>
@@ -220,7 +234,39 @@ const Settings = ({lang='ru'}) => {
               </Tab.Pane>
               <Tab.Pane eventKey="general">
                   <Container fluid className='text-black'>
-                      
+                    <Form.Group as={Row} className="mb-3" controlId="title">
+                      <Form.Label column sm="2">
+                          {'email'}
+                      </Form.Label>
+                      <Col sm="10">
+                          <Form.Control 
+                              type="text" 
+                              name="email"
+                              value={profile?.email ?? ''} 
+                              placeholder="ТОО Ладья" 
+                              onChange={(e) => onChange(e)} 
+                          />
+                      </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-3" controlId="title">
+                      <Form.Label column sm="2">
+                          {'Пароль от почты'}
+                      </Form.Label>
+                      <Col sm="10">
+                          <Form.Control 
+                              type="password" 
+                              name="email_password"
+                              value={profile?.email_password ?? ''} 
+                              onChange={(e) => onChange(e)} 
+                          />
+                      </Col>
+                    </Form.Group>
+                    <Button 
+                        onClick={() => setProfileData()} 
+                        variant='outline-success'
+                    >
+                        {GetParams('save', localization)}
+                    </Button>
                   </Container>
               </Tab.Pane>
               <Tab.Pane eventKey="payment">

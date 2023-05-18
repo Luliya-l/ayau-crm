@@ -24,6 +24,7 @@ export type User = {
     role: string;
     birthdate: string | null;
     login: string;
+    email_password: string;
     created_at: DateTime | null;
     updated_at: DateTime | null;
 };

@@ -42,7 +42,7 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
       case 'bi':
         return (<></>)
       case 'settings':
-        return <SaveSettings />
+        return null
     }
   }
 
