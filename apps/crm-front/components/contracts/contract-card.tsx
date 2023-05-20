@@ -56,7 +56,7 @@ const ContractCard = (props) => {
                 <div className="e-card-avatar">{getString(props.step)}</div>
             </div>
             <div className="e-card-content e-tooltip-text">
-                <div className="e-text fw-bolder">{`Мен.: ${responsible}`}</div>
+                <div className="e-text fw-bolder">{`Ответственный: ${responsible}`}</div>
             </div>
         </div>
     );
