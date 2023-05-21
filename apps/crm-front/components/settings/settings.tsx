@@ -120,7 +120,7 @@ const Settings = ({lang='ru'}) => {
                       </Form.Group>
                       <Form.Group as={Row} className="mb-3" controlId="phone">
                           <Form.Label column sm="2">
-                              {'Рабочий телефон'}
+                              {GetParams('worknumber', localization)}
                           </Form.Label>
                           <Col sm="10">
                           <Form.Control 
@@ -133,7 +133,7 @@ const Settings = ({lang='ru'}) => {
                       </Form.Group>
                       <Form.Group as={Row} className="mb-3" controlId="email">
                           <Form.Label column sm="2">
-                              {'Email'}
+                              {GetParams('email', localization)}
                           </Form.Label>
                           <Col sm="10">
                               <Form.Control 
@@ -165,24 +165,24 @@ const Settings = ({lang='ru'}) => {
                     auth.user?.role === 'user' ?
                     <>
                       <Container fluid className='text-black'>
-                      <h2>{'Организация'}</h2>
+                      <h2>{GetParams('organization', localization)}</h2>
                       <Form.Group as={Row} className="mb-3" controlId="title">
                             <Form.Label column sm="2">
-                                {'Наименование'}
+                                {GetParams('name', localization)}
                             </Form.Label>
                             <Col sm="10">
                                 <Form.Control 
                                     type="text" 
                                     name="title"
                                     value={org?.title ?? ''} 
-                                    placeholder="ТОО Ладья" 
+                                    placeholder="ТОО " 
                                     onChange={(e) => onChangeOrg(e)} 
                                 />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="activity">
                             <Form.Label column sm="2">
-                                {'Род деятельности'}
+                                {GetParams('occupation', localization)}
                             </Form.Label>
                             <Col sm="10">
                                 <Form.Control 
@@ -196,7 +196,7 @@ const Settings = ({lang='ru'}) => {
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="description">
                             <Form.Label column sm="2">
-                                {'Примечание'}
+                                {GetParams('notes', localization)}
                             </Form.Label>
                             <Col sm="10">
                                 <Form.Control 
@@ -216,12 +216,12 @@ const Settings = ({lang='ru'}) => {
                         className="mb-3"
                         fill
                       >
-                        <Tab eventKey="filials" title={'Филиалы'}>
+                        <Tab eventKey="filials" title={GetParams('filial', localization)}>
                           <Container fluid className='text-black'>
                             <Filials />
                           </Container>
                         </Tab>
-                        <Tab eventKey="users" title={'Пользователи'}>
+                        <Tab eventKey="users" title={GetParams('users', localization)}>
                           <Container fluid className='text-black'>
                             <Users />
                           </Container>
@@ -251,7 +251,7 @@ const Settings = ({lang='ru'}) => {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="title">
                       <Form.Label column sm="2">
-                          {'Пароль от почты'}
+                          {GetParams('passwordemail', localization)}
                       </Form.Label>
                       <Col sm="10">
                           <Form.Control 

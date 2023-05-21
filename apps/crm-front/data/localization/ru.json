@@ -82,7 +82,11 @@
             "profile": "Профиль",
             "settingEmails":"Настройки почты",
             "users": "Пользователи",
-            "exit": "Выход"
+            "exit": "Выход",
+            "organization": "Организация",
+            "occupation": "Род деятельности",
+            "filial": "Филиалы",
+            "passwordemail": "Пароль от почты"
 
 
 
