@@ -32,7 +32,7 @@ const DealsBymanager = (): JSX.Element => {
         dataLabel: { visible: true}
     };
 
-    const [size, setSize] = useState({ width: 395, height: 395 });
+    const [size, setSize] = useState({ width: 395, height: 355 });
 
     const changeSize = (element) => {
         const width = element.offsetWidth;

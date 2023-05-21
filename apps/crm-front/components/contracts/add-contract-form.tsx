@@ -18,7 +18,7 @@ const AddContractForm = (props = null) => {
 
     const [responsibles, setResponsibles] = useState([] as User[]);
     const [companies, setComapnies] = useState([] as Company[]);
-
+    
     const [state, setState] = useState(extend({}, {}, props, true));
     const data = state as Contract;
 
@@ -62,15 +62,21 @@ const AddContractForm = (props = null) => {
                     <i className="bi bi-exclamation-octagon fs-5"></i>
                 </Form.Label>
                 <Col sm="10">
-                    <Form.Select 
-                        value={data.priority} 
-                        name="priority"
-                        onChange={(e) => onChange(e)}
-                    >
-                        <option value="low" className="bg-gradient fs-4">{'Низкий'}</option>
-                        <option value="medium" className="bg-gradient fs-4">{'Средний'}</option>
-                        <option value="high" className="bg-gradient fs-4">{'Высокий'}</option>
-                    </Form.Select>
+                    <DropDownListComponent 
+                        id='priority' 
+                        name="priority" 
+                        fields={fields}
+                        dataSource={
+                            [
+                                {id:"low", name:"Низкий"}, 
+                                {id:"medium", name:"Средний"},
+                                {id:"high", name:"Высокий"},
+                            ]
+                        } 
+                        className="e-field" 
+                        value={data.priority ?? 'low'}>
+
+                    </DropDownListComponent>
                 </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="responsible">
