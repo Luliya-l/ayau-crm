@@ -5,6 +5,7 @@ import { Col, Form,  Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Langs, User } from "apps/crm-front/specs/custom-types";
 import { selectLangState } from 'apps/crm-front/store/langSlice';
+import { GetParams } from 'apps/crm-front/specs/custom-service';
 
 const AddUserForm = (props = null) => {
     const localization = useSelector(selectLangState) as Langs;
@@ -30,15 +31,15 @@ const AddUserForm = (props = null) => {
                         name="role"
                         onChange={(e) => onChange(e)}
                     >
-                        <option value="head" className="bg-gradient fs-4">{'Руководитель'}</option>
-                        <option value="manager" className="bg-gradient fs-4">{'Менеджер'}</option>
-                        <option value="user" className="bg-gradient fs-4">{'Администратор'}</option>
+                        <option value="head" className="bg-gradient fs-4">{GetParams('head', localization)}</option>
+                        <option value="manager" className="bg-gradient fs-4">{GetParams('manager', localization)}</option>
+                        <option value="user" className="bg-gradient fs-4">{GetParams('admin', localization)}</option>
                     </Form.Select>
                 </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="responsible">
                 <Form.Label column sm="2">
-                    {'Ф.И.О.'}
+                    {GetParams('lastName', localization)}
                 </Form.Label>
                 <Col sm="10">
                 <Form.Control 
@@ -66,7 +67,7 @@ const AddUserForm = (props = null) => {
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="phone">
                 <Form.Label column sm="2">
-                    {'Телефон'}
+                    {GetParams('phone', localization)}
                 </Form.Label>
                 <Col sm="10">
                 <Form.Control 
@@ -87,14 +88,14 @@ const AddUserForm = (props = null) => {
                         name="gender"
                         onChange={(e) => onChange(e)}
                     >
-                        <option value="Мужской" className="bg-gradient fs-4">{'Мужской'}</option>
-                        <option value="Женский" className="bg-gradient fs-4">{'Женский'}</option>
+                        <option value="Мужской" className="bg-gradient fs-4">{GetParams('man', localization)}</option>
+                        <option value="Женский" className="bg-gradient fs-4">{GetParams('woman', localization)}</option>
                     </Form.Select>
                 </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="phone">
                 <Form.Label column sm="2">
-                    {'Пароль'}
+                    {GetParams('password', localization)}
                 </Form.Label>
                 <Col sm="10">
                 <Form.Control 

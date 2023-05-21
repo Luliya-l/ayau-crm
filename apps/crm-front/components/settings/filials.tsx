@@ -61,7 +61,7 @@ const Filials = ({lang='ru'}) => {
           />
           <ColumnDirective 
               field='name' 
-              headerText={'Наименование'.toUpperCase()} 
+              headerText={GetParams('name', localization).toUpperCase()} 
               width='100' 
           />
           <ColumnDirective 
@@ -83,12 +83,12 @@ const Filials = ({lang='ru'}) => {
           />
           <ColumnDirective 
               field='address' 
-              headerText={'Адрес'.toUpperCase()} 
+              headerText={GetParams('address', localization).toUpperCase()} 
               width='100'
           />
           <ColumnDirective 
               field='description' 
-              headerText={'Примечание'.toUpperCase()} 
+              headerText={GetParams('notes', localization).toUpperCase()} 
               width='100'
           />
         </ColumnsDirective>

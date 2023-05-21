@@ -2,6 +2,7 @@ import { selectLangState } from "apps/crm-front/store/langSlice";
 import { Button, Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Registration from "./registration";
+import { GetParams } from "apps/crm-front/specs/custom-service";
 
 const Authorize = ({setLogin, setPassword, checkAuth}) => {
     const localization = useSelector(selectLangState);
@@ -14,7 +15,7 @@ const Authorize = ({setLogin, setPassword, checkAuth}) => {
         >
           <Row>
             <Col className='my-3 fs-3 text-black text-center'>
-              {'Авторизация'}
+              {GetParams('authorization', localization)}
             </Col>
           </Row>
           <FloatingLabel
@@ -26,7 +27,7 @@ const Authorize = ({setLogin, setPassword, checkAuth}) => {
           </FloatingLabel>
           <FloatingLabel 
             controlId="floatingPassword" 
-            label="Пароль"
+            label={GetParams('password', localization)}
             className='text-secondary mx-3 mb-3'
           >
             <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
@@ -36,7 +37,7 @@ const Authorize = ({setLogin, setPassword, checkAuth}) => {
               <Form.Check 
                 type={'checkbox'}
                 id={`rememberMe`}
-                label={`Запомнить меня`}
+                label={GetParams('rememberme', localization)}
                 className='text-secondary mx-3 mb-3'
               />
             </Col>
@@ -47,7 +48,7 @@ const Authorize = ({setLogin, setPassword, checkAuth}) => {
                 variant="events" 
                 size='lg' 
                 className='px-5' 
-                onClick={() => checkAuth()}>{'Войти'}</Button>
+                onClick={() => checkAuth()}>{GetParams('signin', localization)}</Button>
             </Col>
           </Row>
           <Row>

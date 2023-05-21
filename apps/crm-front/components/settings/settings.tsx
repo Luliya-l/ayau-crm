@@ -106,7 +106,7 @@ const Settings = ({lang='ru'}) => {
                     <h2>{GetParams('profile', localization)}</h2>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                           <Form.Label column sm="2">
-                              {'Ф.И.О.'}
+                              {GetParams('lastName', localization)}
                           </Form.Label>
                           <Col sm="10">
                           <Form.Control 

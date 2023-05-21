@@ -91,7 +91,14 @@
             "admin": "Администратор",
             "head":"Руководитель",
             "gender": "Пол",
-            "role": "Роль"
+            "role": "Роль",
+            "password": "Пароль",
+            "woman":"Женщина",
+            "man":"Мужчина",
+            "rememberme":"Запомнить меня",
+            "signin":"Войти",
+            "authorization": "Авторизация",
+            "phoneoremail":"Телефон или Email"
 
 
 

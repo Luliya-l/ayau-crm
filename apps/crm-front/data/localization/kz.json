@@ -89,7 +89,16 @@
             "passwordemail": "Пошта құпия сөзі",
             "manager": "Менеджер",
             "admin": "Әкімші",
-            "head":"Басқарушы"
+            "head":"Басқарушы",
+            "gender": "Жынысы",
+            "role": "Рөл",
+            "password": "Құпия сөз",
+            "woman":"Әйел",
+            "man":"Ер",
+            "rememberme":"Сақтап қалу",
+            "signin":"Кіру",
+            "authorization": "Авторизация",
+            "phoneoremail":"Телефон немесе Email"
 
         }
 }
