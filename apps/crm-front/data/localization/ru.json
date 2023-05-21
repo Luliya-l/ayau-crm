@@ -98,7 +98,16 @@
             "rememberme":"Запомнить меня",
             "signin":"Войти",
             "authorization": "Авторизация",
-            "phoneoremail":"Телефон или Email"
+            "phoneoremail":"Телефон или Email",
+            "registration": "Регистрация",
+            "login":"Зарегистрироваться",
+            "dontmatch":"Пароли не совподают",
+            "repeat":"Повторите пароль",
+            "enterpass":"Укажите пароль",
+            "enteremail":"укажите Email",
+            "enterphone":"Укажите телефон",
+            "enterfullname": "Укажите Ф.И.О",
+            "companies":"Компании"
 
 
 

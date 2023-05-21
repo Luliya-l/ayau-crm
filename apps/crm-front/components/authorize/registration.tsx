@@ -1,4 +1,5 @@
 import { postRegister } from "apps/crm-front/data/fetch/integration";
+import { GetParams } from "apps/crm-front/specs/custom-service";
 import { User } from "apps/crm-front/specs/custom-types";
 import { selectLangState } from "apps/crm-front/store/langSlice";
 import { useState } from "react";
@@ -86,13 +87,13 @@ const Registration = ({checkAuth}) => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {'Регистрация'}
+                        {GetParams('registration', localization)}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body  className={`${isLoading ? 'd-none' : ''}`}>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                         <Form.Label column sm="2">
-                            {'Ф.И.О.'}*
+                            {GetParams('lastName', localization)}*
                         </Form.Label>
                         <Col sm="10">
                             <Form.Control 
@@ -104,14 +105,14 @@ const Registration = ({checkAuth}) => {
                                 onChange={(e) => onChange(e)} 
                             />
                             <Form.Control.Feedback type="invalid">
-                                {'Укажите Ф.И.О.'}
+                                {GetParams('enterfullname', localization)}
                             </Form.Control.Feedback>
                         </Col>
                     </Form.Group>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="phone">
                             <Form.Label column>
-                                {'Рабочий телефон'}*
+                                {GetParams('worknumber', localization)}*
                             </Form.Label>
                             <Form.Control 
                                 type="phone" 
@@ -122,7 +123,7 @@ const Registration = ({checkAuth}) => {
                                 onChange={(e) => onChange(e)} 
                             />
                             <Form.Control.Feedback type="invalid">
-                                {'Укажите рабочий телефон'}
+                                {GetParams('enterphone', localization)}
                             </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group as={Col}controlId="email">
@@ -138,13 +139,13 @@ const Registration = ({checkAuth}) => {
                                 onChange={(e) => onChange(e)} 
                             />
                             <Form.Control.Feedback type="invalid">
-                                {'Укажите email'}
+                                {GetParams('enteremail', localization)}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Row>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
                         <Form.Label column sm="2">
-                            {'Пол'}
+                            {GetParams('gender', localization)}
                         </Form.Label>
                         <Col sm="10">
                             <Form.Select name={'gender'} onChange={(e) => onChange(e)}>
@@ -156,7 +157,7 @@ const Registration = ({checkAuth}) => {
                     <Row>
                         <Form.Group as={Col} className="mb-3" controlId="email">
                             <Form.Label column sm="2">
-                                {'Пароль'}*
+                                {GetParams('password', localization)}*
                             </Form.Label>
                             <Form.Control 
                                 type="password" 
@@ -166,12 +167,12 @@ const Registration = ({checkAuth}) => {
                                 onChange={(e) => onChange(e)} 
                             />
                             <Form.Control.Feedback type="invalid">
-                                {'Укажите пароль'}
+                                {GetParams('enterpass', localization)}
                             </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group as={Col} className="mb-3" controlId="email">
                             <Form.Label column>
-                                {'Повторите пароль'}
+                                {GetParams('repeat', localization)}
                             </Form.Label>
                             <Form.Control 
                                 type="password" 
@@ -181,7 +182,7 @@ const Registration = ({checkAuth}) => {
                                 onChange={(e) => onChange(e)} 
                             />
                             <Form.Control.Feedback type="invalid">
-                                {'Пароли не совпадают'}
+                                {GetParams('dontmatch', localization)}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Row>
@@ -199,13 +200,13 @@ const Registration = ({checkAuth}) => {
                         variant='outline-success'
                         disabled={!checkFrm()}
                     >
-                        {'Зарегистрироватся'}
+                        {GetParams('login', localization)}
                     </Button>
                     <Button 
                         onClick={handleClose} 
                         variant='outline-warning'
                     >
-                        {'Отменить'}
+                        {GetParams('cancel', localization)}
                     </Button>
                 </Modal.Footer>
             </Modal>

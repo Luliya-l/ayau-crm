@@ -98,7 +98,17 @@
             "rememberme":"Сақтап қалу",
             "signin":"Кіру",
             "authorization": "Авторизация",
-            "phoneoremail":"Телефон немесе Email"
+            "phoneoremail":"Телефон немесе Email",
+            "registration": "Тіркелу",
+            "login":"Тіркелу",
+            "dontmatch":"Құпия сөз сәйкес келмейді",
+            "repeat":"Құпия сөзді қайта еңгізіңіз",
+            "enterpass":"Құпия сөзді теріңіз",
+            "enteremail":"Email-ды теріңіз",
+            "enterphone":"Телефон нөміріңізді тереңіз",
+            "enterfullname": "Аты-жөніңізді теріңіз",
+            "companies":"Компаниялар"
+
 
         }
 }

@@ -49,27 +49,27 @@ const TopBar = ({editIndex, setEditIndex, expanded = false, msg = '65 компа
   const getBreadcrumb = () => {
     switch (addCommand) {
       case 'dashboard':
-        return 'Рабочий стол'
+        return GetParams('dashboard', localization)
       case 'contracts':
-        return 'Сделки'
+        return GetParams('contracts', localization)
       case 'tasks':
-        return "Задачи"
+        return GetParams('tasks', localization)
       case 'contacts':
         return GetParams('contacts', localization)
       case 'list':
         return "Клиенты"
       case 'list/contacts':
-        return "Контакты"
+        return GetParams('contacts', localization)
       case 'list/customers':
-        return "Клиенты"
+        return GetParams('companies', localization)
       case 'list/files':
         return "Файлы"
       case 'email':
-        return "Почта"
+        return GetParams('mail', localization)
       case 'bi':
         return "Бизнес-аналитика"
       case 'settings':
-        return "Настройки"
+        return GetParams('settings', localization)
     }
   }
 
