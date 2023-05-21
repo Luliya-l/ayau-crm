@@ -65,10 +65,10 @@ const Settings = ({lang='ru'}) => {
           <Col sm={3}>
             <Nav variant="pills" className="flex-column px-2">
               <Nav.Item>
-                <Nav.Link eventKey="profile">{'Профиль'}</Nav.Link>
+                <Nav.Link eventKey="profile">{GetParams('profile', localization)}</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="general">{'Настройки почты'}</Nav.Link>
+                <Nav.Link eventKey="general">{GetParams('settingEmails', localization)}</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 {/* <Nav.Link eventKey="payment">{'Счет и оплата'}</Nav.Link> */}
@@ -76,7 +76,7 @@ const Settings = ({lang='ru'}) => {
               <Nav.Item>
                 {
                   auth.user?.role === 'user' ?
-                  <Nav.Link eventKey="users">{'Пользователи'}</Nav.Link>
+                  <Nav.Link eventKey="users">{GetParams('users', localization)}</Nav.Link>
                   : null
                 }
               </Nav.Item>
@@ -95,7 +95,7 @@ const Settings = ({lang='ru'}) => {
                     }));
                     dispatch(setAcceptTerms(false));
                   }}
-                >{'Выход'}</Nav.Link>
+                >{GetParams('exit', localization)}</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
@@ -103,7 +103,7 @@ const Settings = ({lang='ru'}) => {
             <Tab.Content>
               <Tab.Pane eventKey="profile">
                   <Container fluid className='text-black'>
-                    <h2>{'Профиль'}</h2>
+                    <h2>{GetParams('profile', localization)}</h2>
                     <Form.Group as={Row} className="mb-3" controlId="responsible">
                           <Form.Label column sm="2">
                               {'Ф.И.О.'}
