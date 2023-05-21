@@ -86,7 +86,12 @@
             "organization": "Организация",
             "occupation": "Род деятельности",
             "filial": "Филиалы",
-            "passwordemail": "Пароль от почты"
+            "passwordemail": "Пароль от почты",
+            "manager": "Менеджер",
+            "admin": "Администратор",
+            "head":"Руководитель",
+            "gender": "Пол",
+            "role": "Роль"
 
 
 

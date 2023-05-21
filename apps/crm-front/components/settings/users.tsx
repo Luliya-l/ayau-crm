@@ -83,7 +83,7 @@ const Users = ({lang='ru'}) => {
           />
           <ColumnDirective 
               field='name' 
-              headerText={'Ф.И.О.'.toUpperCase()} 
+              headerText={GetParams('lastName', localization).toUpperCase()} 
               width='100' 
           />
           <ColumnDirective 
@@ -98,12 +98,12 @@ const Users = ({lang='ru'}) => {
           />
           <ColumnDirective 
               field='gender' 
-              headerText={'Пол'.toUpperCase()} 
+              headerText={GetParams('gender', localization).toUpperCase()} 
               width='100' 
           />
           <ColumnDirective 
               field='role' 
-              headerText={'Роль'.toUpperCase()} 
+              headerText={GetParams('role', localization).toUpperCase()} 
               dataSource={userRoles}
               foreignKeyValue="name"
               foreignKeyField="id"
