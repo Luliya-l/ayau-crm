@@ -68,9 +68,9 @@ const AddContractForm = (props = null) => {
                         fields={fields}
                         dataSource={
                             [
-                                {id:"low", name:"Низкий"}, 
-                                {id:"medium", name:"Средний"},
-                                {id:"high", name:"Высокий"},
+                                {id:"low", name:"Төмен"}, 
+                                {id:"medium", name:"Орташа"},
+                                {id:"high", name:"Жоғары"},
                             ]
                         } 
                         className="e-field" 
