@@ -51,7 +51,7 @@ const Users = ({lang='ru'}) => {
   const actionComplete = (args) => {
     if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
         const dialog = args.dialog;
-        dialog.header = args.requestType === 'beginEdit' ? 'Редактирование: ' + args.rowData['name'] : 'Новая запись';
+        dialog.header = args.requestType === 'beginEdit' ? 'Өзгерту'  + args.rowData['name'] : 'Жаңа жазба';
     }
   }
 

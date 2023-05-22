@@ -7,7 +7,7 @@ export const sf = {
             'max': 'Макс',
             'cardsSelected': 'Таңдалған карталар',
             'addTitle': 'Жаңа карта қосыңыз',
-            'editTitle': 'Карта мәліметтерін өңдеу',
+            'editTitle': 'Карта мәліметтерін өзгерту',
             'deleteTitle': 'Картаны жойыңыз',
             'deleteContent': 'Мазмұнды жою керек пе?',
             'save': 'Сақтау',
