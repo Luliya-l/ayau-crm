@@ -107,7 +107,9 @@
             "enteremail":"укажите Email",
             "enterphone":"Укажите телефон",
             "enterfullname": "Укажите Ф.И.О",
-            "companies":"Компании"
+            "companies":"Компании",
+            "edit": "Редактирование",
+            "newnote":"Новая запись"
 
 
 
