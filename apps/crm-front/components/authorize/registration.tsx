@@ -99,7 +99,7 @@ const Registration = ({checkAuth}) => {
                             <Form.Control 
                                 type="name" 
                                 name={'name'}  
-                                placeholder="Ф.И.О." 
+                                placeholder="Аты-жөні" 
                                 required 
                                 isInvalid = {!req['name']}
                                 onChange={(e) => onChange(e)} 
@@ -149,8 +149,8 @@ const Registration = ({checkAuth}) => {
                         </Form.Label>
                         <Col sm="10">
                             <Form.Select name={'gender'} onChange={(e) => onChange(e)}>
-                                <option value="мужской">Мужской</option>
-                                <option value="женский">Женский</option>
+                                <option value="мужской">{GetParams('man', localization)}</option>
+                                <option value="женский">{GetParams('woman', localization)}</option>
                             </Form.Select>
                         </Col>
                     </Form.Group>

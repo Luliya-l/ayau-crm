@@ -20,7 +20,7 @@ const Authorize = ({setLogin, setPassword, checkAuth}) => {
           </Row>
           <FloatingLabel
             controlId="floatingInput"
-            label="Телефон или Email"
+            label={GetParams('phoneoremail', localization)}
             className="text-secondary mx-3 mb-3"
           >
             <Form.Control type="login" placeholder="name@example.com" onChange={(e) => setLogin(e.target.value)} />
