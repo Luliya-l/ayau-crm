@@ -96,7 +96,7 @@ const Customers = () => {
                         />
                         <ColumnDirective 
                             field='description' 
-                            headerText={'Примечание'.toUpperCase()} 
+                            headerText={GetParams('notation', localization).toUpperCase()} 
                             width='100'
                         />
                         <ColumnDirective 

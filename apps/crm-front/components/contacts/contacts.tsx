@@ -97,7 +97,6 @@ const Contacts = () => {
                             width='100' 
                             format="C2" 
                         />
-                        {ResponsibleColumn('responsible', auth)}
                     </ColumnsDirective>
                     <Inject services={[Filter, Page, Edit, Sort, ForeignKey, Toolbar, PdfExport, ExcelExport]} />
                 </GridComponent>
