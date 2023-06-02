@@ -12,7 +12,7 @@ export const ContractColumn = (field, auth ) => {
         return (<ColumnDirective 
             field={field} 
             dataSource={contractsDS(auth)}
-            headerText={GetParams('contacts', localization).toUpperCase()} 
+            headerText={GetParams('contract', localization).toUpperCase()} 
             width='100'
             // validationRules={{required: false}}
             foreignKeyValue="name"
