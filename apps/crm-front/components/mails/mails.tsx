@@ -35,8 +35,8 @@ const MailBox = ({inbox = true}) => {
                 <GridComponent 
                     ref={grid}
                     dataSource={mailsDS(auth)}
-                    allowPaging={false}
-                    pageSettings={{ pageSize: 5 }}
+                    allowPaging={true}
+                    pageSettings={{ pageSize: 10 }}
                     editSettings={editOptions}
                     toolbar={toolbarOptions}
                     locale={localization.currentLang}
