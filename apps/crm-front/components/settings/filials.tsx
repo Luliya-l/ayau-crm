@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
-import { CurrentLang, GetParams, ToolbarExport } from 'apps/crm-front/specs/custom-service';
+import { GetParams, ToolbarExport } from 'apps/crm-front/specs/custom-service';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { Langs } from 'apps/crm-front/specs/custom-types';
 
@@ -44,8 +44,10 @@ const Filials = ({lang='ru'}) => {
     <GridComponent 
         ref={grid}
         dataSource={filialsDS}
+        allowResizing={true} 
+        autoFit={true}
         allowPaging={false}
-        pageSettings={{ pageSize: 5 }}
+        pageSettings={{ pageSize: 50 }}
         editSettings={editOptions}
         toolbar={toolbarOptions}
         locale={localization.currentLang}
@@ -55,41 +57,40 @@ const Filials = ({lang='ru'}) => {
     >
         <ColumnsDirective>
           <ColumnDirective 
-              field='id' width='100' 
+              field='id' 
               textAlign="Right" isPrimaryKey={true} 
               visible={false}
           />
           <ColumnDirective 
               field='name' 
               headerText={GetParams('name', localization).toUpperCase()} 
-              width='100' 
+               
           />
           <ColumnDirective 
               field='phone' 
               headerText={GetParams('phone', localization).toUpperCase()} 
-              width='100'
+              
           />
           <ColumnDirective 
               field='email' 
               headerText={GetParams('email', localization).toUpperCase()} 
-              width='100' 
+               
           />
           <ColumnDirective 
               field='responsible' 
               headerText={GetParams('responsible', localization).toUpperCase()} 
-              width='100' 
-              format="C2" 
+               
               visible={false}
           />
           <ColumnDirective 
               field='address' 
               headerText={GetParams('address', localization).toUpperCase()} 
-              width='100'
+              
           />
           <ColumnDirective 
               field='description' 
               headerText={GetParams('notes', localization).toUpperCase()} 
-              width='100'
+              
           />
         </ColumnsDirective>
         <Inject services={[Edit, Toolbar, PdfExport, ExcelExport]} />

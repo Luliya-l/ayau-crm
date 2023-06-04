@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AuthState, useAuth } from 'apps/crm-front/store/authSlice';
 import { useEffect, useRef } from "react";
 import { setLoading, useLoadingState } from 'apps/crm-front/store/loadingState';
-import { GetParams, ToolbarExport, responsiblesDS, usersDS } from 'apps/crm-front/specs/custom-service';
+import { GetParams, ToolbarExport, usersDS } from 'apps/crm-front/specs/custom-service';
 import { selectLangState } from 'apps/crm-front/store/langSlice';
 import { Langs } from 'apps/crm-front/specs/custom-types';
 import AddUserForm from './add-users-form';
@@ -69,6 +69,8 @@ const Users = ({lang='ru'}) => {
         editSettings={editOptions}
         toolbar={toolbarOptions}
         locale={localization.currentLang}
+        allowResizing={true} 
+        autoFit={true}
         allowExcelExport={true}
         allowPdfExport={true}
         actionComplete={actionComplete}
@@ -76,7 +78,7 @@ const Users = ({lang='ru'}) => {
     >
         <ColumnsDirective>
           <ColumnDirective 
-              field='id' width='100' 
+              field='id'  
               textAlign="Right" 
               isPrimaryKey={true} 
               visible={false}
@@ -84,22 +86,22 @@ const Users = ({lang='ru'}) => {
           <ColumnDirective 
               field='name' 
               headerText={GetParams('lastName', localization).toUpperCase()} 
-              width='100' 
+               
           />
           <ColumnDirective 
               field='phone' 
               headerText={GetParams('phone', localization).toUpperCase()} 
-              width='100'
+              
           />
           <ColumnDirective 
               field='email' 
               headerText={GetParams('email', localization).toUpperCase()} 
-              width='100' 
+              
           />
           <ColumnDirective 
               field='gender' 
               headerText={GetParams('gender', localization).toUpperCase()} 
-              width='100' 
+               
           />
           <ColumnDirective 
               field='role' 
