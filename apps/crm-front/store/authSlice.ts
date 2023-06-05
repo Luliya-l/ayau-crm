@@ -23,6 +23,7 @@ const initialState: AuthState = {
     birthdate: null,
     login: "",
     password: "",
+    email_password: "",
     created_at: null,
     updated_at: null,
   },
