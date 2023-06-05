@@ -1,17 +1,17 @@
 @charset "UTF-8";
 
-@import "../../../node_modules/.pnpm/@syncfusion+ej2-base@21.2.3/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
-@import '../../../node_modules/.pnpm/@syncfusion+ej2-buttons@21.2.6/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css';
-@import "../../../node_modules/.pnpm/@syncfusion+ej2-layouts@21.2.6/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
-@import '../../../node_modules/.pnpm/@syncfusion+ej2-dropdowns@21.2.8/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css';
-@import '../../../node_modules/.pnpm/@syncfusion+ej2-inputs@21.2.8/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css';
-@import "../../../node_modules/.pnpm/@syncfusion+ej2-navigations@21.2.8/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
-@import "../../../node_modules/.pnpm/@syncfusion+ej2-popups@21.2.4/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
-@import "../../../node_modules/.pnpm/@syncfusion+ej2-react-layouts@21.2.6/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
-@import "../../../node_modules/.pnpm/@syncfusion+ej2-react-lists@21.2.6/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
-@import "../../../node_modules/.pnpm/@syncfusion+ej2-react-kanban@21.2.3/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
-@import "../../../node_modules/.pnpm/@syncfusion+ej2-react-grids@21.2.8/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
-@import "../../../node_modules/.pnpm/@syncfusion+ej2-react-calendars@21.2.8/node_modules/@syncfusion/ej2-base/styles/bootstrap5.css";
+/* @import "./syncfusion/ej2-base/styles/bootstrap5.css";
+@import './syncfusion/ej2-buttons/styles/bootstrap5.css';
+@import "./syncfusion/ej2-layouts/styles/bootstrap5.css";
+@import './syncfusion/ej2-dropdowns/styles/bootstrap5.css';
+@import './syncfusion/ej2-inputs/styles/bootstrap5.css';
+@import "./syncfusion/ej2-navigations/styles/bootstrap5.css";
+@import "./syncfusion/ej2-popups/styles/bootstrap5.css";
+@import "./syncfusion/ej2-react-layouts/styles/bootstrap5.css";
+@import "./syncfusion/ej2-react-lists/styles/bootstrap5.css";
+@import "./syncfusion/ej2-react-kanban/styles/bootstrap5.css";
+@import "./syncfusion/ej2-react-grids/styles/bootstrap5.css";
+@import "./syncfusion/ej2-react-calendars/styles/bootstrap5.css"; */
 
 :root {
   --gosu-blue-space-100: rgba(75, 88, 119, 1);

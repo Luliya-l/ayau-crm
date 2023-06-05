@@ -29,7 +29,7 @@ specifiers:
   '@syncfusion/ej2-react-base': ^21.2.3
   '@syncfusion/ej2-react-calendars': ^21.2.3
   '@syncfusion/ej2-react-charts': ^21.2.3
-  '@syncfusion/ej2-react-dropdowns': ^21.2.3
+  '@syncfusion/ej2-react-dropdowns': ^21.2.8
   '@syncfusion/ej2-react-grids': ^21.2.3
   '@syncfusion/ej2-react-kanban': ^21.2.3
   '@syncfusion/ej2-react-layouts': ^21.2.3

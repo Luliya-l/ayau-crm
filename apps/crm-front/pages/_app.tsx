@@ -2,6 +2,19 @@ import { AppType } from 'next/app';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 
+import "../styles/syncfusion/ej2-base/styles/bootstrap5.css";
+import '../styles/syncfusion/ej2-buttons/styles/bootstrap5.css';
+import "../styles/syncfusion/ej2-layouts/styles/bootstrap5.css";
+import '../styles/syncfusion/ej2-dropdowns/styles/bootstrap5.css';
+import '../styles/syncfusion/ej2-inputs/styles/bootstrap5.css';
+import "../styles/syncfusion/ej2-navigations/styles/bootstrap5.css";
+import "../styles/syncfusion/ej2-popups/styles/bootstrap5.css";
+import "../styles/syncfusion/ej2-react-layouts/styles/bootstrap5.css";
+import "../styles/syncfusion/ej2-react-lists/styles/bootstrap5.css";
+import "../styles/syncfusion/ej2-react-kanban/styles/bootstrap5.css";
+import "../styles/syncfusion/ej2-react-grids/styles/bootstrap5.css";
+import "../styles/syncfusion/ej2-react-calendars/styles/bootstrap5.css";
+
 import '../styles/styles.css';
 import '../styles/kanban.css';
 import '../styles/chat.css';
