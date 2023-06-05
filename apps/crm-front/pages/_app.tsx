@@ -1,11 +1,13 @@
 import { AppType } from 'next/app';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider } from 'react-bootstrap';
+
 import '../styles/styles.css';
 import '../styles/kanban.css';
 import '../styles/chat.css';
 import '../styles/fonts.css';
+import { ThemeProvider } from 'react-bootstrap';
+
 import { wrapper } from "../store/store";
 import {Provider} from 'react-redux';
 import dynamic from 'next/dynamic';
