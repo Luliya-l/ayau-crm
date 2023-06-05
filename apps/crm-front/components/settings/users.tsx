@@ -22,7 +22,7 @@ const Users = ({lang='ru'}) => {
   const userRoles = [
     {
         id:'head',
-        name:'Руководитель'
+        name:'Басшы'
     },
     {
         id:'manager',
@@ -30,7 +30,7 @@ const Users = ({lang='ru'}) => {
     },
     {
         id:'user',
-        name:'Администратор'
+        name:'Әкімші'
     }
   ]
 
